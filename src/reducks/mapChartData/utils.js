@@ -9,6 +9,8 @@ const createJointData = (state, action) => {
           }
           dataJoint.push(joint)
         }
+        
+        return dataJoint
       })
     })
     return dataJoint

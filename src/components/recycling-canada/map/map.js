@@ -22,6 +22,7 @@ const dataSet = getDataSet(selector);
 console.log(selector)
 
 
+
   useEffect(() => {
       console.log("amchrts data rendered")
   
@@ -108,7 +109,7 @@ console.log(selector)
     let hs = polygonTemplate.states.create("hover");
     hs.properties.fill = chart.colors.getIndex(1).brighten(-0.5);
     
-    }, [dataSet.data, dispatch])
+    }, [dataSet.data])
 
     useEffect(()=> {
         let provDataArr = [];
@@ -132,7 +133,7 @@ console.log(selector)
             .catch(() => null);
            
 
-    }, [dispatch])
+    },[])
 
 
     return (

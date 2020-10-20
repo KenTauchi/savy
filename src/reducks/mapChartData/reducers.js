@@ -4,8 +4,6 @@ import  createJointData  from "./utils"
 
 export const DataSetReducer = (state = initialState.dataSet, action) => {
 
- 
-
   switch (action.type) {
     case Actions.DATA_IMPORT:
       return {

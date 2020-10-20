@@ -7,6 +7,7 @@ import { getDataTable } from "../../../reducks/mapChartData/selectors"
 const MapData = () => {
     const selector = useSelector((state) => state);
     const tableData = getDataTable(selector)
+    console.log(tableData)
     return (
         <div className="map-data-section">
             <ul>
