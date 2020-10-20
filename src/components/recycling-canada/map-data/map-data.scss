@@ -1,0 +1,16 @@
+.map-data-section {
+    margin: 3rem;
+    ul {
+        display: flex;
+        justify-content: space-evenly;
+        list-style-type: none;
+        margin: 0 auto;
+        padding: 0;
+        width: 50%;
+        li {
+            span {
+                display: block;
+            }
+        }
+    }
+}
