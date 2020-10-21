@@ -1,28 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 import arrow from './arrow-direction.png';
+import arrowRight from './arrow-right.png';
 
 import "./LocationListItem.style.scss";
 
 const LocationListItem = (props) => {
-    const { location } = props;
+  const { location, windowWidth } = props;
 
-    // console.log(location);
+  const displayUrl = location.website.slice(0, 30) + "..."
+  // console.log(location);
+
   return (
     <li className="locationListItem">
       <div className="locationListItemDescription">
         <p className="listItemFacilityName">{location.name}</p>
         <p className="listItemFacilityPhone">{location.phone}</p>
-        <p className="listItemFacilityAddress1">{location.address1}</p>
-        <p className="listItemFacilityAddress2">{location.address2}</p>
-        <a className="listItemFacilityLink" href="https://{location.linkUrl}">
-          {location.linkUrl}
+        <p className="listItemFacilityAddress1">{location.address}</p>
+        <p className="listItemFacilityAddress2">
+          {" "}
+          {location.cityId}, {location.postalCode}
+        </p>
+        <a className="listItemFacilityLink" href={location.website}>
+          {displayUrl}
         </a>
       </div>
-      <div className="locationListItemDirection">
-        <img className="directionArrow" src={arrow} alt="arrow image" />
-        <p className="directionDistance">{location.distance} miles</p>
-      </div>
+
+      {windowWidth >= 768 ? (
+        <div className="locationListItemDirection">
+          <img className="directionArrow" src={arrow} alt="arrow image" />
+          <p className="directionDistance">{location.distance} miles</p>
+        </div>
+      ) : (
+        <div className="rightArrowDiv">
+          <img className="rightArrow" src={arrowRight} alt="arrow image" />
+        </div>
+      )}
     </li>
   );
 };

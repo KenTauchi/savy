@@ -1,5 +1,8 @@
-.facilityList {
+.locationsList {
     list-style-type: none;
     padding-left: 0;
     border: solid 1px #eeeeee;
+    max-height: 400px;
+
+    overflow-y:scroll;
 }

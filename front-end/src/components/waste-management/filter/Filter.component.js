@@ -5,19 +5,23 @@ const Filter = () => {
     return (
       <div className="filter-section">
         <h2 className="WMpageH2">Welcome to savy recycling search!</h2>
-        <p>
+        <p className="searchInstructionText">
           Search recycling solutions near you and get to know more about
           materials
         </p>
         <div className="WMpageInputsDiv">
-          <input
-            id="materialSearch"
-            type="text"
-            placeholder="Item / Material name"
-          />
-          <input id="zipSearch"
-                 type="text"
-                 placeholder="ZIP code" />
+          <div className="searchInput">
+            <input
+              id="materialSearch"
+              type="text"
+              placeholder="Item / Material name"
+            />
+          </div>
+          <div className="searchInput">
+            <input id="zipSearch"
+                   type="text"
+                   placeholder="ZIP code" />
+          </div>
         </div>
       </div>
     );
