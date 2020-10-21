@@ -5,9 +5,9 @@ import NavRouter from './components/nav-router';
 
 function App() {
 	return (
-		<div className="App">
+		<main className="App">
 			<NavRouter />
-		</div>
+		</main>
 	);
 }
 
