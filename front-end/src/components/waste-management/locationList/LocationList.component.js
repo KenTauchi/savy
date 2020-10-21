@@ -6,15 +6,19 @@ import './LocationList.style.scss';
 
 const LocationList = (props) => {
 
-    const { locations } = props;
+    const { locations, windowWidth } = props;
 
     // console.log(locations);
 
     return (
       <div className="location-section">
-        <ul className="facilityList">
+        <ul className="locationsList">
           {locations.map((location) => (
-            <LocationListItem key={location.id} location={location} />
+            <LocationListItem
+              key={location.locationId}
+              location={location}
+              windowWidth={windowWidth}
+            />
           ))}
         </ul>
       </div>

@@ -9,9 +9,15 @@
     p {
         margin: 0;
         line-height: 1.25;
+        font-size: .8rem;
+    }
+
+    a {
+        font-size: .8rem;
     }
 
     .listItemFacilityName {
+        font-size: 1rem;
         margin-bottom: .5rem;
         border-bottom: solid 1px black;
         display: inline-block;
@@ -31,6 +37,17 @@
     .directionDistance {
         justify-self: right;
         align-self: flex-end;
+    }
+
+    .rightArrowDiv {
+        display: grid;
+        justify-content: right;
+        align-items: flex-end;
+    }
+
+    .rightArrow {
+        max-width: 16px;
+        height: auto;
     }
 
 }

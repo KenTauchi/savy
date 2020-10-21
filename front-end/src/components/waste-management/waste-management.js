@@ -7,67 +7,103 @@ import GoogleMap from './google-map/GoogleMap.component';
 import RecyclingFacts from './recycling-fact/recycling-fact';
 import ExploreQuiz from './explore-quiz/explore-quiz';
 
+import { LOCATION_DATA } from './TEST_locations.data.js';
+
+import "./waste-management.style.scss";
+
 const WasteManagement = () => {
-    const [defaultProps, setDefaultProps] = useState({
-      center: {
-        lat: 49.2246,
-        lng: -123.1087,
-      },
-      zoom: 11,
+  const [defaultProps, setDefaultProps] = useState({
+    center: {
+      lat: 49.2246,
+      lng: -123.1087,
+    },
+    zoom: 11,
+  });
+  const [locations, setLocations] = useState(LOCATION_DATA);
+  const [mapAndMaterialDisplay, setmapAndMaterialDisplay] = useState({
+    map: true,
+    material: false
+  });
+  const [windowWidth, setwindowWidth] = useState(window.innerWidth);
+
+  const displaySizeListener = () => {
+    const newWindowWidth = window.innerWidth;
+    // console.log(newWindowWidth);
+    setwindowWidth(newWindowWidth);
+  };
+
+  useEffect(()=>{
+    const unsbscribeWindow = window.addEventListener("resize", displaySizeListener);
+    return () => {
+      unsbscribeWindow();
+    }
+  }, [])
+
+
+  const mapDisplayHandler = () => {
+    setmapAndMaterialDisplay({
+      map: true,
+      material: false,
     });
+  };
 
-    const [locations, setLocations] = useState(
-        [
-            {
-                id: "frrafra",
-                name: "UBC",
-                lat: 49.2606,
-                lng: -123.246,
-                phone: "(236)402-9393",
-                address1: "1387 Richards Street",
-                address2: "Vancouver, BC V6G 0B6",
-                linkUrl: "recyclinglocationname.com",
-                distance: "12.5",
-            },
-            {
-                id: "efaefa",
-                name: "Columbia Collage",
-                lat: 49.2718,
-                lng: -123.0953,
-                phone: "(236)402-9393",
-                address1: "1387 Richards Street",
-                address2: "Vancouver, BC V6G 0B6",
-                linkUrl: "recyclinglocationname.com",
-                distance: "12.5",
-            },
-            {
-                id: "moijorm",
-                name: "Douglas College",
-                lat: 49.2036,
-                lng: -122.9127,
-                phone: "(236)402-9393",
-                address1: "1387 Richards Street",
-                address2: "Vancouver, BC V6G 0B6",
-                linkUrl: "recyclinglocationname.com",
-                distance: "12.5",
-            },
-        ],
-    );
+  const materialDisplayHandler = () => {
+    setmapAndMaterialDisplay({
+      map: false,
+      material: true,
+    });
+  };
 
-    return (
-      <div>
-        <Header />
-        <div className="content">
-          <h1>Waste Management</h1>
-          <Filter />
-          <LocationList locations={locations} />
-          <GoogleMap defaultProps={defaultProps} locations={locations} />
-          <RecyclingFacts />
-          <ExploreQuiz />
+  useEffect(() => {
+    if (windowWidth >= 768) {
+      setmapAndMaterialDisplay({
+        map: true,
+        material: true,
+      })
+    } else {
+        if (mapAndMaterialDisplay.map && mapAndMaterialDisplay.material) {
+          setmapAndMaterialDisplay({
+                  map: true,
+                  material: false,
+                })
+        };
+      }
+  }, [windowWidth]);
+
+  return (
+    <div>
+      <Header />
+      <div className="content">
+        <Filter />
+        <div className="mapAndMaterialTab">
+          <button onClick={mapDisplayHandler}>Map</button>
+          <button onClick={materialDisplayHandler}>Material Info</button>
         </div>
-        <Footer />
+        {mapAndMaterialDisplay.map ? (
+          <React.Fragment>
+            <GoogleMap
+              className="googleMap"
+              defaultProps={defaultProps}
+              locations={locations}
+            />
+            <LocationList locations={locations} windowWidth={windowWidth} />
+          </React.Fragment>
+        ) : (
+          <React.Fragment></React.Fragment>
+        )}
+
+        {mapAndMaterialDisplay.material ? (
+          <React.Fragment>
+            <RecyclingFacts />
+            <ExploreQuiz />
+          </React.Fragment>
+        ) : (
+          <React.Fragment></React.Fragment>
+        )}
       </div>
-    );
+      <Footer />
+    </div>
+  );
 }
 
 export default WasteManagement;

@@ -1,0 +1,45 @@
+
+.filter-section {
+    max-width: 100%;
+}
+
+.mapAndMaterialTab {
+    margin: 1rem auto;
+
+    button {
+        margin: 0 1rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+.content {
+    display: grid;
+}
+
+.filter-section {
+    order: 1;
+}
+
+.mapAndMaterialTab {
+    order: 2;
+    display: none;
+
+}
+
+.location-section {
+    order: 3;
+}
+
+.google-map-section {
+    order: 4;
+}
+
+.fact-section {
+    order: 5;
+}
+
+.explore-quiz-section {
+    order: 6;
+}
+
+}

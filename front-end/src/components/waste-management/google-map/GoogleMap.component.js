@@ -3,6 +3,8 @@ import GoogleMapReact from "google-map-react";
 
 import Marker from "../marker/Marker.component";
 
+import './GoogleMap.style.scss';
+
 // const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const GoogleMap = (props) => {
@@ -17,17 +19,19 @@ const GoogleMap = (props) => {
   
   const Markers = locations.map((location, index) => (
     <Marker
-      key={location.id}
-      lat={location.lat}
-      lng={location.lng}
+      key={location.locationId}
+      lat={location.latitude}
+      lng={location.longitude}
       // any user props
       text={location.name}
     />
   ));
 
+  // console.log(Markers);
+
   return (
     // Important! Always set the container height explicitly
-    <div style={{ height: "100vh", width: "100%" }}>
+    <div className="google-map-section">
       <GoogleMapReact
         bootstrapURLKeys={{ key: apikey.apiKey.development }}
         defaultCenter={defaultProps.center}

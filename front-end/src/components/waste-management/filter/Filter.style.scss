@@ -3,14 +3,26 @@
         text-transform: uppercase;
     }
 
+    .searchInstructionText {
+        display: none;
+    }
+
     .WMpageInputsDiv {
         text-align: left;
+        // display: grid;
+        // justify-content: center;
+    }
+
+    .searchInput {
+        margin: .5rem auto;
+        width: 80%;
     }
 
     input {
         padding: .5rem;
         border-radius: 18px;
         font-size: 16px;
+        width: 100%;
     }
 
     input:focus {
@@ -18,4 +30,12 @@
     }
 
 
+}
+
+@media screen and (min-width: 768px) {
+    .filter-section {
+        .searchInstructionText {
+            display: block;
+        }
+    }
 }
