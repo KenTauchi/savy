@@ -1,0 +1,21 @@
+.filter-section {
+    .WMpageH2 {
+        text-transform: uppercase;
+    }
+
+    .WMpageInputsDiv {
+        text-align: left;
+    }
+
+    input {
+        padding: .5rem;
+        border-radius: 18px;
+        font-size: 16px;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+
+}
