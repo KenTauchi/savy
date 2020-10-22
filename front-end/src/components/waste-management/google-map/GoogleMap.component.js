@@ -15,7 +15,13 @@ const GoogleMap = (props) => {
     },
   });
 
-  const { defaultProps, locations } = props;
+  const {
+    defaultProps,
+    locations,
+    displayStyle,
+    mapMarkerLocationDetailDisplayHandler,
+    getSelectedLocation,
+  } = props;
   
   const Markers = locations.map((location, index) => (
     <Marker
@@ -24,6 +30,9 @@ const GoogleMap = (props) => {
       lng={location.longitude}
       // any user props
       text={location.name}
+      location={location}
+      mapMarkerLocationDetailDisplayHandler={mapMarkerLocationDetailDisplayHandler}
+      getSelectedLocation={getSelectedLocation}
     />
   ));
 
@@ -31,13 +40,12 @@ const GoogleMap = (props) => {
 
   return (
     // Important! Always set the container height explicitly
-    <div className="google-map-section">
+    <div className="google-map-section" style={displayStyle}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: apikey.apiKey.development }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
-        <Marker lat={49.2246} lng={-123.1087} text="Langara College!!" />
         {Markers}
       </GoogleMapReact>
     </div>
@@ -45,3 +53,5 @@ const GoogleMap = (props) => {
 }
 
 export default GoogleMap;
+
+        // <Marker lat={49.2246} lng={-123.1087} text="Langara College!!" />;

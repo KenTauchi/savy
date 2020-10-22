@@ -21,10 +21,7 @@
         margin-bottom: .5rem;
         border-bottom: solid 1px black;
         display: inline-block;
-
-        &:hover {
-            cursor: pointer;
-        }
+        cursor: pointer;
     }
 
     .locationListItemDirection {
@@ -52,6 +49,7 @@
     .rightArrow {
         max-width: 16px;
         height: auto;
+        cursor: pointer;
     }
 
 }

@@ -1,0 +1,32 @@
+.locationDetailDiv {
+    position: relative;
+    text-align: left;
+    padding: 1rem;
+    border: solid 1px #eee;
+
+    ul {
+        list-style-type: none;
+        padding-left: 0;
+    }
+}
+
+.listItemFacilityName {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.x_markImage {
+    max-width: 18px;
+    height: auto;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+    .locationDetailDiv {
+        height: 447.45px - 33.99px;
+        max-width: 100%;
+    }
+}
