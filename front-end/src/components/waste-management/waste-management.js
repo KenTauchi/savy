@@ -153,12 +153,16 @@ const WasteManagement = () => {
 
   useEffect(() => {
     window.addEventListener("resize", displaySizeListener);
+
+    return () => {
+      window.removeEventListener("resize", displaySizeListener);
+    }
   }, []);
 
   return (
     <div>
       <Header />
-      <div className="content">
+      <div className="waste-management-content">
         <Filter />
 
         <div
