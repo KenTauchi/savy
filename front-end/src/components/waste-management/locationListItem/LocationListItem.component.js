@@ -6,7 +6,12 @@ import arrowRight from './arrow-right.png';
 import "./LocationListItem.style.scss";
 
 const LocationListItem = (props) => {
-  const { location, windowWidth } = props;
+  const {
+    location,
+    windowWidth,
+    locationDetailDisplayHandler,
+    getSelectedLocation,
+  } = props;
 
   const displayUrl = location.website.slice(0, 30) + "..."
   // console.log(location);
@@ -14,7 +19,15 @@ const LocationListItem = (props) => {
   return (
     <li className="locationListItem">
       <div className="locationListItemDescription">
-        <p className="listItemFacilityName">{location.name}</p>
+        <p
+          className="listItemFacilityName"
+          onClick={() => {
+            locationDetailDisplayHandler();
+            getSelectedLocation(location);
+          }}
+        >
+          {location.name}
+        </p>
         <p className="listItemFacilityPhone">{location.phone}</p>
         <p className="listItemFacilityAddress1">{location.address}</p>
         <p className="listItemFacilityAddress2">
@@ -33,7 +46,15 @@ const LocationListItem = (props) => {
         </div>
       ) : (
         <div className="rightArrowDiv">
-          <img className="rightArrow" src={arrowRight} alt="arrow image" />
+          <img
+            className="rightArrow"
+            src={arrowRight}
+            alt="arrow image"
+            onClick={() => {
+              locationDetailDisplayHandler();
+              getSelectedLocation(location);
+            }}
+          />
         </div>
       )}
     </li>

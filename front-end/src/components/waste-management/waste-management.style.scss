@@ -5,6 +5,7 @@
 
 .mapAndMaterialTab {
     margin: 1rem auto;
+    display: block;
 
     button {
         margin: 0 1rem;
@@ -35,16 +36,17 @@
 
     .mapAndMaterialTab {
         order: 2;
-        display: none;
-
+        display: none !important;
     }
 
-    .location-section {
+    .location-section,
+    .locationDetailDiv {
         order: 3;
     }
 
     .google-map-section {
         order: 4;
+        display: block !important;
     }
 
     .fact-section {
@@ -55,5 +57,17 @@
     .explore-quiz-section {
         order: 6;
         grid-column: span 2;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .content {
+        grid-template-columns: 400px 1fr;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .content {
+        grid-template-columns: 480px 1fr;
     }
 }

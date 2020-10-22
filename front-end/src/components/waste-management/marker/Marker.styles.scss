@@ -2,6 +2,10 @@
   // initially any map object has left top corner at lat lng coordinates
   // it's on you to set object origin to 0,0 coordinates
 
+.markerDiv {
+  cursor: pointer;
+}
+
 .markerDiv:hover .popupComment p{
     display: block;
     animation: fadeIn .5s ease;

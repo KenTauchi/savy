@@ -3,6 +3,7 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import Filter from './filter/Filter.component';
 import LocationList from './locationList/LocationList.component';
+import LocationDetail from './location-detail/LocationDetail.component.js';
 import GoogleMap from './google-map/GoogleMap.component';
 import RecyclingFacts from './recycling-fact/recycling-fact';
 import ExploreQuiz from './explore-quiz/explore-quiz';
@@ -20,11 +21,34 @@ const WasteManagement = () => {
     zoom: 11,
   });
   const [locations, setLocations] = useState(LOCATION_DATA);
-  const [mapAndMaterialDisplay, setmapAndMaterialDisplay] = useState({
+  const [mapAndMaterialDisplay, setMapAndMaterialDisplay] = useState({
     map: true,
     material: false
   });
+  const [locationDetailDisplay, setLocationDetailDisplay] = useState(false);
+  const [tabListMapDetailDisplayStyle, setTabListMapDetailDisplay] = useState({
+    tab: { display: "block" },
+    list: { display: "block" },
+    map: { display: "block" },
+    detail: { display: "none" }
+  });
   const [windowWidth, setwindowWidth] = useState(window.innerWidth);
+  const [selectedLocation, setSelectedLocation] = useState({
+    locationId: 1,
+    locationTypeId: "Private",
+    cityId: "New Westminister",
+    name: "Lowe´s",
+    postalCode: "V3M 0G2",
+    address: "1085 ﻿Tanaka Ct",
+    phone: "604-527-7239",
+    latitude: 49.188678,
+    longitude: -122.951498,
+    openingHour: "Call for hours of operation",
+    website: "https://www.lowes.ca/services/recycling-centre",
+    imageUrl: "",
+    locationNotes:
+      "Minimize your impact on the environment by bringing your paint, batteries, lightbulbs, and fluorescent tubes to one of Lowe's Recycling Centres for safe disposal.",
+  });
 
   const displaySizeListener = () => {
     const newWindowWidth = window.innerWidth;
@@ -32,51 +56,115 @@ const WasteManagement = () => {
     setwindowWidth(newWindowWidth);
   };
 
-  useEffect(()=>{
-    // const unsbscribeWindow = 
-    window.addEventListener("resize", displaySizeListener);
-    // return () => {
-    //   unsbscribeWindow();
-    // }
-  }, [])
-
-
   const mapDisplayHandler = () => {
-    setmapAndMaterialDisplay({
+    setMapAndMaterialDisplay({
       map: true,
       material: false,
     });
   };
 
   const materialDisplayHandler = () => {
-    setmapAndMaterialDisplay({
+    setMapAndMaterialDisplay({
       map: false,
       material: true,
     });
   };
 
+  const locationDetailDisplayHandler = () => {
+    setLocationDetailDisplay(!locationDetailDisplay);
+  }
+
+  const mapMarkerLocationDetailDisplayHandler = () => {
+    setLocationDetailDisplay(true);
+  }
+
+  const getSelectedLocation = (location) => {
+    setSelectedLocation(location);
+  }
+
+  // useEffect(() => {
+  //   console.log(selectedLocation);
+  // }, [selectedLocation]);
+
+  useEffect(()=>{
+    if (windowWidth >= 768 && locationDetailDisplay) {
+      // only list should be display none.
+      setTabListMapDetailDisplay({
+        tab: { display: "none" },
+        list: { display: "none" },
+        map: { display: "block" },
+        detail: { display: "block" },
+      });
+    } else if (windowWidth < 768 && locationDetailDisplay) {
+      // tab, map, list should be display none.
+      setTabListMapDetailDisplay({
+        tab: { display: "none" },
+        list: { display: "none" },
+        map: { display: "none" },
+        detail: { display: "block" },
+      });
+      if (windowWidth <= 767) {
+        window.scrollTo(0, 0);
+      }
+    } else {
+      // only detail should be display none.
+      setTabListMapDetailDisplay({
+        tab: { display: "block" },
+        list: { display: "block" },
+        map: { display: "block" },
+        detail: { display: "none" },
+      });
+    }
+  }, [locationDetailDisplay])
+
   useEffect(() => {
     if (windowWidth >= 768) {
-      setmapAndMaterialDisplay({
+      setMapAndMaterialDisplay({
         map: true,
         material: true,
-      })
-    } else {
-        if (mapAndMaterialDisplay.map && mapAndMaterialDisplay.material) {
-          setmapAndMaterialDisplay({
-                  map: true,
-                  material: false,
-                })
-        };
+      });
+      setTabListMapDetailDisplay({
+        ...tabListMapDetailDisplayStyle,
+        tab: { display: "none" },
+        map: { display: "block" },
+      });
+    } else if (windowWidth <= 767) {
+      if (mapAndMaterialDisplay.map && mapAndMaterialDisplay.material) {
+        setMapAndMaterialDisplay({
+          map: true,
+          material: false,
+        });
       }
+      if (locationDetailDisplay) {
+        setTabListMapDetailDisplay({
+          ...tabListMapDetailDisplayStyle,
+          tab: { display: "none" },
+          map: { display: "none" },
+        });
+      } else if (!locationDetailDisplay) {
+        setTabListMapDetailDisplay({
+          ...tabListMapDetailDisplayStyle,
+          tab: { display: "block" },
+          map: { display: "block" },
+        });
+      }
+    }
   }, [windowWidth]);
+
+  useEffect(() => {
+    window.addEventListener("resize", displaySizeListener);
+  }, []);
 
   return (
     <div>
       <Header />
       <div className="content">
         <Filter />
-        <div className="mapAndMaterialTab">
+
+        <div
+          className="mapAndMaterialTab"
+          style={tabListMapDetailDisplayStyle.tab}
+        >
           <button
             className="mapButton"
             onClick={mapDisplayHandler}
@@ -92,18 +180,35 @@ const WasteManagement = () => {
             Material Info
           </button>
         </div>
+
         {mapAndMaterialDisplay.map ? (
           <React.Fragment>
             <GoogleMap
-              className="googleMap"
               defaultProps={defaultProps}
               locations={locations}
+              displayStyle={tabListMapDetailDisplayStyle.map}
+              mapMarkerLocationDetailDisplayHandler={
+                mapMarkerLocationDetailDisplayHandler
+              }
+              getSelectedLocation={getSelectedLocation}
             />
-            <LocationList locations={locations} windowWidth={windowWidth} />
+            <LocationList
+              locations={locations}
+              windowWidth={windowWidth}
+              displayStyle={tabListMapDetailDisplayStyle.list}
+              locationDetailDisplayHandler={locationDetailDisplayHandler}
+              getSelectedLocation={getSelectedLocation}
+            />
           </React.Fragment>
         ) : (
           <React.Fragment></React.Fragment>
         )}
+
+        <LocationDetail
+          displayStyle={tabListMapDetailDisplayStyle.detail}
+          location={selectedLocation}
+          locationDetailDisplayHandler={locationDetailDisplayHandler}
+        />
 
         {mapAndMaterialDisplay.material ? (
           <React.Fragment>
