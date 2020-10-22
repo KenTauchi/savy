@@ -16,8 +16,8 @@ const RecyclingCanada = () => {
                 <About />
                 <Map />
                 <MapData />
-                <Team />
                 <Testimonial />
+                <Team />
             </div>
             <Footer />
         </div>

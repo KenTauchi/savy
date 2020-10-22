@@ -95,14 +95,16 @@ console.log(selector)
     polygonTemplate.events.on("over", function (event) {
       // event.target.zIndex = 1000000;
       // selectPolygon(event.target);
-      let id = event.target.dataItem.dataContext.id;
+      
      let province = event.target.dataItem.dataContext.name;
     
-     let found = dataSet.data.find(prov => prov.id === id)
-     let population = found.value
-     console.log(population)
+     let found = dataSet.data.find(prov => prov.name === province)
+     let contribution = found.prov_RecyclingContribPerc;
+     let wasteRecycled = found.prov_TotalRecycling;
+     let provinceRank = found.prov_WasteRecyclingPerc
+     
     
-     dispatch(clickGet(population, population, population));
+     dispatch(clickGet(contribution, wasteRecycled, provinceRank));
     })
   
     // Create hover state and set alternative fill color
@@ -115,25 +117,30 @@ console.log(selector)
         let provDataArr = [];
         console.log("API data fetch rendered")
 
-        fetch("https://cors-anywhere.herokuapp.com/" +
-              "https://api.covid19tracker.ca/provinces")
+        // fetch("https://cors-anywhere.herokuapp.com/" +
+        //       "https://api.covid19tracker.ca/provinces")
+
+        fetch("http://localhost:3000/api/v1/mapdata")
             .then((response) => response.json())
             .then(result => {
-                result.forEach((prov) => {
-                    let provId = "CA-" + prov.code;
-                    let provVal = prov.population;
-                    let provObj = {
-                      id: provId,
-                      value: provVal,
-                    };                  
-                    provDataArr.push(provObj);
-                  }); 
-                  dispatch(dataImportAction(provDataArr))
+              
+                // result.forEach((prov) => {
+                //     let provId = "CA-" + prov.code;
+                //     let provVal = prov.population;
+                //     let provObj = {
+                //       id: provId,
+                //       value: provVal,
+                //     };                  
+                //     provDataArr.push(provObj);
+                dispatch(dataImportAction(result))
             })
             .catch(() => null);
+                  
+            },[])
+            
            
 
-    },[])
+    
 
 
     return (
