@@ -21,6 +21,10 @@
         margin-bottom: .5rem;
         border-bottom: solid 1px black;
         display: inline-block;
+
+        &:hover {
+            cursor: pointer;
+        }
     }
 
     .locationListItemDirection {

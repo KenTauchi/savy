@@ -9,8 +9,6 @@
 
     .WMpageInputsDiv {
         text-align: left;
-        // display: grid;
-        // justify-content: center;
     }
 
     .searchInput {
@@ -37,5 +35,26 @@
         .searchInstructionText {
             display: block;
         }
+
+        .WMpageInputsDiv {
+            display: flex;
+
+            & div:nth-of-type(1) {
+                margin-right: 1rem;
+            }
+            & div:nth-of-type(2) {
+                margin-left: 1rem;
+            }
+        }
+
+        .searchInput {
+            width: 30%;
+        }
+
+        .searchInput {
+
+        }
+
+
     }
 }

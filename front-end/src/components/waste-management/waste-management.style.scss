@@ -8,38 +8,52 @@
 
     button {
         margin: 0 1rem;
+        border: none;
+        background-color: #fff;
+        font-size: 16px;
+        color: #bbb;
+
+        &:focus {
+            outline: none;
+        }
+        &:hover {
+            cursor: pointer;
+        }
     }
 }
 
 @media screen and (min-width: 768px) {
-.content {
-    display: grid;
-}
+    .content {
+        display: grid;
+        grid-template-columns: 325px 1fr;
+    }
 
-.filter-section {
-    order: 1;
-}
+    .filter-section {
+        order: 1;
+        grid-column: span 2;
+    }
 
-.mapAndMaterialTab {
-    order: 2;
-    display: none;
+    .mapAndMaterialTab {
+        order: 2;
+        display: none;
 
-}
+    }
 
-.location-section {
-    order: 3;
-}
+    .location-section {
+        order: 3;
+    }
 
-.google-map-section {
-    order: 4;
-}
+    .google-map-section {
+        order: 4;
+    }
 
-.fact-section {
-    order: 5;
-}
+    .fact-section {
+        order: 5;
+        grid-column: span 2;
+    }
 
-.explore-quiz-section {
-    order: 6;
-}
-
+    .explore-quiz-section {
+        order: 6;
+        grid-column: span 2;
+    }
 }

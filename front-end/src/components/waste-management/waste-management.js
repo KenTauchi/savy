@@ -76,8 +76,20 @@ const WasteManagement = () => {
       <div className="content">
         <Filter />
         <div className="mapAndMaterialTab">
-          <button onClick={mapDisplayHandler}>Map</button>
-          <button onClick={materialDisplayHandler}>Material Info</button>
+          <button
+            className="mapButton"
+            onClick={mapDisplayHandler}
+            style={mapAndMaterialDisplay.map ? { color: "black" } : null}
+          >
+            Map
+          </button>
+          <button
+            className="materialButton"
+            onClick={materialDisplayHandler}
+            style={mapAndMaterialDisplay.material ? { color: "black" } : null}
+          >
+            Material Info
+          </button>
         </div>
         {mapAndMaterialDisplay.map ? (
           <React.Fragment>
