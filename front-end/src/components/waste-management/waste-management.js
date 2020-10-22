@@ -33,10 +33,11 @@ const WasteManagement = () => {
   };
 
   useEffect(()=>{
-    const unsbscribeWindow = window.addEventListener("resize", displaySizeListener);
-    return () => {
-      unsbscribeWindow();
-    }
+    // const unsbscribeWindow = 
+    window.addEventListener("resize", displaySizeListener);
+    // return () => {
+    //   unsbscribeWindow();
+    // }
   }, [])
 
 
