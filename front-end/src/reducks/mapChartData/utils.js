@@ -2,10 +2,11 @@ const createJointData = (state, action) => {
     let dataJoint = [];
     state.forEach(prov => {
       action.map(data => {
-        if (data.id === prov.id){
+        if (data.provinceName === prov.name){
           let joint = {
             ...prov,
-            ...data
+            ...data,
+            value: data.prov_TotalWaste
           }
           dataJoint.push(joint)
         }

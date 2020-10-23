@@ -12,11 +12,11 @@ const MapData = () => {
         <div className="map-data-section">
             <ul>
                 <li className="table-data">
-                    <span>{tableData.contribution ? tableData.contribution : "0"}</span>
+                    <span>{tableData.contribution ? tableData.contribution  : "0"}%</span>
                     <span>Contribution</span>
                 </li>
                 <li className="table-data">
-                    <span>{tableData.wasteRecycled ? tableData.wasteRecycled : "0"}</span>
+                    <span>{tableData.wasteRecycled ? tableData.wasteRecycled.toLocaleString() : "0"}</span>
                     <span>Waste Recycled</span>
                 </li>
                 <li className="table-data">
