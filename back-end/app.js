@@ -82,3 +82,22 @@ app.get("/api/v1/mapdata", (req,res)=>{
     });   
 });
 
+
+// Returns a list of all team members
+app.get("/api/v1/team", (req,res)=>{
+
+    let qry = `SELECT T.name, R.name AS role, T.imageURL, T.linkedinURL, T.githubURL, T.behanceURL
+                    FROM teammember T
+                        INNER JOIN teamrole R ON (T.teamRoleId = R.teamRoleId)
+                ORDER BY T.name`;
+
+    savyDb.query(qry, (error, results)=>{
+        if (error) throw error;
+        if (results.length == 0) {
+            res.status(404).send('No Record Found');            
+        } else {
+            res.status(200).send(results);
+        }    
+    });   
+});
+
