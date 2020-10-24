@@ -1,20 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, PropTypes } from "react";
 import GoogleMapReact from "google-map-react";
 
 import Marker from "../marker/Marker.component";
 
 import './GoogleMap.style.scss';
 
-// const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
 const GoogleMap = (props) => {
-  const [apikey, setApikey] = useState({
-    apiKey: {
-      development: "",
-      product: "AIzaSyBeNxnshtVO9hcgIacX_gHmqtFEY2nm49o",
-    },
-  });
-
   const {
     defaultProps,
     locations,
@@ -22,6 +14,13 @@ const GoogleMap = (props) => {
     mapMarkerLocationDetailDisplayHandler,
     getSelectedLocation,
   } = props;
+
+  const [apikey, setApikey] = useState({
+    apiKey: {
+      development: "",
+      product: "AIzaSyBeNxnshtVO9hcgIacX_gHmqtFEY2nm49o",
+    },
+  });
   
   const Markers = locations.map((location, index) => (
     <Marker
@@ -36,8 +35,6 @@ const GoogleMap = (props) => {
     />
   ));
 
-  // console.log(Markers);
-
   return (
     // Important! Always set the container height explicitly
     <div className="google-map-section" style={displayStyle}>
@@ -45,6 +42,8 @@ const GoogleMap = (props) => {
         bootstrapURLKeys={{ key: apikey.apiKey.development }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
+        center={defaultProps.center}
+        zoom={defaultProps.zoom}
       >
         {Markers}
       </GoogleMapReact>
