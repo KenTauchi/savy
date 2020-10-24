@@ -3,6 +3,7 @@
     text-align: left;
     padding: 1rem;
     border: solid 1px #eee;
+    animation: slideInLeft .45s ease;
 
     ul {
         list-style-type: none;
@@ -29,4 +30,23 @@
         height: 447.45px - 33.99px;
         max-width: 100%;
     }
+}
+
+.slide_in_left {
+    animation: slideInLeft .45s ease;
+}
+
+@keyframes slideInLeft {
+  0% { transform: translateX(-100%);}
+  100% { transform: translateX(0%);}
+}
+
+.slide_out_left {
+    animation: slideOutLeft .45s ease;
+    // animation: slideOutLeft .45s ease;
+}
+
+@keyframes slideOutLeft {
+  0% { transform: translateX(0);}
+  100% { transform: translateX(-100%);}
 }

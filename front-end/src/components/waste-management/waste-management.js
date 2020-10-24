@@ -23,14 +23,14 @@ const WasteManagement = () => {
   const [locations, setLocations] = useState(LOCATION_DATA);
   const [mapAndMaterialDisplay, setMapAndMaterialDisplay] = useState({
     map: true,
-    material: false
+    material: false,
   });
   const [locationDetailDisplay, setLocationDetailDisplay] = useState(false);
   const [tabListMapDetailDisplayStyle, setTabListMapDetailDisplay] = useState({
     tab: { display: "block" },
     list: { display: "block" },
     map: { display: "block" },
-    detail: { display: "none" }
+    detail: { display: "none" },
   });
   const [windowWidth, setwindowWidth] = useState(window.innerWidth);
   const [selectedLocation, setSelectedLocation] = useState({
@@ -72,21 +72,28 @@ const WasteManagement = () => {
 
   const locationDetailDisplayHandler = () => {
     setLocationDetailDisplay(!locationDetailDisplay);
-  }
+  };
 
   const mapMarkerLocationDetailDisplayHandler = () => {
     setLocationDetailDisplay(true);
-  }
-
-  const getSelectedLocation = (location) => {
-    setSelectedLocation(location);
-  }
+  };
 
   // useEffect(() => {
   //   console.log(selectedLocation);
   // }, [selectedLocation]);
 
-  useEffect(()=>{
+  const getSelectedLocation = (location) => {
+    setSelectedLocation(location);
+    setDefaultProps({
+      center: {
+        lat: location.latitude,
+        lng: location.longitude,
+      },
+      zoom: 15,
+    });
+  };
+
+  useEffect(() => {
     if (windowWidth >= 768 && locationDetailDisplay) {
       // only list should be display none.
       setTabListMapDetailDisplay({
@@ -115,7 +122,7 @@ const WasteManagement = () => {
         detail: { display: "none" },
       });
     }
-  }, [locationDetailDisplay])
+  }, [locationDetailDisplay]);
 
   useEffect(() => {
     if (windowWidth >= 768) {
@@ -156,7 +163,7 @@ const WasteManagement = () => {
 
     return () => {
       window.removeEventListener("resize", displaySizeListener);
-    }
+    };
   }, []);
 
   return (

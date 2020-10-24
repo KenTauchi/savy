@@ -2,7 +2,9 @@ import React from 'react';
 import { Swiper, SwiperSlide } from "swiper/react";
 import {initialState}  from "../../../reducks/store/initialState";
 import SwiperCore, {Pagination} from 'swiper'
-import '/Users/kentauchi/Documents/WMDD/Fall2020/Project2/savy/front-end/node_modules/swiper/swiper-bundle.css'
+// import '/Users/kentauchi/Documents/WMDD/Fall2020/Project2/savy/front-end/node_modules/swiper/swiper-bundle.css'
+// Above code causes an error so I commented it out and I added a new line below. Tomohiro -> Ken san
+import "../../../../node_modules/swiper/swiper-bundle.css";
 import "../../../../node_modules/swiper/swiper.scss"
 import "./testimonial.scss"
 
