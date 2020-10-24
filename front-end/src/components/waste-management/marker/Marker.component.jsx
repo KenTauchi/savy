@@ -5,8 +5,20 @@ import marker from "./map-pin.png";
 import './Marker.styles.scss';
 
 const Marker = (props) => {
+    const {
+        location,
+        mapMarkerLocationDetailDisplayHandler,
+        getSelectedLocation,
+    } = props;
+
     return (
-        <div className="markerDiv">
+        <div 
+            className="markerDiv"
+            onClick={()=>{
+                mapMarkerLocationDetailDisplayHandler();
+                getSelectedLocation(location);
+            }}
+            >
             <div className="popupComment">
                 <p>{props.text}</p>
             </div>

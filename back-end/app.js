@@ -82,3 +82,65 @@ app.get("/api/v1/mapdata", (req,res)=>{
     });   
 });
 
+
+// Returns a list of all team members
+app.get("/api/v1/team", (req,res)=>{
+
+    let qry = `SELECT T.name, R.name AS role, T.imageURL, T.linkedinURL, T.githubURL, T.behanceURL
+                    FROM teammember T
+                        INNER JOIN teamrole R ON (T.teamRoleId = R.teamRoleId)
+                ORDER BY T.name`;
+
+    savyDb.query(qry, (error, results)=>{
+        if (error) throw error;
+        if (results.length == 0) {
+            res.status(404).send('No Record Found');            
+        } else {
+            res.status(200).send(results);
+        }    
+    });   
+});
+
+
+// Returns a list of all quiz questions and answers
+app.get("/api/v1/quiz", (req,res)=>{
+
+    let qry = `SELECT Q.questionId, Q.question, q.description, a.answer, 
+                      CASE WHEN a.correct = 1 THEN 'yes' ELSE 'no' END AS correct
+                 FROM quizquestion Q
+                      INNER JOIN quizanswer A ON (Q.questionId = A.questionId)
+                ORDER BY q.questionId, a.answerId  `;
+
+    savyDb.query(qry, (error, results)=>{
+        if (error) throw error;
+        if (results.length == 0) {
+            res.status(404).send('No Record Found');            
+        } else {
+
+            let myResult = [];
+            let myAnswer = [];
+            let question = {};
+            let iQuestion = -1;
+
+            for (let i=0; i< results.length; i++) {
+                if (iQuestion != results[i].questionId) {
+
+                    if (myAnswer.length > 0) {
+                        myResult.push( {question, 'answers': myAnswer});
+                        myAnswer = [];                    
+                    }
+                    question = { 'questionId': results[i].questionId, 'question': results[i].question, 'description' : results[i].description };
+                }  
+                myAnswer.push( {'answer': results[i].answer, 'correct':results[i].correct} );
+                iQuestion = results[i].questionId;                
+            }            
+
+            if (question != {}) {
+                myResult.push( {question, 'answers': myAnswer });
+            }
+
+            res.status(200).send(myResult);
+        }    
+    });   
+});
+

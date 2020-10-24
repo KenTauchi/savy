@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,aAAa,CAAC;EACV,eAAe,EAAE,IAAI;EACrB,YAAY,EAAE,CAAC;EACf,MAAM,EAAE,iBAAiB;CAC5B",
+    "sources": [
+        "../src/components/waste-management/locationList/LocationList.style.scss"
+    ],
+    "names": [],
+    "file": "LocationList.style.css"
+}

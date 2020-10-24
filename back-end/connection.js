@@ -19,7 +19,9 @@ const ConnectionString = {
     database: 'savy',
     user: 'root',
     password: 'root',
-    multipleStatements: true
+    multipleStatements: true,
+    socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
+
 }
 
 // *******************************************************

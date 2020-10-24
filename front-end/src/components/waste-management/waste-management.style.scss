@@ -5,6 +5,7 @@
 
 .mapAndMaterialTab {
     margin: 1rem auto;
+    display: block;
 
     button {
         margin: 0 1rem;
@@ -23,28 +24,30 @@
 }
 
 @media screen and (min-width: 768px) {
-    .content {
-        // display: grid;
-        // grid-template-columns: 325px 1fr;
+    .waste-management-content {
+        display: grid;
+        grid-template-columns: 325px 1fr;
     }
 
     .filter-section {
         order: 1;
         grid-column: span 2;
+        margin-bottom: 2rem;
     }
 
     .mapAndMaterialTab {
         order: 2;
-        display: none;
-
+        display: none !important;
     }
 
-    .location-section {
+    .location-section,
+    .locationDetailDiv {
         order: 3;
     }
 
     .google-map-section {
         order: 4;
+        display: block !important;
     }
 
     .fact-section {
@@ -55,5 +58,17 @@
     .explore-quiz-section {
         order: 6;
         grid-column: span 2;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .waste-management-content {
+        grid-template-columns: 400px 1fr;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    .waste-management-content {
+        grid-template-columns: 480px 1fr;
     }
 }
