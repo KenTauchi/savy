@@ -1,26 +1,24 @@
 const mySql = require('mysql');
 
-// Defines the connection string parameters to the database
-// const connectionPool = mySql.createPool({
-//         connectionLimit:10,
-//         host : 'localhost',
-//         user : 'root',
-//         password : '',
-//         database : 'a1', // this has to be the name of the database you just created.
-//         multipleStatements: true
-// });
-
-// module.exports = {connectionPool};
-
 // ConnectionString to connect to database
+// const ConnectionString = {
+//     connectionLimit:10,
+//     host: 'localhost',
+//     database: 'savy',
+//     user: 'root',
+//     password: 'root',
+//     multipleStatements: true
+// }
+
 const ConnectionString = {
     connectionLimit:10,
-    host: 'localhost',
+    host: '34.212.131.115',
     database: 'savy',
-    user: 'root',
-    password: 'root',
+    user: 'savy-user',
+    password: '9LpsjjT6Pn<0',
     multipleStatements: true
 }
+
 
 // *******************************************************
 // ******** Database Connection Setup ********************
