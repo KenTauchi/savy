@@ -1,0 +1,23 @@
+.testimonial-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    .char {
+        font-size: 5rem;
+        margin: 0 2rem;
+    }
+
+    .swiper-container {
+        width: 50vw;
+        .swiper-pagination {
+            bottom: 0;
+        }
+    }
+    
+}
