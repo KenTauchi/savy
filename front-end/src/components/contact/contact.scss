@@ -1,0 +1,12 @@
+.contact-section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    justify-content: center;
+    text-align: left;
+    grid-gap: 4rem;
+    margin: 5rem;
+}
+
+label,input,textarea {
+    display: block;
+}
