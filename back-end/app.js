@@ -13,7 +13,6 @@
 
 const express = require("express");
 const app = express();
-//const mySql = require('mysql');
 const {savyDb} = require("./connection.js");
 
 const server = app.listen(process.env.PORT || 3000, ()=>{
@@ -78,26 +77,26 @@ app.get("/api/v1/mapdata", (req,res)=>{
                 ) md,
                 (
                     SELECT p.countryCode,
-                            P.provinceCode,
-                            P.provinceName,
+                            p.provinceCode,
+                            p.provinceName,
                             f.name       AS familyName, 
                             SUM(d.value) AS familyTotalRecycling,
                             ROUND((SUM(d.value) / MIN(tp.total) * 100),2) AS familyPercent     
                         FROM datacontent d 
                             INNER JOIN informationtype t ON (d.informationTypeID = t.informationTypeID)
                             INNER JOIN family f ON (t.familyId = f.familyId)
-                            INNER JOIN provinces p ON (d.provinceCode = p.provinceCode AND d.countryCode = P.countryCode )
+                            INNER JOIN provinces p ON (d.provinceCode = p.provinceCode AND d.countryCode = p.countryCode )
                             INNER JOIN ( SELECT d2.countryCode, d2.provinceCode,
                                                 SUM(d2.value) AS total
                                            FROM datacontent d2
                                                 INNER JOIN informationtype t2 ON (d2.informationTypeID = t2.informationTypeID)
                                                 INNER JOIN family f2 ON (t2.familyId = f2.familyId)
                                           WHERE t2.familyId IN(2,3,4,5,6,7,8,9)
-                                            AND D2.year = 2016        
+                                            AND d2.year = 2016        
                                           GROUP BY d2.countryCode, d2.provinceCode
                                         ) tp ON (p.provinceCode = tp.provinceCode and p.countryCode = tp.countryCode )
                     WHERE t.familyId IN(2,3,4,5,6,7,8,9)
-                      AND D.year = 2016
+                      AND d.year = 2016
                     GROUP BY p.countryCode, p.provinceCode, p.provinceName, f.name         
                 ) pd
                 WHERE md.provinceCode = pd.provinceCode
