@@ -6,6 +6,7 @@ const createJointData = (state, action) => {
         let joint = {
           ...prov,
           ...data,
+
           // value: data.prov_TotalWaste,
         };
         dataJoint.push(joint);
