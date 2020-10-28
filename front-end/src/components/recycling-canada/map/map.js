@@ -45,13 +45,13 @@ export default function Map() {
     }
 
     // Set projection
-    chart.projection = new am4maps.projections.Mercator();
+    chart.projection = new am4maps.projections.Miller();
     // chart.projection = new am4maps.projections.Miller();
 
     // zoomout on background click
     chart.chartContainer.background.events.on("hit", function () {
       zoomOut();
-      polygonTemplate.properties.fillOpacity = 1;
+      // polygonTemplate.properties.fillOpacity = 1;
     });
 
     let colorSet = new am4core.ColorSet();
@@ -107,7 +107,7 @@ export default function Map() {
     polygonTemplate.events.on("hit", function (event) {
       // event.target.zIndex = 1000000;
       // selectPolygon(event.target);
-      console.log(event.target.dataItem.dataContext.id);
+      // console.log(event.target.dataItem.dataContext.id);
 
       let province = event.target.dataItem.dataContext.name;
       let contribution;
@@ -117,7 +117,7 @@ export default function Map() {
       let found = dataSet.data.find((prov) =>
         prov.mapData ? prov.mapData.provinceName === province : false
       );
-      console.log("found", found);
+      // console.log("found", found);
 
       if (found) {
         contribution = found.mapData.prov_RecyclingContribPerc;
@@ -173,13 +173,11 @@ export default function Map() {
     pieSeries.dataFields.value = "value";
     pieSeries.dataFields.category = "category";
 
-    pieSeries.data = {
-      "CA-BC": [
-        { value: 20, category: "First" },
-        { value: 20, category: "Second" },
-        { value: 10, category: "Third" },
-      ],
-    };
+    pieSeries.data = [
+      { value: 20, category: "First" },
+      // { value: 20, category: "Second" },
+      // { value: 10, category: "Third" },
+    ];
 
     let dropShadowFilter = new am4core.DropShadowFilter();
     dropShadowFilter.blur = 4;
@@ -351,10 +349,46 @@ export default function Map() {
 
       let fill = polygon.fill;
       let desaturated = fill.saturate(0.3);
-      console.log(pieSeries.dataItems);
+
+      let myData = {
+        "CA-BC": [
+          { value: 51, category: "first" },
+          { value: 99, category: "second" },
+          { value: 4, category: "Third" },
+          { value: 4, category: "Fourth" },
+        ],
+        "CA-AB": [
+          { value: 80, category: "first" },
+          { value: 20, category: "second" },
+          { value: 23, category: "Third" },
+          { value: 40, category: "Fourth" },
+        ],
+      };
+
+      // let myData = dataSet.data.slice(0, -2).map((prov) => {
+      //   let id = prov.id;
+
+      //   let obj = prov.pieData.map((pie) => {
+      //     return [
+      //       {
+      //         category: pie.familyName,
+      //         value: pie.familyPercent,
+      //       },
+      //     ];
+      //   });
+
+      //   return {
+      //     id: obj,
+      //   };
+      // });
+
+      // console.log(myData);
+
+      // console.log(pieSeries.dataItems);
       for (let i = 0; i < pieSeries.dataItems.length; i++) {
         let dataItem = pieSeries.dataItems.getIndex(i);
-        dataItem.value = Math.round(Math.random() * 100);
+        // dataItem.value = Math.round(Math.random() * 100);
+        dataItem.value = myData[polygon.dataItem.dataContext.id][i].value;
         dataItem.slice.fill = am4core.color(
           am4core.colors.interpolate(
             fill.rgb,
