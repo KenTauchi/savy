@@ -1,0 +1,17 @@
+.map-data-section {
+  margin: 3rem;
+}
+
+.map-data-section ul {
+  display: flex;
+  justify-content: space-evenly;
+  list-style-type: none;
+  margin: 0 auto;
+  padding: 0;
+  width: 50%;
+}
+
+.map-data-section ul li span {
+  display: block;
+}
+/*# sourceMappingURL=map-data.css.map */

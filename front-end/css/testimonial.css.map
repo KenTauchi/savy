@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,oBAAoB,CAAC;EACjB,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,MAAM;EACvB,WAAW,EAAE,MAAM;EACnB,UAAU,EAAE,IAAI;CAkBnB;;AAtBD,AAKI,oBALgB,CAKhB,GAAG,CAAC;EACA,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,IAAI;CACf;;AARL,AAUI,oBAVgB,CAUhB,KAAK,CAAC;EACF,SAAS,EAAE,IAAI;EACf,MAAM,EAAE,MAAM;CACjB;;AAbL,AAeI,oBAfgB,CAehB,iBAAiB,CAAC;EACd,KAAK,EAAE,IAAI;CAId;;AApBL,AAiBQ,oBAjBY,CAehB,iBAAiB,CAEb,kBAAkB,CAAC;EACf,MAAM,EAAE,CAAC;CACZ",
+    "sources": [
+        "../src/components/recycling-canada/testimonial/testimonial.scss"
+    ],
+    "names": [],
+    "file": "testimonial.css"
+}
