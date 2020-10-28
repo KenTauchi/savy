@@ -11,13 +11,15 @@
 // *******************************************************
 // ******** Running Server *******************************
 // *******************************************************
-//      1) Localhost - run MAMP
-//      2) Import Savy database
-//      3) npm run dev   ( under back-end folder )
-//      4) API Test on Postman
+//      Just for Localhost database
+//         a) Localhost - run MAMP  
+//         b) Import Savy database
+//      For localhost API
+//      1) npm run dev   ( under back-end folder )
+//      2) API Test on Postman
 //           On postman - File - Import..
 //           import Savy.postman_collection.js
-//      5) On front-end:
+//      3) On front-end:
 //           Setup a Global <apiUrl> variable to Localhost
 //           Map endpoints to <apiUrl>/API/V1/..    
 
