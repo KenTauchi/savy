@@ -122,7 +122,7 @@ export default function Map() {
       if (found) {
         contribution = found.mapData.prov_RecyclingContribPerc;
         wasteRecycled = found.mapData.prov_TotalRecycling;
-        provinceRank = found.mapData.prov_WasteRecyclingPerc;
+        provinceRank = found.mapData.prov_Rank;
       } else {
         contribution = "Not Avaialble";
         wasteRecycled = "Not Avaialble";
@@ -173,10 +173,27 @@ export default function Map() {
     pieSeries.dataFields.value = "value";
     pieSeries.dataFields.category = "category";
 
+    let pieDataSet = {};
+    let myData = dataSet.data.slice(0, -2).map((prov) => {
+      let id = prov.id;
+
+      let obj = prov.pieData.map((pie) => ({
+        category: pie.familyName,
+        value: pie.familyPercent,
+      }));
+
+      return (pieDataSet[prov.id] = obj);
+    });
+
+    console.log(pieDataSet);
     pieSeries.data = [
-      { value: 20, category: "First" },
-      // { value: 20, category: "Second" },
-      // { value: 10, category: "Third" },
+      { category: "Construction", value: 9.46 },
+      { category: "Eletronic", value: 1.11 },
+      { category: "Metal", value: 7.6 },
+      { category: "Organic", value: 32.29 },
+      { category: "Others", value: 10.03 },
+      { category: "Paper", value: 34.99 },
+      { category: "Plastic", value: 4.53 },
     ];
 
     let dropShadowFilter = new am4core.DropShadowFilter();
@@ -350,45 +367,39 @@ export default function Map() {
       let fill = polygon.fill;
       let desaturated = fill.saturate(0.3);
 
-      let myData = {
-        "CA-BC": [
-          { value: 51, category: "first" },
-          { value: 99, category: "second" },
-          { value: 4, category: "Third" },
-          { value: 4, category: "Fourth" },
-        ],
-        "CA-AB": [
-          { value: 80, category: "first" },
-          { value: 20, category: "second" },
-          { value: 23, category: "Third" },
-          { value: 40, category: "Fourth" },
-        ],
-      };
-
+      // let pieDataSet = {};
       // let myData = dataSet.data.slice(0, -2).map((prov) => {
       //   let id = prov.id;
 
-      //   let obj = prov.pieData.map((pie) => {
-      //     return [
-      //       {
-      //         category: pie.familyName,
-      //         value: pie.familyPercent,
-      //       },
-      //     ];
-      //   });
+      //   let obj = prov.pieData.map((pie) => ({
+      //     category: pie.familyName,
+      //     value: pie.familyPercent,
+      //   }));
 
-      //   return {
-      //     id: obj,
-      //   };
+      //   return (pieDataSet[prov.id] = obj);
       // });
 
-      // console.log(myData);
+      // console.log(pieDataSet);
 
-      // console.log(pieSeries.dataItems);
+      console.log(pieSeries.dataItems);
       for (let i = 0; i < pieSeries.dataItems.length; i++) {
         let dataItem = pieSeries.dataItems.getIndex(i);
         // dataItem.value = Math.round(Math.random() * 100);
-        dataItem.value = myData[polygon.dataItem.dataContext.id][i].value;
+        dataItem.value = pieDataSet[polygon.dataItem.dataContext.id][i].value;
+        // dataItem.value = {
+        //   "CA-AB": [
+        //     { category: "Construction", value: 1 },
+        //     { category: "Eletronic", value: 1 },
+        //     { category: "Metal", value: 1 },
+        //     { category: "Organic", value: 1 },
+        //     { category: "Others", value: 1 },
+        //     { category: "Paper", value: 1 },
+        //     { category: "Plastic", value: 1 },
+        //   ],
+        // };
+        // dataItem.value = pieDataSet.find((data) => {
+        //   data[polygon.dataItem.dataContext.id].value;
+        // });
         dataItem.slice.fill = am4core.color(
           am4core.colors.interpolate(
             fill.rgb,
@@ -400,15 +411,6 @@ export default function Map() {
         dataItem.label.background.fill = desaturated;
         dataItem.tick.stroke = fill;
       }
-      // let dataItem = pieSeries.dataItems;
-      // dataItem.value = myData[polygon.dataItem.dataContext.id].value;
-      // dataItem.slice.fill = am4core.color(
-      //   am4core.colors.interpolate(
-      //     fill.rgb,
-      //     am4core.color("#ffffff").rgb,
-      //     0.2 * 1
-      //   )
-      // );
 
       pieSeries.show();
       pieChart.show();
