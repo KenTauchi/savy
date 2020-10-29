@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AAAA,iBAAiB,CAAC;EACd,MAAM,EAAE,IAAI;CAef;;AAhBD,AAGI,iBAHa,CAGb,EAAE,CAAC;EACC,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,YAAY;EAC7B,eAAe,EAAE,IAAI;EACrB,MAAM,EAAE,MAAM;EACd,OAAO,EAAE,CAAC;EACV,KAAK,EAAE,GAAG;CAMb;;AAfL,AAWY,iBAXK,CAGb,EAAE,CAOE,EAAE,CACE,IAAI,CAAC;EACD,OAAO,EAAE,KAAK;CACjB",
-    "sources": [
-        "front-end/src/components/recycling-canada/map-data/map-data.scss"
-    ],
-    "names": [],
-    "file": "map-data.css"
-}
