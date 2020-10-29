@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,mBAAmB,CAAC;EAChB,MAAM,EAAE,IAAI;EACZ,SAAS,EAAE,IAAI;CAClB;;AAED,MAAM,CAAC,MAAM,MAAM,SAAS,EAAE,KAAK;EAC/B,AAAA,mBAAmB,CAAC;IAChB,MAAM,EAAE,QAAQ;IAChB,SAAS,EAAE,IAAI;GAClB",
+    "sources": [
+        "front-end/src/components/waste-management/google-map/GoogleMap.style.scss"
+    ],
+    "names": [],
+    "file": "GoogleMap.style.css"
+}
