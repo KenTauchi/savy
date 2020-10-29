@@ -1,12 +1,31 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { initialState } from "../../../reducks/store/initialState";
+import { teamImportAction } from "../../../reducks/teamMembers/action";
+import { getTeamMembers } from "../../../reducks/teamMembers/selectors";
 import Slider from "react-slick";
 import TeamMember from './team-member';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./team.scss";
 
-export default class CenterMode extends Component {
-    render() {
+export default function CenterMode() {
+// export default class CenterMode extends Component {
+    // render() {
+        const selector = useSelector((state) => state);
+        const teamMembers = getTeamMembers(selector);
+        const dispatch = useDispatch();
+
+        useEffect(() => {
+            fetch('http://localhost:3000/api/v1/team')
+                .then(response => response.json())
+                .then((result) => {
+                    console.log(result)
+                    dispatch(teamImportAction(result));
+                })
+                .catch(() => null);
+        }, []);
+
         const settings = {
             className: "center",
             centerMode: true,
@@ -53,22 +72,23 @@ export default class CenterMode extends Component {
             <div>
                 <h2> Center Mode</h2>
                 <Slider {...settings}>
-                    <TeamMember imageSRC="tomohiro-yoshida.jpeg" memberName="Tomohiro Yoshida" memberRole="Full Stack Developer" linkedIn="LinkedIn" gitHub="gitHub" />
-                    <TeamMember imageSRC="hardikkumar-vasoya.jpeg" memberName="Hardikkumar Vasoya" memberRole="Full Stack Developer" linkedIn="LinkedIn" gitHub="gitHub" />
-                    <TeamMember imageSRC="ken-tauchi.jpeg" memberName="Ken Tauchi" memberRole="Lead Developer" linkedIn="LinkedIn" gitHub="gitHub" />
-                    <TeamMember imageSRC="vinicius-lana.jpeg" memberName="Vinicius Meyer Lana" memberRole="Project Manager" linkedIn="LinkedIn" gitHub="gitHub" />
-                    <TeamMember imageSRC="hiteshri-nanda.jpeg" memberName="Hiteshri Nanda" memberRole="Lead Designer" linkedIn="LinkedIn" behance="Behnace" />
-                    <TeamMember imageSRC="shen-gianni.jpeg" memberName="Shen Gianni" memberRole="UI/UX Designer" linkedIn="LinkedIn" behance="Behnace" />
-                    <TeamMember imageSRC="jaqueline-santos.jpeg" memberName="Jaqueline Santos" memberRole="UI/UX Designer" linkedIn="LinkedIn" behance="Behnace" />
-                    <TeamMember imageSRC="tomohiro-yoshida.jpeg" memberName="Tomohiro Yoshida" memberRole="Full Stack Developer" linkedIn="LinkedIn" gitHub="gitHub" />
-                    <TeamMember imageSRC="hardikkumar-vasoya.jpeg" memberName="Hardikkumar Vasoya" memberRole="Full Stack Developer" linkedIn="LinkedIn" gitHub="gitHub" />
-                    <TeamMember imageSRC="ken-tauchi.jpeg" memberName="Ken Tauchi" memberRole="Lead Developer" linkedIn="LinkedIn" gitHub="gitHub" />
-                    <TeamMember imageSRC="vinicius-lana.jpeg" memberName="Vinicius Meyer Lana" memberRole="Project Manager" linkedIn="LinkedIn" gitHub="gitHub" />
-                    <TeamMember imageSRC="hiteshri-nanda.jpeg" memberName="Hiteshri Nanda" memberRole="Lead Designer" linkedIn="LinkedIn" behance="Behnace" />
-                    <TeamMember imageSRC="shen-gianni.jpeg" memberName="Shen Gianni" memberRole="UI/UX Designer" linkedIn="LinkedIn" behance="Behnace" />
-                    <TeamMember imageSRC="jaqueline-santos.jpeg" memberName="Jaqueline Santos" memberRole="UI/UX Designer" linkedIn="LinkedIn" behance="Behnace" />
+                    {teamMembers.data.map((teamMember, index) => {
+                        // {
+                        //     switch(teamMember.imageURL) {
+                        //         case "bhumili.jpg":
+                        //             teamMember.imageURL = "bhumili.jpg"
+                        //           return 'bar';
+                        //         default:
+                        //           return 'foo';
+                        //       }
+                        // }
+                        return (
+                            
+                            <TeamMember key={index} imageSRC={teamMember.imageURL} memberName={teamMember.name} memberRole={teamMember.role} linkedIn={teamMember.linkedinURL} gitHub={teamMember.githubURL} behance={teamMember.behanceURL}/>
+                        );
+                    })}
                 </Slider>
             </div>
         );
-    }
+    // }
 }
