@@ -6,7 +6,7 @@ import LocationList from './locationList/LocationList.component';
 import LocationDetail from './location-detail/LocationDetail.component.js';
 import GoogleMap from './google-map/GoogleMap.component';
 import RecyclingFacts from './recycling-fact/RecyclingFacts.component.js';
-import ExploreQuiz from './explore-quiz/explore-quiz';
+import ExploreQuiz from './explore-quiz/ExploreQuiz.component.js';
 
 import { LOCATION_DATA } from './TEST_locations.data.js';
 

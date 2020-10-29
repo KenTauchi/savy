@@ -34,7 +34,7 @@ const RecyclingFacts = () => {
             presents danger to humans and the environment when poorly stored and
             discarded.
           </p>
-          <button>Explore</button>
+          <button className="factExploreButton">Explore</button>
         </div>
       </div>
     );
