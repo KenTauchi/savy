@@ -1,0 +1,95 @@
+.locationDetailDiv {
+  position: relative;
+  text-align: left;
+  padding: 1rem;
+  border: solid 1px #eee;
+  -webkit-animation: slideInLeft .45s ease;
+          animation: slideInLeft .45s ease;
+}
+
+.locationDetailDiv ul {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.listItemFacilityName {
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.hoursOfOperation,
+.materialAccepted,
+.notes {
+  font-weight: bold;
+}
+
+.x_markImage {
+  max-width: 18px;
+  height: auto;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .locationDetailDiv {
+    height: 413.46px;
+    max-width: 100%;
+  }
+}
+
+.slide_in_left {
+  -webkit-animation: slideInLeft .45s ease;
+          animation: slideInLeft .45s ease;
+}
+
+@-webkit-keyframes slideInLeft {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+}
+
+@keyframes slideInLeft {
+  0% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+  100% {
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
+}
+
+.slide_out_left {
+  -webkit-animation: slideOutLeft .45s ease;
+          animation: slideOutLeft .45s ease;
+}
+
+@-webkit-keyframes slideOutLeft {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+
+@keyframes slideOutLeft {
+  0% {
+    -webkit-transform: translateX(0);
+            transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+  }
+}
+/*# sourceMappingURL=LocationDetail.style.css.map */

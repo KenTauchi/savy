@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,aAAa,CAAC;EACV,UAAU,EAAE,eAAe;CAC9B",
+    "sources": [
+        "front-end/src/components/waste-management/recycling-fact/RecyclingFacts.style.scss"
+    ],
+    "names": [],
+    "file": "RecyclingFacts.style.css"
+}
