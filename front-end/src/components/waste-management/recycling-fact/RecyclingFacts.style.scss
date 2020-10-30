@@ -1,0 +1,33 @@
+.fact-section {
+    text-align: left;
+    padding: 0 1rem 0;
+}
+
+.factRecyclingNotes {
+    font-weight: bold;
+}
+
+.factExploreButton {
+    font-size: 22px;
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .fact-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 1rem;
+
+        border: solid 1px #eee;
+        margin-top: 2rem;
+        padding-top: 1rem;
+    }
+
+    .factImageDiv {
+        grid-row: span 2;
+    }
+
+    .factExploreButton {
+        width: auto;
+    }
+}

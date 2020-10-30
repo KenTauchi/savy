@@ -1,4 +1,5 @@
 export const initialState = {
+
   dataSet: {
     data: [],
     pieChartData: []
@@ -11,4 +12,12 @@ export const initialState = {
   testimonials: {
     data: [],
   },
+    teamMembers: {
+		data: []
+	},
+
+	exploreFAQ: {
+		data: []
+	}
 };
+
