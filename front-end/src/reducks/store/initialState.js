@@ -1,4 +1,5 @@
 export const initialState = {
+
   dataSet: {
     data: [],
   },
@@ -10,4 +11,12 @@ export const initialState = {
   testimonials: {
     data: [],
   },
+    teamMembers: {
+		data: []
+	},
+
+	exploreFAQ: {
+		data: []
+	}
 };
+
