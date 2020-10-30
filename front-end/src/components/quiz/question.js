@@ -28,7 +28,7 @@ export default function Question() {
       <div>
         {quizData.currentIndex > quizData.quizLength ? (
           <h3>
-            Congratulation! Your Score is $
+            Congratulation! Your Score is
             {(quizData.correctAnswer / quizData.quizLength).toFixed(2) * 100}%
           </h3>
         ) : (
