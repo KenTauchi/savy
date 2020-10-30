@@ -1,6 +1,7 @@
 export const initialState = {
   dataSet: {
     data: [],
+    pieChartData: []
   },
   mapChartDataTable: {
     contribution: "",
