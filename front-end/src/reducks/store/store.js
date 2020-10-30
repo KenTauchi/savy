@@ -1,4 +1,5 @@
 import {
+
 	createStore as reduxCreateStore,
 	combineReducers,
 	applyMiddleware,
@@ -7,15 +8,19 @@ import { connectRouter, routerMiddleware } from "connected-react-router";
 import { DataSetReducer, DataTableReducer } from "../mapChartData/reducers";
 import { DataFaqReducer } from "../exploreFAQ/reducers";
 import { TeamDataReducer } from "../teamMembers/reducers";
+import { DataTestimonialReducer } from "../testimonials/reducers";
+
 
 import thunk from "redux-thunk";
 
 export default function createStore(history) {
+
 	return reduxCreateStore(
 		combineReducers({
 			router: connectRouter(history),
 			dataSet: DataSetReducer,
 			dataTable: DataTableReducer,
+      testimonial: DataTestimonialReducer,
 			faq: DataFaqReducer,
 			team: TeamDataReducer
 		}),
@@ -24,9 +29,4 @@ export default function createStore(history) {
 	);
 }
 
-  // Store is literally storing the state of this app.
-  // The object inside the combineReduces is technically equal to the state.
-  // each poperty/category is corresponding with the property name in the initial state.
-  // combineReducers has a chunk of JSON.
 
-  // set router state with the connectRouter passing the history parameter

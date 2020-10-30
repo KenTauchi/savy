@@ -101,7 +101,7 @@ app.get("/api/v1/mapdata", (req,res)=>{
                 ) pd
                 WHERE md.provinceCode = pd.provinceCode
                   AND md.countryCode  = pd.countryCode
-                ORDER BY provinceName, familyName   
+                ORDER BY prov_RecyclingContribPerc DESC, provinceName, familyName   
                     `;
 
     savyDb.query(qry, (error, results)=>{
@@ -114,6 +114,7 @@ app.get("/api/v1/mapdata", (req,res)=>{
             let pieObj     = [];
             let mapData    = {};
             let sProvince  = '';
+            let iRank      = 0;
 
             for (let i=0; i< results.length; i++) {
                 if (sProvince != results[i].provinceCode) {
@@ -122,13 +123,16 @@ app.get("/api/v1/mapdata", (req,res)=>{
                         myResult.push( {mapData, 'pieData': pieObj});
                         pieObj = [];                    
                     }
+
+                    iRank++;
                     mapData = { 'provinceCode': results[i].provinceCode, 
                                 'provinceName': results[i].provinceName,
                                 'prov_Population' : results[i].prov_Population,
                                 'prov_RecyclingContribPerc' : results[i].prov_RecyclingContribPerc,
                                 'prov_TotalRecycling' : results[i].prov_TotalRecycling,
                                 'prov_TotalWaste' : results[i].prov_TotalWaste,
-                                'prov_WasteRecyclingPerc' : results[i].prov_WasteRecyclingPerc
+                                'prov_WasteRecyclingPerc' : results[i].prov_WasteRecyclingPerc,
+                                'prov_Rank' : iRank
                               };
                 }  
                 pieObj.push( {'familyName': results[i].familyName, 'familyTotalRecycling':results[i].familyTotalRecycling, 'familyPercent':results[i].familyPercent } );
@@ -148,10 +152,10 @@ app.get("/api/v1/mapdata", (req,res)=>{
 // Returns a list of all team members
 app.get("/api/v1/team", (req,res)=>{
 
-    let qry = `SELECT T.name, R.name AS role, T.imageURL, T.linkedinURL, T.githubURL, T.behanceURL
-                    FROM teammember T
-                        INNER JOIN teamrole R ON (T.teamRoleId = R.teamRoleId)
-                ORDER BY T.name`;
+    let qry = `SELECT t.name, r.name AS role, t.imageURL, t.linkedinURL, t.githubURL, t.behanceURL
+                    FROM teammember t
+                        INNER JOIN teamrole r ON (t.teamRoleId = r.teamRoleId)
+                ORDER BY t.name`;
 
     savyDb.query(qry, (error, results)=>{
         if (error) throw error;
@@ -167,10 +171,10 @@ app.get("/api/v1/team", (req,res)=>{
 // Returns a list of all quiz questions and answers
 app.get("/api/v1/quiz", (req,res)=>{
 
-    let qry = `SELECT Q.questionId, Q.question, q.description, a.answer, 
+    let qry = `SELECT q.questionId, q.question, q.description, a.answer, 
                       CASE WHEN a.correct = 1 THEN 'yes' ELSE 'no' END AS correct
-                 FROM quizquestion Q
-                      INNER JOIN quizanswer A ON (Q.questionId = A.questionId)
+                 FROM quizquestion q
+                      INNER JOIN quizanswer a ON (q.questionId = a.questionId)
                 ORDER BY q.questionId, a.answerId  `;
 
     savyDb.query(qry, (error, results)=>{
