@@ -1,8 +1,7 @@
 export const initialState = {
-
   dataSet: {
     data: [],
-    pieChartData: []
+    pieChartData: [],
   },
   mapChartDataTable: {
     contribution: "",
@@ -12,12 +11,19 @@ export const initialState = {
   testimonials: {
     data: [],
   },
-    teamMembers: {
-		data: []
-	},
+  teamMembers: {
+    data: [],
+  },
 
-	exploreFAQ: {
-		data: []
-	}
+  exploreFAQ: {
+    data: [],
+  },
+
+  quizData: {
+    data: [],
+    quizLength: 0,
+    currentIndex: 1,
+    showScore: false,
+    correctAnswer: 0,
+  },
 };
-
