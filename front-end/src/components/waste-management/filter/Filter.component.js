@@ -1,7 +1,10 @@
 import React from 'react';
 import './Filter.style.scss';
 
-const Filter = () => {
+const Filter = (props) => {
+
+  const { postalCodeChangeHandler, postalCodeValue } = props;
+
     return (
       <div className="filter-section">
         <h2 className="WMpageH2">Welcome to savy recycling search!</h2>
@@ -20,7 +23,9 @@ const Filter = () => {
           <div className="searchInput">
             <input id="zipSearch"
                    type="text"
-                   placeholder="ZIP code" />
+                   onChange={postalCodeChangeHandler} 
+                   value={postalCodeValue}
+                   placeholder="Postal Code" />
           </div>
         </div>
       </div>

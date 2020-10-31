@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../header/header';
 import Footer from '../footer/footer';
-import "./challenges.scss";
+// import "./challenges.scss";
 const Challenges = () => {
 
     // this.state = {
