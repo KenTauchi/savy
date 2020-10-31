@@ -1,0 +1,41 @@
+.contact-us-section {
+    background-color: #eee;
+    padding: 1rem;
+    margin: 6rem 0 0;
+
+    p {
+        font-size: 22px;
+        line-height: 1.5;
+        margin-top: 0;
+    }
+
+    button {
+        font-size: 22px;
+        width: 100%;
+    }
+
+    span {
+        display: block;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .contact-us-section {
+
+        margin-top: 120px;
+
+        p {
+            margin-right: 40px;
+            display: inline-block;
+        }
+
+        button {
+            width: auto;
+        }
+
+        span {
+            display: inline;
+        }
+
+    }
+}
