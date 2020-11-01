@@ -1,21 +1,15 @@
-const createJointData = (state, action) => {
-  let dataJoint = [];
-  state.forEach((prov) => {
-    action.map((data) => {
-      if (data.mapData.provinceName === prov.name) {
-        let joint = {
-          ...prov,
-          ...data,
+const createTableData = (state, provName) => {
+  console.log("state", state.data);
+  let found = state.find((prov) => prov.mapData.provinceCode === provName);
 
-          // value: data.prov_TotalWaste,
-        };
-        dataJoint.push(joint);
-      }
-
-      return dataJoint;
-    });
-  });
-  return dataJoint;
+  return found.mapData;
 };
 
-export default createJointData;
+const createPieData = (state, provName) => {
+  // console.log("state", state.data);
+  let found = state.find((prov) => prov.mapData.provinceCode === provName);
+
+  return found.pieData;
+};
+
+export { createTableData, createPieData };

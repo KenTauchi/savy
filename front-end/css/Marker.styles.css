@@ -1,3 +1,7 @@
+.markerDiv {
+  cursor: pointer;
+}
+
 .markerDiv:hover .popupComment p {
   display: block;
   animation: fadeIn .5s ease;

@@ -13,16 +13,16 @@
 
 const express = require("express");
 const app = express();
-const {savyDb} = require("./connection.js");
+const { savyDb } = require("./connection.js");
 
-const server = app.listen(process.env.PORT || 3000, ()=>{
-        console.log("listening port 3000");
+const server = app.listen(process.env.PORT || 3000, () => {
+  console.log("listening port 3000");
 });
 
-
 // middleware parse the request body
-app.use(express.urlencoded({extended:true}));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 
 //   app.use(function (req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "*");
@@ -31,28 +31,23 @@ app.use(express.json());
 //     next();
 //   });
 
-
-
 // Returns all provinces in database
-app.get("/api/v1/provinces", (req,res)=>{
+app.get("/api/v1/provinces", (req, res) => {
+  let qry = `SELECT * FROM provinces`;
 
-    let qry = `SELECT * FROM provinces`;
-
-    savyDb.query(qry, (error, results)=>{
-        if (error) throw error;
-        if (results.length == 0) {
-            res.status(404).send('No Record Found');            
-        } else {
-            res.status(200).send(results);
-        }    
-    });   
+  savyDb.query(qry, (error, results) => {
+    if (error) throw error;
+    if (results.length == 0) {
+      res.status(404).send("No Record Found");
+    } else {
+      res.status(200).send(results);
+    }
+  });
 });
 
-
 // Returns statics data from provinces for the map
-app.get("/api/v1/mapdata", (req,res)=>{
-
-    let qry = `SELECT md.provinceCode, md.provinceName,
+app.get("/api/v1/mapdata", (req, res) => {
+  let qry = `SELECT md.provinceCode, md.provinceName,
                       md.prov_Population, md.prov_RecyclingContribPerc,
                       md.prov_TotalRecycling, md.prov_TotalWaste, md.prov_WasteRecyclingPerc,
                       pd.familyName, pd.familyTotalRecycling, pd.familyPercent
@@ -111,147 +106,148 @@ app.get("/api/v1/mapdata", (req,res)=>{
                 ORDER BY prov_RecyclingContribPerc DESC, provinceName, familyName   
                     `;
 
-    savyDb.query(qry, (error, results)=>{
-        if (error) throw error;
-        if (results.length == 0) {
-            res.status(404).send('No Record Found');            
-        } else {
+  savyDb.query(qry, (error, results) => {
+    if (error) throw error;
+    if (results.length == 0) {
+      res.status(404).send("No Record Found");
+    } else {
+      let myResult = [];
+      let pieObj = [];
+      let mapData = {};
+      let sProvince = "";
+      let iRank = 0;
 
-            let myResult   = [];
-            let pieObj     = [];
-            let mapData    = {};
-            let sProvince  = '';
-            let iRank      = 0;
+      for (let i = 0; i < results.length; i++) {
+        if (sProvince != results[i].provinceCode) {
+          if (pieObj.length > 0) {
+            myResult.push({ mapData, pieData: pieObj });
+            pieObj = [];
+          }
 
-            for (let i=0; i< results.length; i++) {
-                if (sProvince != results[i].provinceCode) {
+          iRank++;
+          mapData = {
+            provinceCode: results[i].provinceCode,
+            provinceName: results[i].provinceName,
+            prov_Population: results[i].prov_Population,
+            prov_RecyclingContribPerc: results[i].prov_RecyclingContribPerc,
+            prov_TotalRecycling: results[i].prov_TotalRecycling,
+            prov_TotalWaste: results[i].prov_TotalWaste,
+            prov_WasteRecyclingPerc: results[i].prov_WasteRecyclingPerc,
+            prov_Rank: iRank,
+          };
+        }
+        pieObj.push({
+          familyName: results[i].familyName,
+          familyTotalRecycling: results[i].familyTotalRecycling,
+          familyPercent: results[i].familyPercent,
+        });
+        sProvince = results[i].provinceCode;
+      }
 
-                    if (pieObj.length > 0) {
-                        myResult.push( {mapData, 'pieData': pieObj});
-                        pieObj = [];                    
-                    }
+      if (mapData != {}) {
+        myResult.push({ mapData, pieData: pieObj });
+      }
 
-                    iRank++;
-                    mapData = { 'provinceCode': results[i].provinceCode, 
-                                'provinceName': results[i].provinceName,
-                                'prov_Population' : results[i].prov_Population,
-                                'prov_RecyclingContribPerc' : results[i].prov_RecyclingContribPerc,
-                                'prov_TotalRecycling' : results[i].prov_TotalRecycling,
-                                'prov_TotalWaste' : results[i].prov_TotalWaste,
-                                'prov_WasteRecyclingPerc' : results[i].prov_WasteRecyclingPerc,
-                                'prov_Rank' : iRank
-                              };
-                }  
-                pieObj.push( {'familyName': results[i].familyName, 'familyTotalRecycling':results[i].familyTotalRecycling, 'familyPercent':results[i].familyPercent } );
-                sProvince = results[i].provinceCode;                
-            }            
-
-            if (mapData != {}) {
-                myResult.push( {mapData, 'pieData': pieObj });
-            }
-
-            res.status(200).send(myResult);
-        }    
-    });   
+      res.status(200).send(myResult);
+    }
+  });
 });
 
-
 // Returns a list of all team members
-app.get("/api/v1/team", (req,res)=>{
-
-    let qry = `SELECT t.name, r.name AS role, t.imageURL, t.linkedinURL, t.githubURL, t.behanceURL
+app.get("/api/v1/team", (req, res) => {
+  let qry = `SELECT t.name, r.name AS role, t.imageURL, t.linkedinURL, t.githubURL, t.behanceURL
                     FROM teammember t
                         INNER JOIN teamrole r ON (t.teamRoleId = r.teamRoleId)
                 ORDER BY t.name`;
 
-    savyDb.query(qry, (error, results)=>{
-        if (error) throw error;
-        if (results.length == 0) {
-            res.status(404).send('No Record Found');            
-        } else {
-            res.status(200).send(results);
-        }    
-    });   
+  savyDb.query(qry, (error, results) => {
+    if (error) throw error;
+    if (results.length == 0) {
+      res.status(404).send("No Record Found");
+    } else {
+      res.status(200).send(results);
+    }
+  });
 });
 
-
 // Returns a list of all quiz questions and answers
-app.get("/api/v1/quiz", (req,res)=>{
-
-    let qry = `SELECT q.questionId, q.question, q.description, a.answer, 
+app.get("/api/v1/quiz", (req, res) => {
+  let qry = `SELECT q.questionId, q.question, q.description, a.answer, 
                       CASE WHEN a.correct = 1 THEN 'yes' ELSE 'no' END AS correct
                  FROM quizquestion q
                       INNER JOIN quizanswer a ON (q.questionId = a.questionId)
                 ORDER BY q.questionId, a.answerId  `;
 
-    savyDb.query(qry, (error, results)=>{
-        if (error) throw error;
-        if (results.length == 0) {
-            res.status(404).send('No Record Found');            
-        } else {
+  savyDb.query(qry, (error, results) => {
+    if (error) throw error;
+    if (results.length == 0) {
+      res.status(404).send("No Record Found");
+    } else {
+      let myResult = [];
+      let myAnswer = [];
+      let question = {};
+      let iQuestion = -1;
 
-            let myResult = [];
-            let myAnswer = [];
-            let question = {};
-            let iQuestion = -1;
+      for (let i = 0; i < results.length; i++) {
+        if (iQuestion != results[i].questionId) {
+          if (myAnswer.length > 0) {
+            myResult.push({ question, answers: myAnswer });
+            myAnswer = [];
+          }
+          question = {
+            questionId: results[i].questionId,
+            question: results[i].question,
+            description: results[i].description,
+          };
+        }
+        myAnswer.push({
+          answer: results[i].answer,
+          correct: results[i].correct,
+        });
+        iQuestion = results[i].questionId;
+      }
 
-            for (let i=0; i< results.length; i++) {
-                if (iQuestion != results[i].questionId) {
+      if (question != {}) {
+        myResult.push({ question, answers: myAnswer });
+      }
 
-                    if (myAnswer.length > 0) {
-                        myResult.push( {question, 'answers': myAnswer});
-                        myAnswer = [];                    
-                    }
-                    question = { 'questionId': results[i].questionId, 'question': results[i].question, 'description' : results[i].description };
-                }  
-                myAnswer.push( {'answer': results[i].answer, 'correct':results[i].correct} );
-                iQuestion = results[i].questionId;                
-            }            
-
-            if (question != {}) {
-                myResult.push( {question, 'answers': myAnswer });
-            }
-
-            res.status(200).send(myResult);
-        }    
-    });   
+      res.status(200).send(myResult);
+    }
+  });
 });
 
-
 // Returns a list of all FAQ questions
-app.get("/api/v1/faq", (req,res)=>{
-
-    let qry = `SELECT f.faqId, f.postedOn, f.question, f.answer
+app.get("/api/v1/faq", (req, res) => {
+  let qry = `SELECT f.faqId, f.postedOn, f.question, f.answer
                  FROM faq f
                 ORDER BY f.question  `;
 
-    savyDb.query(qry, (error, results)=>{
-        if (error) throw error;
-        if (results.length == 0) {
-            res.status(404).send('No Record Found');            
-        } else {
-            res.status(200).send(results);
-        }    
-    });   
+  savyDb.query(qry, (error, results) => {
+    if (error) throw error;
+    if (results.length == 0) {
+      res.status(404).send("No Record Found");
+    } else {
+      res.status(200).send(results);
+    }
+  });
 });
 
-
 // Returns a list of all TESTEMONIALS report
-app.get("/api/v1/testemonials", (req,res)=>{
-
-    let qry = `SELECT t.testemonialId, t.postedOn, t.postedBy, t.imageURL, t.description
+app.get("/api/v1/testemonials", (req, res) => {
+  let qry = `SELECT t.testemonialId, t.postedOn, t.postedBy, t.imageURL, t.description
                  FROM testemonial t
                  ORDER BY t.postedOn   `;
 
-    savyDb.query(qry, (error, results)=>{
-        if (error) throw error;
-        if (results.length == 0) {
-            res.status(404).send('No Record Found');            
-        } else {
-            res.status(200).send(results);
-        }    
-    });   
+  savyDb.query(qry, (error, results) => {
+    if (error) throw error;
+    if (results.length == 0) {
+      res.status(404).send("No Record Found");
+    } else {
+      res.status(200).send(results);
+    }
+  });
 });
+
 
 
 // Returns a list of all TESTEMONIALS report
@@ -274,3 +270,4 @@ app.get("/api/v1/materials", (req,res)=>{
         }    
     });   
 });
+
