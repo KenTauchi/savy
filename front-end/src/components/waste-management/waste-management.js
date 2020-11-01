@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+
+import { materialsImport } from '../../reducks/materials/operations.js';
+import { getMaterials, getMaterialsIdNameType } from '../../reducks/materials/selectors.js';
+
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import Filter from './filter/Filter.component';
@@ -14,6 +19,27 @@ import { LOCATION_DATA } from './TEST_locations.data.js';
 import "./waste-management.style.scss";
 
 const WasteManagement = () => {
+
+  const dispatch = useDispatch();
+
+  // Get materials *********************************************************************************************************************************************************************************************
+
+  const [materilas, setMaterilas] = useState([]);
+
+  const state = useSelector((state) => state);
+  let stateMaterials = getMaterialsIdNameType(state);
+
+  useEffect(()=>{
+    dispatch(materialsImport());
+  }, []);
+
+  useEffect(()=>{
+    setMaterilas(stateMaterials);
+  }, [stateMaterials]);
+
+  useEffect(()=>{
+    console.log(materilas);
+  }, [materilas]);
 
   // States for locations *********************************************************************************************************************************************************************************************
   

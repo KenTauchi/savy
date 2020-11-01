@@ -1,5 +1,4 @@
 import {
-
 	createStore as reduxCreateStore,
 	combineReducers,
 	applyMiddleware,
@@ -9,6 +8,7 @@ import { DataSetReducer, DataTableReducer } from "../mapChartData/reducers";
 import { DataFaqReducer } from "../exploreFAQ/reducers";
 import { TeamDataReducer } from "../teamMembers/reducers";
 import { DataTestimonialReducer } from "../testimonials/reducers";
+import { materialsReducer } from '../materials/reducers';
 
 
 import thunk from "redux-thunk";
@@ -22,7 +22,8 @@ export default function createStore(history) {
 			dataTable: DataTableReducer,
       testimonial: DataTestimonialReducer,
 			faq: DataFaqReducer,
-			team: TeamDataReducer
+			team: TeamDataReducer,
+			materials: materialsReducer
 		}),
 
 		applyMiddleware(routerMiddleware(history), thunk)
