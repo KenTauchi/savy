@@ -1,7 +1,15 @@
 const createTableData = (state, provName) => {
-  state.find((prov) => prov.mapData.provinceCode === provName);
+  console.log("state", state.data);
+  let found = state.find((prov) => prov.mapData.provinceCode === provName);
 
-  // return found.mapData;
+  return found.mapData;
 };
 
-export default createTableData;
+const createPieData = (state, provName) => {
+  // console.log("state", state.data);
+  let found = state.find((prov) => prov.mapData.provinceCode === provName);
+
+  return found.pieData;
+};
+
+export { createTableData, createPieData };

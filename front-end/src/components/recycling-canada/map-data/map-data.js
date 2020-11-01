@@ -6,15 +6,16 @@ import { getDataSet } from "../../../reducks/mapChartData/selectors";
 
 const MapData = () => {
   const selector = useSelector((state) => state);
-  const tableData = getDataSet(selector);
-  // console.log(tableData)
+  const mapTableData = getDataSet(selector);
+  const table = mapTableData.mapDataTable;
+
   return (
     <div className="map-data-section">
       <ul>
         <li className="table-data">
           <span>
-            {tableData.mapDataTable.contribution
-              ? tableData.mapDataTable.contribution
+            {table.prov_RecyclingContribPerc
+              ? table.prov_RecyclingContribPerc
               : "0"}
             %
           </span>
@@ -22,18 +23,14 @@ const MapData = () => {
         </li>
         <li className="table-data">
           <span>
-            {tableData.mapDataTable.wasteRecycled
-              ? tableData.mapDataTable.wasteRecycled.toLocaleString()
+            {table.prov_WasteRecyclingPerc
+              ? table.prov_WasteRecyclingPerc
               : "0"}
           </span>
           <span>Waste Recycled</span>
         </li>
         <li className="table-data">
-          <span>
-            {tableData.mapDataTable.provinceRank
-              ? tableData.mapDataTable.provinceRank
-              : "0"}
-          </span>
+          <span>{table.prov_Rank ? table.prov_Rank : "0"}</span>
           <span>Province Rank</span>
         </li>
       </ul>

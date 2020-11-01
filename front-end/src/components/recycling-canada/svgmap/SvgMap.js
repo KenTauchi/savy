@@ -23,8 +23,16 @@ const SvgMap = () => {
 
   const clickFunc = (e) => {
     setCartDis(!charDis);
-    dispatch(clickGet(e.target.id));
+    let province = e.target.id;
+    return province !== "" ? dispatch(clickGet(e.target.id)) : null;
+
     console.log(e.target.id);
+
+    // if (province !== "") {
+    //   return dispatch(clickGet(e.target.id));
+    // } else {
+    //   return null;
+    // }
   };
 
   am4core.useTheme(am4themes_animated);

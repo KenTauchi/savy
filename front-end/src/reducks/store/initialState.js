@@ -2,6 +2,7 @@ export const initialState = {
   dataSet: {
     data: [],
     mapDataTable: [],
+    pieChartData: [],
   },
   testimonials: {
     data: [],

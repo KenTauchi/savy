@@ -17,56 +17,19 @@ const PieChart = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const dataSet = getDataSet(selector);
-  console.log(selector);
+  const pieData = dataSet.pieChartData;
 
   useEffect(() => {
     console.log("pieChart UseEffect");
     am4core.useTheme(am4themes_animated);
     let chart = am4core.create("chartdiv", am4charts.PieChart);
     // chart.responsive.enabled = true;
-    chart.data = [
-      {
-        country: "Lithuania",
-        litres: 501.9,
-      },
-      {
-        country: "Czechia",
-        litres: 301.9,
-      },
-      {
-        country: "Ireland",
-        litres: 201.1,
-      },
-      {
-        country: "Germany",
-        litres: 165.8,
-      },
-      {
-        country: "Australia",
-        litres: 139.9,
-      },
-      {
-        country: "Austria",
-        litres: 128.3,
-      },
-      {
-        country: "UK",
-        litres: 99,
-      },
-      {
-        country: "Belgium",
-        litres: 60,
-      },
-      {
-        country: "The Netherlands",
-        litres: 50,
-      },
-    ];
+    chart.data = pieData;
 
     // Add and configure Series
     let pieSeries = chart.series.push(new am4charts.PieSeries());
-    pieSeries.dataFields.value = "litres";
-    pieSeries.dataFields.category = "country";
+    pieSeries.dataFields.value = "familyPercent";
+    pieSeries.dataFields.category = "familyName";
     pieSeries.slices.template.stroke = am4core.color("#fff"); //color of piechart inner strole
     pieSeries.slices.template.strokeWidth = 1;
     pieSeries.slices.template.strokeOpacity = 0.5;
