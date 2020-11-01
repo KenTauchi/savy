@@ -11,9 +11,16 @@ export const initialState = {
     data: [],
   },
 
-  exploreFAQ: {
-    data: [],
+
+	exploreFAQ: {
+		data: []
   },
+
+  materials: {
+    idNameType:[]
+  }
+};
+
 
   quizData: {
     data: [],

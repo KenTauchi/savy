@@ -1,0 +1,63 @@
+.wmPageNotFound {
+    // height: 60vh;
+    // display: grid !important;
+    // grid-template-columns: 50px 1fr;
+    padding: 0 2rem 0;
+}
+
+.notFoundLogo {
+    max-width: 65px;
+    height: auto;
+    display: inline-block;
+    transform: translateY(20px);
+    margin-right: 25px;
+}
+
+.wmPageNotFoundHead {
+    font-size: 28px;
+    display: inline-block;
+    margin: 0;
+    // line-height: 160px;
+    font-weight: bold;
+}
+
+.wmPageNotFoundMessage {
+    margin-top: 3rem;
+    line-height: 1.5;
+}
+
+@media screen and (min-width: 768px) {
+
+    .wm-notfound-content {
+        // height: 70vh;
+    }
+
+    .wmPageNotFound {
+        display: grid;
+        justify-content: center;
+        grid-template-columns: 200px 360px;
+        grid-column-gap: 3rem;
+        margin-top: 120px;
+    }
+
+    .notFoundLogo {
+        max-width: 130px;
+        height: auto;
+        grid-row: span 2;
+        transform: translateY(0);
+        align-self: center;
+        justify-self: right;
+        margin-right: 0;
+    }
+
+    .wmPageNotFoundHead {
+        font-size: 50px;
+        text-align: left;
+    }
+
+    .wmPageNotFoundMessage {
+        margin-top: 0;
+        text-align: left;
+    }
+
+}

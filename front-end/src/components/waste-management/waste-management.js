@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+
+import { materialsImport } from '../../reducks/materials/operations.js';
+import { getMaterials, getMaterialsIdNameType } from '../../reducks/materials/selectors.js';
+
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import Filter from './filter/Filter.component';
@@ -7,12 +12,46 @@ import LocationDetail from './location-detail/LocationDetail.component.js';
 import GoogleMap from './google-map/GoogleMap.component';
 import RecyclingFacts from './recycling-fact/RecyclingFacts.component.js';
 import ExploreQuiz from './explore-quiz/ExploreQuiz.component.js';
+import NotFound from './not-found/NotFound.component.js';
 
 import { LOCATION_DATA } from './TEST_locations.data.js';
 
 import "./waste-management.style.scss";
 
 const WasteManagement = () => {
+
+  const dispatch = useDispatch();
+
+  // Get materials *********************************************************************************************************************************************************************************************
+
+  const [materials, setMaterilas] = useState({
+    idNameType: [],
+  });
+
+  const state = useSelector((state) => state);
+  let stateMaterials = getMaterialsIdNameType(state);
+
+  useEffect(()=>{
+    dispatch(materialsImport());
+  }, []);
+
+  useEffect(()=>{
+    setMaterilas({
+      ...materials,
+      idNameType: stateMaterials
+    });
+    // console.log(stateMaterials)
+  }, [stateMaterials]);
+
+  // useEffect(()=>{
+  //   console.log(materials);
+  //   console.log(state);
+  // }, [materials]);
+
+  // States for locations *********************************************************************************************************************************************************************************************
+  
+  const [locations, setLocations] = useState(LOCATION_DATA);
+  const [filteredLocations, setFilteredLocations] = useState(locations);
   const [defaultProps, setDefaultProps] = useState({
     center: {
       lat: 49.2246,
@@ -20,19 +59,6 @@ const WasteManagement = () => {
     },
     zoom: 11,
   });
-  const [locations, setLocations] = useState(LOCATION_DATA);
-  const [mapAndMaterialDisplay, setMapAndMaterialDisplay] = useState({
-    map: true,
-    material: false,
-  });
-  const [locationDetailDisplay, setLocationDetailDisplay] = useState(false);
-  const [tabListMapDetailDisplayStyle, setTabListMapDetailDisplay] = useState({
-    tab: { display: "block" },
-    list: { display: "block" },
-    map: { display: "block" },
-    detail: { display: "none" },
-  });
-  const [windowWidth, setwindowWidth] = useState(window.innerWidth);
   const [selectedLocation, setSelectedLocation] = useState({
     locationId: 1,
     locationTypeId: "Private",
@@ -50,6 +76,32 @@ const WasteManagement = () => {
       "Minimize your impact on the environment by bringing your paint, batteries, lightbulbs, and fluorescent tubes to one of Lowe's Recycling Centres for safe disposal.",
   });
 
+  // States for filter *********************************************************************************************************************************************************************************************
+
+  const [postalCodeSearchField, setPostalCodeSearchField] = useState("");
+
+  // States for components display *********************************************************************************************************************************************************************************************
+
+  const [mapAndMaterialDisplay, setMapAndMaterialDisplay] = useState({
+    map: true,
+    material: false,
+  });
+  const [wmComponentDisplay, setWmComponentDisplay] = useState({
+    tab: true,
+    list: true,
+    map: true,
+    detail: false,
+    material: false,
+    startQuiz: false
+  });
+  const [windowWidth, setwindowWidth] = useState(window.innerWidth);
+  const [notFoundDisplay, setNotFoundDisplay] = useState({
+    contents: {display: "block"},
+    notFound: {display: "none"}
+  });
+
+  // Functions *********************************************************************************************************************************************************************************************
+
   const displaySizeListener = () => {
     const newWindowWidth = window.innerWidth;
     // console.log(newWindowWidth);
@@ -61,6 +113,14 @@ const WasteManagement = () => {
       map: true,
       material: false,
     });
+    setWmComponentDisplay({
+      ...wmComponentDisplay,
+      list: true,
+      map: true,
+      detail: false,
+      material: false,
+      startQuiz: false
+    })
   };
 
   const materialDisplayHandler = () => {
@@ -68,14 +128,29 @@ const WasteManagement = () => {
       map: false,
       material: true,
     });
+    setWmComponentDisplay({
+      ...wmComponentDisplay,
+      list: false,
+      map: false,
+      detail: false,
+      material: true,
+      startQuiz: true
+    })
+
   };
 
   const locationDetailDisplayHandler = () => {
-    setLocationDetailDisplay(!locationDetailDisplay);
+    setWmComponentDisplay({
+      ...wmComponentDisplay,
+      detail: !wmComponentDisplay.detail
+    });
   };
 
   const mapMarkerLocationDetailDisplayHandler = () => {
-    setLocationDetailDisplay(true);
+    setWmComponentDisplay({
+      ...wmComponentDisplay,
+      detail: true
+    });
   };
 
   // useEffect(() => {
@@ -93,66 +168,253 @@ const WasteManagement = () => {
     });
   };
 
-  useEffect(() => {
-    if (windowWidth >= 768 && locationDetailDisplay) {
-      // only list should be display none.
-      setTabListMapDetailDisplay({
-        tab: { display: "none" },
-        list: { display: "none" },
-        map: { display: "block" },
-        detail: { display: "block" },
-      });
-    } else if (windowWidth < 768 && locationDetailDisplay) {
-      // tab, map, list should be display none.
-      setTabListMapDetailDisplay({
-        tab: { display: "none" },
-        list: { display: "none" },
-        map: { display: "none" },
-        detail: { display: "block" },
-      });
-      if (windowWidth <= 767) {
-        window.scrollTo(0, 0);
-      }
+  const setCurrentPosition = (position) => {
+    setDefaultProps({
+      center: {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      },
+      zoom: 12,
+    });
+  }
+
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      // console.log("Get current location!!!");
+      navigator.geolocation.getCurrentPosition(setCurrentPosition);
     } else {
-      // only detail should be display none.
-      setTabListMapDetailDisplay({
-        tab: { display: "block" },
-        list: { display: "block" },
-        map: { display: "block" },
-        detail: { display: "none" },
+      // console.log("Geolocation is not supported by this browser.");
+      setDefaultProps({
+        center: {
+          lat: 49.2246,
+          lng: -123.1087,
+        },
+        zoom: 11,
+      })
+    }
+  }
+
+  const postalCodeChangeHandler = (e) => {
+
+    if (windowWidth < 768 && wmComponentDisplay.detail) {
+      setWmComponentDisplay({
+        ...wmComponentDisplay,
+        list: true,
+        map: true,
+        detail: false,
       });
     }
-  }, [locationDetailDisplay]);
+
+    setPostalCodeSearchField(e.target.value);
+    // console.log("handler: ", e.target.value);
+  }
+
+  // Lifecycle *********************************************************************************************************************************************************************************************
+
+  useEffect(()=>{
+
+    // console.log("filter: ", postalCodeSearchField)
+
+    // const filteredLocationsByPostalCode = locations.filter(location =>
+    //   location.postalCode.toLowerCase().includes(postalCodeSearchField.toLocaleLowerCase())
+    // )
+
+    const searchChars = postalCodeSearchField.split('');
+    // console.log(searchChars)
+
+    const filteredLocationsByPostalCode = locations.filter(location => {
+
+      if (searchChars.length === 0) {
+        return location.postalCode.toLowerCase().includes(postalCodeSearchField.toLocaleLowerCase())
+      } else {
+
+        let founds = [];
+        searchChars.forEach(char => {
+          // console.log("line 192: ", char)
+          if (location.postalCode.toLowerCase().includes(char.toLocaleLowerCase())) {
+            founds.push(true);
+          } else {
+            founds.push(false);
+          }
+        });
+        let searchResult = !founds.includes(false)
+        return searchResult;
+      }
+    });
+
+    // console.log("filtered locations: ", filteredLocationsByPostalCode)
+
+    setFilteredLocations(filteredLocationsByPostalCode);
+
+    if (filteredLocationsByPostalCode.length === 0) {
+      setNotFoundDisplay({
+        contents: { display: "none" },
+        notFound: { display: "block" }
+      })
+    } else {
+      if (windowWidth >= 768) {
+        setNotFoundDisplay({
+          contents: { display: "grid" },
+          notFound: { display: "none" }
+        })
+      } else {
+        setNotFoundDisplay({
+          contents: { display: "block" },
+          notFound: { display: "none" }
+        })
+      }
+    }
+
+  }, [postalCodeSearchField])
+
+  useEffect(() => {
+
+    if (windowWidth >= 768 && wmComponentDisplay.detail) {
+      setWmComponentDisplay({
+        ...wmComponentDisplay,
+        list: false,
+        detail: true,
+      });
+    } else if (windowWidth < 768 && wmComponentDisplay.detail) {
+      if (mapAndMaterialDisplay.map) {
+        setWmComponentDisplay({
+          ...wmComponentDisplay,
+          list: false,
+          map: false,
+          detail: true,
+        });
+      } else if (mapAndMaterialDisplay.material) {
+        setWmComponentDisplay({
+          ...wmComponentDisplay,
+          list: false,
+          map: false,
+          detail: false,
+        });
+      }
+    } else if (windowWidth >= 768 && !wmComponentDisplay.detail) {
+      setWmComponentDisplay({
+        ...wmComponentDisplay,
+        list: true,
+      })
+    } else if (windowWidth < 768 && !wmComponentDisplay.detail) {
+      if (mapAndMaterialDisplay.map) {
+        setWmComponentDisplay({
+          ...wmComponentDisplay,
+          tab: true,
+          map: true,
+          list: true,
+        });
+      } else if (mapAndMaterialDisplay.material) {
+        setWmComponentDisplay({
+          ...wmComponentDisplay,
+          tab: true,
+          map: false,
+          list: false,
+        });
+      }
+
+    }
+
+  }, [wmComponentDisplay.detail]);
 
   useEffect(() => {
     if (windowWidth >= 768) {
+
       setMapAndMaterialDisplay({
         map: true,
         material: true,
       });
-      setTabListMapDetailDisplay({
-        ...tabListMapDetailDisplayStyle,
-        tab: { display: "none" },
-        map: { display: "block" },
-      });
+
+      if (notFoundDisplay.notFound.display === "none") {
+        setNotFoundDisplay({
+          ...notFoundDisplay,
+          contents: { display: "grid" },
+        })
+      }
+
+
+      if (mapAndMaterialDisplay.map) {
+
+        if (wmComponentDisplay.detail) {
+          setWmComponentDisplay({
+            ...wmComponentDisplay,
+            tab: false,
+            map: true,
+            list: false,
+            material: true,
+            startQuiz: true
+          });
+        } else if (!wmComponentDisplay.detail) {
+          setWmComponentDisplay({
+            ...wmComponentDisplay,
+            tab: false,
+            map: true,
+            list: true,
+            material: true,
+            startQuiz: true
+          });
+        }
+
+      } else if (mapAndMaterialDisplay.material) {
+
+        if (wmComponentDisplay.detail) {
+          setWmComponentDisplay({
+            ...wmComponentDisplay,
+            tab: false,
+            map: true,
+            list: false,
+            detail: true,
+            material: true,
+            startQuiz: true
+          });
+        } else if (!wmComponentDisplay.detail) {
+          setWmComponentDisplay({
+            ...wmComponentDisplay,
+            tab: false,
+            map: true,
+            list: true,
+            material: true,
+            startQuiz: true
+          });
+        }
+
+      }
     } else if (windowWidth <= 767) {
+
       if (mapAndMaterialDisplay.map && mapAndMaterialDisplay.material) {
         setMapAndMaterialDisplay({
           map: true,
           material: false,
         });
       }
-      if (locationDetailDisplay) {
-        setTabListMapDetailDisplay({
-          ...tabListMapDetailDisplayStyle,
-          tab: { display: "none" },
-          map: { display: "none" },
-        });
-      } else if (!locationDetailDisplay) {
-        setTabListMapDetailDisplay({
-          ...tabListMapDetailDisplayStyle,
-          tab: { display: "block" },
-          map: { display: "block" },
+
+      if (mapAndMaterialDisplay.map) {
+        if (wmComponentDisplay.detail) {
+          setWmComponentDisplay({
+            ...wmComponentDisplay,
+            tab: false,
+            map: false,
+            list: false,
+            material: false,
+            startQuiz: false
+          });
+        } else if (!wmComponentDisplay.detail) {
+          setWmComponentDisplay({
+            ...wmComponentDisplay,
+            tab: true,
+            map: true,
+            list: true,
+            material: false,
+            startQuiz: false
+          });
+        }
+      } else if (mapAndMaterialDisplay.material) {
+        setWmComponentDisplay({
+          ...wmComponentDisplay,
+          map: false,
+          list: false,
+          material: true,
+          startQuiz: true
         });
       }
     }
@@ -161,74 +423,95 @@ const WasteManagement = () => {
   useEffect(() => {
     window.addEventListener("resize", displaySizeListener);
 
+    getLocation();
+
     return () => {
       window.removeEventListener("resize", displaySizeListener);
     };
   }, []);
 
+  // Render components *********************************************************************************************************************************************************************************************
+
   return (
     <div>
       <Header />
       <div className="waste-management-content">
-        <Filter />
+        <Filter 
+          postalCodeChangeHandler={postalCodeChangeHandler} 
+          postalCodeValue={postalCodeSearchField}
+        />
 
-        <div
-          className="mapAndMaterialTab"
-          style={tabListMapDetailDisplayStyle.tab}
-        >
-          <button
-            className="mapButton"
-            onClick={mapDisplayHandler}
-            style={mapAndMaterialDisplay.map ? { color: "black" } : null}
-          >
-            Map
-          </button>
-          <button
-            className="materialButton"
-            onClick={materialDisplayHandler}
-            style={mapAndMaterialDisplay.material ? { color: "black" } : null}
-          >
-            Material Info
-          </button>
-        </div>
+        <div className="wm-main-contens" style={notFoundDisplay.contents}>
 
-        {mapAndMaterialDisplay.map ? (
-          <React.Fragment>
+          <div
+            className="mapAndMaterialTab"
+          >
+            <button
+              className="mapButton"
+              onClick={mapDisplayHandler}
+              style={mapAndMaterialDisplay.map ? { color: "black" } : null}
+            >
+              Map
+          </button>
+            <button
+              className="materialButton"
+              onClick={materialDisplayHandler}
+              style={mapAndMaterialDisplay.material ? { color: "black" } : null}
+            >
+              Material Info
+          </button>
+          </div>
+
+          {wmComponentDisplay.map ? (
             <GoogleMap
               defaultProps={defaultProps}
-              locations={locations}
-              displayStyle={tabListMapDetailDisplayStyle.map}
+              locations={filteredLocations}
               mapMarkerLocationDetailDisplayHandler={
                 mapMarkerLocationDetailDisplayHandler
               }
               getSelectedLocation={getSelectedLocation}
             />
+          ) : (
+            null
+          )}
+
+          {wmComponentDisplay.list ? (
             <LocationList
-              locations={locations}
+              locations={filteredLocations}
               windowWidth={windowWidth}
-              displayStyle={tabListMapDetailDisplayStyle.list}
               locationDetailDisplayHandler={locationDetailDisplayHandler}
               getSelectedLocation={getSelectedLocation}
             />
-          </React.Fragment>
-        ) : (
-          <React.Fragment></React.Fragment>
-        )}
+          ) : (
+            null
+          )}
 
-        <LocationDetail
-          displayStyle={tabListMapDetailDisplayStyle.detail}
-          location={selectedLocation}
-          locationDetailDisplayHandler={locationDetailDisplayHandler}
-        />
 
-        {mapAndMaterialDisplay.material ? (
-          <React.Fragment>
+          {wmComponentDisplay.detail ? (
+            <LocationDetail
+              location={selectedLocation}
+              locationDetailDisplayHandler={locationDetailDisplayHandler}
+            />
+          ) : (
+            null
+          )}
+
+
+          {wmComponentDisplay.material ? (
             <RecyclingFacts />
+          ) : (
+            null
+          )}
+
+          {wmComponentDisplay.startQuiz ? (
             <ExploreQuiz />
-          </React.Fragment>
-        ) : (
-          <React.Fragment></React.Fragment>
-        )}
+          ) : (
+            null
+          )}
+        </div>
+
+        <NotFound style={notFoundDisplay.notFound} />
+
       </div>
       <Footer />
     </div>

@@ -23,6 +23,14 @@ const server = app.listen(process.env.PORT || 3000, () => {
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+
+//   app.use(function (req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "*");
+//     res.header("Access-Control-Allow-Methods", "*");
+//     next();
+//   });
+
 // Returns all provinces in database
 app.get("/api/v1/provinces", (req, res) => {
   let qry = `SELECT * FROM provinces`;
@@ -239,3 +247,27 @@ app.get("/api/v1/testemonials", (req, res) => {
     }
   });
 });
+
+
+
+// Returns a list of all TESTEMONIALS report
+app.get("/api/v1/materials", (req,res)=>{
+
+    let qry = `SELECT "material" AS type, m.materialId AS id, m.name AS materialName
+                 FROM material m 
+                UNION  
+               SELECT "family" AS type, f.familyId AS id, f.name AS materialName
+                 FROM family f 
+                WHERE EXISTS ( SELECT 1 FROM material m WHERE m.familyId = f.familyId )
+                ORDER BY materialName   `;
+
+    savyDb.query(qry, (error, results)=>{
+        if (error) throw error;
+        if (results.length == 0) {
+            res.status(404).send('No Record Found');            
+        } else {
+            res.status(200).send(results);
+        }    
+    });   
+});
+
