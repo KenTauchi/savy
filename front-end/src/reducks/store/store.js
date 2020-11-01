@@ -17,7 +17,6 @@ export default function createStore(history) {
     combineReducers({
       router: connectRouter(history),
       dataSet: DataSetReducer,
-      dataTable: DataTableReducer,
       testimonial: DataTestimonialReducer,
       faq: DataFaqReducer,
       team: TeamDataReducer,

@@ -1,0 +1,69 @@
+.filter-section {
+  max-width: 100%;
+}
+
+.mapAndMaterialTab {
+  margin: 1rem auto;
+  display: block;
+}
+
+.mapAndMaterialTab button {
+  margin: 0 1rem;
+  border: none;
+  background-color: #fff;
+  font-size: 16px;
+  color: #bbb;
+}
+
+.mapAndMaterialTab button:focus {
+  outline: none;
+}
+
+.mapAndMaterialTab button:hover {
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .waste-management-content {
+    display: grid;
+    grid-template-columns: 325px 1fr;
+  }
+  .filter-section {
+    order: 1;
+    grid-column: span 2;
+    margin-bottom: 2rem;
+  }
+  .mapAndMaterialTab {
+    order: 2;
+    display: none !important;
+  }
+  .location-section,
+  .locationDetailDiv {
+    order: 3;
+  }
+  .google-map-section {
+    order: 4;
+    display: block !important;
+  }
+  .fact-section {
+    order: 5;
+    grid-column: span 2;
+  }
+  .explore-quiz-section {
+    order: 6;
+    grid-column: span 2;
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .waste-management-content {
+    grid-template-columns: 400px 1fr;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .waste-management-content {
+    grid-template-columns: 480px 1fr;
+  }
+}
+/*# sourceMappingURL=waste-management.style.css.map */

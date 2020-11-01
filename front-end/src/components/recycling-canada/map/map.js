@@ -424,7 +424,6 @@ export default function Map() {
 
   useEffect(() => {
     let provDataArr = [];
-    console.log("API data fetch rendered");
 
     // fetch("https://cors-anywhere.herokuapp.com/" +
     //       "https://api.covid19tracker.ca/provinces")
@@ -432,14 +431,16 @@ export default function Map() {
     fetch("http://localhost:3000/api/v1/mapdata")
       .then((response) => response.json())
       .then((result) => {
-        dispatch(dataImportAction(result));
+        // dispatch(dataImportAction(result));
+        console.log(result);
+        console.log("API data fetch rendered");
       })
       .catch(() => null);
   }, []);
 
   return (
     <div className="map-section">
-      <div id="chartdiv" style={{ width: "100%", height: "30vw" }}></div>
+      <div id="chartdiv" style={{ width: "100%", height: "10vw" }}></div>
     </div>
   );
 }
