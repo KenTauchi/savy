@@ -17,6 +17,10 @@ export const initialState = {
 
 	exploreFAQ: {
 		data: []
-	}
+  },
+
+  materials: {
+    materialsIdNameType:[]
+  }
 };
 
