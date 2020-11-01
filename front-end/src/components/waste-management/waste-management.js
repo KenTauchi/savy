@@ -27,6 +27,7 @@ const WasteManagement = () => {
   const [materials, setMaterilas] = useState({
     idNameType: [],
   });
+  const [filteredMaterials, setFilteredMaterials] = useState(materials.idNameType);
 
   const state = useSelector((state) => state);
   let stateMaterials = getMaterialsIdNameType(state);
@@ -79,6 +80,7 @@ const WasteManagement = () => {
   // States for filter *********************************************************************************************************************************************************************************************
 
   const [postalCodeSearchField, setPostalCodeSearchField] = useState("");
+  const [materialsSearchField, setMaterialsSearchField] = useState("");
 
   // States for components display *********************************************************************************************************************************************************************************************
 
@@ -194,8 +196,15 @@ const WasteManagement = () => {
     }
   }
 
-  const postalCodeChangeHandler = (e) => {
+  const postalCodeInputClear = () => {
+    setPostalCodeSearchField("");
+  };
 
+  const materialsInputClear = () => {
+    setMaterialsSearchField("");
+  };
+
+  const postalCodeChangeHandler = (event) => {
     if (windowWidth < 768 && wmComponentDisplay.detail) {
       setWmComponentDisplay({
         ...wmComponentDisplay,
@@ -205,9 +214,64 @@ const WasteManagement = () => {
       });
     }
 
-    setPostalCodeSearchField(e.target.value);
-    // console.log("handler: ", e.target.value);
+    materialsInputClear();
+
+    // console.log("event: ", event)
+    // console.log("handler: ", event.target.value);
+    setPostalCodeSearchField(event.target.value);
   }
+
+  const postalCodeClickHandler = (event) => {
+    if (windowWidth < 768 && wmComponentDisplay.detail) {
+      setWmComponentDisplay({
+        ...wmComponentDisplay,
+        list: true,
+        map: true,
+        detail: false,
+      });
+    }
+
+    materialsInputClear();
+
+    // console.log("event: ", event.target.textContent)
+    // console.log("handler: ", event.target.value);
+    setPostalCodeSearchField(event.target.textContent);
+  }
+
+  const materialsChangeHandler = (event) => {
+    if (windowWidth < 768 && wmComponentDisplay.detail) {
+      setWmComponentDisplay({
+        ...wmComponentDisplay,
+        list: true,
+        map: true,
+        detail: false,
+      });
+    }
+
+    postalCodeInputClear();
+
+    // console.log("event: ", event)
+    // console.log("handler: ", event.target.value);
+    setMaterialsSearchField(event.target.value);
+  }
+
+  const materialsClickHandler = (event) => {
+    if (windowWidth < 768 && wmComponentDisplay.detail) {
+      setWmComponentDisplay({
+        ...wmComponentDisplay,
+        list: true,
+        map: true,
+        detail: false,
+      });
+    }
+
+    postalCodeInputClear();
+
+    // console.log("event: ", event.target.textContent)
+    // console.log("handler: ", event.target.value);
+    setMaterialsSearchField(event.target.textContent);
+  }
+
 
   // Lifecycle *********************************************************************************************************************************************************************************************
 
@@ -215,32 +279,28 @@ const WasteManagement = () => {
 
     // console.log("filter: ", postalCodeSearchField)
 
-    // const filteredLocationsByPostalCode = locations.filter(location =>
-    //   location.postalCode.toLowerCase().includes(postalCodeSearchField.toLocaleLowerCase())
-    // )
+    const filteredLocationsByPostalCode = locations.filter(location =>
+      location.postalCode.toLowerCase().includes(postalCodeSearchField.toLocaleLowerCase())
+    )
 
-    const searchChars = postalCodeSearchField.split('');
-    // console.log(searchChars)
+    // const searchChars = postalCodeSearchField.split('');
+    // const filteredLocationsByPostalCode = locations.filter(location => {
+    //   if (searchChars.length === 0) {
+    //     return location.postalCode.toLowerCase().includes(postalCodeSearchField.toLocaleLowerCase())
+    //   } else {
 
-    const filteredLocationsByPostalCode = locations.filter(location => {
-
-      if (searchChars.length === 0) {
-        return location.postalCode.toLowerCase().includes(postalCodeSearchField.toLocaleLowerCase())
-      } else {
-
-        let founds = [];
-        searchChars.forEach(char => {
-          // console.log("line 192: ", char)
-          if (location.postalCode.toLowerCase().includes(char.toLocaleLowerCase())) {
-            founds.push(true);
-          } else {
-            founds.push(false);
-          }
-        });
-        let searchResult = !founds.includes(false)
-        return searchResult;
-      }
-    });
+    //     let founds = [];
+    //     searchChars.forEach(char => {
+    //       if (location.postalCode.toLowerCase().includes(char.toLocaleLowerCase())) {
+    //         founds.push(true);
+    //       } else {
+    //         founds.push(false);
+    //       }
+    //     });
+    //     let searchResult = !founds.includes(false)
+    //     return searchResult;
+    //   }
+    // });
 
     // console.log("filtered locations: ", filteredLocationsByPostalCode)
 
@@ -436,30 +496,33 @@ const WasteManagement = () => {
     <div>
       <Header />
       <div className="waste-management-content">
-        <Filter 
-          postalCodeChangeHandler={postalCodeChangeHandler} 
+        <Filter
+          postalCodeChangeHandler={postalCodeChangeHandler}
+          postalCodeClickHandler={postalCodeClickHandler}
           postalCodeValue={postalCodeSearchField}
+          postalCodeInputClear={postalCodeInputClear}
+          materialsChangeHandler={materialsChangeHandler}
+          materialsClickHandler={materialsClickHandler}
+          materialsValue={materialsSearchField}
+          materialsInputClear={materialsInputClear}
         />
 
         <div className="wm-main-contens" style={notFoundDisplay.contents}>
-
-          <div
-            className="mapAndMaterialTab"
-          >
+          <div className="mapAndMaterialTab">
             <button
               className="mapButton"
               onClick={mapDisplayHandler}
               style={mapAndMaterialDisplay.map ? { color: "black" } : null}
             >
               Map
-          </button>
+            </button>
             <button
               className="materialButton"
               onClick={materialDisplayHandler}
               style={mapAndMaterialDisplay.material ? { color: "black" } : null}
             >
               Material Info
-          </button>
+            </button>
           </div>
 
           {wmComponentDisplay.map ? (
@@ -471,9 +534,7 @@ const WasteManagement = () => {
               }
               getSelectedLocation={getSelectedLocation}
             />
-          ) : (
-            null
-          )}
+          ) : null}
 
           {wmComponentDisplay.list ? (
             <LocationList
@@ -482,36 +543,21 @@ const WasteManagement = () => {
               locationDetailDisplayHandler={locationDetailDisplayHandler}
               getSelectedLocation={getSelectedLocation}
             />
-          ) : (
-            null
-          )}
-
+          ) : null}
 
           {wmComponentDisplay.detail ? (
             <LocationDetail
               location={selectedLocation}
               locationDetailDisplayHandler={locationDetailDisplayHandler}
             />
-          ) : (
-            null
-          )}
+          ) : null}
 
+          {wmComponentDisplay.material ? <RecyclingFacts /> : null}
 
-          {wmComponentDisplay.material ? (
-            <RecyclingFacts />
-          ) : (
-            null
-          )}
-
-          {wmComponentDisplay.startQuiz ? (
-            <ExploreQuiz />
-          ) : (
-            null
-          )}
+          {wmComponentDisplay.startQuiz ? <ExploreQuiz /> : null}
         </div>
 
         <NotFound style={notFoundDisplay.notFound} />
-
       </div>
       <Footer />
     </div>
