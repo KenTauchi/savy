@@ -9,5 +9,5 @@ export const getMaterials = createSelector(
 
 export const getMaterialsIdNameType = createSelector(
     [materialsSelector],
-    (state) => state.materialsIdNameType
+    (state) => state.idNameType
 );

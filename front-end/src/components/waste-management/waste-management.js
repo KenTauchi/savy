@@ -24,7 +24,9 @@ const WasteManagement = () => {
 
   // Get materials *********************************************************************************************************************************************************************************************
 
-  const [materilas, setMaterilas] = useState([]);
+  const [materials, setMaterilas] = useState({
+    idNameType: [],
+  });
 
   const state = useSelector((state) => state);
   let stateMaterials = getMaterialsIdNameType(state);
@@ -34,12 +36,17 @@ const WasteManagement = () => {
   }, []);
 
   useEffect(()=>{
-    setMaterilas(stateMaterials);
+    setMaterilas({
+      ...materials,
+      idNameType: stateMaterials
+    });
+    // console.log(stateMaterials)
   }, [stateMaterials]);
 
-  useEffect(()=>{
-    console.log(materilas);
-  }, [materilas]);
+  // useEffect(()=>{
+  //   console.log(materials);
+  //   console.log(state);
+  // }, [materials]);
 
   // States for locations *********************************************************************************************************************************************************************************************
   

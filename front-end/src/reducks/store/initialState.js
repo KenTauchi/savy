@@ -20,7 +20,7 @@ export const initialState = {
   },
 
   materials: {
-    materialsIdNameType:[]
+    idNameType:[]
   }
 };
 
