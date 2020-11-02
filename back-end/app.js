@@ -274,3 +274,44 @@ app.get("/api/v1/materials", (req,res)=>{
         }    
     });   
 });
+
+
+// Search a location for a material
+app.get("/api/v1/search", (req,res)=>{
+
+    let sOrigin = "";
+    let sWhere  = " WHERE 1=2";
+
+    if ((req.query.materialId != undefined) && (req.query.materialId != "")) {
+       sWhere = `WHERE m.materialId = ${req.query.materialId} `;
+       sOrigin = ` "material" AS origin, m.name AS material, `;
+    } else {
+        if ((req.query.familyId != undefined) && (req.query.familyId != "")) {
+            sWhere = `WHERE f.familyId = ${req.query.familyId} `;
+            sOrigin = ` "family" AS origin, f.name AS material, `;            
+         }
+    }
+
+    let qry = `SELECT DISTINCT 
+                      ${sOrigin} 
+                      l.name AS location, c.name AS city, c.provinceCode, l.postalCode, l.address, l.phone, l.latitude, l.longitude, 
+                      l.openningHour, l.website, l.imageUrl, l.locationNotes 
+                 FROM family f  
+                      INNER JOIN material m ON (f.familyId = m.familyId)
+                      INNER JOIN materialperlocation ml ON (m.materialId = ml.materialId)
+                      INNER JOIN location l ON (ml.locationId = l.locationId)
+                      INNER JOIN city c ON (l.cityId = c.cityId)
+                      INNER JOIN provinces p ON (c.provinceCode = p.provinceCode AND c.countryCode = p.countryCode)
+                ${sWhere}
+                ORDER BY location   `;
+
+    savyDb.query(qry, (error, results)=>{
+        if (error) throw error;
+        if (results.length == 0) {
+            res.status(404).send('No Record Found');            
+        } else {
+            res.status(200).send(results);
+        }    
+    });   
+});
+
