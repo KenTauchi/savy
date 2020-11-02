@@ -8,14 +8,9 @@ export const dataImportAction = (dataResult) => {
 };
 
 export const CLICK_GET = "CLICK_GET";
-export const clickGet = (contr, waste, prov) => {
-    return {
-      type: "CLICK_GET",
-      payload: {
-        contribution: contr,
-        wasteRecycled: waste,
-        provinceRank: prov,
-      }
-    };
+export const clickGet = (province) => {
+  return {
+    type: "CLICK_GET",
+    payload: province,
   };
-
+};

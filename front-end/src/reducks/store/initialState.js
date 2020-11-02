@@ -1,22 +1,28 @@
 export const initialState = {
-
   dataSet: {
     data: [],
-  },
-  mapChartDataTable: {
-    contribution: "",
-    wasteRecycled: "",
-    provinceRank: "",
+    mapDataTable: [],
+    pieChartData: [],
   },
   testimonials: {
     data: [],
   },
-    teamMembers: {
-		data: []
-	},
+  teamMembers: {
+    data: [],
+  },
 
-	exploreFAQ: {
-		data: []
-	}
+  exploreFAQ: {
+    data: [],
+  },
+
+  materials: {
+    idNameType: [],
+  },
+  quizData: {
+    data: [],
+    quizLength: 0,
+    currentIndex: 1,
+    showScore: false,
+    correctAnswer: 0,
+  },
 };
-
