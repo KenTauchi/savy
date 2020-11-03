@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { materialsImport } from '../../reducks/materials/operations.js';
 import { getMaterials, getMaterialsIdNameType } from '../../reducks/materials/selectors.js';
+import { locationsImport } from '../../reducks/locations/operations.js';
 
 import Header from '../header/header';
 import Footer from '../footer/footer';
@@ -48,6 +49,33 @@ const WasteManagement = () => {
   //   console.log(materials);
   //   console.log(state);
   // }, [materials]);
+  
+  // Get locations *********************************************************************************************************************************************************************************************
+
+  const [searchedLocations, setSearchedLocations] = useState({
+    selectedLocations: [],
+  });
+  // const [filteredLocations, setFilteredLocations] = useState(locations.selectedLocations);
+
+  // const state = useSelector((state) => state);
+  // let stateLocations = getlocationsIdNameType(state);
+
+  useEffect(()=>{
+    dispatch(locationsImport());
+  }, []);
+
+  // useEffect(()=>{
+  //   setSearchedLocations({
+  //     ...searchedLocations,
+  //     searchedLocations: statelocations
+  //   });
+  //   // console.log(statelocations)
+  // }, [statelocations]);
+
+  // useEffect(()=>{
+  //   console.log(locations);
+  //   console.log(state);
+  // }, [locations]);
 
   // States for locations *********************************************************************************************************************************************************************************************
   
