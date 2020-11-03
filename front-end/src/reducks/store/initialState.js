@@ -14,9 +14,11 @@ export const initialState = {
   exploreFAQ: {
     data: [],
   },
-
   materials: {
     idNameType: [],
+  },
+  locations: {
+    selectedLocations: [],
   },
   quizData: {
     data: [],
