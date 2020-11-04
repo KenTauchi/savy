@@ -2,8 +2,11 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { materialsImport } from '../../reducks/materials/operations.js';
-import { getMaterials, getMaterialsIdNameType } from '../../reducks/materials/selectors.js';
-import { locationsImport } from '../../reducks/locations/operations.js';
+import { getMaterials, getMaterialsIdNameType, getSearchedMaterial } from '../../reducks/materials/selectors.js';
+import { materialsSearchFieldUpdate } from '../../reducks/materials/actions';
+
+import { searchLocationsByMaterial } from '../../reducks/locations/operations.js';
+import { getLocations, getLocationsSearchedLocations } from '../../reducks/locations/selectors.js';
 
 import Header from '../header/header';
 import Footer from '../footer/footer';
@@ -27,11 +30,14 @@ const WasteManagement = () => {
 
   const [materials, setMaterilas] = useState({
     idNameType: [],
+    searchedMaterial: ""
   });
   const [filteredMaterials, setFilteredMaterials] = useState(materials.idNameType);
+  const [materialsSearchField, setMaterialsSearchField] = useState("");
 
   const state = useSelector((state) => state);
   let stateMaterials = getMaterialsIdNameType(state);
+  let stateSearchedMaterial = getSearchedMaterial(state);
 
   useEffect(()=>{
     dispatch(materialsImport());
@@ -45,41 +51,25 @@ const WasteManagement = () => {
     // console.log(stateMaterials)
   }, [stateMaterials]);
 
+  // This code is necessary to update search field when user chooses filter option by enter key. **********************************************************************************************************
+  useEffect(()=>{
+    // console.log(materials);
+    // console.log(stateSearchedMaterial);
+    setMaterialsSearchField(stateSearchedMaterial);
+
+  }, [stateSearchedMaterial]);
+
+  // **********************************************************************************************************
+
   // useEffect(()=>{
   //   console.log(materials);
   //   console.log(state);
   // }, [materials]);
   
-  // Get locations *********************************************************************************************************************************************************************************************
-
-  const [searchedLocations, setSearchedLocations] = useState({
-    selectedLocations: [],
-  });
-  // const [filteredLocations, setFilteredLocations] = useState(locations.selectedLocations);
-
-  // const state = useSelector((state) => state);
-  // let stateLocations = getlocationsIdNameType(state);
-
-  useEffect(()=>{
-    dispatch(locationsImport());
-  }, []);
-
-  // useEffect(()=>{
-  //   setSearchedLocations({
-  //     ...searchedLocations,
-  //     searchedLocations: statelocations
-  //   });
-  //   // console.log(statelocations)
-  // }, [statelocations]);
-
-  // useEffect(()=>{
-  //   console.log(locations);
-  //   console.log(state);
-  // }, [locations]);
-
-  // States for locations *********************************************************************************************************************************************************************************************
+  // State for locations *********************************************************************************************************************************************************************************************
   
-  const [locations, setLocations] = useState(LOCATION_DATA);
+  // const [locations, setLocations] = useState(LOCATION_DATA);
+  const [locations, setLocations] = useState([]);
   const [filteredLocations, setFilteredLocations] = useState(locations);
   const [defaultProps, setDefaultProps] = useState({
     center: {
@@ -89,26 +79,43 @@ const WasteManagement = () => {
     zoom: 11,
   });
   const [selectedLocation, setSelectedLocation] = useState({
-    locationId: 1,
-    locationTypeId: "Private",
-    cityId: "New Westminister",
-    name: "Lowe´s",
-    postalCode: "V3M 0G2",
-    address: "1085 ﻿Tanaka Ct",
-    phone: "604-527-7239",
+    locationId: "",
+    locationTypeId: "",
+    cityId: "",
+    name: "",
+    postalCode: "",
+    address: "",
+    phone: "",
     latitude: 49.188678,
     longitude: -122.951498,
-    openingHour: "Call for hours of operation",
-    website: "https://www.lowes.ca/services/recycling-centre",
+    openingHour: "",
+    website: "",
     imageUrl: "",
-    locationNotes:
-      "Minimize your impact on the environment by bringing your paint, batteries, lightbulbs, and fluorescent tubes to one of Lowe's Recycling Centres for safe disposal.",
+    locationNotes: "",
   });
+
+  // const [filteredLocations, setFilteredLocations] = useState(locations.selectedLocations);
+
+  let stateLocations = getLocationsSearchedLocations(state);
+
+  useEffect(() => {
+    dispatch(searchLocationsByMaterial(43));
+  }, []);
+
+  useEffect(()=>{
+    setFilteredLocations(stateLocations);
+    // console.log(statelocations)
+  }, [stateLocations]);
+
+  // useEffect(()=>{
+  //   console.log(locations);
+    // console.log(state);
+  // }, [locations]);
+
 
   // States for filter *********************************************************************************************************************************************************************************************
 
   const [postalCodeSearchField, setPostalCodeSearchField] = useState("");
-  const [materialsSearchField, setMaterialsSearchField] = useState("");
 
   // States for components display *********************************************************************************************************************************************************************************************
 
@@ -191,10 +198,12 @@ const WasteManagement = () => {
     setSelectedLocation(location);
     setDefaultProps({
       center: {
-        lat: location.latitude,
-        lng: location.longitude,
+        // lat: location.latitude,
+        // lng: location.longitude,
+        lat: parseFloat(location.latitude),
+        lng: parseFloat(location.longitude),
       },
-      zoom: 15,
+      zoom: 13,
     });
   };
 
@@ -204,7 +213,7 @@ const WasteManagement = () => {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       },
-      zoom: 12,
+      zoom: 11,
     });
   }
 
@@ -226,10 +235,12 @@ const WasteManagement = () => {
 
   const postalCodeInputClear = () => {
     setPostalCodeSearchField("");
+    // dispatch(materialsSearchFieldUpdate(""));
   };
 
   const materialsInputClear = () => {
     setMaterialsSearchField("");
+    dispatch(materialsSearchFieldUpdate(""));
   };
 
   const postalCodeChangeHandler = (event) => {
@@ -266,7 +277,7 @@ const WasteManagement = () => {
     setPostalCodeSearchField(event.target.textContent);
   }
 
-  const materialsChangeHandler = (event) => {
+  const materialsChangeHandler = (event, value) => {
     if (windowWidth < 768 && wmComponentDisplay.detail) {
       setWmComponentDisplay({
         ...wmComponentDisplay,
@@ -279,6 +290,7 @@ const WasteManagement = () => {
     postalCodeInputClear();
 
     // console.log("event: ", event)
+    // console.log("value: ", value)
     // console.log("handler: ", event.target.value);
     setMaterialsSearchField(event.target.value);
   }
@@ -300,17 +312,65 @@ const WasteManagement = () => {
     setMaterialsSearchField(event.target.textContent);
   }
 
+  const materialsOptionKeyDown = (event, option, index) => {
+    console.log("keyDownTest");
+    // console.log(event);
+    // console.log(option, index)
+    // console.log(event.key);
+    // if (event.key === 'Enter') {
+    //   console.log(event.target);
+    // }
+  }
+
+  const notFoundhandler = (selectedItem) => {
+
+    if (selectedItem === undefined) {
+      setNotFoundDisplay({
+        contents: { display: "none" },
+        notFound: { display: "block" }
+      })
+    } else {
+      if (windowWidth >= 768) {
+        setNotFoundDisplay({
+          contents: { display: "grid" },
+          notFound: { display: "none" }
+        })
+      } else {
+        setNotFoundDisplay({
+          contents: { display: "block" },
+          notFound: { display: "none" }
+        })
+      }
+    }
+
+  }
 
   // Lifecycle *********************************************************************************************************************************************************************************************
 
   useEffect(()=>{
+    // console.log(materialsSearchField);
+    // console.log(materials);
+      const selectedMaterial = materials.idNameType.find(material => {
+      const searchresult = material.materialName.toLowerCase().indexOf(materialsSearchField.toLowerCase())
+      if (searchresult > -1) {
+        return true;
+      }
+    });
+
+    // console.log("test: ", selectedMaterial)
+
+    if (selectedMaterial !== undefined) {
+      dispatch(searchLocationsByMaterial(selectedMaterial.id));
+    }
+
+    if (materialsSearchField !== "") {
+      notFoundhandler(selectedMaterial);
+    }
+  }, [materialsSearchField])
+
+  useEffect(()=>{
 
     // console.log("filter: ", postalCodeSearchField)
-
-    const filteredLocationsByPostalCode = locations.filter(location =>
-      location.postalCode.toLowerCase().includes(postalCodeSearchField.toLocaleLowerCase())
-    )
-
     // const searchChars = postalCodeSearchField.split('');
     // const filteredLocationsByPostalCode = locations.filter(location => {
     //   if (searchChars.length === 0) {
@@ -329,8 +389,13 @@ const WasteManagement = () => {
     //     return searchResult;
     //   }
     // });
-
     // console.log("filtered locations: ", filteredLocationsByPostalCode)
+
+    /*
+
+    const filteredLocationsByPostalCode = locations.filter(location =>
+      location.postalCode.toLowerCase().includes(postalCodeSearchField.toLocaleLowerCase())
+    )
 
     setFilteredLocations(filteredLocationsByPostalCode);
 
@@ -352,6 +417,8 @@ const WasteManagement = () => {
         })
       }
     }
+
+    */
 
   }, [postalCodeSearchField])
 
@@ -533,6 +600,7 @@ const WasteManagement = () => {
           materialsClickHandler={materialsClickHandler}
           materialsValue={materialsSearchField}
           materialsInputClear={materialsInputClear}
+          materialsOptionKeyDown={materialsOptionKeyDown}
         />
 
         <div className="wm-main-contens" style={notFoundDisplay.contents}>

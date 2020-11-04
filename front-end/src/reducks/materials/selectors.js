@@ -11,3 +11,8 @@ export const getMaterialsIdNameType = createSelector(
     [materialsSelector],
     (state) => state.idNameType
 );
+
+export const getSearchedMaterial = createSelector(
+    [materialsSelector],
+    (state) => state.searchedMaterial
+);

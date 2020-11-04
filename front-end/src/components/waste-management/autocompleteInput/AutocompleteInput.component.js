@@ -1,6 +1,7 @@
 /* eslint-disable no-use-before-define */
-import React, {useState, useEffect, useRef} from "react";
-import useAutocomplete from "@material-ui/lab/useAutocomplete";
+import React from "react";
+// import useAutocomplete from "@material-ui/lab/useAutocomplete";
+import useAutocomplete from "./useAutocomplete";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 
@@ -40,7 +41,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AutocompleteInput = (props) => {
   const classes = useStyles();
-  const {
+  let {
     getRootProps,
     getInputLabelProps,
     getInputProps,
@@ -55,15 +56,27 @@ const AutocompleteInput = (props) => {
 
   const { onChange } = getInputProps();
   const { onClick } = getOptionProps({ test: 1 });
-//   console.log(getListboxProps);
-//   console.log(getOptionProps({ test: 1 }));
-//   console.log(onClick);
+  // console.log(getRootProps);
+  // console.log(getRootProps());
+  const { onKeyDown } = getRootProps();
+  // console.log(getOptionProps({ test: 1 }));
+  // console.log(getRootProps().onKeyDown);
+  // alert(getInputProps)
+
+  // console.log(onTouchStart);
+  // alert(onClick)
+
+  // getInputProps.onKeyDown = props.keyDown;
+
+
 
   return (
     <div className="autocompleteInput">
-      <div {...getRootProps()}>
+      <div 
+        onKeyDown={props.keyDown}
+        {...getRootProps()} 
+        >
         <input
-          //   ref={autocompleteInputTag}
           className={classes.input}
           {...getInputProps()}
           placeholder={props.placeholder}
@@ -91,7 +104,7 @@ const AutocompleteInput = (props) => {
                 props.click(event);
                 onClick(event);
               }}
-            >
+             >
               {option}
             </li>
           ))}

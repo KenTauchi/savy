@@ -9,6 +9,12 @@ export const materialsReducer = ( state = initialState.materials, action ) => {
                 idNameType: action.payload,
             };
 
+        case materialsAcationsTypes.MATERIALS_SEARCHFIELD_UPDATE:
+            return {
+                ...state,
+                searchedMaterial: action.payload,
+            };
+
         default:
             return state;
     }

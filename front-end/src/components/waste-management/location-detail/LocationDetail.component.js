@@ -12,23 +12,23 @@ const LocationDetail = (props) => {
 
   return (
     <div style={displayStyle} className="locationDetailDiv">
-      <p className="listItemFacilityName">{location.name}</p>
+      <p className="listItemFacilityName">{location.location}</p>
       <p className="listItemFacilityPhone">{location.phone}</p>
       <p className="listItemFacilityAddress1">{location.address}</p>
       <p className="listItemFacilityAddress2">
         {" "}
-        {location.cityId}, {location.postalCode}
+        {location.city}, {location.provinceCode}, {location.postalCode}
       </p>
       <a className="listItemFacilityLink" href={location.website}>
         {displayUrl}
       </a>
 
       <p className="hoursOfOperation">Hours of Operation</p>
-      <p className="openingHour">{location.openingHour}</p>
+      <p className="openingHour">{location.openningHour}</p>
 
       <p className="materialAccepted">Material accepted</p>
       <ul>
-        <li></li>
+        <li>{location.material}</li>
       </ul>
 
       <p className="notes">Notes</p>

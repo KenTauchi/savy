@@ -1,13 +1,13 @@
 import { createSelector } from "reselect";
 
-const materialsSelector = (state) => state.materials;
+const locationsSelector = (state) => state.locations;
 
-export const getMaterials = createSelector(
-    [materialsSelector],
+export const getLocations = createSelector(
+    [locationsSelector],
     (state) => state
 );
 
-export const getMaterialsIdNameType = createSelector(
-    [materialsSelector],
-    (state) => state.idNameType
+export const getLocationsSearchedLocations = createSelector(
+    [locationsSelector],
+    (state) => state.searchedLocations
 );

@@ -16,9 +16,10 @@ export const initialState = {
   },
   materials: {
     idNameType: [],
+    searchedMaterial: ""
   },
   locations: {
-    selectedLocations: [],
+    searchedLocations: [],
   },
   quizData: {
     data: [],
