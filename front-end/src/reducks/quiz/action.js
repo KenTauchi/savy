@@ -24,3 +24,21 @@ export const incScoreAction = (num) => {
     payload: num,
   };
 };
+
+export const DIS_WINDOW = "DIS_WINDOW";
+
+export const disWindow = (boolean) => {
+  return {
+    type: "DIS_WINDOW",
+    payload: boolean,
+  };
+};
+
+export const CORRECTNESS = "CORRECTNESS";
+
+export const checkCorrect = (boolean) => {
+  return {
+    type: "CORRECTNESS",
+    payload: boolean,
+  };
+};

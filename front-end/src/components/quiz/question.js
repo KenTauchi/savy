@@ -38,12 +38,12 @@ export default function Question() {
             </h2>
             <h3>
               {typeof quizData.data[0] === "undefined"
-                ? "N/A"
+                ? "Loading..."
                 : quizData.data[quizData.currentIndex - 1].question.question}
             </h3>
             <div>
               {typeof quizData.data[0] === "undefined"
-                ? "N/A"
+                ? "Loading..."
                 : quizData.data[
                     quizData.currentIndex - 1
                   ].answers.map((answer, index) => (
