@@ -24,11 +24,11 @@ const GoogleMap = (props) => {
   
   const Markers = locations.map((location, index) => (
     <Marker
-      key={location.locationId}
+      key={location.address + location.location}
       lat={location.latitude}
       lng={location.longitude}
       // any user props
-      text={location.name}
+      text={location.location}
       location={location}
       mapMarkerLocationDetailDisplayHandler={mapMarkerLocationDetailDisplayHandler}
       getSelectedLocation={getSelectedLocation}

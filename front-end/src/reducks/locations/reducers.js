@@ -6,7 +6,7 @@ export const locationsReducer = ( state = initialState.locations, action ) => {
         case locationsAcationsTypes.LOCATIONS_IMPORT:
             return {
                 ...state,
-                selectedLocations: action.payload,
+                searchedLocations: action.payload,
             };
 
         default:

@@ -24,6 +24,7 @@ const Filter = (props) => {
     materialsClickHandler,
     materialsValue,
     materialsInputClear,
+    materialsOptionKeyDown
   } = props;
   const [locations, setLocations] = useState(LOCATION_DATA);
 
@@ -64,6 +65,7 @@ const Filter = (props) => {
               click={materialsClickHandler}
               value={materialsValue}
               clear={materialsInputClear}
+              keyDown={materialsOptionKeyDown}
             />
           </div>
 

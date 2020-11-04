@@ -21,7 +21,7 @@ const LocationList = (props) => {
         <ul className="locationsList">
           {locations.map((location) => (
             <LocationListItem
-              key={location.locationId}
+              key={location.address + location.location}
               location={location}
               windowWidth={windowWidth}
               locationDetailDisplayHandler={locationDetailDisplayHandler}

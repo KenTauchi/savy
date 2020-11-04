@@ -1,6 +1,6 @@
 import { locationsImportAction } from './actions.js';
 
-export const locationsImport = (materialId) => {
+export const searchLocationsByMaterial = (materialId) => {
     return async (dispatch, getState) => {
 
         // console.log("API data fetch rendered");
@@ -13,8 +13,7 @@ export const locationsImport = (materialId) => {
             })
             .catch(() => null);
 
-
-        console.log("search results: ", locations);
+        // console.log("search results: ", locations);
         dispatch(locationsImportAction(locations));
     }
 }
