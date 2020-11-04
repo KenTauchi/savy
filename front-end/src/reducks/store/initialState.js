@@ -24,5 +24,7 @@ export const initialState = {
     currentIndex: 1,
     showScore: false,
     correctAnswer: 0,
+    windowDis: false,
+    correctness: false,
   },
 };

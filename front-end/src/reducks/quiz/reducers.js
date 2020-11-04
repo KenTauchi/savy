@@ -20,6 +20,16 @@ export const QuizDataReducer = (state = initialState.quizData, action) => {
         ...state,
         correctAnswer: state.correctAnswer + action.payload,
       };
+    case Actions.DIS_WINDOW:
+      return {
+        ...state,
+        windowDis: action.payload,
+      };
+    case Actions.CORRECTNESS:
+      return {
+        ...state,
+        correctness: action.payload,
+      };
 
     default:
       return state;
