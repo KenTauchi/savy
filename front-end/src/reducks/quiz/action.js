@@ -42,3 +42,12 @@ export const checkCorrect = (boolean) => {
     payload: boolean,
   };
 };
+
+export const RESET_QUIZ = "RESET_QUIZ";
+
+export const resetQuiz = (boolean) => {
+  return {
+    type: "RESET_QUIZ",
+    payload: boolean,
+  };
+};

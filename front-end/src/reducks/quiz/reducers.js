@@ -30,6 +30,15 @@ export const QuizDataReducer = (state = initialState.quizData, action) => {
         ...state,
         correctness: action.payload,
       };
+    case Actions.RESET_QUIZ:
+      return {
+        ...state,
+        currentIndex: 1,
+        showScore: false,
+        correctAnswer: 0,
+        windowDis: false,
+        correctness: false,
+      };
 
     default:
       return state;
