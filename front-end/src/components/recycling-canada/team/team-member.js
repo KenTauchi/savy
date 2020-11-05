@@ -1,5 +1,5 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import * as FAIcons from "react-icons/fa";
 
 const TeamMember = (props) => {
     return (
@@ -8,9 +8,11 @@ const TeamMember = (props) => {
             <div className="member-info">
                 <p>{props.memberName}</p>
                 <p>{props.memberRole}</p>
-                <p className="member-profile">{props.linkedIn != "" ? <a href={props.linkedIn}><FontAwesomeIcon icon={['fab', 'linkedin']} size="2x" /></a> : ""}
-                {props.gitHub != "" ? <a href={props.gitHub}><FontAwesomeIcon icon={['fab', 'github']} size="2x" /></a> : ""}
-                {props.behance != "" ? <a href={props.behance}><FontAwesomeIcon icon={['fab', 'behance']} size="2x" /></a> : ""}</p>
+                <p className="member-profile">
+                    {props.linkedIn != "" ? <a href={props.linkedIn}><FAIcons.FaLinkedin /></a> : ""}
+                    {props.gitHub != "" ? <a href={props.gitHub}><FAIcons.FaGithubSquare /></a> : ""}
+                    {props.behance != "" ? <a href={props.behance}><FAIcons.FaBehanceSquare /></a> : ""}
+                </p>
             </div>
         </div>
     );

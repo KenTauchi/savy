@@ -2,8 +2,6 @@ import React from 'react';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 
-import "./contact.scss";
-
 class Contact extends React.Component {
 
     constructor(props) {

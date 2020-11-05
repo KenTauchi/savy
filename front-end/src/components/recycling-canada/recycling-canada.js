@@ -2,6 +2,7 @@ import React from "react";
 import Header from "../header/header";
 import Footer from "../footer/footer";
 import About from "./about/about";
+import Feature from "./feature/feature";
 import Map from "./map/map";
 import SvgMap from "./svgmap/SvgMap";
 import MapData from "./map-data/map-data";
@@ -13,10 +14,10 @@ const RecyclingCanada = () => {
     <div>
       <Header />
       <div className="content">
-        <h1>Recycling Canada</h1>
-        <About />
         <SvgMap />
         <MapData />
+        <About />
+        <Feature />
         <Testimonial />
         <Team />
       </div>
