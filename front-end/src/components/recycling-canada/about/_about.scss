@@ -1,0 +1,23 @@
+.about-section {
+    background-color: #f5f8fb;
+
+    .about-section-info {
+        max-width: 700px;
+        margin: 0 auto;
+        padding: 5rem 0;
+
+        h2 {
+            font-size: 3rem;
+            color: $primary-color;
+        }
+
+        p {
+            line-height: 1.7;
+            letter-spacing: 0.05rem;
+
+            &:first-of-type {
+                padding-bottom: 1.5rem;
+            }
+        }
+    }
+}

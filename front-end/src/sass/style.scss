@@ -1,0 +1,21 @@
+@import './mixins';
+@import './variables';
+@import './typography';
+
+
+body {
+	font-family: $font-sans-serif;
+}
+
+// Header
+@import '../components/header/header';
+
+//  Recycling Canada
+@import '../components/recycling-canada/team/team';
+@import '../components/recycling-canada/about/about';
+@import '../components/recycling-canada/feature/feature';
+@import '../components/recycling-canada/svgmap/SvgMap.style';
+@import '../components/recycling-canada/svgmap/piechart/piechart';
+
+// Contact
+@import '../components/contact/contact';

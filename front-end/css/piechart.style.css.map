@@ -1,9 +1,0 @@
-{
-    "version": 3,
-    "mappings": "AAAA,AACE,SADO,CACP,SAAS,CAAC;EAER,KAAK,EAAE,IAAI;EACX,MAAM,EAAE,eAAe;EAKvB,UAAU,EAAE,CAAC,CAAC,GAAG,CAAC,GAAG,CAAC,CAAC,CAAC,kBAAkB,EAAE,CAAC,CAAC,GAAG,CAAC,IAAI,CAAC,CAAC,CAAC,mBAAmB;CAC7E",
-    "sources": [
-        "../src/components/recycling-canada/svgmap/piechart.style.scss"
-    ],
-    "names": [],
-    "file": "piechart.style.css"
-}
