@@ -20,7 +20,7 @@ export default function AnswerWindow() {
             {(quizData.correctAnswer / quizData.quizLength).toFixed(2) * 100}%
           </h2>
           <div>
-            <img src="#" />
+            <img src="https://images.unsplash.com/photo-1563477710521-5ae0aa5085ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80" />
           </div>
           <span
             className="next-question"
