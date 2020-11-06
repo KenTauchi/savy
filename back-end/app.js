@@ -6,23 +6,30 @@
 //      2)  npm i express
 //      3)  npm i mysql
 //      4)  npm i express-validator
+//      5)  npm i node-fetch
 //
+//      API https://www.zipcodeapi.com/API#radiusSql
+//      API https://www.zipcodeapi.com/API#zipToLoc
+//      API http://www.zip-codes.com/content/api/samples/QuickGetZipCodeDetails.html  
+//      REGISTER https://www.zip-codes.com/zip-code-api-register.asp
+// 
 // *******************************************************
 // ******** Required Modules *****************************
 // *******************************************************
 
 const express = require("express");
-const app = express();
-const { savyDb } = require("./connection.js");
+const fetch   = require('node-fetch');
+const app     = express();
+const {savyDb} = require("./connection.js");
 
-const server = app.listen(process.env.PORT || 3000, () => {
-  console.log("listening port 3000");
+const server = app.listen(process.env.PORT || 3000, ()=>{
+        console.log("listening port 3000");
 });
 
-// middleware parse the request body
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
 
+// middleware parse the request body
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 
 //   app.use(function (req, res, next) {
 //     res.header("Access-Control-Allow-Origin", "*");
@@ -31,23 +38,28 @@ app.use(express.json());
 //     next();
 //   });
 
-// Returns all provinces in database
-app.get("/api/v1/provinces", (req, res) => {
-  let qry = `SELECT * FROM provinces`;
 
-  savyDb.query(qry, (error, results) => {
-    if (error) throw error;
-    if (results.length == 0) {
-      res.status(404).send("No Record Found");
-    } else {
-      res.status(200).send(results);
-    }
-  });
+
+// Returns all provinces in database
+app.get("/api/v1/provinces", (req,res)=>{
+
+    let qry = `SELECT * FROM provinces`;
+
+    savyDb.query(qry, (error, results)=>{
+        if (error) throw error;
+        if (results.length == 0) {
+            res.status(404).send('No Record Found');            
+        } else {
+            res.status(200).send(results);
+        }    
+    });   
 });
 
+
 // Returns statics data from provinces for the map
-app.get("/api/v1/mapdata", (req, res) => {
-  let qry = `SELECT md.provinceCode, md.provinceName,
+app.get("/api/v1/mapdata", (req,res)=>{
+
+    let qry = `SELECT md.provinceCode, md.provinceName,
                       md.prov_Population, md.prov_RecyclingContribPerc,
                       md.prov_TotalRecycling, md.prov_TotalWaste, md.prov_WasteRecyclingPerc,
                       pd.familyName, pd.familyTotalRecycling, pd.familyPercent
@@ -106,148 +118,147 @@ app.get("/api/v1/mapdata", (req, res) => {
                 ORDER BY prov_RecyclingContribPerc DESC, provinceName, familyName   
                     `;
 
-  savyDb.query(qry, (error, results) => {
-    if (error) throw error;
-    if (results.length == 0) {
-      res.status(404).send("No Record Found");
-    } else {
-      let myResult = [];
-      let pieObj = [];
-      let mapData = {};
-      let sProvince = "";
-      let iRank = 0;
+    savyDb.query(qry, (error, results)=>{
+        if (error) throw error;
+        if (results.length == 0) {
+            res.status(404).send('No Record Found');            
+        } else {
 
-      for (let i = 0; i < results.length; i++) {
-        if (sProvince != results[i].provinceCode) {
-          if (pieObj.length > 0) {
-            myResult.push({ mapData, pieData: pieObj });
-            pieObj = [];
-          }
+            let myResult   = [];
+            let pieObj     = [];
+            let mapData    = {};
+            let sProvince  = '';
+            let iRank      = 0;
 
-          iRank++;
-          mapData = {
-            provinceCode: results[i].provinceCode,
-            provinceName: results[i].provinceName,
-            prov_Population: results[i].prov_Population,
-            prov_RecyclingContribPerc: results[i].prov_RecyclingContribPerc,
-            prov_TotalRecycling: results[i].prov_TotalRecycling,
-            prov_TotalWaste: results[i].prov_TotalWaste,
-            prov_WasteRecyclingPerc: results[i].prov_WasteRecyclingPerc,
-            prov_Rank: iRank,
-          };
-        }
-        pieObj.push({
-          familyName: results[i].familyName,
-          familyTotalRecycling: results[i].familyTotalRecycling,
-          familyPercent: results[i].familyPercent,
-        });
-        sProvince = results[i].provinceCode;
-      }
+            for (let i=0; i< results.length; i++) {
+                if (sProvince != results[i].provinceCode) {
 
-      if (mapData != {}) {
-        myResult.push({ mapData, pieData: pieObj });
-      }
+                    if (pieObj.length > 0) {
+                        myResult.push( {mapData, 'pieData': pieObj});
+                        pieObj = [];                    
+                    }
 
-      res.status(200).send(myResult);
-    }
-  });
+                    iRank++;
+                    mapData = { 'provinceCode': results[i].provinceCode, 
+                                'provinceName': results[i].provinceName,
+                                'prov_Population' : results[i].prov_Population,
+                                'prov_RecyclingContribPerc' : results[i].prov_RecyclingContribPerc,
+                                'prov_TotalRecycling' : results[i].prov_TotalRecycling,
+                                'prov_TotalWaste' : results[i].prov_TotalWaste,
+                                'prov_WasteRecyclingPerc' : results[i].prov_WasteRecyclingPerc,
+                                'prov_Rank' : iRank
+                              };
+                }  
+                pieObj.push( {'familyName': results[i].familyName, 'familyTotalRecycling':results[i].familyTotalRecycling, 'familyPercent':results[i].familyPercent } );
+                sProvince = results[i].provinceCode;                
+            }            
+
+            if (mapData != {}) {
+                myResult.push( {mapData, 'pieData': pieObj });
+            }
+
+            res.status(200).send(myResult);
+        }    
+    });   
 });
 
+
 // Returns a list of all team members
-app.get("/api/v1/team", (req, res) => {
-  let qry = `SELECT t.name, r.name AS role, t.imageURL, t.linkedinURL, t.githubURL, t.behanceURL
+app.get("/api/v1/team", (req,res)=>{
+
+    let qry = `SELECT t.name, r.name AS role, t.imageURL, t.linkedinURL, t.githubURL, t.behanceURL
                     FROM teammember t
                         INNER JOIN teamrole r ON (t.teamRoleId = r.teamRoleId)
                 ORDER BY t.name`;
 
-  savyDb.query(qry, (error, results) => {
-    if (error) throw error;
-    if (results.length == 0) {
-      res.status(404).send("No Record Found");
-    } else {
-      res.status(200).send(results);
-    }
-  });
+    savyDb.query(qry, (error, results)=>{
+        if (error) throw error;
+        if (results.length == 0) {
+            res.status(404).send('No Record Found');            
+        } else {
+            res.status(200).send(results);
+        }    
+    });   
 });
 
+
 // Returns a list of all quiz questions and answers
-app.get("/api/v1/quiz", (req, res) => {
-  let qry = `SELECT q.questionId, q.question, q.description, a.answer, 
+app.get("/api/v1/quiz", (req,res)=>{
+
+    let qry = `SELECT q.questionId, q.question, q.description, a.answer, 
                       CASE WHEN a.correct = 1 THEN 'yes' ELSE 'no' END AS correct
                  FROM quizquestion q
                       INNER JOIN quizanswer a ON (q.questionId = a.questionId)
                 ORDER BY q.questionId, a.answerId  `;
 
-  savyDb.query(qry, (error, results) => {
-    if (error) throw error;
-    if (results.length == 0) {
-      res.status(404).send("No Record Found");
-    } else {
-      let myResult = [];
-      let myAnswer = [];
-      let question = {};
-      let iQuestion = -1;
+    savyDb.query(qry, (error, results)=>{
+        if (error) throw error;
+        if (results.length == 0) {
+            res.status(404).send('No Record Found');            
+        } else {
 
-      for (let i = 0; i < results.length; i++) {
-        if (iQuestion != results[i].questionId) {
-          if (myAnswer.length > 0) {
-            myResult.push({ question, answers: myAnswer });
-            myAnswer = [];
-          }
-          question = {
-            questionId: results[i].questionId,
-            question: results[i].question,
-            description: results[i].description,
-          };
-        }
-        myAnswer.push({
-          answer: results[i].answer,
-          correct: results[i].correct,
-        });
-        iQuestion = results[i].questionId;
-      }
+            let myResult = [];
+            let myAnswer = [];
+            let question = {};
+            let iQuestion = -1;
 
-      if (question != {}) {
-        myResult.push({ question, answers: myAnswer });
-      }
+            for (let i=0; i< results.length; i++) {
+                if (iQuestion != results[i].questionId) {
 
-      res.status(200).send(myResult);
-    }
-  });
+                    if (myAnswer.length > 0) {
+                        myResult.push( {question, 'answers': myAnswer});
+                        myAnswer = [];                    
+                    }
+                    question = { 'questionId': results[i].questionId, 'question': results[i].question, 'description' : results[i].description };
+                }  
+                myAnswer.push( {'answer': results[i].answer, 'correct':results[i].correct} );
+                iQuestion = results[i].questionId;                
+            }            
+
+            if (question != {}) {
+                myResult.push( {question, 'answers': myAnswer });
+            }
+
+            res.status(200).send(myResult);
+        }    
+    });   
 });
 
+
 // Returns a list of all FAQ questions
-app.get("/api/v1/faq", (req, res) => {
-  let qry = `SELECT f.faqId, f.postedOn, f.question, f.answer
+app.get("/api/v1/faq", (req,res)=>{
+
+    let qry = `SELECT f.faqId, f.postedOn, f.question, f.answer
                  FROM faq f
                 ORDER BY f.question  `;
 
-  savyDb.query(qry, (error, results) => {
-    if (error) throw error;
-    if (results.length == 0) {
-      res.status(404).send("No Record Found");
-    } else {
-      res.status(200).send(results);
-    }
-  });
+    savyDb.query(qry, (error, results)=>{
+        if (error) throw error;
+        if (results.length == 0) {
+            res.status(404).send('No Record Found');            
+        } else {
+            res.status(200).send(results);
+        }    
+    });   
 });
 
+
 // Returns a list of all TESTEMONIALS report
-app.get("/api/v1/testemonials", (req, res) => {
-  let qry = `SELECT t.testemonialId, t.postedOn, t.postedBy, t.imageURL, t.description
+app.get("/api/v1/testemonials", (req,res)=>{
+
+    let qry = `SELECT t.testemonialId, t.postedOn, t.postedBy, t.imageURL, t.description
                  FROM testemonial t
                  ORDER BY t.postedOn   `;
 
-  savyDb.query(qry, (error, results) => {
-    if (error) throw error;
-    if (results.length == 0) {
-      res.status(404).send("No Record Found");
-    } else {
-      res.status(200).send(results);
-    }
-  });
+    savyDb.query(qry, (error, results)=>{
+        if (error) throw error;
+        if (results.length == 0) {
+            res.status(404).send('No Record Found');            
+        } else {
+            res.status(200).send(results);
+        }    
+    });   
 });
-
 
 
 // Returns a list of all TESTEMONIALS report
@@ -272,43 +283,147 @@ app.get("/api/v1/materials", (req,res)=>{
 });
 
 
+
+
+
 // Search a location for a material
 app.get("/api/v1/search", (req,res)=>{
 
-    let sOrigin = "";
-    let sWhere  = " WHERE 1=2";
+    let mySearch = async (req) => {
+        
+        let sApiFilter = "";
+        let zipCodeCordinate  = {};        
+        if ((req.query.filterRange != undefined) && (req.query.filterRange == 'true') &&
+            (req.query.zipCode     != undefined) && (req.query.zipCode != '') ) {
 
-    if ((req.query.materialId != undefined) && (req.query.materialId != "")) {
-       sWhere = `WHERE m.materialId = ${req.query.materialId} `;
-       sOrigin = ` "material" AS origin, m.name AS material, `;
-    } else {
-        if ((req.query.familyId != undefined) && (req.query.familyId != "")) {
-            sWhere = `WHERE f.familyId = ${req.query.familyId} `;
-            sOrigin = ` "family" AS origin, f.name AS material, `;            
-         }
-    }
+            let getMyCordinateAPI = new Promise((resolve, reject) => {
 
-    let qry = `SELECT DISTINCT 
-                      ${sOrigin} 
-                      l.name AS location, c.name AS city, c.provinceCode, l.postalCode, l.address, l.phone, l.latitude, l.longitude, 
-                      l.openningHour, l.website, l.imageUrl, l.locationNotes 
-                 FROM family f  
-                      INNER JOIN material m ON (f.familyId = m.familyId)
-                      INNER JOIN materialperlocation ml ON (m.materialId = ml.materialId)
-                      INNER JOIN location l ON (ml.locationId = l.locationId)
-                      INNER JOIN city c ON (l.cityId = c.cityId)
-                      INNER JOIN provinces p ON (c.provinceCode = p.provinceCode AND c.countryCode = p.countryCode)
-                ${sWhere}
-                ORDER BY location   `;
+                let zipCodeApiKey         = `DEMOAPIKEY`;
+                let zipCode               = `${req.query.zipCode}`;  // `V6B1B4`;
+                let zipCodeApi = `https://api.zip-codes.com/ZipCodesAPI.svc/1.0/QuickGetZipCodeDetails/${zipCode}?key=${zipCodeApiKey}`;
+            
+                fetch(zipCodeApi)
+                .then((res) => {
+                    res.json().then((data) => {
+                        if (data.err) {
+                            console.log(err);
+                            reject ({});
+                        } else {
+                            resolve ( {'latitude' : data.Latitude, 'longitude' : data.Longitude } );
+                        }   
+                    })
+                })
+            });
+            
+            zipCodeCordinate = await getMyCordinateAPI; // wait until the promise resolves (*)
 
-    savyDb.query(qry, (error, results)=>{
-        if (error) throw error;
-        if (results.length == 0) {
-            res.status(404).send('No Record Found');            
+            console.log(zipCodeCordinate);            
+
+            if (zipCodeCordinate.latitude != undefined && zipCodeCordinate.longitude != undefined) {
+
+                let getZipCodeAPI = new Promise((resolve, reject) => {
+
+                    let zipCodeApiKey         = `C3TxsgWGYzdRIPOlk1yaRoyLPTJrSojipPbYtQy51B55BSm3LxMxVUCNfab95sKE`;
+                    let zipCodeLatitude       =  `${zipCodeCordinate.latitude}`;  // `49.279750`;
+                    let zipCodeLongitude      =  `${zipCodeCordinate.longitude}`; // `-122.967925`;
+                    let zipCodeLatitudeField  = `l.latitude`;
+                    let zipCodeLongitudeField = `l.longitude`;
+                    let zipCodeRange          = `20`;  // default kilometers for range search
+                    if ((req.query.range != undefined) && (req.query.range > 0)) {
+                        zipCodeRange          = `${req.query.range}`;                    
+                    }    
+    
+                    let zipCodeApi = `https://www.zipcodeapi.com/rest/${zipCodeApiKey}/radius-sql.json/${zipCodeLatitude}/${zipCodeLongitude}/degrees/${zipCodeRange}/km/${zipCodeLatitudeField}/${zipCodeLongitudeField}/2`
+                
+                    fetch(zipCodeApi)
+                    .then((res) => {
+                        res.json().then((data) => {
+                            if (data.err) {
+                                console.log(err);
+                                reject (``);
+                            } else {
+                                resolve (` AND ${data.where_clause} `);
+                            }   
+                        })
+                    })
+                });
+                
+                sApiFilter = await getZipCodeAPI; // wait until the promise resolves (*)
+
+            } else {
+                sApiFilter = ` AND 1=2 `;  // invalid zip code, will not return any result
+            }
+        }
+
+        //console.log(`Finish Promise Zip`);
+        //console.log(sApiFilter);
+
+        let sOrigin  = "";
+        let sWhere   = " WHERE 1=1" + sApiFilter;
+    
+        if ((req.query.materialId != undefined) && (req.query.materialId != "")) {
+           sWhere = sWhere + ` AND m.materialId = ${req.query.materialId} `;
+           sOrigin = ` "material" AS origin, m.name AS material, `;
         } else {
-            res.status(200).send(results);
-        }    
-    });   
-});
+            if ((req.query.familyId != undefined) && (req.query.familyId != "")) {
+                sWhere = sWhere + ` AND f.familyId = ${req.query.familyId} `;
+                sOrigin = ` "family" AS origin, f.name AS material, `;            
+             }
+        }
+    
+        let qry = `SELECT DISTINCT 
+                          ${sOrigin} 
+                          f.name AS familyName, f.recyclingFact,                      
+                          l.name AS location, c.name AS city, c.provinceCode, l.postalCode, l.address, l.phone, l.latitude, l.longitude, 
+                          l.openningHour, l.website, l.imageUrl, l.locationNotes 
+                     FROM family f  
+                          INNER JOIN material m ON (f.familyId = m.familyId)
+                          INNER JOIN materialperlocation ml ON (m.materialId = ml.materialId)
+                          INNER JOIN location l ON (ml.locationId = l.locationId)
+                          INNER JOIN city c ON (l.cityId = c.cityId)
+                          INNER JOIN provinces p ON (c.provinceCode = p.provinceCode AND c.countryCode = p.countryCode) 
+                    ${sWhere}      
+                    ORDER BY location                          
+                   `;
+        
+        //console.log(`SQL QUERY -----------------------`);
+        //console.log(qry);
 
+        savyDb.query(qry, (error, results)=>{
+            if (error) throw error;
+            if (results.length == 0) {
+                res.status(404).send('No Record Found');            
+            } else {
+                let myResult = [];
+                let myLocation = [];
+                let material = {};
+                material = { 'origin': results[0].origin, 'material': results[0].material, 'familyName' : results[0].familyName, 'recyclingFact' : results[0].recyclingFact };            
+            
+                for (let i=0; i< results.length; i++) {
+                    myLocation.push( {'locationName': results[i].location, 
+                                      'city':results[i].city, 
+                                      'provinceCode':results[i].provinceCode, 
+                                      'postalCode':results[i].postalCode, 
+                                      'address':results[i].address, 
+                                      'phone':results[i].phone, 
+                                      'latitude':results[i].latitude, 
+                                      'longitude':results[i].longitude, 
+                                      'openningHour':results[i].openningHour, 
+                                      'website':results[i].website, 
+                                      'openningHour':results[i].openningHour, 
+                                      'imageUrl':results[i].imageUrl, 
+                                      'locationNotes':results[i].locationNotes                                                                                                       
+                                      } );
+                }            
+                myResult.push( {material, 'locations': myLocation });
+            
+                res.status(200).send(myResult);
+            }    
+        });   
+
+    };
+
+    mySearch(req);
+
+});
 
