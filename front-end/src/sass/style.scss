@@ -1,6 +1,8 @@
 @import './mixins';
 @import './variables';
+@import './colors';
 @import './typography';
+@import './media';
 
 
 body {
@@ -11,11 +13,17 @@ body {
 @import '../components/header/header';
 
 //  Recycling Canada
-@import '../components/recycling-canada/team/team';
 @import '../components/recycling-canada/about/about';
 @import '../components/recycling-canada/feature/feature';
 @import '../components/recycling-canada/svgmap/SvgMap.style';
 @import '../components/recycling-canada/svgmap/piechart/piechart';
+@import '../components/recycling-canada/map-data/map-data';
+@import '../components/recycling-canada/team/team';
+@import '../components/recycling-canada/testimonial/testimonial';
+@import '../components/recycling-canada/contact-section/contact-section';
 
 // Contact
 @import '../components/contact/contact';
+
+// Footer
+@import '../components/footer/footer';

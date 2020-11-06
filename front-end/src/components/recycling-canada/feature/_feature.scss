@@ -1,7 +1,6 @@
 .feature-section {
-    max-width: 1600px;
-    margin: 0 auto;
-    color: $primary-color;
+    max-width: $max-width;
+    margin: 5rem auto;
 
     .feature-section-info {
         h2 {
@@ -10,6 +9,48 @@
             
             strong {
                 display: block;
+            }
+        }
+
+        .feature-list {
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-gap: 4rem;
+
+            .feature {
+                span {
+                    display: block;
+                    letter-spacing: 0.8px;
+                    line-height: 1.5;
+                }
+                
+                .feature-image {
+                    width: 250px;
+                    height: 250px;;
+                }
+
+                .feature-name {
+                    font-weight: bold;
+                }
+
+                .feature-info {
+
+                }
+
+                .feature-redirect-btn {
+                    margin-top: 1.5rem;
+                    border: 2px solid $savy-green-100;
+                    border-radius: 5px;
+                    padding: 0.5rem 1.5rem;
+                    color: $savy-green-100;
+                    background-color: $savy-white;
+                    cursor: pointer;
+
+                    &:focus {
+                        outline: unset;
+                    }
+                }
             }
         }
     }

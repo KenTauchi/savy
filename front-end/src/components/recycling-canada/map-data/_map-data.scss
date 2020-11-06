@@ -1,5 +1,6 @@
 .map-data-section {
-    margin: 3rem;
+    text-align: center;
+    margin: 2rem 0;
     
     ul {
         display: flex;
@@ -7,10 +8,15 @@
         list-style-type: none;
         margin: 0 auto;
         padding: 0;
-        width: 50%;
+        max-width: 900px;
         li {
             span {
                 display: block;
+            }
+
+            .map-data-value {
+                font-size: 2rem;
+                margin-bottom: 0.5rem;
             }
         }
     }
