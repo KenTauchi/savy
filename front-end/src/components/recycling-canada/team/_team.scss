@@ -1,15 +1,21 @@
-img {
-	width: 100%;
-	height: auto;
-}
-
 .team-section {
-	margin-top: 5rem;
+	max-width: $max-width;
+	margin: 0 auto;
 
 	.team-section-info {
 		text-align: center;
 		max-width: 700px;
 		margin: 0 auto;
+
+		h2 {
+			font-size: $h2-fz;
+			font-weight: normal;
+		}
+
+		.heading-info {
+			line-height: 1.5;
+			letter-spacing: 0.4px;
+		}
 	}
 
 	.slick-slider {
@@ -64,7 +70,7 @@ img {
 
 		.slick-center {
 			img {
-				transform: scale(1.3);
+				transform: scale(1.2);
 				filter: grayscale(0%);
 			}
 
