@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import FloatingLabelInput from "react-floating-label-input";
-import Header from '../header/header';
-import Footer from '../footer/footer';
+
 
 
 /* Install these two libraries for Floating Input 
@@ -57,13 +56,12 @@ const Contact = () => {
     // className={serverState.submitting ? {display: 'none'} : ""} 
     return (
         <div>
-            <Header />
             <div className="contact-main">
                 <h2>If there is any question or feedback, feel free to reach out to us.</h2>
 
                 <div className="contact-section">
                     <div className="contact-img">
-                        <img src="./images/contact.svg"></img>
+                        <img src="./images/contact.svg" />
                     </div>
 
                     <div className="contact-content">
@@ -110,8 +108,6 @@ const Contact = () => {
                     </div>
                 </div>
             </div>
-
-            <Footer />
         </div>
     );
 }

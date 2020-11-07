@@ -17,11 +17,6 @@ export const ToggleMenu = [
         cName: 'nav-item'
     },
     {
-        title: 'Quiz',
-        path: '/quiz',
-        cName: 'nav-item'
-    },
-    {
         title: 'Explore',
         path: '/explore',
         cName: 'nav-item'

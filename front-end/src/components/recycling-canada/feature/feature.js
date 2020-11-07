@@ -40,9 +40,9 @@ const Feature = () => {
                         <img className="feature-image" src="./images/icons/explore.svg" />
                         <span className="feature-name">Explore</span>
                         <span className="feature-info">
-                            Find nearest locations for your recycling
-                            materials along with the items they receive and
-                            how to get in touch with them.
+                            Find frequent questions and answers
+                            and any related articles that can help you
+                            expand your knowledge.
                         </span>
                         <button className="feature-redirect-btn">Go to Explore </button>
                     </div>
