@@ -14,8 +14,8 @@ class Contact extends React.Component {
 
     contactSubmit(event) {
         const nameValue = event.target.name.value;
-        const emailValue = event.target.email.value;
-        const messageValue = event.target.message.value;
+        // const emailValue = event.target.email.value;
+        // const messageValue = event.target.message.value;
 
         alert("Message Sent Successfully" + nameValue);
 
