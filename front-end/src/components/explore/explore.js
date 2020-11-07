@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { initialState } from "../../reducks/store/initialState";
 import { faqImportAction } from "../../reducks/exploreFAQ/action";
 import { getFAQs } from "../../reducks/exploreFAQ/selectors";
-import Header from '../header/header';
-import Footer from '../footer/footer';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
@@ -32,14 +30,13 @@ const Explore = () => {
     }, []);
 
     return (
-        <div>
-            <Header />
-            <div className="content">
-                <h1>Explore</h1>
-                <div>
-                    {faqs.data.map((faq, index) => {
-                        return (
-                            <Accordion key={index} expanded={expanded === `panel${faq.faqId}`} onChange={handleChange(`panel${faq.faqId}`)}>
+
+        <div className="content">
+            <h1>Explore</h1>
+            <div>
+                {faqs.data.map((faq, index) => {
+                    return (
+                        <Accordion key={index} expanded={expanded === `panel${faq.faqId}`} onChange={handleChange(`panel${faq.faqId}`)}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls={`panel${faq.faqId}bh-content`}
@@ -51,12 +48,11 @@ const Explore = () => {
                                 <Typography>{faq.answer}</Typography>
                             </AccordionDetails>
                         </Accordion>
-                        );
-                    })}
-                </div>
+                    );
+                })}
             </div>
-            <Footer />
         </div>
+
     );
 }
 
