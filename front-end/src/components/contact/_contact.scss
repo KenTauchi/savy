@@ -1,12 +1,47 @@
-.contact-section {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    justify-content: center;
-    text-align: left;
-    grid-gap: 4rem;
-    margin: 5rem;
+.contact-main{
+    
+    h2 {
+        text-align: center;
+        font-weight: 900;
+        font-size: 1.4rem;
+    }
+    .contact-section {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        justify-content: center;
+        text-align: left;
+        grid-gap: 4rem;
+        margin: 5rem;
+    }
+
+    #submit-message {
+        text-align: center;
+    }
+    .contact-content {
+        h3 {
+            text-align: center;
+            font-weight: 900;
+            font-size: 1.3rem;
+        }
+
+        .floating-input {
+            color: #000000;
+            margin-top: 2rem;
+            padding: 5px 1px;
+        }
+        button {
+            border-radius: 5px;
+            background-color:$primary-color;
+            border: none;
+            color: #ffffff;
+            height: 3rem;
+            width: 6rem;
+            margin-top: 4rem;
+        }
+        #submit-message {
+            margin-top: 2rem;
+        }
+    }
+    
 }
 
-label,input,textarea {
-    display: block;
-}
