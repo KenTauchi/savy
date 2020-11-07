@@ -18,6 +18,7 @@ const Contact = () => {
         status: null,
     });
 
+
     const handleServerResponse = (ok, msg, form) => {
         setServerState({
             submitting: false,

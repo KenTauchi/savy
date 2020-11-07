@@ -13,7 +13,7 @@ const MapData = () => {
 			<ul>
 				<li className="table-data">
 					<span>
-						<img className="map-data-img" src="./images/icons/contribution.svg" />
+						<img className="map-data-img" src="./images/icons/contribution.svg" alt="" />
 					</span>
 					<span className="map-data-value">
 						{table.prov_RecyclingContribPerc
@@ -24,7 +24,7 @@ const MapData = () => {
 				</li>
 				<li className="table-data">
 					<span>
-						<img className="map-data-img" src="./images/icons/waste-recycled.svg" />
+						<img className="map-data-img" src="./images/icons/waste-recycled.svg" alt="" />
 					</span>
 					<span className="map-data-value">
 						{table.prov_WasteRecyclingPerc
@@ -35,7 +35,7 @@ const MapData = () => {
 				</li>
 				<li className="table-data">
 					<span>
-						<img className="map-data-img" src="./images/icons/province-rank.svg" />
+						<img className="map-data-img" src="./images/icons/province-rank.svg" alt="" />
 					</span>
 					<span className="map-data-value">{table.prov_Rank ? table.prov_Rank : "0"}</span>
 					<span>Province Rank</span>

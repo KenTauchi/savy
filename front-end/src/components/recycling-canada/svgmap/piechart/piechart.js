@@ -1,4 +1,6 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
+
+import React, { useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { getDataSet } from "../../../../reducks/mapChartData/selectors";
 // import {
@@ -9,10 +11,10 @@ import { getDataSet } from "../../../../reducks/mapChartData/selectors";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
-import { polyline } from "@amcharts/amcharts4/.internal/core/rendering/Path";
+// import { polyline } from "@amcharts/amcharts4/.internal/core/rendering/Path";
 
 const PieChart = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const dataSet = getDataSet(selector);
   const pieData = dataSet.pieChartData;
