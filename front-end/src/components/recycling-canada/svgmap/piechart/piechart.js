@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDataSet } from "../../../../reducks/mapChartData/selectors";
 // import {
@@ -17,12 +17,18 @@ const PieChart = () => {
   const dataSet = getDataSet(selector);
   const pieData = dataSet.pieChartData;
 
+  // const chart = useRef(null);
+
   useEffect(() => {
+    // let x = am4core.create("chartdiv", am4charts.XYChart);
+
     console.log("pieChart UseEffect");
     am4core.useTheme(am4themes_animated);
     let chart = am4core.create("chartdiv", am4charts.PieChart);
     // chart.responsive.enabled = true;
     chart.data = pieData;
+
+    // chart.current = x;
 
     // Add and configure Series
     let pieSeries = chart.series.push(new am4charts.PieSeries());
@@ -53,7 +59,11 @@ const PieChart = () => {
     labelTemplate.background.fillOpacity = 0.9;
     labelTemplate.padding(2, 9, 2, 9);
     labelTemplate.background.fill = am4core.color("#0d9445");
-  });
+
+    // return () => {
+    //   x.dispose();
+    // };
+  }, []);
 
   return (
     <div className="piechart">
