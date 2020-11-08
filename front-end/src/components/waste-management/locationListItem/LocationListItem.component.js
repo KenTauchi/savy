@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-import arrow from './arrow-direction.png';
+import arrow from './directions-60px.svg';
 import arrowRight from './arrow-right.png';
 
-import "./LocationListItem.style.scss";
+// import "./LocationListItem.style.scss";
 
 const LocationListItem = (props) => {
   const {
@@ -42,7 +42,7 @@ const LocationListItem = (props) => {
       {windowWidth >= 768 ? (
         <div className="locationListItemDirection">
           <img className="directionArrow" src={arrow} alt="arrow image" />
-          <p className="directionDistance">{location.distance} miles</p>
+          <p className="directionDistance">{location.distance} </p>
         </div>
       ) : (
         <div className="rightArrowDiv">

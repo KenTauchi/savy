@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-import x_mark from './x-mark.png';
+import x_mark from './closewindow-60px.svg';
 
-import "./LocationDetail.style.scss";
+// import "./LocationDetail.style.scss";
 
 const LocationDetail = (props) => {
   const { location, displayStyle, locationDetailDisplayHandler } = props;

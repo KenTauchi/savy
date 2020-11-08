@@ -1,7 +1,16 @@
-
-.filter-section {
-    max-width: 100%;
-}
+@import "./autocompleteInput//AutocompleteInput.style";
+@import "./button/Button.style";
+@import "./contact-us/ContactUs.style";
+@import "./dropdown/Dropdown.style";
+@import "./explore-quiz/ExploreQuiz.style";
+@import "./filter/Filter.style";
+@import "./google-map/GoogleMap.style";
+@import "./location-detail//LocationDetail.style";
+@import "./locationList/LocationList.style";
+@import "./locationListItem/LocationListItem.style";
+@import "./marker/Marker.styles";
+@import "./not-found/NotFound.style";
+@import "./recycling-fact/RecyclingFacts.style";
 
 .mapAndMaterialTab {
     margin: 1rem auto;

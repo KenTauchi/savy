@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useHistory } from 'react-router-dom';
 
-import './ExploreQuiz.style.scss';
+// import './ExploreQuiz.style.scss';
 
 const ExploreQuiz = () => {
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import LocationListItem from '../locationListItem/LocationListItem.component';
 
-import './LocationList.style.scss';
+// import './LocationList.style.scss';
 
 const LocationList = (props) => {
 
