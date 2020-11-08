@@ -1,7 +1,7 @@
 import React from 'react';
 import { useHistory } from "react-router-dom";
 
-import './RecyclingFacts.style.scss';
+// import './RecyclingFacts.style.scss';
 
 const RecyclingFacts = () => {
 

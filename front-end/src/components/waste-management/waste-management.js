@@ -18,7 +18,7 @@ import NotFound from './not-found/NotFound.component.js';
 
 import { LOCATION_DATA } from './TEST_locations.data.js';
 
-import "./waste-management.style.scss";
+// import "./waste-management.style.scss";
 
 const WasteManagement = () => {
 

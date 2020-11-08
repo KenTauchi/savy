@@ -2,16 +2,16 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import AutocompleteInput from '../autocompleteInput/AutocompleteInput.component';
+import DefaultButton from '../button/Button.component';
+import Dropdown from '../dropdown/Dropdown.component';
+
+import serchButtonIcon from './search-65px.svg';
 
 import { materialsImport } from "../../../reducks/materials/operations.js";
 import { getMaterials, getMaterialsIdNameType, } from "../../../reducks/materials/selectors.js";
 import { LOCATION_DATA } from "../TEST_locations.data.js";
 
-import Autocomplete from '@material-ui/lab/Autocomplete';
-import useAutocomplete from "@material-ui/lab/useAutocomplete";
-import { makeStyles } from "@material-ui/core/styles";
-
-import './Filter.style.scss';
+// import './Filter.style.scss';
 
 const Filter = (props) => {
   const dispatch = useDispatch();
@@ -71,13 +71,25 @@ const Filter = (props) => {
 
           <div className="searchInput">
             <AutocompleteInput
-              options={locations.map((location) => location.postalCode)}
-              placeholder="Postal Code"
+              options={[]}
+              placeholder="zip code"
               change={postalCodeChangeHandler}
               click={postalCodeClickHandler}
               value={postalCodeValue}
               clear={postalCodeInputClear}
             />
+          </div>
+
+          <div className="searchInput">
+            <Dropdown />
+          </div>
+
+          <div className="searchButtonMobile">
+            <DefaultButton text="Search" />
+          </div>
+
+          <div className="searchButtonLaptop">
+            <img src={serchButtonIcon} alt="search button" />
           </div>
         </div>
       </div>
@@ -85,6 +97,18 @@ const Filter = (props) => {
 }
 
 export default Filter;
+
+// <div className="searchInput">
+//   <AutocompleteInput
+//     options={locations.map((location) => location.postalCode)}
+//     placeholder="zip code"
+//     change={postalCodeChangeHandler}
+//     click={postalCodeClickHandler}
+//     value={postalCodeValue}
+//     clear={postalCodeInputClear}
+//   />
+// </div>
+
 
           // <div className="searchInput">
           //   <Autocomplete

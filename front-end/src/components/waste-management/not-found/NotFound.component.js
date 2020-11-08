@@ -3,7 +3,7 @@ import ContactUs from '../contact-us/ContactUs.component.js';
 
 import logo from './savy-logo.png'
 
-import './NotFound.style.scss';
+// import './NotFound.style.scss';
 
 const NotFound = (props) => {
 

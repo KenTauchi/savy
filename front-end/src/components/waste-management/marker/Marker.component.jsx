@@ -1,8 +1,8 @@
 import React from "react";
 
-import marker from "./map-pin.png";
+import marker from "./map-pin-60px.svg";
 
-import './Marker.styles.scss';
+// import './Marker.styles.scss';
 
 const Marker = (props) => {
     const {
