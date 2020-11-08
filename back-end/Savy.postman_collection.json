@@ -158,7 +158,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/search?materialId=30&familyId=&filterRange=true&range=5&zipCode=V6B1B4",
+					"raw": "http://localhost:3000/api/v1/search?materialId=30&familyId=&filterRange=true&range=10&zipCode=&latitude=49.278862&longitude=-123.121101",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -184,11 +184,19 @@
 						},
 						{
 							"key": "range",
-							"value": "5"
+							"value": "10"
 						},
 						{
 							"key": "zipCode",
-							"value": "V6B1B4"
+							"value": ""
+						},
+						{
+							"key": "latitude",
+							"value": "49.278862"
+						},
+						{
+							"key": "longitude",
+							"value": "-123.121101"
 						}
 					]
 				}
