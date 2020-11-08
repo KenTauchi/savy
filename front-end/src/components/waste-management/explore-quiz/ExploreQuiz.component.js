@@ -1,5 +1,7 @@
 import React from 'react';
 
+import DefaultButton from '../button/Button.component';
+
 import { useHistory } from 'react-router-dom';
 
 // import './ExploreQuiz.style.scss';
@@ -7,13 +9,19 @@ import { useHistory } from 'react-router-dom';
 const ExploreQuiz = () => {
 
   const history = useHistory();
+  const moveToQuiz = () => {
+    history.push("/challenges")
+  }
 
   return (
     <div className="explore-quiz-section">
       <p>
         EXPLORE OUR PLATFORM AND TEST YOUR RECYCLING KNOWLEDGE: TAKE OUR QUIZ!
       </p>
-      <button onClick={() => history.push("/quiz")}>Start Quiz</button>
+      <DefaultButton
+        click={moveToQuiz}
+        text="Start Quiz"
+      />
     </div>
   );
 }

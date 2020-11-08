@@ -1,29 +1,42 @@
 .explore-quiz-section {
-    background-color: #eee;
+    background-color: #F6F8FB;
+    color: $savy-gray-100;
     padding: 1rem;
     margin: 48px 0;
+    text-align: center;
 
     p {
-        font-size: 22px;
+        font-size: 20px;
         line-height: 1.5;
+        margin-bottom: 2.5rem;
     }
 
     button {
-        font-size: 22px;
-        width: 100%;
+        font-size: 18px;
+        padding: .75rem;
+        // width: 100%;
     }
 }
 
 @media screen and (min-width: 768px) {
     .explore-quiz-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // display: grid;
+        // align-items: center;
+        // grid-template-columns: 1fr 200px;
 
         p {
             margin-right: 40px;
-            display: inline-block;
+            margin-bottom: 20px;
+            // display: inline-block;
         }
 
         button {
-            width: auto;
+            max-width: 220px;
+            padding: .5rem 2.5rem;
+            height: 48px;
         }
     }
 }

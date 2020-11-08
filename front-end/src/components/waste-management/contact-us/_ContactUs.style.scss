@@ -1,17 +1,20 @@
 .contact-us-section {
-    background-color: #eee;
+    background-color: #F6F8FB;
+    color: $savy-gray-100;
     padding: 1rem;
-    margin: 6rem 0 0;
+    margin: 48px 0;
+    text-align: center;
 
     p {
-        font-size: 22px;
+        font-size: 16px;
         line-height: 1.5;
-        margin-top: 0;
+        margin-bottom: 2.5rem;
     }
 
     button {
-        font-size: 22px;
-        width: 100%;
+        font-size: 18px;
+        padding: .75rem;
+        // width: 100%;
     }
 
     span {
@@ -21,16 +24,25 @@
 
 @media screen and (min-width: 768px) {
     .contact-us-section {
-
-        margin-top: 120px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // display: grid;
+        // align-items: center;
+        // grid-template-columns: 1fr 200px;
 
         p {
             margin-right: 40px;
-            display: inline-block;
+            margin-bottom: 20px;
+            font-size: 18px;
+            // display: inline-block;
         }
 
         button {
-            width: auto;
+            font-size: 20px;
+            max-width: 220px;
+            padding: .5rem 2.5rem;
+            height: 48px;
         }
 
         span {
@@ -39,3 +51,45 @@
 
     }
 }
+
+// .contact-us-section {
+//     background-color: #eee;
+//     padding: 1rem;
+//     margin: 6rem 0 0;
+
+//     p {
+//         font-size: 22px;
+//         line-height: 1.5;
+//         margin-top: 0;
+//     }
+
+//     button {
+//         font-size: 22px;
+//         width: 100%;
+//     }
+
+//     span {
+//         display: block;
+//     }
+// }
+
+// @media screen and (min-width: 768px) {
+//     .contact-us-section {
+
+//         margin-top: 120px;
+
+//         p {
+//             margin-right: 40px;
+//             display: inline-block;
+//         }
+
+//         button {
+//             width: auto;
+//         }
+
+//         span {
+//             display: inline;
+//         }
+
+//     }
+// }

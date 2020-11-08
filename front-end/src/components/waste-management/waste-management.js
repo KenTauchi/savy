@@ -101,9 +101,18 @@ const WasteManagement = () => {
 	}, []);
 
 	useEffect(() => {
-		setFilteredLocations(stateLocations);
-		// console.log(statelocations)
+		if (stateLocations) {
+			setFilteredLocations(stateLocations);
+		} else {
+			setFilteredLocations([]);
+		}
+		// console.log(stateLocations)
+		// notFoundhandler(stateLocations);;
 	}, [stateLocations]);
+
+	useEffect(()=>{
+		notFoundhandler(filteredLocations);;
+	}, [filteredLocations]);
 
 	// useEffect(()=>{
 	//   console.log(locations);
@@ -268,7 +277,7 @@ const WasteManagement = () => {
 			});
 		}
 
-		materialsInputClear();
+		// materialsInputClear();
 
 		// console.log("event: ", event.target.textContent)
 		// console.log("handler: ", event.target.value);
@@ -285,7 +294,7 @@ const WasteManagement = () => {
 			});
 		}
 
-		postalCodeInputClear();
+		// postalCodeInputClear();
 
 		// console.log("event: ", event)
 		// console.log("value: ", value)
@@ -303,26 +312,18 @@ const WasteManagement = () => {
 			});
 		}
 
-		postalCodeInputClear();
+		// postalCodeInputClear();
 
 		// console.log("event: ", event.target.textContent)
 		// console.log("handler: ", event.target.value);
 		setMaterialsSearchField(event.target.textContent);
 	}
 
-	const materialsOptionKeyDown = (event, option, index) => {
-		console.log("keyDownTest");
-		// console.log(event);
-		// console.log(option, index)
-		// console.log(event.key);
-		// if (event.key === 'Enter') {
-		//   console.log(event.target);
-		// }
-	}
+	const notFoundhandler = (searchResult) => {
 
-	const notFoundhandler = (selectedItem) => {
+		// console.log(searchResult);
 
-		if (selectedItem === undefined) {
+		if (searchResult.length === 0) {
 			setNotFoundDisplay({
 				contents: { display: "none" },
 				notFound: { display: "block" }
@@ -340,31 +341,85 @@ const WasteManagement = () => {
 				})
 			}
 		}
+	}
+	// const notFoundhandler = (selectedItem) => {
+
+	// 	if (selectedItem === undefined) {
+	// 		setNotFoundDisplay({
+	// 			contents: { display: "none" },
+	// 			notFound: { display: "block" }
+	// 		})
+	// 	} else {
+	// 		if (windowWidth >= 768) {
+	// 			setNotFoundDisplay({
+	// 				contents: { display: "grid" },
+	// 				notFound: { display: "none" }
+	// 			})
+	// 		} else {
+	// 			setNotFoundDisplay({
+	// 				contents: { display: "block" },
+	// 				notFound: { display: "none" }
+	// 			})
+	// 		}
+	// 	}
+	// }
+
+	const searchButtonClickHandler = () => {
+		// console.log(materialsSearchField);
+		// console.log(materials);
+
+		let selectedMaterial;
+
+		if (materialsSearchField === "") {
+			dispatch(searchLocationsByMaterial(43));
+			return;
+		} else {
+			selectedMaterial = materials.idNameType.find(material => {
+				const searchresult = material.materialName.toLowerCase().indexOf(materialsSearchField.toLowerCase())
+				if (searchresult > -1) {
+					return true;
+				}
+			});
+		}
+
+		// console.log("test: ", selectedMaterial)
+
+		// dispatch(searchLocationsByMaterial(selectedMaterial.id));
+
+		if (selectedMaterial !== undefined) {
+			dispatch(searchLocationsByMaterial(selectedMaterial.id));
+		} else {
+			dispatch(searchLocationsByMaterial(0));
+		}
+
+		// if (materialsSearchField !== "") {
+		// 	notFoundhandler(selectedMaterial);
+		// }
 
 	}
 
 	// Lifecycle *********************************************************************************************************************************************************************************************
 
-	useEffect(() => {
-		// console.log(materialsSearchField);
-		// console.log(materials);
-		const selectedMaterial = materials.idNameType.find(material => {
-			const searchresult = material.materialName.toLowerCase().indexOf(materialsSearchField.toLowerCase())
-			if (searchresult > -1) {
-				return true;
-			}
-		});
+	// useEffect(() => {
+	// 	// console.log(materialsSearchField);
+	// 	// console.log(materials);
+	// 	const selectedMaterial = materials.idNameType.find(material => {
+	// 		const searchresult = material.materialName.toLowerCase().indexOf(materialsSearchField.toLowerCase())
+	// 		if (searchresult > -1) {
+	// 			return true;
+	// 		}
+	// 	});
 
-		// console.log("test: ", selectedMaterial)
+	// 	// console.log("test: ", selectedMaterial)
 
-		if (selectedMaterial !== undefined) {
-			dispatch(searchLocationsByMaterial(selectedMaterial.id));
-		}
+	// 	if (selectedMaterial !== undefined) {
+	// 		dispatch(searchLocationsByMaterial(selectedMaterial.id));
+	// 	}
 
-		if (materialsSearchField !== "") {
-			notFoundhandler(selectedMaterial);
-		}
-	}, [materialsSearchField])
+	// 	if (materialsSearchField !== "") {
+	// 		notFoundhandler(selectedMaterial);
+	// 	}
+	// }, [materialsSearchField])
 
 	useEffect(() => {
 
@@ -597,17 +652,17 @@ const WasteManagement = () => {
 				materialsClickHandler={materialsClickHandler}
 				materialsValue={materialsSearchField}
 				materialsInputClear={materialsInputClear}
-				materialsOptionKeyDown={materialsOptionKeyDown}
+				searchButtonClickHandler={searchButtonClickHandler}
 			/>
 
-			<div className="wm-main-contens" style={notFoundDisplay.contents}>
+			<div className="wm-main-contents" style={notFoundDisplay.contents}>
 				<div className="mapAndMaterialTab">
 					<button
 						className="mapButton"
 						onClick={mapDisplayHandler}
 						style={mapAndMaterialDisplay.map ? { color: "black" } : null}
 					>
-						Map
+						Map View
             </button>
 					<button
 						className="materialButton"
