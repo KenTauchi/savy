@@ -1,7 +1,14 @@
 .customDropdown {
 
-    padding: 12px;
-    border-bottom: $savy-gray-50 1px solid;
+    padding: 0px;
+
+    // .makeStyles-selectEmpty-20 {
+    //     margin-top: 7px !important;
+    // }
+
+    .MuiInputBase-root {
+        margin-top: 0px !important;
+    }
 
     .MuiFormControl-root {
         width: 100%;
@@ -23,8 +30,9 @@
     }
 
     .MuiInputBase-input  {
-        padding: 0;
+        padding: .5rem;
         width: 100%;
+        border-bottom: $savy-gray-50 1px solid;
     }
 
     .MuiSelect-select.MuiSelect-select {
@@ -70,10 +78,22 @@
 @media screen and (min-width: 768px) {
     .customDropdown {
         border-bottom: none;
+        height: 43px;
     }
 
-    .MuiSelect-icon {
-        margin-right: 16px;
+    .MuiFormControl-root {
+        margin-top: 4px !important;
     }
+
+
+    .MuiInputBase-input  {
+        border-bottom: none !important;
+    }
+
+
+    .MuiSelect-icon {
+        margin-right: 24px;
+    }
+
 
 }

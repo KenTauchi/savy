@@ -24,7 +24,8 @@ const Filter = (props) => {
     materialsClickHandler,
     materialsValue,
     materialsInputClear,
-    materialsOptionKeyDown
+    materialsOptionKeyDown,
+    searchButtonClickHandler
   } = props;
   const [locations, setLocations] = useState(LOCATION_DATA);
 
@@ -85,11 +86,14 @@ const Filter = (props) => {
           </div>
 
           <div className="searchButtonMobile">
-            <DefaultButton text="Search" />
+            <DefaultButton text="Search" click={searchButtonClickHandler} />
           </div>
 
           <div className="searchButtonLaptop">
-            <img src={serchButtonIcon} alt="search button" />
+            <img 
+              onClick={searchButtonClickHandler}
+              src={serchButtonIcon} 
+              alt="search button" />
           </div>
         </div>
       </div>

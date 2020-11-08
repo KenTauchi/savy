@@ -13,14 +13,15 @@
 @import "./recycling-fact/RecyclingFacts.style";
 
 .mapAndMaterialTab {
-    margin: 1rem auto;
+    margin: 24px auto;
     display: block;
+    text-align: center;
 
     button {
         margin: 0 1rem;
         border: none;
         background-color: #fff;
-        font-size: 16px;
+        font-size: 20px;
         color: #bbb;
 
         &:focus {
@@ -49,10 +50,11 @@
         display: none !important;
     }
 
-    .wm-main-contens {
+    .wm-main-contents {
         display: grid;
         grid-template-columns: 325px 1fr;
         margin-top: 2rem;
+        grid-column-gap: 48px;
     }
 
     .location-section,
@@ -82,13 +84,13 @@
 }
 
 @media screen and (min-width: 992px) {
-    .waste-management-content {
-        grid-template-columns: 400px 1fr;
+    .wm-main-contents {
+        grid-template-columns: 420px 1fr;
     }
 }
 
 @media screen and (min-width: 1200px) {
-    .waste-management-content {
-        grid-template-columns: 480px 1fr;
+    .wm-main-contents {
+        grid-template-columns: 520px 1fr;
     }
 }

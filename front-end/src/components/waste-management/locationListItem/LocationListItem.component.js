@@ -39,30 +39,36 @@ const LocationListItem = (props) => {
         </a>
       </div>
 
-      {windowWidth >= 768 ? (
-        <div className="locationListItemDirection">
-          <img className="directionArrow" src={arrow} alt="arrow image" />
-          <p className="directionDistance">{location.distance} </p>
-        </div>
-      ) : (
-        <div className="rightArrowDiv">
-          <img
-            className="rightArrow"
-            src={arrowRight}
-            alt="arrow image"
-            onClick={() => {
-              locationDetailDisplayHandler();
-              getSelectedLocation(location);
-            }}
-          />
-        </div>
-      )}
+      <div className="locationListItemDirection">
+        <img className="directionArrow" src={arrow} alt="arrow image" />
+      </div>
     </li>
   );
 };
 
 export default LocationListItem;
 
+// {
+//   windowWidth >= 768 ? (
+//     <div className="locationListItemDirection">
+//       <img className="directionArrow" src={arrow} alt="arrow image" />
+//       <p className="directionDistance">{location.distance} miles</p>
+//     </div>
+//   ) : (
+//     <div className="rightArrowDiv">
+//       <img
+//         className="rightArrow"
+//         src={arrowRight}
+//         alt="arrow image"
+//         onClick={() => {
+//           locationDetailDisplayHandler();
+//           getSelectedLocation(location);
+//         }}
+//       />
+//     </div>
+//   )
+// }
+// *****************************************************************************************************************
 // <li className="locationListItem">
 //   <div className="locationListItemDescription">
 //     <p
