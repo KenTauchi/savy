@@ -19,9 +19,9 @@ const LocationList = (props) => {
     return (
       <div className="location-section" style={displayStyle}>
         <ul className="locationsList">
-          {locations.map((location) => (
+          {locations.map((location, index) => (
             <LocationListItem
-              key={location.address + location.location}
+              key={location.address + location.location + index}
               location={location}
               windowWidth={windowWidth}
               locationDetailDisplayHandler={locationDetailDisplayHandler}

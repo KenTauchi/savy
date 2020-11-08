@@ -97,7 +97,7 @@ const WasteManagement = () => {
 	let stateLocations = getLocationsSearchedLocations(state);
 
 	useEffect(() => {
-		dispatch(searchLocationsByMaterial(43));
+		dispatch(searchLocationsByMaterial(49.188678, -122.951498, 20, "", 43, ""));
 	}, []);
 
 	useEffect(() => {

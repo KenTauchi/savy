@@ -26,7 +26,7 @@ const LocationListItem = (props) => {
             getSelectedLocation(location);
           }}
         >
-          {location.location}
+          {location.locationName}
         </p>
         <p className="listItemFacilityPhone">{location.phone}</p>
         <p className="listItemFacilityAddress1">{location.address}</p>
