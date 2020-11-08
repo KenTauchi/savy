@@ -1,21 +1,25 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
+import { getSearchedMaterialFact } from '../../../reducks/locations/selectors';
+
 
 // import './RecyclingFacts.style.scss';
 
 const RecyclingFacts = () => {
+  const state = useSelector(state => state);
+  const fact = getSearchedMaterialFact(state);
+
+  console.log(fact);
 
   const history = useHistory();
 
   return (
     <div className="fact-section">
       <div className="factHeadDiv">
-        <h2>Alkiline Batteries</h2>
+        <h2>{fact.materialName}</h2>
         <p>
-          This is a type of
-          <span>Batteries</span>
-          and it goes to
-          <span>****</span>.
+          {fact.description}
         </p>
       </div>
       <div className="factImageDiv">
@@ -26,17 +30,14 @@ const RecyclingFacts = () => {
         />
         <p className="factRecyclingNotes">Recycling Notes:</p>
         <p>
-          It needs to be disposed of in a special place. Consult the location
-          for more details.
+          {fact.deliveryNotes}
         </p>
       </div>
 
       <div className="factFootDiv">
         <h2>Recycling Facts</h2>
         <p>
-          It is a material commonly used for toys and small electronics and
-          presents danger to humans and the environment when poorly stored and
-          discarded.
+          {fact.recyclingFact}
         </p>
         <button 
           className="factExploreButton" 

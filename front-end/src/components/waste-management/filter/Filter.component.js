@@ -27,7 +27,6 @@ const Filter = (props) => {
     materialsOptionKeyDown,
     searchButtonClickHandler
   } = props;
-  const [locations, setLocations] = useState(LOCATION_DATA);
 
   const [materials, setMaterilas] = useState({
     idNameType: [],

@@ -24,7 +24,7 @@ const GoogleMap = (props) => {
   
   const Markers = locations.map((location, index) => (
     <Marker
-      key={location.address + location.location}
+      key={location.address + location.location + index}
       lat={location.latitude}
       lng={location.longitude}
       // any user props
