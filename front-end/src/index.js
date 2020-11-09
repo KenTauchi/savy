@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { Provider } from "react-redux";
 import createStore from "./reducks/store/store";
 
-import { ConnectedRouter } from "connected-react-router";
+// import { ConnectedRouter } from "connected-react-router";
 import * as History from "history";
 
 const history = History.createBrowserHistory();

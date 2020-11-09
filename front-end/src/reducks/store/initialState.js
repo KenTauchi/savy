@@ -20,6 +20,9 @@ export const initialState = {
   },
   locations: {
     searchedLocations: [],
+    searchedMaterialFact: {},
+    loading: false,
+    notFound: false
   },
   quizData: {
     data: [],

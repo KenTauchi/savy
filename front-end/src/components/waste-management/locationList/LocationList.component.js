@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import LocationListItem from '../locationListItem/LocationListItem.component';
 
-import './LocationList.style.scss';
+// import './LocationList.style.scss';
 
 const LocationList = (props) => {
 
@@ -19,9 +19,9 @@ const LocationList = (props) => {
     return (
       <div className="location-section" style={displayStyle}>
         <ul className="locationsList">
-          {locations.map((location) => (
+          {locations.map((location, index) => (
             <LocationListItem
-              key={location.address + location.location}
+              key={location.address + location.location + index}
               location={location}
               windowWidth={windowWidth}
               locationDetailDisplayHandler={locationDetailDisplayHandler}

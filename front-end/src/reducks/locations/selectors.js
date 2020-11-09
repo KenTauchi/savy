@@ -11,3 +11,18 @@ export const getLocationsSearchedLocations = createSelector(
     [locationsSelector],
     (state) => state.searchedLocations
 );
+
+export const getSearchedMaterialFact = createSelector(
+  [locationsSelector],
+  (state) => state.searchedMaterialFact
+);
+
+export const getLoadingCondition = createSelector(
+  [locationsSelector],
+  (state) => state.loading
+);
+
+export const getNotFoundCondition = createSelector(
+  [locationsSelector],
+  (state) => state.notFound
+);

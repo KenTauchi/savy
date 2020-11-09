@@ -1,61 +1,117 @@
-import React from 'react';
+import React, { useState } from "react";
+import axios from "axios";
+import FloatingLabelInput from "react-floating-label-input";
 
-class Contact extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: '',
-            email: '',
-            message: ''
-        };
 
+/* Install these two libraries for Floating Input 
+    npm i react-floating-label-input
+    npm i styled-components
+*/
+
+
+const Contact = () => {
+
+    // Server State Handling
+    const [serverState, setServerState] = useState({
+        submitting: false,
+        status: null,
+    });
+
+
+    const handleServerResponse = (ok, msg, form) => {
+        setServerState({
+            submitting: false,
+            status: { ok, msg }
+        });
+
+        if (ok) {
+            form.reset();
+
+        }
     }
 
-    contactSubmit(event) {
-        const nameValue = event.target.name.value;
-        const emailValue = event.target.email.value;
-        const messageValue = event.target.message.value;
-
-        alert("Message Sent Successfully" + nameValue);
-
-        // Prevent for going on another page by default
+    const handleOnSubmit = event => {
         event.preventDefault();
+        const form = event.target;
+        setServerState({ submitting: true });
+
+        axios({
+            method: "POST",
+            url: "https://formspree.io/f/xyybjnnl",
+            data: new FormData(form)
+
+        })
+
+            .then(r => {
+                handleServerResponse(true, "Thanks You!  We will reply by email as soon as possible.", form);
+            })
+
+            .catch(r => {
+                handleServerResponse(false, r.response.data.error, form);
+            });
+
     }
 
-    render() {
-        return (
-            <div>
+    // Form hidden 
+    // className={serverState.submitting ? {display: 'none'} : ""} 
+    return (
+        <div>
+            <div className="contact-main">
                 <h2>If there is any question or feedback, feel free to reach out to us.</h2>
 
                 <div className="contact-section">
                     <div className="contact-img">
-                        <img src="./images/contact.jpeg"></img>
+                        <img src="./images/contact.svg" />
                     </div>
 
                     <div className="contact-content">
-
                         <h3>Contact Us</h3>
 
-                        <form id="contact-form" method="POST" onSubmit={this.contactSubmit}>
+                        
+                        <form onSubmit={handleOnSubmit}>
+                            
+                            <FloatingLabelInput
+                                className="floating-input"
+                                type="text"
+                                name="name"
+                                label="Name"
+                            />
 
-                            <label htmlFor="name">Name</label>
-                            <input type="text" name="name" />
+                            <FloatingLabelInput
+                                className="floating-input"
+                                type="email"
+                                name="email"
+                                label="Email"
+                                required
+                            />
 
-                            <label htmlFor="email">Email</label>
-                            <input type="email" name="email" />
+                            <FloatingLabelInput
+                                className="floating-input"
+                                type="text"
+                                name="message"
+                                label="Message"
+                                required
+                            />
+                            <button id="contact-button" type="submit" disabled={serverState.submitting} >
+                                Submit
+                            </button>
 
-                            <label htmlFor="message">Message</label>
-                            <textarea name="message" rows="3"></textarea>
-
-                            <input type="submit" value="Submit" />
+                       
                         </form>
+                            
+                        {serverState.status && (
+                                <p id="submit-message" className={!serverState.status.ok ? "errorMsg" : ""}>
+                                    {serverState.status.msg}
+                                </p>
+                        )}
 
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
+
 
 export default Contact;

@@ -1,6 +1,6 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { initialState } from "../../reducks/store/initialState";
+// import { initialState } from "../../reducks/store/initialState";
 import { quizImportAction, incAction } from "../../reducks/quiz/action";
 import { getQuizData } from "../../reducks/quiz/selectors";
 import Answer from "./answer";
