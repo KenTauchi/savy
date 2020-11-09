@@ -396,11 +396,11 @@ app.get("/api/v1/search", (req, res) => {
     // Material and Family Parameters
     if ((req.query.materialId != undefined) && (req.query.materialId != "")) {
       sWhere = sWhere + ` AND m.materialId = ${req.query.materialId} `;
-      sOrigin = ` "material" AS origin, m.name AS material, m.description, m.imageUrl AS materialImageUrl, m.deliveryNotes, `;
+      sOrigin = ` "material" AS origin, m.name AS material, m.description, m.imageUrl AS materialImageUrl, m.imageName AS materialImageName, m.deliveryNotes, `;
     } else {
       if ((req.query.familyId != undefined) && (req.query.familyId != "")) {
         sWhere = sWhere + ` AND f.familyId = ${req.query.familyId} `;
-        sOrigin = ` "family" AS origin, f.name AS material, f.description, f.imageUrl AS materialImageUrl, f.deliveryNotes, `;
+        sOrigin = ` "family" AS origin, f.name AS material, f.description, f.imageUrl AS materialImageUrl, f.imageName AS materialImageName, f.deliveryNotes, `;
       }
     }
     
@@ -464,6 +464,7 @@ app.get("/api/v1/search", (req, res) => {
           'familyName': results[0].familyName,
           'description': results[0].description,
           'imageUrl': results[0].materialImageUrl,
+          'imageName': results[0].materialImageName,          
           'deliveryNotes': results[0].deliveryNotes,
           'recyclingFact': results[0].recyclingFact
         };
