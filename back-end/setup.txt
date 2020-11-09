@@ -2,11 +2,31 @@
 // ******** Required NPMs to Install *********************
 // *******************************************************
 //
+//    BACK-END:
 //      1)  npm init -y
 //      2)  npm i express
 //      3)  npm i mysql
 //      4)  npm i express-validator
 //      5)  npm i nodemon --save-dev  
+//      6)  npm i node-fetch
+//
+//      API https://www.zipcodeapi.com/API#radiusSql
+//      API https://www.zipcodeapi.com/API#zipToLoc
+//      API http://www.zip-codes.com/content/api/samples/QuickGetZipCodeDetails.html  
+//      REGISTER https://www.zip-codes.com/zip-code-api-register.asp   ( vlana / MaR!AS8qaNGzj6T )
+//      
+//      SQL distance calculation function     
+//      https://tighten.co/blog/a-mysql-distance-function-you-should-know-about/
+//      https://dev.mysql.com/doc/refman/5.7/en/spatial-convenience-functions.html
+//
+//   FRONT-END
+//      npm init 
+//      npm install
+//      npm i @fortawesome/free-solid-svg-icons
+//      npm i @fortawesome/react-fontawesome
+//      npm i @fortawesome/fontawesome-svg-core
+//
+//      npm start
 //
 // *******************************************************
 // ******** Running Server *******************************
@@ -19,8 +39,6 @@
 //      2) API Test on Postman
 //           On postman - File - Import..
 //           import Savy.postman_collection.js
-//      3) On front-end:
+//      3) On front-end: 
 //           Setup a Global <apiUrl> variable to Localhost
 //           Map endpoints to <apiUrl>/API/V1/..    
-
-

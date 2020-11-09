@@ -396,14 +396,14 @@ app.get("/api/v1/search", (req, res) => {
     // Material and Family Parameters
     if ((req.query.materialId != undefined) && (req.query.materialId != "")) {
       sWhere = sWhere + ` AND m.materialId = ${req.query.materialId} `;
-      sOrigin = ` "material" AS origin, m.name AS material, `;
+      sOrigin = ` "material" AS origin, m.name AS material, m.description, m.imageUrl AS materialImageUrl, m.deliveryNotes, `;
     } else {
       if ((req.query.familyId != undefined) && (req.query.familyId != "")) {
         sWhere = sWhere + ` AND f.familyId = ${req.query.familyId} `;
-        sOrigin = ` "family" AS origin, f.name AS material, `;
+        sOrigin = ` "family" AS origin, f.name AS material, f.description, f.imageUrl AS materialImageUrl, f.deliveryNotes, `;
       }
     }
-
+    
     // Range Filter Parameters
     if ((req.query.filterRange != undefined) && (req.query.filterRange == 'true')) {
       if ((req.query.range != undefined) && (req.query.range > 0)) {
@@ -420,7 +420,7 @@ app.get("/api/v1/search", (req, res) => {
     // Set query statement
     let qry = `SELECT DISTINCT 
                           ${sOrigin} 
-                          f.name AS familyName, f.recyclingFact, l.locationId, l.distance, m.description, m.imageUrl AS materialImageUrl, m.deliveryNotes,                   
+                          f.name AS familyName, f.recyclingFact, l.locationId, l.distance,                   
                           l.name AS location, c.name AS city, c.provinceCode, l.postalCode, l.address, l.phone, l.latitude, l.longitude, 
                           l.openningHour, l.website, l.imageUrl, l.locationNotes, om.family_name as otherMaterial 
                      FROM family f  
