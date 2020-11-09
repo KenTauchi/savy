@@ -8,32 +8,126 @@ import Dropdown from '../dropdown/Dropdown.component';
 import serchButtonIcon from './search-65px.svg';
 
 import { materialsImport } from "../../../reducks/materials/operations.js";
-import { getMaterials, getMaterialsIdNameType, } from "../../../reducks/materials/selectors.js";
-import { LOCATION_DATA } from "../TEST_locations.data.js";
+import {
+  getMaterials,
+  getMaterialsIdNameType,
+  getSearchedMaterial,
+} from "../../../reducks/materials/selectors.js";
+import { materialsSearchFieldUpdate } from "../../../reducks/materials/actions";
+
+import { searchLocationsByMaterial } from "../../../reducks/locations/operations.js";
 
 // import './Filter.style.scss';
 
 const Filter = (props) => {
   const dispatch = useDispatch();
   const {
-    postalCodeChangeHandler,
-    postalCodeClickHandler,
-    postalCodeValue,
-    postalCodeInputClear,
-    materialsChangeHandler,
-    materialsClickHandler,
-    materialsValue,
-    materialsInputClear,
     materialsOptionKeyDown,
-    searchButtonClickHandler
+    currentLocation
   } = props;
+
+  const [materialsSearchField, setMaterialsSearchField] = useState("");
+  const [postalCodeSearchField, setPostalCodeSearchField] = useState("");
+  const [distanceSearchField, setDistanceSearchField] = useState(15);
+
+  const state = useSelector((state) => state);
+  let stateMaterials = getMaterialsIdNameType(state);
+  let stateSearchedMaterial = getSearchedMaterial(state);
+
+  // console.log(stateMaterials);
+
+  const materialsInputClear = () => {
+    setMaterialsSearchField("");
+    dispatch(materialsSearchFieldUpdate(""));
+  };
+
+  const postalCodeInputClear = () => {
+    setPostalCodeSearchField("");
+  };
+
+  const postalCodeChangeHandler = (event) => {
+    // if (windowWidth < 768 && wmComponentDisplay.detail) {
+    //   setWmComponentDisplay({
+    //     ...wmComponentDisplay,
+    //     list: true,
+    //     map: true,
+    //     detail: false,
+    //   });
+    // }
+
+    // materialsInputClear();
+
+    // console.log("event: ", event)
+    // console.log("handler: ", event.target.value);
+    setPostalCodeSearchField(event.target.value);
+  };
+
+  const materialsChangeHandler = (event, value) => {
+    setMaterialsSearchField(event.target.value);
+  };
+
+  const materialsClickHandler = (event) => {
+    setMaterialsSearchField(event.target.textContent);
+  };
+
+  const postalCodeClickHandler = (event) => {
+    setPostalCodeSearchField(event.target.textContent);
+  };
+
+  const distanceChangeHandler = (event) => {
+    setDistanceSearchField(event.target.value);
+  };
 
   const [materials, setMaterilas] = useState({
     idNameType: [],
   });
 
-  const state = useSelector((state) => state);
-  let stateMaterials = getMaterialsIdNameType(state);
+	const searchButtonClickHandler = () => {
+    // console.log(materialsSearchField);
+    // console.log(postalCodeSearchField);
+    // console.log(distanceSearchField);
+    // console.log(materials);
+
+    let lat = currentLocation.center.lat;
+    let lng = currentLocation.center.lat;
+    let range = distanceSearchField;
+    let zip = postalCodeSearchField;
+
+    let materialId, familiyId;
+
+    let selectedMaterial;
+    if (materialsSearchField !== "") {
+      selectedMaterial = materials.idNameType.find((material) => {
+        const searchresult = material.materialName
+          .toLowerCase()
+          .indexOf(materialsSearchField.toLowerCase());
+        if (searchresult > -1) {
+          return true;
+        }
+      });
+    }
+
+    // console.log(selectedMaterial);
+
+    if (selectedMaterial) {
+      selectedMaterial.type === "family"
+        ? (familiyId = selectedMaterial.id)
+        : (materialId = selectedMaterial.id);
+    }
+
+    // console.log(familiyId, materialId);
+
+    if (zip) {
+      dispatch(
+        searchLocationsByMaterial("", "", range, zip, materialId, familiyId)
+      );
+    } else {
+      dispatch(
+        searchLocationsByMaterial(lat, lng, range, "", materialId, familiyId)
+      );
+    }
+  };
+
 
   useEffect(() => {
     dispatch(materialsImport());
@@ -47,56 +141,66 @@ const Filter = (props) => {
     // console.log(stateMaterials)
   }, [stateMaterials]);
 
-    return (
-      <div className="filter-section">
-        <h2 className="WMpageH2">Welcome to savy recycling search!</h2>
-        <p className="searchInstructionText">
-          Search recycling solutions near you and get to know more about
-          materials
-        </p>
-        <div className="WMpageInputsDiv">
-          <div className="searchInput">
-            <AutocompleteInput
-              options={materials.idNameType.map(
-                (material) => material.materialName
-              )}
-              placeholder="Item / Material name"
-              change={materialsChangeHandler}
-              click={materialsClickHandler}
-              value={materialsValue}
-              clear={materialsInputClear}
-              keyDown={materialsOptionKeyDown}
-            />
-          </div>
+  // This code is necessary to update search field when user chooses filter option by enter key. **********************************************************************************************************
+  useEffect(() => {
+    // console.log(materials);
+    // console.log(stateSearchedMaterial);
+    setMaterialsSearchField(stateSearchedMaterial);
+  }, [stateSearchedMaterial]);
 
-          <div className="searchInput">
-            <AutocompleteInput
-              options={[]}
-              placeholder="zip code"
-              change={postalCodeChangeHandler}
-              click={postalCodeClickHandler}
-              value={postalCodeValue}
-              clear={postalCodeInputClear}
-            />
-          </div>
+  return (
+    <div className="filter-section">
+      <h2 className="WMpageH2">Welcome to savy recycling search!</h2>
+      <p className="searchInstructionText">
+        Search recycling solutions near you and get to know more about materials
+      </p>
+      <div className="WMpageInputsDiv">
+        <div className="searchInput">
+          <AutocompleteInput
+            options={materials.idNameType.map(
+              (material) => material.materialName
+            )}
+            placeholder="Item / Material name"
+            change={materialsChangeHandler}
+            click={materialsClickHandler}
+            value={materialsSearchField}
+            clear={materialsInputClear}
+            keyDown={materialsOptionKeyDown}
+          />
+        </div>
 
-          <div className="searchInput">
-            <Dropdown />
-          </div>
+        <div className="searchInput">
+          <AutocompleteInput
+            options={[]}
+            placeholder="zip code"
+            change={postalCodeChangeHandler}
+            click={postalCodeClickHandler}
+            value={postalCodeSearchField}
+            clear={postalCodeInputClear}
+          />
+        </div>
 
-          <div className="searchButtonMobile">
-            <DefaultButton text="Search" click={searchButtonClickHandler} />
-          </div>
+        <div className="searchInput">
+          <Dropdown
+            change={distanceChangeHandler}
+            value={distanceSearchField}
+          />
+        </div>
 
-          <div className="searchButtonLaptop">
-            <img 
-              onClick={searchButtonClickHandler}
-              src={serchButtonIcon} 
-              alt="search button" />
-          </div>
+        <div className="searchButtonMobile">
+          <DefaultButton text="Search" click={searchButtonClickHandler} />
+        </div>
+
+        <div className="searchButtonLaptop">
+          <img
+            onClick={searchButtonClickHandler}
+            src={serchButtonIcon}
+            alt="search button"
+          />
         </div>
       </div>
-    );
+    </div>
+  );
 }
 
 export default Filter;

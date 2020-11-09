@@ -10,17 +10,15 @@ const RecyclingFacts = () => {
   const state = useSelector(state => state);
   const fact = getSearchedMaterialFact(state);
 
-  console.log(fact);
+  // console.log(fact);
 
   const history = useHistory();
 
   return (
     <div className="fact-section">
       <div className="factHeadDiv">
-        <h2>{fact.materialName}</h2>
-        <p>
-          {fact.description}
-        </p>
+        <h2>{fact.materialName ? fact.materialName : fact.familyName}</h2>
+        <p>{fact.description}</p>
       </div>
       <div className="factImageDiv">
         <img
@@ -28,21 +26,16 @@ const RecyclingFacts = () => {
           src="https://images.unsplash.com/photo-1598048145816-4d54a3af68fe?ixlib=rb-1.2.1&auto=format&fit=crop&w=2251&q=80"
           alt="Waste Image"
         />
-        <p className="factRecyclingNotes">Recycling Notes:</p>
-        <p>
-          {fact.deliveryNotes}
-        </p>
       </div>
 
-      <div className="factFootDiv">
+      <div className="notesDiv">
+        <p className="factRecyclingNotes">Recycling Notes: </p>
+        <p className="factRecyclingNotesText">{fact.deliveryNotes}</p>
+      </div>
+
+      <div className="factMainDiv">
         <h2>Recycling Facts</h2>
-        <p>
-          {fact.recyclingFact}
-        </p>
-        <button 
-          className="factExploreButton" 
-          onClick={() => history.push("/explore")}
-        >Explore</button>
+        <p>{fact.recyclingFact}</p>
       </div>
     </div>
   );

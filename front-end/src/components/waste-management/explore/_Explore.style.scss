@@ -1,0 +1,26 @@
+.explore-section {
+    padding: 1.5rem;
+    line-height: 1.5;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+
+    button {
+        font-size: 18px;
+        padding: .75rem;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .explore-section {
+        font-size: 20px;
+        max-width: 716px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+
+    button {
+        padding: 8px 40px !important;
+        max-width: 220px;
+    }
+}

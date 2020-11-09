@@ -31,20 +31,20 @@ function ArrowIcon(props) {
     );
 }
 
-export const Dropdown = () => {
+export const Dropdown = (props) => {
     const classes = useStyles();
-    const [age, setAge] = React.useState(5);
+    // const [age, setAge] = React.useState(5);
 
-    const handleChange = (event) => {
-        setAge(event.target.value);
-    };
+    // const handleChange = (event) => {
+    //     setAge(event.target.value);
+    // };
 
     return (
         <div className="customDropdown">
             <FormControl className={classes.formControl}>
                 <Select
-                    value={age}
-                    onChange={handleChange}
+                    value={props.value}
+                    onChange={props.change}
                     className={classes.selectEmpty}
                     inputProps={{ 'aria-label': 'Without label' }}
                     IconComponent={ArrowIcon}

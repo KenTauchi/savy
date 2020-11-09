@@ -9,12 +9,26 @@ export const searchLocationsByMaterial = (
   familiyId
 ) => {
   return async (dispatch, getState) => {
-    let slatitude = latitude === "" ? "" : "latitude=" + latitude;
-    let slongitude = longitude === "" ? "" : "longitude=" + longitude;
-    let sfilterRange = filterRange === "" ? "" : "filterRange=" + filterRange;
-    let szipCode = zipCode === "" ? "" : "zipCode=" + zipCode;
-    let smaterialId = materialId === "" ? "" : "materialId=" + materialId;
-    let sfamiliyId = familiyId === "" ? "" : "familiyId=" + familiyId;
+    let slatitude =
+      latitude === "" || latitude === undefined ? "" : "latitude=" + latitude;
+    let slongitude =
+      longitude === "" || longitude === undefined
+        ? ""
+        : "longitude=" + longitude;
+    let sfilterRange =
+      filterRange === "" || filterRange === undefined
+        ? ""
+        : "filterRange=" + filterRange;
+    let szipCode =
+      zipCode === "" || zipCode === undefined ? "" : "zipCode=" + zipCode;
+    let smaterialId =
+      materialId === "" || materialId === undefined
+        ? ""
+        : "materialId=" + materialId;
+    let sfamiliyId =
+      familiyId === "" || familiyId === undefined
+        ? ""
+        : "familiyId=" + familiyId;
 
     let queries = [
       slatitude,
@@ -35,7 +49,7 @@ export const searchLocationsByMaterial = (
       }
     });
 
-    console.log(apiUrl);
+    // console.log(apiUrl);
 
     const searchResult = await fetch(apiUrl)
       .then((response) => response.json())
@@ -61,8 +75,8 @@ export const searchLocationsByMaterial = (
     })
 
     console.log("search results: ", searchResult);
-    console.log("search results L: ", locations);
-    console.log("search results M: ", material);
+    // console.log("search results L: ", locations);
+    // console.log("search results M: ", material);
     dispatch(locationsImportAction(locations));
     dispatch(searchedMaterialFactImportAction(material));
   };

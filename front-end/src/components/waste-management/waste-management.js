@@ -13,6 +13,7 @@ import LocationList from './locationList/LocationList.component';
 import LocationDetail from './location-detail/LocationDetail.component.js';
 import GoogleMap from './google-map/GoogleMap.component';
 import RecyclingFacts from './recycling-fact/RecyclingFacts.component.js';
+import Explore from './explore/Explore.conponent';
 import ExploreQuiz from './explore-quiz/ExploreQuiz.component.js';
 import NotFound from './not-found/NotFound.component.js';
 
@@ -97,7 +98,7 @@ const WasteManagement = () => {
 	let stateLocations = getLocationsSearchedLocations(state);
 
 	useEffect(() => {
-		dispatch(searchLocationsByMaterial(49.188678, -122.951498, 20, "", 43, ""));
+		dispatch(searchLocationsByMaterial(49.188678, -122.951498, 20, "", "", ""));
 	}, []);
 
 	useEffect(() => {
@@ -114,10 +115,9 @@ const WasteManagement = () => {
 		notFoundhandler(filteredLocations);;
 	}, [filteredLocations]);
 
-	// useEffect(()=>{
-	//   console.log(locations);
-	// console.log(state);
-	// }, [locations]);
+	useEffect(()=>{
+	  console.log(locations);
+	}, [locations]);
 
 
 	// States for filter *********************************************************************************************************************************************************************************************
@@ -240,85 +240,6 @@ const WasteManagement = () => {
 		}
 	}
 
-	const postalCodeInputClear = () => {
-		setPostalCodeSearchField("");
-		// dispatch(materialsSearchFieldUpdate(""));
-	};
-
-	const materialsInputClear = () => {
-		setMaterialsSearchField("");
-		dispatch(materialsSearchFieldUpdate(""));
-	};
-
-	const postalCodeChangeHandler = (event) => {
-		if (windowWidth < 768 && wmComponentDisplay.detail) {
-			setWmComponentDisplay({
-				...wmComponentDisplay,
-				list: true,
-				map: true,
-				detail: false,
-			});
-		}
-
-		materialsInputClear();
-
-		// console.log("event: ", event)
-		// console.log("handler: ", event.target.value);
-		setPostalCodeSearchField(event.target.value);
-	}
-
-	const postalCodeClickHandler = (event) => {
-		if (windowWidth < 768 && wmComponentDisplay.detail) {
-			setWmComponentDisplay({
-				...wmComponentDisplay,
-				list: true,
-				map: true,
-				detail: false,
-			});
-		}
-
-		// materialsInputClear();
-
-		// console.log("event: ", event.target.textContent)
-		// console.log("handler: ", event.target.value);
-		setPostalCodeSearchField(event.target.textContent);
-	}
-
-	const materialsChangeHandler = (event, value) => {
-		if (windowWidth < 768 && wmComponentDisplay.detail) {
-			setWmComponentDisplay({
-				...wmComponentDisplay,
-				list: true,
-				map: true,
-				detail: false,
-			});
-		}
-
-		// postalCodeInputClear();
-
-		// console.log("event: ", event)
-		// console.log("value: ", value)
-		// console.log("handler: ", event.target.value);
-		setMaterialsSearchField(event.target.value);
-	}
-
-	const materialsClickHandler = (event) => {
-		if (windowWidth < 768 && wmComponentDisplay.detail) {
-			setWmComponentDisplay({
-				...wmComponentDisplay,
-				list: true,
-				map: true,
-				detail: false,
-			});
-		}
-
-		// postalCodeInputClear();
-
-		// console.log("event: ", event.target.textContent)
-		// console.log("handler: ", event.target.value);
-		setMaterialsSearchField(event.target.textContent);
-	}
-
 	const notFoundhandler = (searchResult) => {
 
 		// console.log(searchResult);
@@ -363,40 +284,6 @@ const WasteManagement = () => {
 	// 		}
 	// 	}
 	// }
-
-	const searchButtonClickHandler = () => {
-		// console.log(materialsSearchField);
-		// console.log(materials);
-
-		let selectedMaterial;
-
-		if (materialsSearchField === "") {
-			dispatch(searchLocationsByMaterial(43));
-			return;
-		} else {
-			selectedMaterial = materials.idNameType.find(material => {
-				const searchresult = material.materialName.toLowerCase().indexOf(materialsSearchField.toLowerCase())
-				if (searchresult > -1) {
-					return true;
-				}
-			});
-		}
-
-		// console.log("test: ", selectedMaterial)
-
-		// dispatch(searchLocationsByMaterial(selectedMaterial.id));
-
-		if (selectedMaterial !== undefined) {
-			dispatch(searchLocationsByMaterial(selectedMaterial.id));
-		} else {
-			dispatch(searchLocationsByMaterial(0));
-		}
-
-		// if (materialsSearchField !== "") {
-		// 	notFoundhandler(selectedMaterial);
-		// }
-
-	}
 
 	// Lifecycle *********************************************************************************************************************************************************************************************
 
@@ -641,74 +528,67 @@ const WasteManagement = () => {
 	// Render components *********************************************************************************************************************************************************************************************
 
 	return (
+    <div className="waste-management-content">
+      <Filter currentLocation={defaultProps} />
 
-		<div className="waste-management-content">
-			<Filter
-				postalCodeChangeHandler={postalCodeChangeHandler}
-				postalCodeClickHandler={postalCodeClickHandler}
-				postalCodeValue={postalCodeSearchField}
-				postalCodeInputClear={postalCodeInputClear}
-				materialsChangeHandler={materialsChangeHandler}
-				materialsClickHandler={materialsClickHandler}
-				materialsValue={materialsSearchField}
-				materialsInputClear={materialsInputClear}
-				searchButtonClickHandler={searchButtonClickHandler}
-			/>
+      <div className="wm-main-contents" style={notFoundDisplay.contents}>
+        <div className="mapAndMaterialTab">
+          <button
+            className="mapButton"
+            onClick={mapDisplayHandler}
+            style={mapAndMaterialDisplay.map ? { color: "black" } : null}
+          >
+            Map View
+          </button>
+          <button
+            className="materialButton"
+            onClick={materialDisplayHandler}
+            style={mapAndMaterialDisplay.material ? { color: "black" } : null}
+          >
+            Material Info
+          </button>
+        </div>
 
-			<div className="wm-main-contents" style={notFoundDisplay.contents}>
-				<div className="mapAndMaterialTab">
-					<button
-						className="mapButton"
-						onClick={mapDisplayHandler}
-						style={mapAndMaterialDisplay.map ? { color: "black" } : null}
-					>
-						Map View
-            </button>
-					<button
-						className="materialButton"
-						onClick={materialDisplayHandler}
-						style={mapAndMaterialDisplay.material ? { color: "black" } : null}
-					>
-						Material Info
-            </button>
-				</div>
+        {wmComponentDisplay.map ? (
+          <GoogleMap
+            defaultProps={defaultProps}
+            locations={filteredLocations}
+            mapMarkerLocationDetailDisplayHandler={
+              mapMarkerLocationDetailDisplayHandler
+            }
+            getSelectedLocation={getSelectedLocation}
+          />
+        ) : null}
 
-				{wmComponentDisplay.map ? (
-					<GoogleMap
-						defaultProps={defaultProps}
-						locations={filteredLocations}
-						mapMarkerLocationDetailDisplayHandler={
-							mapMarkerLocationDetailDisplayHandler
-						}
-						getSelectedLocation={getSelectedLocation}
-					/>
-				) : null}
+        {wmComponentDisplay.list ? (
+          <LocationList
+            locations={filteredLocations}
+            windowWidth={windowWidth}
+            locationDetailDisplayHandler={locationDetailDisplayHandler}
+            getSelectedLocation={getSelectedLocation}
+          />
+        ) : null}
 
-				{wmComponentDisplay.list ? (
-					<LocationList
-						locations={filteredLocations}
-						windowWidth={windowWidth}
-						locationDetailDisplayHandler={locationDetailDisplayHandler}
-						getSelectedLocation={getSelectedLocation}
-					/>
-				) : null}
+        {wmComponentDisplay.detail ? (
+          <LocationDetail
+            location={selectedLocation}
+            locationDetailDisplayHandler={locationDetailDisplayHandler}
+          />
+        ) : null}
 
-				{wmComponentDisplay.detail ? (
-					<LocationDetail
-						location={selectedLocation}
-						locationDetailDisplayHandler={locationDetailDisplayHandler}
-					/>
-				) : null}
+        {wmComponentDisplay.material ? (
+          <React.Fragment>
+            <RecyclingFacts />
+            <Explore />
+          </React.Fragment>
+        ) : null}
 
-				{wmComponentDisplay.material ? <RecyclingFacts /> : null}
+        {wmComponentDisplay.startQuiz ? <ExploreQuiz /> : null}
+      </div>
 
-				{wmComponentDisplay.startQuiz ? <ExploreQuiz /> : null}
-			</div>
-
-			<NotFound style={notFoundDisplay.notFound} />
-		</div>
-
-	);
+      <NotFound style={notFoundDisplay.notFound} />
+    </div>
+  );
 }
 
 export default WasteManagement;

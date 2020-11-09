@@ -28,7 +28,7 @@ const GoogleMap = (props) => {
       lat={location.latitude}
       lng={location.longitude}
       // any user props
-      text={location.location}
+      text={location.locationName}
       location={location}
       mapMarkerLocationDetailDisplayHandler={mapMarkerLocationDetailDisplayHandler}
       getSelectedLocation={getSelectedLocation}
