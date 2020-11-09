@@ -31,7 +31,7 @@ export const searchLocationsByMaterial = (
     let sfamiliyId =
       familiyId === "" || familiyId === undefined
         ? ""
-        : "familiyId=" + familiyId;
+        : "familyId=" + familiyId;
 
     let queries = [
       slatitude,
