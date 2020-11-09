@@ -42,27 +42,29 @@ const Testimonial = () => {
 					alt="sample"
 				/>
 			</div>
-			<h2 className="char">"</h2>
-			<div>
-				{/* <h2>Our Testimonial</h2> */}
-
-				<Swiper
-					id="main"
-					tag="ul"
-					pagination
-					pagination={{ clickable: true }}
-					slidesPerView={1}
-				>
-					{testimonials.data.map((testimonial, index) => {
-						return (
-							<SwiperSlide tag="li" key={index}>
-								<p className="testimonial-description">{testimonial.description}</p>
-								<p className="testimonial-by">{testimonial.postedBy}</p>
-								<p className="testimonial-date">{formatDate(testimonial.postedOn)}</p>
-							</SwiperSlide>
-						);
-					})}
-				</Swiper>
+			<div className="teastimonial-text">
+				<h2 className="char">“</h2>
+				<div>
+					{/* <h2>Our Testimonial</h2> */}
+	
+					<Swiper
+						id="main"
+						tag="ul"
+						pagination
+						pagination={{ clickable: true }}
+						slidesPerView={1}
+					>
+						{testimonials.data.map((testimonial, index) => {
+							return (
+								<SwiperSlide tag="li" key={index}>
+									<p className="testimonial-description">{testimonial.description}</p>
+									<p className="testimonial-by">{testimonial.postedBy}</p>
+									<p className="testimonial-date">{formatDate(testimonial.postedOn)}</p>
+								</SwiperSlide>
+							);
+						})}
+					</Swiper>
+				</div>
 			</div>
 		</div>
 	);

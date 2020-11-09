@@ -45,6 +45,7 @@ const SvgMap = () => {
 		<div className="canada-map-container">
 			<div className="canada-map">
 
+				<span className="info-label"><label>Click on provinces to see details</label></span>
 
 				<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
 					viewBox="0 0 1032.51 831.57" >
@@ -477,12 +478,12 @@ const SvgMap = () => {
           />
         </svg>
 
-        <a
+        {/* <a
           href="https://www.vecteezy.com/free-vector/canada-map"
           style={{ fontSize: "11px" }}
         >
           Canada Map Vectors by Vecteezy
-        </a>
+        </a> */}
 
         {charDis ? (
           <div className="chart fade_in" onClick={clickFunc}>

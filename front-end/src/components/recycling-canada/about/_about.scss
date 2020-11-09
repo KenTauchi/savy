@@ -1,5 +1,6 @@
 .about-section {
-    background-color: #f5f8fb;
+    background-color: $savy-gray-25;
+    padding: 0 1.5rem;
 
     .about-section-info {
         max-width: 700px;
@@ -8,12 +9,13 @@
 
         h2 {
             font-size: $h2-fz;
-            color: $primary-color;
+            color: $savy-green-100;
         }
 
         p {
             line-height: 1.7;
-            letter-spacing: 0.05rem;
+            letter-spacing: 1px;
+            color: $savy-black;
 
             &:first-of-type {
                 padding-bottom: 1.5rem;

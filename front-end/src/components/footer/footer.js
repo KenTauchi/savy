@@ -3,7 +3,7 @@ import React from "react";
 const Footer = () => {
   return (
     <footer className="footer">
-      &copy; Copyright 2020 Savy by BubbleGum Team. All rights reserved.
+      &copy; 2020 Savy by BubbleGum Team. All rights reserved.
     </footer>
   );
 };

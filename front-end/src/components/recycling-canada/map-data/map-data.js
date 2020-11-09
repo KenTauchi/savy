@@ -38,7 +38,7 @@ const MapData = () => {
 						<img className="map-data-img" src="./images/icons/province-rank.svg" alt="" />
 					</span>
 					<span className="map-data-value">{table.prov_Rank ? table.prov_Rank : "0"}</span>
-					<span>Province Rank</span>
+					<span className="map-data-text">Province Rank</span>
 				</li>
 			</ul>
 		</div>
