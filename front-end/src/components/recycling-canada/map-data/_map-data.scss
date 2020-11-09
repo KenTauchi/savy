@@ -1,28 +1,32 @@
 .map-data-section {
-    text-align: center;
-    margin: 2rem 0;
-    
-    ul {
-        display: flex;
-        justify-content: space-evenly;
-        list-style-type: none;
-        margin: 0 auto;
-        padding: 0;
-        max-width: 900px;
-        li {
-            span {
-                display: block;
-            }
+  text-align: center;
+  margin: 2rem 0;
 
-            .map-data-img {
-                width: 70px;
-            }
+  ul {
+    display: flex;
+    justify-content: space-evenly;
+    list-style-type: none;
+    margin: 0 auto;
+    padding: 0;
+    max-width: 1000px;
 
-            .map-data-value {
-                font-size: 2rem;
-                margin-top: 1rem;
-                margin-bottom: 0.5rem;
-            }
-        }
+    li {
+      flex: 1;
+      width: calc(100% / 6);
+
+      span {
+        display: block;
+      }
+
+      .map-data-img {
+        width: 70px;
+      }
+
+      .map-data-value {
+        font-size: 2rem;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+      }
     }
+  }
 }
