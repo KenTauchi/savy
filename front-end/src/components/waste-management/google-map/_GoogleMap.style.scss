@@ -11,17 +11,19 @@
         -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 
-        .gm-bundled-control-on-bottom div {
-            position: absolute;
-        //    right: 2rem;
-            transform: translateX(-1.5rem);
-            width: 5rem !important;
+        // google map zoom button configuration
+        // *************************************
+        // .gm-bundled-control-on-bottom div {
+        //     position: absolute;
+        //     transform: translateX(-1.5rem);
+        //     width: 5rem !important;
 
-        }
-        .gm-bundled-control-on-bottom div:nth-child(2) div div  {
-            position: absolute;
-            transform: translateX(.25rem);
-            width: 4rem !important;
-        }
+        // }
+        // .gm-bundled-control-on-bottom div:nth-child(2) div div  {
+        //     position: absolute;
+        //     transform: translateX(.25rem);
+        //     width: 4rem !important;
+        // }
+        // *************************************
     }
 }
