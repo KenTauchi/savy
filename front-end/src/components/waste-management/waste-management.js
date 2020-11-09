@@ -10,6 +10,7 @@ import {
   getLoadingCondition,
   getNotFoundCondition
 } from "../../reducks/locations/selectors.js";
+import { notFoundHandlerAction } from "../../reducks/locations/actions";
 
 import Filter from './filter/Filter.component';
 import LocationList from './locationList/LocationList.component';
@@ -171,10 +172,14 @@ const WasteManagement = () => {
         -122.951498,
         20,
         "",
+        49, // cat
+        // 26, //dog
         "",
-        1,
       )
     );
+    return () => {
+      dispatch(notFoundHandlerAction(false));
+    }
   }, []);
 
   useEffect(() => {
@@ -623,14 +628,16 @@ const WasteManagement = () => {
             <button
               className="mapButton"
               onClick={mapDisplayHandler}
-              style={mapAndMaterialDisplay.map ? { color: "black" } : null}
+              style={mapAndMaterialDisplay.map ? { color: "#1E1E1E" } : null}
             >
               Map View
             </button>
             <button
               className="materialButton"
               onClick={materialDisplayHandler}
-              style={mapAndMaterialDisplay.material ? { color: "black" } : null}
+              style={
+                mapAndMaterialDisplay.material ? { color: "#1E1E1E" } : null
+              }
             >
               Material Info
             </button>
