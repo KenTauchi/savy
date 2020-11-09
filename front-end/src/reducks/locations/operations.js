@@ -74,7 +74,7 @@ export const searchLocationsByMaterial = (
         return location.locationInfo;
     })
 
-    console.log("search results: ", searchResult);
+    // console.log("search results: ", searchResult);
     // console.log("search results L: ", locations);
     // console.log("search results M: ", material);
     dispatch(locationsImportAction(locations));

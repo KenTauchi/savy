@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import arrow from './directions-60px.svg';
-import arrowRight from './arrow-right.png';
 
 // import "./LocationListItem.style.scss";
 
 const LocationListItem = (props) => {
   const {
     location,
-    windowWidth,
     locationDetailDisplayHandler,
     getSelectedLocation,
   } = props;

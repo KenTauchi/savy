@@ -2,11 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { materialsImport } from '../../reducks/materials/operations.js';
-import { getMaterials, getMaterialsIdNameType, getSearchedMaterial } from '../../reducks/materials/selectors.js';
-import { materialsSearchFieldUpdate } from '../../reducks/materials/actions';
+import { getMaterialsIdNameType } from '../../reducks/materials/selectors.js';
 
 import { searchLocationsByMaterial } from '../../reducks/locations/operations.js';
-import { getLocations, getLocationsSearchedLocations } from '../../reducks/locations/selectors.js';
+import { getLocationsSearchedLocations } from '../../reducks/locations/selectors.js';
 
 import Filter from './filter/Filter.component';
 import LocationList from './locationList/LocationList.component';
@@ -16,322 +15,325 @@ import RecyclingFacts from './recycling-fact/RecyclingFacts.component.js';
 import Explore from './explore/Explore.conponent';
 import ExploreQuiz from './explore-quiz/ExploreQuiz.component.js';
 import NotFound from './not-found/NotFound.component.js';
+import Loader from './loader/Loader.component';
 
-import { LOCATION_DATA } from './TEST_locations.data.js';
+// import { LOCATION_DATA } from './TEST_locations.data.js';
 
 // import "./waste-management.style.scss";
 
 const WasteManagement = () => {
+  const dispatch = useDispatch();
 
-	const dispatch = useDispatch();
+  // States for components display *********************************************************************************************************************************************************************************************
 
-	// Get materials *********************************************************************************************************************************************************************************************
+  const [mapAndMaterialDisplay, setMapAndMaterialDisplay] = useState({
+    map: true,
+    material: false,
+  });
+  const [wmComponentDisplay, setWmComponentDisplay] = useState({
+    tab: true,
+    list: true,
+    map: true,
+    detail: false,
+    material: false,
+    startQuiz: false,
+  });
+  const [windowWidth, setwindowWidth] = useState(window.innerWidth);
+  const [notFoundDisplay, setNotFoundDisplay] = useState({
+    contents: { display: "none" },
+    notFound: { display: "none" },
+    loader: { display: "block" },
+  });
 
-	const [materials, setMaterilas] = useState({
-		idNameType: [],
-		searchedMaterial: ""
-	});
-	const [filteredMaterials, setFilteredMaterials] = useState(materials.idNameType);
-	const [materialsSearchField, setMaterialsSearchField] = useState("");
+  // Get materials *********************************************************************************************************************************************************************************************
 
-	const state = useSelector((state) => state);
-	let stateMaterials = getMaterialsIdNameType(state);
-	let stateSearchedMaterial = getSearchedMaterial(state);
+  const [materials, setMaterilas] = useState({
+    idNameType: [],
+    searchedMaterial: "",
+  });
 
-	useEffect(() => {
-		dispatch(materialsImport());
-	}, []);
+  const state = useSelector((state) => state);
+  let stateMaterials = getMaterialsIdNameType(state);
 
-	useEffect(() => {
-		setMaterilas({
-			...materials,
-			idNameType: stateMaterials
-		});
-		// console.log(stateMaterials)
-	}, [stateMaterials]);
+  useEffect(() => {
+    dispatch(materialsImport());
+  }, []);
 
-	// This code is necessary to update search field when user chooses filter option by enter key. **********************************************************************************************************
-	useEffect(() => {
-		// console.log(materials);
-		// console.log(stateSearchedMaterial);
-		setMaterialsSearchField(stateSearchedMaterial);
+  useEffect(() => {
+    setMaterilas({
+      ...materials,
+      idNameType: stateMaterials,
+    });
+    // console.log(stateMaterials)
+  }, [stateMaterials]);
 
-	}, [stateSearchedMaterial]);
+  // **********************************************************************************************************
 
-	// **********************************************************************************************************
+  // useEffect(()=>{
+  //   console.log(materials);
+  //   console.log(state);
+  // }, [materials]);
 
-	// useEffect(()=>{
-	//   console.log(materials);
-	//   console.log(state);
-	// }, [materials]);
+  // State for locations *********************************************************************************************************************************************************************************************
 
-	// State for locations *********************************************************************************************************************************************************************************************
+  // const [locations, setLocations] = useState(LOCATION_DATA);
+  const [locations, setLocations] = useState([]);
+  const [filteredLocations, setFilteredLocations] = useState(locations);
+  const [defaultProps, setDefaultProps] = useState({
+    center: {
+      lat: 49.2246,
+      lng: -123.1087,
+    },
+    zoom: 11,
+  });
 
-	// const [locations, setLocations] = useState(LOCATION_DATA);
-	const [locations, setLocations] = useState([]);
-	const [filteredLocations, setFilteredLocations] = useState(locations);
-	const [defaultProps, setDefaultProps] = useState({
-		center: {
-			lat: 49.2246,
-			lng: -123.1087,
-		},
-		zoom: 11,
-	});
-	const [selectedLocation, setSelectedLocation] = useState({
-		locationId: "",
-		locationTypeId: "",
-		cityId: "",
-		name: "",
-		postalCode: "",
-		address: "",
-		phone: "",
-		latitude: 49.188678,
-		longitude: -122.951498,
-		openingHour: "",
-		website: "",
-		imageUrl: "",
-		locationNotes: "",
-	});
+  const [currentLocationProps, setCurrentLocationProps] = useState({
+    center: {
+      lat: 49.2246,
+      lng: -123.1087,
+    },
+    zoom: 11,
+  });
 
-	// const [filteredLocations, setFilteredLocations] = useState(locations.selectedLocations);
+  const [selectedLocation, setSelectedLocation] = useState({
+    locationId: "",
+    locationTypeId: "",
+    cityId: "",
+    name: "",
+    postalCode: "",
+    address: "",
+    phone: "",
+    latitude: 49.188678,
+    longitude: -122.951498,
+    openingHour: "",
+    website: "",
+    imageUrl: "",
+    locationNotes: "",
+  });
 
-	let stateLocations = getLocationsSearchedLocations(state);
+  // const [filteredLocations, setFilteredLocations] = useState(locations.selectedLocations);
 
-	useEffect(() => {
-		dispatch(searchLocationsByMaterial(49.188678, -122.951498, 20, "", "", ""));
-	}, []);
+  let stateLocations = getLocationsSearchedLocations(state);
 
-	useEffect(() => {
-		if (stateLocations) {
-			setFilteredLocations(stateLocations);
-		} else {
-			setFilteredLocations([]);
-		}
-		// console.log(stateLocations)
-		// notFoundhandler(stateLocations);;
-	}, [stateLocations]);
+  useEffect(() => {
+    dispatch(searchLocationsByMaterial(49.188678, -122.951498, 20, "", "", ""));
+  }, []);
 
-	useEffect(()=>{
-		notFoundhandler(filteredLocations);;
-	}, [filteredLocations]);
+  useEffect(() => {
+    if (stateLocations) {
+      setFilteredLocations(stateLocations);
+    } else {
+      setFilteredLocations([]);
+    }
+    // console.log(stateLocations)
+    // notFoundhandler(stateLocations);
+  }, [stateLocations]);
 
-	useEffect(()=>{
-	  console.log(locations);
-	}, [locations]);
+  useEffect(() => {
+    notFoundhandler(filteredLocations);
+  }, [filteredLocations]);
 
+  // useEffect(()=>{
+  //   console.log(locations);
+  // }, [locations]);
 
-	// States for filter *********************************************************************************************************************************************************************************************
+  // Functions *********************************************************************************************************************************************************************************************
 
-	const [postalCodeSearchField, setPostalCodeSearchField] = useState("");
+  const displaySizeListener = () => {
+    const newWindowWidth = window.innerWidth;
+    // console.log(newWindowWidth);
+    setwindowWidth(newWindowWidth);
+  };
 
-	// States for components display *********************************************************************************************************************************************************************************************
+  const mapDisplayHandler = () => {
+    setMapAndMaterialDisplay({
+      map: true,
+      material: false,
+    });
+    setWmComponentDisplay({
+      ...wmComponentDisplay,
+      list: true,
+      map: true,
+      detail: false,
+      material: false,
+      startQuiz: false,
+    });
+  };
 
-	const [mapAndMaterialDisplay, setMapAndMaterialDisplay] = useState({
-		map: true,
-		material: false,
-	});
-	const [wmComponentDisplay, setWmComponentDisplay] = useState({
-		tab: true,
-		list: true,
-		map: true,
-		detail: false,
-		material: false,
-		startQuiz: false
-	});
-	const [windowWidth, setwindowWidth] = useState(window.innerWidth);
-	const [notFoundDisplay, setNotFoundDisplay] = useState({
-		contents: { display: "block" },
-		notFound: { display: "none" }
-	});
+  const materialDisplayHandler = () => {
+    setMapAndMaterialDisplay({
+      map: false,
+      material: true,
+    });
+    setWmComponentDisplay({
+      ...wmComponentDisplay,
+      list: false,
+      map: false,
+      detail: false,
+      material: true,
+      startQuiz: true,
+    });
+  };
 
-	// Functions *********************************************************************************************************************************************************************************************
+  const locationDetailDisplayHandler = () => {
+    setWmComponentDisplay({
+      ...wmComponentDisplay,
+      detail: !wmComponentDisplay.detail,
+    });
+  };
 
-	const displaySizeListener = () => {
-		const newWindowWidth = window.innerWidth;
-		// console.log(newWindowWidth);
-		setwindowWidth(newWindowWidth);
-	};
+  const mapMarkerLocationDetailDisplayHandler = () => {
+    setWmComponentDisplay({
+      ...wmComponentDisplay,
+      detail: true,
+    });
+  };
 
-	const mapDisplayHandler = () => {
-		setMapAndMaterialDisplay({
-			map: true,
-			material: false,
-		});
-		setWmComponentDisplay({
-			...wmComponentDisplay,
-			list: true,
-			map: true,
-			detail: false,
-			material: false,
-			startQuiz: false
-		})
-	};
+  // useEffect(() => {
+  //   console.log(selectedLocation);
+  // }, [selectedLocation]);
 
-	const materialDisplayHandler = () => {
-		setMapAndMaterialDisplay({
-			map: false,
-			material: true,
-		});
-		setWmComponentDisplay({
-			...wmComponentDisplay,
-			list: false,
-			map: false,
-			detail: false,
-			material: true,
-			startQuiz: true
-		})
+  const getSelectedLocation = (location) => {
+    setSelectedLocation(location);
+    setCurrentLocationProps({
+      center: {
+        // lat: location.latitude,
+        // lng: location.longitude,
+        lat: parseFloat(location.latitude),
+        lng: parseFloat(location.longitude),
+      },
+      zoom: 13,
+    });
+  };
 
-	};
+  const setCurrentPosition = (position) => {
+    setCurrentLocationProps({
+      center: {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      },
+      zoom: 12,
+    });
+  };
 
-	const locationDetailDisplayHandler = () => {
-		setWmComponentDisplay({
-			...wmComponentDisplay,
-			detail: !wmComponentDisplay.detail
-		});
-	};
+  const getlocationByPostalCode = (postalCode) => {
+    fetch(
+      `http://geogratis.gc.ca/services/geolocation/en/locate?q=${postalCode}`
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        setCurrentLocationProps({
+          center: {
+            lat: result[0].geometry.coordinates[1],
+            lng: result[0].geometry.coordinates[0],
+          },
+          zoom: 12,
+        });
+        return result;
+      })
+      .catch((error) => console.log(error));
+  };
 
-	const mapMarkerLocationDetailDisplayHandler = () => {
-		setWmComponentDisplay({
-			...wmComponentDisplay,
-			detail: true
-		});
-	};
+  const getLocation = () => {
+    if (navigator.geolocation) {
+      // console.log("Get current location!!!");
+      navigator.geolocation.getCurrentPosition(setCurrentPosition);
+    } else {
+      // console.log("Geolocation is not supported by this browser.");
+      setCurrentLocationProps({
+        center: {
+          lat: 49.2246,
+          lng: -123.1087,
+        },
+        zoom: 11,
+      });
+    }
+  };
 
-	// useEffect(() => {
-	//   console.log(selectedLocation);
-	// }, [selectedLocation]);
+  const notFoundhandler = (searchResult) => {
+    // console.log(searchResult);
 
-	const getSelectedLocation = (location) => {
-		setSelectedLocation(location);
-		setDefaultProps({
-			center: {
-				// lat: location.latitude,
-				// lng: location.longitude,
-				lat: parseFloat(location.latitude),
-				lng: parseFloat(location.longitude),
-			},
-			zoom: 13,
-		});
-	};
+    if (searchResult.length === 0) {
+      setNotFoundDisplay({
+        contents: { display: "none" },
+        notFound: { display: "block" },
+        loader: { display: "none" }
+      });
+    } else {
+      if (windowWidth >= 768) {
+        setNotFoundDisplay({
+          contents: { display: "grid" },
+          notFound: { display: "none" },
+          loader: { display: "none" },
+        });
+      } else {
+        setNotFoundDisplay({
+          contents: { display: "block" },
+          notFound: { display: "none" },
+          loader: { display: "none" },
+        });
+      }
+    }
+  };
 
-	const setCurrentPosition = (position) => {
-		setDefaultProps({
-			center: {
-				lat: position.coords.latitude,
-				lng: position.coords.longitude,
-			},
-			zoom: 11,
-		});
-	}
+  const detailHide = () => {
+    if (windowWidth < 768 && wmComponentDisplay.detail) {
+      setWmComponentDisplay({
+        ...wmComponentDisplay,
+        list: true,
+        map: true,
+        detail: false,
+      });
+    }
+  };
 
-	const getLocation = () => {
-		if (navigator.geolocation) {
-			// console.log("Get current location!!!");
-			navigator.geolocation.getCurrentPosition(setCurrentPosition);
-		} else {
-			// console.log("Geolocation is not supported by this browser.");
-			setDefaultProps({
-				center: {
-					lat: 49.2246,
-					lng: -123.1087,
-				},
-				zoom: 11,
-			})
-		}
-	}
+  // Lifecycle *********************************************************************************************************************************************************************************************
 
-	const notFoundhandler = (searchResult) => {
+  // useEffect(() => {
+  // 	// console.log(materialsSearchField);
+  // 	// console.log(materials);
+  // 	const selectedMaterial = materials.idNameType.find(material => {
+  // 		const searchresult = material.materialName.toLowerCase().indexOf(materialsSearchField.toLowerCase())
+  // 		if (searchresult > -1) {
+  // 			return true;
+  // 		}
+  // 	});
 
-		// console.log(searchResult);
+  // 	// console.log("test: ", selectedMaterial)
 
-		if (searchResult.length === 0) {
-			setNotFoundDisplay({
-				contents: { display: "none" },
-				notFound: { display: "block" }
-			})
-		} else {
-			if (windowWidth >= 768) {
-				setNotFoundDisplay({
-					contents: { display: "grid" },
-					notFound: { display: "none" }
-				})
-			} else {
-				setNotFoundDisplay({
-					contents: { display: "block" },
-					notFound: { display: "none" }
-				})
-			}
-		}
-	}
-	// const notFoundhandler = (selectedItem) => {
+  // 	if (selectedMaterial !== undefined) {
+  // 		dispatch(searchLocationsByMaterial(selectedMaterial.id));
+  // 	}
 
-	// 	if (selectedItem === undefined) {
-	// 		setNotFoundDisplay({
-	// 			contents: { display: "none" },
-	// 			notFound: { display: "block" }
-	// 		})
-	// 	} else {
-	// 		if (windowWidth >= 768) {
-	// 			setNotFoundDisplay({
-	// 				contents: { display: "grid" },
-	// 				notFound: { display: "none" }
-	// 			})
-	// 		} else {
-	// 			setNotFoundDisplay({
-	// 				contents: { display: "block" },
-	// 				notFound: { display: "none" }
-	// 			})
-	// 		}
-	// 	}
-	// }
+  // 	if (materialsSearchField !== "") {
+  // 		notFoundhandler(selectedMaterial);
+  // 	}
+  // }, [materialsSearchField])
 
-	// Lifecycle *********************************************************************************************************************************************************************************************
+  // useEffect(() => {
 
-	// useEffect(() => {
-	// 	// console.log(materialsSearchField);
-	// 	// console.log(materials);
-	// 	const selectedMaterial = materials.idNameType.find(material => {
-	// 		const searchresult = material.materialName.toLowerCase().indexOf(materialsSearchField.toLowerCase())
-	// 		if (searchresult > -1) {
-	// 			return true;
-	// 		}
-	// 	});
+  // console.log("filter: ", postalCodeSearchField)
+  // const searchChars = postalCodeSearchField.split('');
+  // const filteredLocationsByPostalCode = locations.filter(location => {
+  //   if (searchChars.length === 0) {
+  //     return location.postalCode.toLowerCase().includes(postalCodeSearchField.toLocaleLowerCase())
+  //   } else {
 
-	// 	// console.log("test: ", selectedMaterial)
+  //     let founds = [];
+  //     searchChars.forEach(char => {
+  //       if (location.postalCode.toLowerCase().includes(char.toLocaleLowerCase())) {
+  //         founds.push(true);
+  //       } else {
+  //         founds.push(false);
+  //       }
+  //     });
+  //     let searchResult = !founds.includes(false)
+  //     return searchResult;
+  //   }
+  // });
+  // console.log("filtered locations: ", filteredLocationsByPostalCode)
 
-	// 	if (selectedMaterial !== undefined) {
-	// 		dispatch(searchLocationsByMaterial(selectedMaterial.id));
-	// 	}
-
-	// 	if (materialsSearchField !== "") {
-	// 		notFoundhandler(selectedMaterial);
-	// 	}
-	// }, [materialsSearchField])
-
-	useEffect(() => {
-
-		// console.log("filter: ", postalCodeSearchField)
-		// const searchChars = postalCodeSearchField.split('');
-		// const filteredLocationsByPostalCode = locations.filter(location => {
-		//   if (searchChars.length === 0) {
-		//     return location.postalCode.toLowerCase().includes(postalCodeSearchField.toLocaleLowerCase())
-		//   } else {
-
-		//     let founds = [];
-		//     searchChars.forEach(char => {
-		//       if (location.postalCode.toLowerCase().includes(char.toLocaleLowerCase())) {
-		//         founds.push(true);
-		//       } else {
-		//         founds.push(false);
-		//       }
-		//     });
-		//     let searchResult = !founds.includes(false)
-		//     return searchResult;
-		//   }
-		// });
-		// console.log("filtered locations: ", filteredLocationsByPostalCode)
-
-		/*
+  /*
 	
 		const filteredLocationsByPostalCode = locations.filter(location =>
 		  location.postalCode.toLowerCase().includes(postalCodeSearchField.toLocaleLowerCase())
@@ -360,177 +362,170 @@ const WasteManagement = () => {
 	
 		*/
 
-	}, [postalCodeSearchField])
+  // }, [postalCodeSearchField])
 
-	useEffect(() => {
+  useEffect(() => {
+    if (windowWidth >= 768 && wmComponentDisplay.detail) {
+      setWmComponentDisplay({
+        ...wmComponentDisplay,
+        list: false,
+        detail: true,
+      });
+    } else if (windowWidth < 768 && wmComponentDisplay.detail) {
+      if (mapAndMaterialDisplay.map) {
+        setWmComponentDisplay({
+          ...wmComponentDisplay,
+          list: false,
+          map: false,
+          detail: true,
+        });
+      } else if (mapAndMaterialDisplay.material) {
+        setWmComponentDisplay({
+          ...wmComponentDisplay,
+          list: false,
+          map: false,
+          detail: false,
+        });
+      }
+    } else if (windowWidth >= 768 && !wmComponentDisplay.detail) {
+      setWmComponentDisplay({
+        ...wmComponentDisplay,
+        list: true,
+      });
+    } else if (windowWidth < 768 && !wmComponentDisplay.detail) {
+      if (mapAndMaterialDisplay.map) {
+        setWmComponentDisplay({
+          ...wmComponentDisplay,
+          tab: true,
+          map: true,
+          list: true,
+        });
+      } else if (mapAndMaterialDisplay.material) {
+        setWmComponentDisplay({
+          ...wmComponentDisplay,
+          tab: true,
+          map: false,
+          list: false,
+        });
+      }
+    }
+  }, [wmComponentDisplay.detail]);
 
-		if (windowWidth >= 768 && wmComponentDisplay.detail) {
-			setWmComponentDisplay({
-				...wmComponentDisplay,
-				list: false,
-				detail: true,
-			});
-		} else if (windowWidth < 768 && wmComponentDisplay.detail) {
-			if (mapAndMaterialDisplay.map) {
-				setWmComponentDisplay({
-					...wmComponentDisplay,
-					list: false,
-					map: false,
-					detail: true,
-				});
-			} else if (mapAndMaterialDisplay.material) {
-				setWmComponentDisplay({
-					...wmComponentDisplay,
-					list: false,
-					map: false,
-					detail: false,
-				});
-			}
-		} else if (windowWidth >= 768 && !wmComponentDisplay.detail) {
-			setWmComponentDisplay({
-				...wmComponentDisplay,
-				list: true,
-			})
-		} else if (windowWidth < 768 && !wmComponentDisplay.detail) {
-			if (mapAndMaterialDisplay.map) {
-				setWmComponentDisplay({
-					...wmComponentDisplay,
-					tab: true,
-					map: true,
-					list: true,
-				});
-			} else if (mapAndMaterialDisplay.material) {
-				setWmComponentDisplay({
-					...wmComponentDisplay,
-					tab: true,
-					map: false,
-					list: false,
-				});
-			}
+  useEffect(() => {
+    if (windowWidth >= 768) {
+      setMapAndMaterialDisplay({
+        map: true,
+        material: true,
+      });
 
-		}
+      if (notFoundDisplay.notFound.display === "none") {
+        setNotFoundDisplay({
+          ...notFoundDisplay,
+          contents: { display: "grid" },
+        });
+      }
 
-	}, [wmComponentDisplay.detail]);
+      if (mapAndMaterialDisplay.map) {
+        if (wmComponentDisplay.detail) {
+          setWmComponentDisplay({
+            ...wmComponentDisplay,
+            tab: false,
+            map: true,
+            list: false,
+            material: true,
+            startQuiz: true,
+          });
+        } else if (!wmComponentDisplay.detail) {
+          setWmComponentDisplay({
+            ...wmComponentDisplay,
+            tab: false,
+            map: true,
+            list: true,
+            material: true,
+            startQuiz: true,
+          });
+        }
+      } else if (mapAndMaterialDisplay.material) {
+        if (wmComponentDisplay.detail) {
+          setWmComponentDisplay({
+            ...wmComponentDisplay,
+            tab: false,
+            map: true,
+            list: false,
+            detail: true,
+            material: true,
+            startQuiz: true,
+          });
+        } else if (!wmComponentDisplay.detail) {
+          setWmComponentDisplay({
+            ...wmComponentDisplay,
+            tab: false,
+            map: true,
+            list: true,
+            material: true,
+            startQuiz: true,
+          });
+        }
+      }
+    } else if (windowWidth <= 767) {
+      if (mapAndMaterialDisplay.map && mapAndMaterialDisplay.material) {
+        setMapAndMaterialDisplay({
+          map: true,
+          material: false,
+        });
+      }
 
-	useEffect(() => {
-		if (windowWidth >= 768) {
+      if (mapAndMaterialDisplay.map) {
+        if (wmComponentDisplay.detail) {
+          setWmComponentDisplay({
+            ...wmComponentDisplay,
+            tab: false,
+            map: false,
+            list: false,
+            material: false,
+            startQuiz: false,
+          });
+        } else if (!wmComponentDisplay.detail) {
+          setWmComponentDisplay({
+            ...wmComponentDisplay,
+            tab: true,
+            map: true,
+            list: true,
+            material: false,
+            startQuiz: false,
+          });
+        }
+      } else if (mapAndMaterialDisplay.material) {
+        setWmComponentDisplay({
+          ...wmComponentDisplay,
+          map: false,
+          list: false,
+          material: true,
+          startQuiz: true,
+        });
+      }
+    }
+  }, [windowWidth]);
 
-			setMapAndMaterialDisplay({
-				map: true,
-				material: true,
-			});
+  useEffect(() => {
+    window.addEventListener("resize", displaySizeListener);
 
-			if (notFoundDisplay.notFound.display === "none") {
-				setNotFoundDisplay({
-					...notFoundDisplay,
-					contents: { display: "grid" },
-				})
-			}
+    getLocation();
 
+    return () => {
+      window.removeEventListener("resize", displaySizeListener);
+    };
+  }, []);
 
-			if (mapAndMaterialDisplay.map) {
+  // Render components *********************************************************************************************************************************************************************************************
 
-				if (wmComponentDisplay.detail) {
-					setWmComponentDisplay({
-						...wmComponentDisplay,
-						tab: false,
-						map: true,
-						list: false,
-						material: true,
-						startQuiz: true
-					});
-				} else if (!wmComponentDisplay.detail) {
-					setWmComponentDisplay({
-						...wmComponentDisplay,
-						tab: false,
-						map: true,
-						list: true,
-						material: true,
-						startQuiz: true
-					});
-				}
-
-			} else if (mapAndMaterialDisplay.material) {
-
-				if (wmComponentDisplay.detail) {
-					setWmComponentDisplay({
-						...wmComponentDisplay,
-						tab: false,
-						map: true,
-						list: false,
-						detail: true,
-						material: true,
-						startQuiz: true
-					});
-				} else if (!wmComponentDisplay.detail) {
-					setWmComponentDisplay({
-						...wmComponentDisplay,
-						tab: false,
-						map: true,
-						list: true,
-						material: true,
-						startQuiz: true
-					});
-				}
-
-			}
-		} else if (windowWidth <= 767) {
-
-			if (mapAndMaterialDisplay.map && mapAndMaterialDisplay.material) {
-				setMapAndMaterialDisplay({
-					map: true,
-					material: false,
-				});
-			}
-
-			if (mapAndMaterialDisplay.map) {
-				if (wmComponentDisplay.detail) {
-					setWmComponentDisplay({
-						...wmComponentDisplay,
-						tab: false,
-						map: false,
-						list: false,
-						material: false,
-						startQuiz: false
-					});
-				} else if (!wmComponentDisplay.detail) {
-					setWmComponentDisplay({
-						...wmComponentDisplay,
-						tab: true,
-						map: true,
-						list: true,
-						material: false,
-						startQuiz: false
-					});
-				}
-			} else if (mapAndMaterialDisplay.material) {
-				setWmComponentDisplay({
-					...wmComponentDisplay,
-					map: false,
-					list: false,
-					material: true,
-					startQuiz: true
-				});
-			}
-		}
-	}, [windowWidth]);
-
-	useEffect(() => {
-		window.addEventListener("resize", displaySizeListener);
-
-		getLocation();
-
-		return () => {
-			window.removeEventListener("resize", displaySizeListener);
-		};
-	}, []);
-
-	// Render components *********************************************************************************************************************************************************************************************
-
-	return (
+  return (
     <div className="waste-management-content">
-      <Filter currentLocation={defaultProps} />
-
+      <Filter
+        detailHide={detailHide}
+        currentLocation={defaultProps}
+        getlocationByPostalCode={getlocationByPostalCode}
+      />
       <div className="wm-main-contents" style={notFoundDisplay.contents}>
         <div className="mapAndMaterialTab">
           <button
@@ -552,6 +547,7 @@ const WasteManagement = () => {
         {wmComponentDisplay.map ? (
           <GoogleMap
             defaultProps={defaultProps}
+            currentLocationProps={currentLocationProps}
             locations={filteredLocations}
             mapMarkerLocationDetailDisplayHandler={
               mapMarkerLocationDetailDisplayHandler
@@ -585,10 +581,11 @@ const WasteManagement = () => {
 
         {wmComponentDisplay.startQuiz ? <ExploreQuiz /> : null}
       </div>
-
-      <NotFound style={notFoundDisplay.notFound} />
+      <NotFound style={notFoundDisplay.notFound} />;
     </div>
   );
 }
 
 export default WasteManagement;
+
+    //   <Loader style={notFoundDisplay.loader} />;

@@ -12,10 +12,8 @@ const NotFound = (props) => {
     return (
         <div className="wm-notfound-content" style={style}>
             <div className="wmPageNotFound">
-                <div className="notFoundImageText">
-                    <img className="notFoundLogo" src={logo} alt="" />
-                    <p className="wmPageNotFoundHead">Not Found!</p>
-                </div>
+                <img className="notFoundLogo" src={logo} alt="" />
+                <p className="wmPageNotFoundHead">Not Found!</p>
                 <p className="wmPageNotFoundMessage">Sorry! It seems we can't find what you are looking for. Maybe if you search for similar name or zip code?<br />If the problem persists, please let us know.</p>
             </div>
             <ContactUs />

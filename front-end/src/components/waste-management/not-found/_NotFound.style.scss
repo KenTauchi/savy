@@ -3,12 +3,13 @@
     // display: grid !important;
     // grid-template-columns: 50px 1fr;
     padding: 0 2rem 0;
-}
-
-.notFoundImageText {
-    margin-top: 1rem;
     text-align: center;
 }
+
+// .notFoundImageText {
+//     margin-top: 1rem;
+//     text-align: center;
+// }
 
 .notFoundLogo {
     max-width: 65px;
@@ -37,6 +38,12 @@
         // height: 70vh;
     }
 
+    // .notFoundImageText {
+    //     display: flex;
+    //     align-items: center;
+    // }
+
+
     .wmPageNotFound {
         display: grid;
         justify-content: center;
@@ -46,7 +53,7 @@
     }
 
     .notFoundLogo {
-        max-width: 130px;
+        max-width: 90%;
         height: auto;
         grid-row: span 2;
         transform: translateY(0);
