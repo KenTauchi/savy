@@ -11,7 +11,7 @@ const ContactUs = () => {
   const history = useHistory();
 
   const moveToContact = () => {
-    history.push("/challenges")
+    history.push("/contact")
   }
 
   return (

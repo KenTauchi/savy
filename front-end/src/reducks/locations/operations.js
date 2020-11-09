@@ -1,4 +1,4 @@
-import { locationsImportAction, searchedMaterialFactImportAction, loadingConditionHandlerAction } from './actions.js';
+import { locationsImportAction, searchedMaterialFactImportAction, loadingConditionHandlerAction, notFoundHandlerAction } from './actions.js';
 
 export const searchLocationsByMaterial = (
   latitude,
@@ -58,9 +58,13 @@ export const searchLocationsByMaterial = (
       .then((response) => response.json())
       .then((result) => {
         // dispatch(locationsImportAction(result));
+        dispatch(notFoundHandlerAction(false));
         return result;
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        dispatch(notFoundHandlerAction(true));
+        console.log(error);
+      });
     
     // console.log(searchResult);
 
@@ -85,13 +89,13 @@ export const searchLocationsByMaterial = (
         return location.locationInfo;
     })
 
+    dispatch(loadingConditionHandlerAction(false)); 
     // console.log("search results: ", searchResult);
     // console.log("search results L: ", locations);
     // console.log("search results M: ", material);
     dispatch(locationsImportAction(locations));
     dispatch(searchedMaterialFactImportAction(material));
 
-    dispatch(loadingConditionHandlerAction(false)); 
     };
 };
 
