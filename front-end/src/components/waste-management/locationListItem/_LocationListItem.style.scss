@@ -1,6 +1,7 @@
 .locationListItem {
 
-    border: solid 1px #eeeeee;
+    border: solid 1px $savy-gray-25;
+    border-right: none;
     text-align: left;
     padding: 1rem;
     display: grid;
