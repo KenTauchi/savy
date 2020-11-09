@@ -2,9 +2,13 @@
     position: relative;
     text-align: left;
     padding: 1rem;
-    border: solid 1px #eee;
+    // border: solid 1px #eee;
     animation: slideInLeft .45s ease;
     line-height: 1.5;
+    -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+
 
     overflow-y: scroll;
 
