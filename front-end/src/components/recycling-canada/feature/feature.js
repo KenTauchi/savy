@@ -29,7 +29,7 @@ const Feature = () => {
                         <img className="feature-image" src="./images/icons/challenge.svg" />
                         <span className="feature-name">Challenges</span>
                         <span className="feature-info">
-                            With our quiz you can easily test your
+                            You can easily test your
                             knowledge and expertise in recycling and learn
                             new things with simple question and answer.
                         </span>
@@ -40,7 +40,7 @@ const Feature = () => {
                         <img className="feature-image" src="./images/icons/explore.svg" />
                         <span className="feature-name">Explore</span>
                         <span className="feature-info">
-                            Find frequent questions and answers
+                            Find frequently asked questions and answers
                             and any related articles that can help you
                             expand your knowledge.
                         </span>

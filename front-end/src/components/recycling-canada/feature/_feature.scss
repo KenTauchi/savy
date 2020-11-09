@@ -1,50 +1,76 @@
 .feature-section {
-    max-width: $max-width;
+    max-width: 1300px;
     margin: 5rem auto;
+    padding: 0 1.5rem;
 
     .feature-section-info {
         h2 {
+            font-size: $h2-fz;
             font-weight: normal;
-            line-height: 1.4;
-            
+            line-height: 41px;
+
             strong {
                 display: block;
             }
         }
 
         .feature-list {
-
+            margin-top: 4rem;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 4rem;
+            grid-template-columns: 1fr;
+            grid-gap: 3rem;
+
+            @include mq-medium {
+                grid-template-columns: repeat(3, 1fr);
+                grid-gap: 2rem;
+            }
 
             .feature {
+                text-align: center;
+
+                @include mq-medium {
+                    text-align: left;
+                }
+
                 span {
                     display: block;
                     letter-spacing: 0.8px;
                     line-height: 1.5;
                 }
-                
+
                 .feature-image {
-                    width: 250px;
-                    height: 250px;;
+                    width: 120px;
+                    margin-bottom: 1.5rem;
                 }
 
                 .feature-name {
                     font-weight: bold;
+                    text-align: left;
+                    line-height: 25px;
+
+                    @include mq-mediumLarge {
+                        line-height: 30px;
+                    }
                 }
 
                 .feature-info {
+                    text-align: left;
+                    line-height: 25px;
 
+                    @include mq-mediumLarge {
+                        line-height: 30px;
+                    }
                 }
 
                 .feature-redirect-btn {
                     margin-top: 1.5rem;
                     border: 2px solid $savy-green-100;
-                    border-radius: 5px;
+                    border-radius: 6px;
                     padding: 0.5rem 1.5rem;
                     color: $savy-green-100;
                     background-color: $savy-white;
+                    font-weight: 500;
+                    font-size: 14px;
                     cursor: pointer;
 
                     &:focus {

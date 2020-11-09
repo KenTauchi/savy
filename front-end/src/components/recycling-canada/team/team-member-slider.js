@@ -31,8 +31,8 @@ export default function CenterMode() {
         speed: 500,
         arrows: true,
         focusOnSelect: true,
-        autoplay: true,
-        autoplaySpeed: 3000,
+        // autoplay: true,
+        // autoplaySpeed: 3000,
         cssEase: "linear",
         responsive: [
             {
