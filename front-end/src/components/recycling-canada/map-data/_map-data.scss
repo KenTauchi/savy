@@ -1,32 +1,41 @@
 .map-data-section {
-  text-align: center;
-  margin: 2rem 0;
 
-  ul {
-    display: flex;
-    justify-content: space-evenly;
-    list-style-type: none;
-    margin: 0 auto;
-    padding: 0;
-    max-width: 1000px;
+    text-align: center;
+    margin: 2rem 0;
 
-    li {
-      flex: 1;
-      width: calc(100% / 6);
+    ul {
+        margin: 0 auto;
+        max-width: 700px;
 
-      span {
-        display: block;
-      }
+        display: grid;
+            grid-template-columns: 1fr;
+            grid-gap: 2rem;
 
-      .map-data-img {
-        width: 70px;
-      }
+        @include mq-medium {
+            grid-template-columns: repeat(3, 1fr);
+        }
 
-      .map-data-value {
-        font-size: 2rem;
-        margin-top: 1rem;
-        margin-bottom: 0.5rem;
-      }
+        .table-data {
+            // margin-bottom: 1.5rem;
+
+            @include mq-medium {
+                margin-bottom: 0;
+            }
+
+            span {
+                display: block;
+            }
+
+
+
+            .map-data-value {
+                font-size: 2rem;
+                font-weight: bold;
+                margin-top: 1rem;
+                margin-bottom: 0.5rem;
+            }
+        }
+
     }
   }
 }

@@ -8,6 +8,7 @@ const MapData = () => {
   const mapTableData = getDataSet(selector);
   const table = mapTableData.mapDataTable;
 
+
   return (
     <div className="map-data-section">
       <ul>
@@ -97,6 +98,7 @@ const MapData = () => {
       </ul>
     </div>
   );
+
 };
 
 export default MapData;

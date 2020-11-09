@@ -17,6 +17,7 @@ const SvgMap = () => {
   const clickFunc = (e) => {
     setCartDis(!charDis);
     let province = e.target.id;
+
     return province !== "" && charDis === false
       ? dispatch(clickGet(e.target.id))
       : null;
@@ -34,6 +35,7 @@ const SvgMap = () => {
   return (
     <div className="canada-map-container">
       <div className="canada-map">
+    <span className="info-label"><label>Click on provinces to see details</label></span>
         <svg
           version="1.1"
           id="Layer_1"
@@ -52,6 +54,7 @@ const SvgMap = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
             d="M971.5,571.33c-2.33-1.12-3.36,1.49-5.22,2.23c-0.86,0.35-1.9-0.15-2.8,0.19
+
 
     
 	c-0.71,0.26-1.67,1.73-2.34,1.76c-3.1,0.16-2.2-3.12-2.5-5.07c-0.4-2.81-1.95-4.41-4.52-5.96c-4.97-2.99-3.22,5.86-2.74,7.8
@@ -601,6 +604,7 @@ const SvgMap = () => {
 	c3.2,3.76,10.4,9.58,15.06,11.33c4,1.51,0.75-12.02,0.5-13.2C88.86,703.26,83.79,699.91,79.78,692.76z"
           />
         </svg>
+
 
         {charDis ? (
           <div className="chart fade_in" onClick={clickFunc}>
