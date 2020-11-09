@@ -39,7 +39,7 @@
 //      2) API Test on Postman
 //           On postman - File - Import..
 //           import Savy.postman_collection.js
-//      3) On front-end:
+//      3) On front-end: 
 //           Setup a Global <apiUrl> variable to Localhost
 //           Map endpoints to <apiUrl>/API/V1/..    
 

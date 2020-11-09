@@ -404,6 +404,7 @@ app.get("/api/v1/search", (req, res) => {
       }
     }
 
+    
     // Range Filter Parameters
     if ((req.query.filterRange != undefined) && (req.query.filterRange == 'true')) {
       if ((req.query.range != undefined) && (req.query.range > 0)) {
