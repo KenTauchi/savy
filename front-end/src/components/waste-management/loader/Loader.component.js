@@ -5,7 +5,10 @@ import logo from './logo-error-page.svg';
 const Loader = () => {
     return (
         <div className="wmLoaderComponent">
-            <img src={logo} alt="Logo" />
+            <div className="loadingImageText">
+                <img src={logo} alt="Logo" />
+                <p>Loading ...</p>
+            </div>
         </div>
     )
 }

@@ -5,7 +5,10 @@ import { materialsImport } from '../../reducks/materials/operations.js';
 import { getMaterialsIdNameType } from '../../reducks/materials/selectors.js';
 
 import { searchLocationsByMaterial } from '../../reducks/locations/operations.js';
-import { getLocationsSearchedLocations } from '../../reducks/locations/selectors.js';
+import {
+  getLocationsSearchedLocations,
+  getLoadingCondition,
+} from "../../reducks/locations/selectors.js";
 
 import Filter from './filter/Filter.component';
 import LocationList from './locationList/LocationList.component';
@@ -22,7 +25,9 @@ import Loader from './loader/Loader.component';
 // import "./waste-management.style.scss";
 
 const WasteManagement = () => {
+
   const dispatch = useDispatch();
+  const state = useSelector((state) => state);
 
   // States for components display *********************************************************************************************************************************************************************************************
 
@@ -42,8 +47,35 @@ const WasteManagement = () => {
   const [notFoundDisplay, setNotFoundDisplay] = useState({
     contents: { display: "none" },
     notFound: { display: "none" },
-    loader: { display: "block" },
   });
+
+  const [loadingCondition, setLoadingCondition] = useState(false);
+
+  const loadingState = getLoadingCondition(state);
+
+  useEffect(() => {
+	  setLoadingCondition(loadingState);
+	//   console.log(loadingState);
+  }, [loadingState]);
+
+  const loaderFunction = (startOrStop) => {
+	  console.log("loader");
+	  if(startOrStop === "start") {
+		setNotFoundDisplay({
+			...notFoundDisplay,
+			contents: { display: "none" },
+			notFound: { display: "none" },
+			loader: { display: "block" },
+		});
+		console.log("loader-start");
+	  } else if (startOrStop === "stop") {
+		setNotFoundDisplay({
+			...notFoundDisplay,
+			loader: { display: "none" },
+			});
+		console.log("loader-stop");
+	  }
+  }
 
   // Get materials *********************************************************************************************************************************************************************************************
 
@@ -52,7 +84,6 @@ const WasteManagement = () => {
     searchedMaterial: "",
   });
 
-  const state = useSelector((state) => state);
   let stateMaterials = getMaterialsIdNameType(state);
 
   useEffect(() => {
@@ -116,7 +147,16 @@ const WasteManagement = () => {
   let stateLocations = getLocationsSearchedLocations(state);
 
   useEffect(() => {
-    dispatch(searchLocationsByMaterial(49.188678, -122.951498, 20, "", "", ""));
+    dispatch(
+      searchLocationsByMaterial(
+        49.188678,
+        -122.951498,
+        20,
+        "",
+        "",
+        1,
+      )
+    );
   }, []);
 
   useEffect(() => {
@@ -133,9 +173,13 @@ const WasteManagement = () => {
     notFoundhandler(filteredLocations);
   }, [filteredLocations]);
 
-  // useEffect(()=>{
-  //   console.log(locations);
-  // }, [locations]);
+//   useEffect(()=>{
+//     console.log(locations);
+//   }, [locations]);
+
+//   useEffect(()=>{
+//     console.log(state);
+//   }, [state]);
 
   // Functions *********************************************************************************************************************************************************************************************
 
@@ -251,26 +295,30 @@ const WasteManagement = () => {
   };
 
   const notFoundhandler = (searchResult) => {
-    // console.log(searchResult);
+	// console.log(searchResult);
+	
+	// if (notFoundDisplay.loader.display === "block") {
+	// 	return;
+	// }
 
     if (searchResult.length === 0) {
       setNotFoundDisplay({
+        ...notFoundDisplay,
         contents: { display: "none" },
         notFound: { display: "block" },
-        loader: { display: "none" }
       });
     } else {
       if (windowWidth >= 768) {
         setNotFoundDisplay({
+          ...notFoundDisplay,
           contents: { display: "grid" },
           notFound: { display: "none" },
-          loader: { display: "none" },
         });
       } else {
         setNotFoundDisplay({
+          ...notFoundDisplay,
           contents: { display: "block" },
           notFound: { display: "none" },
-          loader: { display: "none" },
         });
       }
     }
@@ -581,11 +629,15 @@ const WasteManagement = () => {
 
         {wmComponentDisplay.startQuiz ? <ExploreQuiz /> : null}
       </div>
-      <NotFound style={notFoundDisplay.notFound} />;
+      <NotFound style={notFoundDisplay.notFound} />
+
+      {loadingCondition ? <Loader /> : null}
     </div>
   );
 }
 
 export default WasteManagement;
 
-    //   <Loader style={notFoundDisplay.loader} />;
+    //   {
+    //     loadingCondition ? <Loader /> : null;
+    //   }
