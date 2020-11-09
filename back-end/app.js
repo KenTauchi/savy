@@ -403,7 +403,6 @@ app.get("/api/v1/search", (req, res) => {
         sOrigin = ` "family" AS origin, f.name AS material, f.description, f.imageUrl AS materialImageUrl, f.deliveryNotes, `;
       }
     }
-
     
     // Range Filter Parameters
     if ((req.query.filterRange != undefined) && (req.query.filterRange == 'true')) {

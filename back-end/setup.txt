@@ -42,5 +42,3 @@
 //      3) On front-end: 
 //           Setup a Global <apiUrl> variable to Localhost
 //           Map endpoints to <apiUrl>/API/V1/..    
-
-
