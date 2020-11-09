@@ -12,9 +12,9 @@ const LocationDetail = (props) => {
 
   // console.log(location.materials);
 
-  const displayMaterials = [...new Set(location.materials)];
+  // const displayMaterials = [...new Set(location.materials)];
 
-  displayMaterials.shift();
+  // displayMaterials.shift();
 
   // console.log(displayMaterials);
 
@@ -46,7 +46,7 @@ const LocationDetail = (props) => {
 
       <p className="materialAccepted">Material accepted</p>
       <ul className="acceptedMaterialsList">
-        {displayMaterials.map((material, index) => (
+        {location.materials.map((material, index) => (
           <li key={material + index}>{material}</li>
         ))}
       </ul>
