@@ -50,7 +50,7 @@ const AutocompleteInput = (props) => {
     getOptionProps,
     groupedOptions,
   } = useAutocomplete({
-    id: "autocomplete-popup",
+    class: "autocomplete-popup",
     options: props.options,
     getOptionLabel: (option) => option,
   });

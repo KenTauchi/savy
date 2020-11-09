@@ -9,7 +9,6 @@ import serchButtonIcon from './search-65px.svg';
 
 import { materialsImport } from "../../../reducks/materials/operations.js";
 import {
-  getMaterials,
   getMaterialsIdNameType,
   getSearchedMaterial,
 } from "../../../reducks/materials/selectors.js";
@@ -21,10 +20,7 @@ import { searchLocationsByMaterial } from "../../../reducks/locations/operations
 
 const Filter = (props) => {
   const dispatch = useDispatch();
-  const {
-    materialsOptionKeyDown,
-    currentLocation
-  } = props;
+  const { currentLocation, detailHide, getlocationByPostalCode } = props;
 
   const [materialsSearchField, setMaterialsSearchField] = useState("");
   const [postalCodeSearchField, setPostalCodeSearchField] = useState("");
@@ -80,6 +76,7 @@ const Filter = (props) => {
 
   const [materials, setMaterilas] = useState({
     idNameType: [],
+    searchedMaterial: "",
   });
 
 	const searchButtonClickHandler = () => {
@@ -87,6 +84,11 @@ const Filter = (props) => {
     // console.log(postalCodeSearchField);
     // console.log(distanceSearchField);
     // console.log(materials);
+    detailHide();
+
+    if (postalCodeSearchField != "") {
+      getlocationByPostalCode(postalCodeSearchField);
+    }
 
     let lat = currentLocation.center.lat;
     let lng = currentLocation.center.lat;
@@ -165,7 +167,6 @@ const Filter = (props) => {
             click={materialsClickHandler}
             value={materialsSearchField}
             clear={materialsInputClear}
-            keyDown={materialsOptionKeyDown}
           />
         </div>
 

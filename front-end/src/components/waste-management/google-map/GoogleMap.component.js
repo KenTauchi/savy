@@ -1,4 +1,4 @@
-import React, { useState, useEffect, PropTypes } from "react";
+import React, { useState } from "react";
 import GoogleMapReact from "google-map-react";
 
 import Marker from "../marker/Marker.component";
@@ -9,10 +9,12 @@ import Marker from "../marker/Marker.component";
 const GoogleMap = (props) => {
   const {
     defaultProps,
+    currentLocationProps,
     locations,
     displayStyle,
     mapMarkerLocationDetailDisplayHandler,
     getSelectedLocation,
+
   } = props;
 
   const [apikey, setApikey] = useState({
@@ -42,8 +44,8 @@ const GoogleMap = (props) => {
         bootstrapURLKeys={{ key: apikey.apiKey.development }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
-        center={defaultProps.center}
-        zoom={defaultProps.zoom}
+        center={currentLocationProps.center}
+        zoom={currentLocationProps.zoom}
       >
         {Markers}
       </GoogleMapReact>

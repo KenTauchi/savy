@@ -1,6 +1,5 @@
-import React, {useState, useEffect} from 'react';
-import { useDispatch, useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import React from 'react';
+import { useSelector } from "react-redux";
 import { getSearchedMaterialFact } from '../../../reducks/locations/selectors';
 
 
@@ -12,8 +11,6 @@ const RecyclingFacts = () => {
 
   // console.log(fact);
 
-  const history = useHistory();
-
   return (
     <div className="fact-section">
       <div className="factHeadDiv">
@@ -24,7 +21,7 @@ const RecyclingFacts = () => {
         <img
           className="factWasteImage"
           src="https://images.unsplash.com/photo-1598048145816-4d54a3af68fe?ixlib=rb-1.2.1&auto=format&fit=crop&w=2251&q=80"
-          alt="Waste Image"
+          alt="Material"
         />
       </div>
 
