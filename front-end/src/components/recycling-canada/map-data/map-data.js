@@ -25,7 +25,7 @@ const MapData = () => {
               ? table.prov_WasteRecyclingPerc + " %"
               : "0"}
           </span>
-          <span>Waste Recycled</span>
+          <span className="data-table-title">Waste Recycled</span>
         </li>
         <li className="table-data">
           <span>
@@ -40,7 +40,7 @@ const MapData = () => {
               ? table.prov_RecyclingContribPerc + " %"
               : "0"}
           </span>
-          <span>Contribution</span>
+          <span className="data-table-title">Contribution (%)</span>
         </li>
 
         <li className="table-data">
@@ -54,13 +54,13 @@ const MapData = () => {
           <span className="map-data-value">
             {table.prov_Rank ? table.prov_Rank : "0"}
           </span>
-          <span>Province Rank</span>
+          <span className="data-table-title">Province Rank</span>
         </li>
         <li className="table-data">
           <span>
             <img
               className="map-data-img"
-              src="./images/icons/province-rank.svg"
+              src="./images/icons/population-contribution-rank.svg"
               alt=""
             />
           </span>
@@ -73,27 +73,27 @@ const MapData = () => {
           <span>
             <img
               className="map-data-img"
-              src="./images/icons/province-rank.svg"
+              src="./images/icons/industries.svg"
               alt=""
             />
           </span>
           <span className="map-data-value">
             {table.prov_Industries ? table.prov_Industries : "0"}
           </span>
-          <span>Industries</span>
+          <span className="data-table-title">Industries</span>
         </li>
         <li className="table-data">
           <span>
             <img
               className="map-data-img"
-              src="./images/icons/province-rank.svg"
+              src="./images/icons/employees.svg"
               alt=""
             />
           </span>
           <span className="map-data-value">
             {table.prov_Employees ? table.prov_Employees.toLocaleString() : "0"}
           </span>
-          <span>Employees</span>
+          <span className="data-table-title">Employees</span>
         </li>
       </ul>
     </div>
