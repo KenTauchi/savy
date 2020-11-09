@@ -1,4 +1,4 @@
-import { locationsImportAction, searchedMaterialFactImportAction } from './actions.js';
+import { locationsImportAction, searchedMaterialFactImportAction, loadingConditionHandlerAction } from './actions.js';
 
 export const searchLocationsByMaterial = (
   latitude,
@@ -6,9 +6,12 @@ export const searchLocationsByMaterial = (
   filterRange,
   zipCode,
   materialId,
-  familiyId
+  familiyId,
 ) => {
   return async (dispatch, getState) => {
+
+    dispatch(loadingConditionHandlerAction(true));
+
     let slatitude =
       latitude === "" || latitude === undefined ? "" : "latitude=" + latitude;
     let slongitude =
@@ -58,6 +61,14 @@ export const searchLocationsByMaterial = (
         return result;
       })
       .catch((error) => console.log(error));
+    
+    // console.log(searchResult);
+
+    if (!searchResult) {
+        dispatch(locationsImportAction([]));
+        dispatch(loadingConditionHandlerAction(false));
+        return;
+    }
 
     let {locations, material} = searchResult[0];
 
@@ -79,7 +90,9 @@ export const searchLocationsByMaterial = (
     // console.log("search results M: ", material);
     dispatch(locationsImportAction(locations));
     dispatch(searchedMaterialFactImportAction(material));
-  };
+
+    dispatch(loadingConditionHandlerAction(false)); 
+    };
 };
 
     // const locations = await fetch(`http://localhost:3000/api/v1/search?materialId=${materialId}`)

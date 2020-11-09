@@ -16,3 +16,8 @@ export const getSearchedMaterialFact = createSelector(
   [locationsSelector],
   (state) => state.searchedMaterialFact
 );
+
+export const getLoadingCondition = createSelector(
+  [locationsSelector],
+  (state) => state.loading
+);

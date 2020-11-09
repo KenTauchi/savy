@@ -13,6 +13,11 @@ export const locationsReducer = ( state = initialState.locations, action ) => {
               ...state,
               searchedMaterialFact: action.payload,
             };
+        case locationsAcationsTypes.LOADING_CONDITION_HANDLER:
+            return {
+              ...state,
+              loading: action.payload,
+            };
 
         default:
             return state;
