@@ -115,6 +115,8 @@ const Filter = (props) => {
       selectedMaterial.type === "family"
         ? (familiyId = selectedMaterial.id)
         : (materialId = selectedMaterial.id);
+    } else {
+      materialId = 99999;
     }
 
     // console.log(familiyId, materialId);

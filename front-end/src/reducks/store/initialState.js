@@ -21,7 +21,8 @@ export const initialState = {
   locations: {
     searchedLocations: [],
     searchedMaterialFact: {},
-    loading: false
+    loading: false,
+    notFound: false
   },
   quizData: {
     data: [],

@@ -8,6 +8,7 @@ import { searchLocationsByMaterial } from '../../reducks/locations/operations.js
 import {
   getLocationsSearchedLocations,
   getLoadingCondition,
+  getNotFoundCondition
 } from "../../reducks/locations/selectors.js";
 
 import Filter from './filter/Filter.component';
@@ -49,33 +50,50 @@ const WasteManagement = () => {
     notFound: { display: "none" },
   });
 
-  const [loadingCondition, setLoadingCondition] = useState(false);
+  const notFoundCondition = getNotFoundCondition(state)
 
+  const [loadingCondition, setLoadingCondition] = useState(false);
   const loadingState = getLoadingCondition(state);
 
   useEffect(() => {
 	  setLoadingCondition(loadingState);
-	//   console.log(loadingState);
+  //   console.log(loadingState);
+    if (loadingState) {
+      setWmComponentDisplay({
+        tab: false,
+        list: false,
+        map: false,
+        detail: false,
+        material: false,
+        startQuiz: false,
+      });
+      setNotFoundDisplay({
+        ...notFoundDisplay,
+        contents: { display: "none" },
+        notFound: { display: "none" },
+      });
+    } else {
+      if (windowWidth >= 768) {
+        setWmComponentDisplay({
+          tab: true,
+          list: true,
+          map: true,
+          detail: false,
+          material: true,
+          startQuiz: true,
+        });
+      } else {
+        setWmComponentDisplay({
+          tab: true,
+          list: true,
+          map: true,
+          detail: false,
+          material: false,
+          startQuiz: false,
+        });
+      }
+    }
   }, [loadingState]);
-
-  const loaderFunction = (startOrStop) => {
-	  console.log("loader");
-	  if(startOrStop === "start") {
-		setNotFoundDisplay({
-			...notFoundDisplay,
-			contents: { display: "none" },
-			notFound: { display: "none" },
-			loader: { display: "block" },
-		});
-		console.log("loader-start");
-	  } else if (startOrStop === "stop") {
-		setNotFoundDisplay({
-			...notFoundDisplay,
-			loader: { display: "none" },
-			});
-		console.log("loader-stop");
-	  }
-  }
 
   // Get materials *********************************************************************************************************************************************************************************************
 
@@ -170,16 +188,41 @@ const WasteManagement = () => {
   }, [stateLocations]);
 
   useEffect(() => {
-    notFoundhandler(filteredLocations);
+    // console.log(loadingCondition);
+      notFoundhandler(filteredLocations);
   }, [filteredLocations]);
+  
+  // useEffect(() => {
+  //       if (notFoundCondition) {
+  //         setNotFoundDisplay({
+  //           ...notFoundDisplay,
+  //           contents: { display: "none" },
+  //           notFound: { display: "block" },
+  //         });
+  //       } else {
+  //         if (windowWidth >= 768) {
+  //           setNotFoundDisplay({
+  //             ...notFoundDisplay,
+  //             contents: { display: "grid" },
+  //             notFound: { display: "none" },
+  //           });
+  //         } else {
+  //           setNotFoundDisplay({
+  //             ...notFoundDisplay,
+  //             contents: { display: "block" },
+  //             notFound: { display: "none" },
+  //           });
+  //         }
+  //       }
+  // }, [notFoundCondition]);
 
-//   useEffect(()=>{
-//     console.log(locations);
-//   }, [locations]);
+  // useEffect(()=>{
+  //   console.log(locations);
+  // }, [locations]);
 
-//   useEffect(()=>{
-//     console.log(state);
-//   }, [state]);
+  // useEffect(()=>{
+  //   console.log(state);
+  // }, [state]);
 
   // Functions *********************************************************************************************************************************************************************************************
 
@@ -301,7 +344,7 @@ const WasteManagement = () => {
 	// 	return;
 	// }
 
-    if (searchResult.length === 0) {
+    if (notFoundCondition) {
       setNotFoundDisplay({
         ...notFoundDisplay,
         contents: { display: "none" },
@@ -575,22 +618,24 @@ const WasteManagement = () => {
         getlocationByPostalCode={getlocationByPostalCode}
       />
       <div className="wm-main-contents" style={notFoundDisplay.contents}>
-        <div className="mapAndMaterialTab">
-          <button
-            className="mapButton"
-            onClick={mapDisplayHandler}
-            style={mapAndMaterialDisplay.map ? { color: "black" } : null}
-          >
-            Map View
-          </button>
-          <button
-            className="materialButton"
-            onClick={materialDisplayHandler}
-            style={mapAndMaterialDisplay.material ? { color: "black" } : null}
-          >
-            Material Info
-          </button>
-        </div>
+        {wmComponentDisplay.tab ? (
+          <div className="mapAndMaterialTab">
+            <button
+              className="mapButton"
+              onClick={mapDisplayHandler}
+              style={mapAndMaterialDisplay.map ? { color: "black" } : null}
+            >
+              Map View
+            </button>
+            <button
+              className="materialButton"
+              onClick={materialDisplayHandler}
+              style={mapAndMaterialDisplay.material ? { color: "black" } : null}
+            >
+              Material Info
+            </button>
+          </div>
+        ) : null}
 
         {wmComponentDisplay.map ? (
           <GoogleMap

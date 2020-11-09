@@ -21,3 +21,8 @@ export const getLoadingCondition = createSelector(
   [locationsSelector],
   (state) => state.loading
 );
+
+export const getNotFoundCondition = createSelector(
+  [locationsSelector],
+  (state) => state.notFound
+);
