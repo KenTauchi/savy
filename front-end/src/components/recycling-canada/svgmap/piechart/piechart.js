@@ -62,8 +62,8 @@ const PieChart = () => {
 
     // For the desktip view
     // change the percentage to 50, font size t0 12, and css as below;
-    chart.radius = am4core.percent(screen > 700 ? 95 : screen / 11);
-    labelTemplate.fontSize = screen > 550 ? 14 : 12;
+    chart.radius = am4core.percent(screen > 700 ? 95 : screen / 9.5);
+    labelTemplate.fontSize = screen > 550 ? 16 : 14;
     labelTemplate.padding(padSide, padVar, padSide, padVar);
 
     // ====================================================
