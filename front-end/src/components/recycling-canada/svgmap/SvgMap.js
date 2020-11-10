@@ -17,6 +17,7 @@ const SvgMap = () => {
   const clickFunc = (e) => {
     setCartDis(!charDis);
     let province = e.target.id;
+    console.log("province", e.target.id);
 
     return province !== "" && charDis === false
       ? dispatch(clickGet(e.target.id))
@@ -35,7 +36,9 @@ const SvgMap = () => {
   return (
     <div className="canada-map-container">
       <div className="canada-map">
-    <span className="info-label"><label>Click on provinces to see details</label></span>
+        <span className="info-label">
+          <label>Click on provinces to see details</label>
+        </span>
         <svg
           version="1.1"
           id="Layer_1"
@@ -247,6 +250,7 @@ const SvgMap = () => {
           <g onClick={clickFunc} id="NU">
             <g>
               <path
+                id="NU"
                 className="st1"
                 fill="#F4F4F4"
                 d="M661.89,344.06c3.16-12.95,22.35-0.86,30.32-1.52c16.53-1.41,8.75-15.31,0.42-12.15
@@ -371,6 +375,7 @@ const SvgMap = () => {
             <g>
               <path
                 className="st2"
+                id="NU"
                 fill="none"
                 stroke="#E29A25"
                 strokeWidth="0.7898"
@@ -604,7 +609,6 @@ const SvgMap = () => {
 	c3.2,3.76,10.4,9.58,15.06,11.33c4,1.51,0.75-12.02,0.5-13.2C88.86,703.26,83.79,699.91,79.78,692.76z"
           />
         </svg>
-
 
         {charDis ? (
           <div className="chart fade_in" onClick={clickFunc}>
