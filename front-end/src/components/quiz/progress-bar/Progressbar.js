@@ -14,6 +14,9 @@ export default function Progressbar() {
     height: 10px;
     border-right: 1px solid white;
     background-color: gray;
+    :last-child {
+      border: none;
+    }
     :nth-child(n + 1):nth-child(-n + ${quizData.currentIndex}) {
       background-color: #05c4a3;
     }
