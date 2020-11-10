@@ -33,12 +33,6 @@ const Testimonial = () => {
 
   return (
     <div className="testimonial-section">
-      <div className="testimonial-img">
-        <img
-          src="https://images.unsplash.com/photo-1563477710521-5ae0aa5085ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
-          alt="sample"
-        />
-      </div>
       <div className="teastimonial-text">
         <div>
           <Swiper
@@ -54,7 +48,11 @@ const Testimonial = () => {
                   <div>
                     <img
                       className="testimonial-img"
-                      src={"./images/" + testimonial.postedBy.split(" ")[0]}
+                      src={
+                        "./images/" +
+                        testimonial.postedBy.split(" ")[0] +
+                        ".jpg"
+                      }
                     />
                   </div>
                   <h2 className="char">“</h2>
