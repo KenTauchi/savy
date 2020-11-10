@@ -5,16 +5,17 @@ import WasteManagement from "./waste-management/waste-management";
 import Explore from "./explore/explore";
 import Contact from "./contact/contact";
 import Quiz from "./quiz/quiz";
+import QuizStarter from "./quiz/quiz-starter/QuizStarter";
 
 const NavRouter = () => (
   <Switch>
     <Route exact path="/" component={RecyclingCanada} />
     <Route path="/waste-management" component={WasteManagement} />
-    <Route path="/challenges" component={Quiz} />
+    <Route path="/challenges/rule" component={QuizStarter} />
+    <Route exact path="/challenges" component={Quiz} />
     <Route path="/explore" component={Explore} />
     <Route path="/contact" component={Contact} />
   </Switch>
 );
 
 export default NavRouter;
- 
