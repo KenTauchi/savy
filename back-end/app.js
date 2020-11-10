@@ -85,7 +85,7 @@ app.get("/api/v1/mapdata", (req, res) => {
                                     (it.informationTypeID IN(19) AND dc.year = 2016) OR -- 19.Number of Business   
                                     (it.informationTypeID IN(23) AND dc.year = 2016) OR -- 23.Number of Employees                                    
                                     (it.informationTypeID IN(14) AND dc.year = 2018) )  -- 14.Total Waste           
-                            GROUP BY p.provinceCode, p.provinceName   
+                            GROUP BY p.countryCode, p.provinceCode, p.provinceName  
                       ) md,
                       -- Pie Chart data per province
                       (

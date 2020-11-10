@@ -22,6 +22,7 @@ export default function CenterMode() {
             .catch(() => null);
     }, []);
 
+    // Slick Slider Setting
     const settings = {
         className: "center",
         centerMode: true,
@@ -31,8 +32,8 @@ export default function CenterMode() {
         speed: 500,
         arrows: true,
         focusOnSelect: true,
-        // autoplay: true,
-        // autoplaySpeed: 3000,
+        autoplay: true,
+        autoplaySpeed: 3000,
         cssEase: "linear",
         responsive: [
             {
@@ -69,6 +70,7 @@ export default function CenterMode() {
     };
     return (
         <div>
+            {/* Loading Dynamic Data to the slides */}
             <Slider {...settings}>
                 {teamMembers.data.map((teamMember, index) => {
                     return (

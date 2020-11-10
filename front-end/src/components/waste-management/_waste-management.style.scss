@@ -16,6 +16,7 @@
 
 .waste-management-content {
     position: relative;
+    color: $savy-black;
 }
 
 .mapAndMaterialTab {
@@ -28,7 +29,7 @@
         border: none;
         background-color: #fff;
         font-size: 20px;
-        color: #bbb;
+        color: $savy-gray-50;
 
         &:focus {
             outline: none;
