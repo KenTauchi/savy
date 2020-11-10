@@ -14,7 +14,7 @@ export default function Question() {
   useEffect(() => {
     console.log("quiz API data fetch rendered");
 
-    fetch("http://localhost:3000/api/v1/quiz")
+    fetch("http://localhost:3000/api/v1/quiz?limit=10")
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
