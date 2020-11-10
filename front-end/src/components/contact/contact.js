@@ -56,7 +56,7 @@ const Contact = () => {
     // Form hidden 
     // className={serverState.submitting ? {display: 'none'} : ""} 
     return (
-        <div>
+        <div className="main-content">
             <div className="contact-main">
                 <h2>If there is any question or feedback, feel free to reach out to us.</h2>
 

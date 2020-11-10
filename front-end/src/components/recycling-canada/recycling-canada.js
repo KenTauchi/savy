@@ -10,7 +10,7 @@ import ContactSection from './contact-section/contact-section';
 
 const RecyclingCanada = () => {
 	return (
-		<div className="content">
+		<div className="main-content homepage-content">
 			<SvgMap />
 			<MapData />
 			<About />
