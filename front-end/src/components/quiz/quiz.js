@@ -13,7 +13,7 @@ const Quiz = () => {
 	const quizData = getQuizData(selector);
 
 	return (
-		<div className="quiz-page">
+		<div className="main-content quiz-page">
 
 			<div className="quiz-content">
 				{quizData.windowDis ? <div className="quiz-overlay"></div> : null}

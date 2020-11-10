@@ -616,7 +616,7 @@ const WasteManagement = () => {
   // Render components *********************************************************************************************************************************************************************************************
 
   return (
-    <div className="waste-management-content">
+    <div className="waste-management-content main-content">
       <Filter
         detailHide={detailHide}
         currentLocation={defaultProps}
