@@ -204,9 +204,14 @@ app.get("/api/v1/team", (req, res) => {
 // Returns a list of all quiz questions and answers
 app.get("/api/v1/quiz", (req, res) => {
 
+  let slimit = ``;
+  if ((req.query.limit != undefined) && (req.query.limit > 0)) {
+    slimit = ` LIMIT ${req.query.limit} `;
+  }
+
   let qry = `SELECT q.questionId, q.question, q.description, a.answer, 
                       CASE WHEN a.correct = 1 THEN 'yes' ELSE 'no' END AS correct
-                 FROM quizquestion q
+                 FROM (SELECT * FROM quizquestion ${slimit} ) q
                       INNER JOIN quizanswer a ON (q.questionId = a.questionId)
                 ORDER BY q.questionId, a.answerId  `;
 
