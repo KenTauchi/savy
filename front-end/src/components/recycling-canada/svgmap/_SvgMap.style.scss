@@ -1,81 +1,81 @@
 .canada-map-container {
-	background-image: url("../../../images/wavy-background-01.jpg");
-	background-size: cover;
-	background-position: center;
-	text-align: center;
-	padding: 0.5rem 0;
-	padding: 0 1.5rem;
+  background-image: url("../../../images/wavy-background-01.jpg");
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  padding: 0.5rem 0;
+  padding: 0 1.5rem;
 
-	// Map Click Instruction Label
-	.info-label {
-		display: block;
-		max-width: 320px;
-		box-shadow: 0px 2px 32px #87D3C6B3;
-		border-radius: 37px;
-		background-color: $savy-green-100;
-		padding: 1rem;
-		margin: 2rem auto;
+  // Map Click Instruction Label
+  .info-label {
+    display: block;
+    max-width: 320px;
+    box-shadow: 0px 2px 32px #87d3c6b3;
+    border-radius: 37px;
+    background-color: $savy-green-100;
+    padding: 1rem;
+    margin: 2rem auto;
 
-		label {
-			font-weight: bold;
-			font-size: 1rem;
-			color: $savy-white;
-		}
-	}
+    label {
+      font-weight: bold;
+      font-size: 1rem;
+      color: $savy-white;
+    }
+  }
 
-	// Canada Map Inner Container
-	.canada-map {
-		position: relative;
-		display: block;
-		height: auto;
+  // Canada Map Inner Container
+  .canada-map {
+    position: relative;
+    display: block;
+    height: auto;
 
-		@include mq-medium {
-			max-width: 700px;
-			margin: 0 auto;
-        }
+    @include mq-medium {
+      max-width: 700px;
+      margin: 0 auto;
+    }
 
-		svg {
-			max-width: 100%;
-		}
+    svg {
+      max-width: 100%;
+    }
 
-		// Province Hover
-		#AB:hover,
-		#BC:hover,
-		#MB:hover,
-		#NB:hover,
-		#NL:hover,
-		#NT:hover,
-		#NS:hover,
-		#NU:hover path,
-		#ON:hover,
-		#PE:hover,
-		#QC:hover,
-		#SK:hover,
-		#YT:hover {
-			// fill: #F6EBBE;
-			fill: $savy-green-50;
-		}
+    // Province Hover
+    #AB:hover,
+    #BC:hover,
+    #MB:hover,
+    #NB:hover,
+    #NL:hover,
+    #NT:hover,
+    #NS:hover,
+    #NU:hover path,
+    #ON:hover,
+    #PE:hover,
+    #QC:hover,
+    #SK:hover,
+    #YT:hover {
+      // fill: #F6EBBE;
+      fill: $savy-green-50;
+    }
 
-		.chart {
-			position: absolute;
-			width: 100%;
-			top: 50%;
-			left: 50%;
-			transform: translateY(-50%) translateX(-50%);
-		}
+    .chart {
+      position: absolute;
+      width: 100%;
+      top: 60%;
+      left: 47%;
+      transform: translateY(-50%) translateX(-50%);
+    }
 
-		.fade_in {
-			animation: fadeIn 0.45s ease;
-		}
+    .fade_in {
+      animation: fadeIn 0.45s ease;
+    }
 
-		@keyframes fadeIn {
-			0% {
-				opacity: 0;
-			}
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
 
-			100% {
-				opacity: 100;
-			}
-		}
-	}
+      100% {
+        opacity: 100;
+      }
+    }
+  }
 }

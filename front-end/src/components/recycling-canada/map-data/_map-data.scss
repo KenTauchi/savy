@@ -1,41 +1,36 @@
 .map-data-section {
+  text-align: center;
+  margin: 2rem 0;
 
-    text-align: center;
-    margin: 2rem 0;
+  ul {
+    margin: 0 auto;
+    max-width: 700px;
 
-    ul {
-        margin: 0 auto;
-        max-width: 700px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 2rem;
 
-        display: grid;
-            grid-template-columns: 1fr;
-            grid-gap: 2rem;
+    @include mq-medium {
+      grid-template-columns: repeat(3, 1fr);
+    }
 
-        @include mq-medium {
-            grid-template-columns: repeat(3, 1fr);
-        }
+    .table-data {
+      // margin-bottom: 1.5rem;
 
-        .table-data {
-            // margin-bottom: 1.5rem;
+      @include mq-medium {
+        margin-bottom: 0;
+      }
 
-            @include mq-medium {
-                margin-bottom: 0;
-            }
+      span {
+        display: block;
+      }
 
-            span {
-                display: block;
-            }
-
-
-
-            .map-data-value {
-                font-size: 2rem;
-                font-weight: bold;
-                margin-top: 1rem;
-                margin-bottom: 0.5rem;
-            }
-        }
-
+      .map-data-value {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+      }
     }
   }
 }
