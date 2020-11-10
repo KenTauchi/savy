@@ -20,7 +20,9 @@ export const initialState = {
   },
   locations: {
     searchedLocations: [],
-    searchedMaterialFact: {}
+    searchedMaterialFact: {},
+    loading: false,
+    notFound: false
   },
   quizData: {
     data: [],

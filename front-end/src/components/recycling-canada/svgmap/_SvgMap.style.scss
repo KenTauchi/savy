@@ -1,59 +1,81 @@
 .canada-map-container {
-	background-image: url("../../../images/wavy-background-01.jpg");
-	background-size: cover;
-	background-position: center;
+  background-image: url("../../../images/wavy-background-01.jpg");
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+  padding: 0.5rem 0;
+  padding: 0 1.5rem;
 
-	.canada-map {
-		// width: 100%;
-		position: relative;
-		display: block;
-		max-width: 600px;
-		margin: 0 auto;
-		height: auto;
-	
-		svg {
-			max-width: 100%;
-		}
-	
-		#AB:hover,
-		#BC:hover,
-		#MB:hover,
-		#NB:hover,
-		#NL:hover,
-		#NT:hover,
-		#NS:hover,
-		#NU:hover path,
-		#ON:hover,
-		#PE:hover,
-		#QC:hover,
-		#SK:hover,
-		#YT:hover {
-			fill: #F6EBBE;
-		}
-	
-		.chart {
-			/* border: solid 1px black; */
-			position: absolute;
-			// background-color: gray;
-			// padding: 50px;
-			width: 100%;
-			top: 50%;
-			left: 50%;
-			transform: translateY(-50%) translateX(-50%);
-		}
-	
-		.fade_in {
-			animation: fadeIn 0.45s ease;
-		}
-	
-		@keyframes fadeIn {
-			0% {
-				opacity: 0;
-			}
-	
-			100% {
-				opacity: 100;
-			}
-		}
-	}
+  // Map Click Instruction Label
+  .info-label {
+    display: block;
+    max-width: 320px;
+    box-shadow: 0px 2px 32px #87d3c6b3;
+    border-radius: 37px;
+    background-color: $savy-green-100;
+    padding: 1rem;
+    margin: 2rem auto;
+
+    label {
+      font-weight: bold;
+      font-size: 1rem;
+      color: $savy-white;
+    }
+  }
+
+  // Canada Map Inner Container
+  .canada-map {
+    position: relative;
+    display: block;
+    height: auto;
+
+    @include mq-medium {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    svg {
+      max-width: 100%;
+    }
+
+    // Province Hover
+    #AB:hover,
+    #BC:hover,
+    #MB:hover,
+    #NB:hover,
+    #NL:hover,
+    #NT:hover,
+    #NS:hover,
+    #NU:hover path,
+    #ON:hover,
+    #PE:hover,
+    #QC:hover,
+    #SK:hover,
+    #YT:hover {
+      // fill: #F6EBBE;
+      fill: $savy-green-50;
+    }
+
+    .chart {
+      position: absolute;
+      width: 100%;
+      top: 65%;
+      left: 47%;
+      transform: translateY(-50%) translateX(-50%);
+    }
+
+    .fade_in {
+      animation: fadeIn 0.45s ease;
+    }
+
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+
+      100% {
+        opacity: 100;
+      }
+    }
+  }
 }

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import x_mark from './closewindow-60px.svg';
 
@@ -10,12 +10,19 @@ const LocationDetail = (props) => {
   const displayUrl = location.website.slice(0, 30) + "...";
   // console.log(location);
 
+  // console.log(location.materials);
+
+  // const displayMaterials = [...new Set(location.materials)];
+
+  // displayMaterials.shift();
+
+  // console.log(displayMaterials);
+
   return (
     <div style={displayStyle} className="locationDetailDiv">
-
       <div className="detailTop">
         <p className="listItemFacilityName">{location.locationName}</p>
-  
+
         <img
           className="x_markImage"
           src={x_mark}
@@ -51,3 +58,16 @@ const LocationDetail = (props) => {
 };
 
 export default LocationDetail;
+
+      // {
+      //   location.materials.length < 20 ? (
+      //     <React.Fragment>
+      //       <p className="materialAccepted">Material accepted</p>
+      //       <ul className="acceptedMaterialsList">
+      //         {location.materials.map((material, index) => (
+      //           <li key={material + index}>{material}</li>
+      //         ))}
+      //       </ul>
+      //     </React.Fragment>
+      //   ) : null;
+      // }

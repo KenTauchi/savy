@@ -1,4 +1,4 @@
-import { locationsImportAction, searchedMaterialFactImportAction } from './actions.js';
+import { locationsImportAction, searchedMaterialFactImportAction, loadingConditionHandlerAction, notFoundHandlerAction } from './actions.js';
 
 export const searchLocationsByMaterial = (
   latitude,
@@ -6,9 +6,12 @@ export const searchLocationsByMaterial = (
   filterRange,
   zipCode,
   materialId,
-  familiyId
+  familiyId,
 ) => {
   return async (dispatch, getState) => {
+
+    dispatch(loadingConditionHandlerAction(true));
+
     let slatitude =
       latitude === "" || latitude === undefined ? "" : "latitude=" + latitude;
     let slongitude =
@@ -28,7 +31,7 @@ export const searchLocationsByMaterial = (
     let sfamiliyId =
       familiyId === "" || familiyId === undefined
         ? ""
-        : "familiyId=" + familiyId;
+        : "familyId=" + familiyId;
 
     let queries = [
       slatitude,
@@ -55,9 +58,21 @@ export const searchLocationsByMaterial = (
       .then((response) => response.json())
       .then((result) => {
         // dispatch(locationsImportAction(result));
+        dispatch(notFoundHandlerAction(false));
         return result;
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {
+        dispatch(notFoundHandlerAction(true));
+        console.log(error);
+      });
+    
+    // console.log(searchResult);
+
+    if (!searchResult) {
+        dispatch(locationsImportAction([]));
+        dispatch(loadingConditionHandlerAction(false));
+        return;
+    }
 
     let {locations, material} = searchResult[0];
 
@@ -74,12 +89,14 @@ export const searchLocationsByMaterial = (
         return location.locationInfo;
     })
 
-    console.log("search results: ", searchResult);
+    dispatch(loadingConditionHandlerAction(false)); 
+    // console.log("search results: ", searchResult);
     // console.log("search results L: ", locations);
     // console.log("search results M: ", material);
     dispatch(locationsImportAction(locations));
     dispatch(searchedMaterialFactImportAction(material));
-  };
+
+    };
 };
 
     // const locations = await fetch(`http://localhost:3000/api/v1/search?materialId=${materialId}`)

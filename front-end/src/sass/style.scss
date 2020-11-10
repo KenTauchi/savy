@@ -8,9 +8,8 @@
 // Normalize
 @import './normalize';
 
-body {
-	font-family: $font-sans-serif;
-}
+// Layout
+@import './layout';
 
 // Header
 @import '../components/header/header';
@@ -27,6 +26,9 @@ body {
 
 // Waste Management
 @import '../components/waste-management/waste-management.style';
+
+// Explore
+@import '../components/explore/explore';
 
 // Contact
 @import '../components/contact/contact';

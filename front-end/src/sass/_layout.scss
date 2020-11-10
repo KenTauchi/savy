@@ -1,0 +1,16 @@
+body {
+    font-family: $font-sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.main-content {
+    min-height: 80vh;
+}

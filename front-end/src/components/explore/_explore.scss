@@ -1,0 +1,167 @@
+.explore-content {
+    max-width: 1300px;
+    margin: 0 auto;
+
+    @include mq-mediumLarge {
+        padding: 0 1.5rem;
+    }
+
+    // Post Card Download Section
+    .download-section {
+        margin-bottom: 6rem;
+
+        @include mq-mediumLarge {
+            margin-bottom: 9rem;
+        }
+
+        .postcard-section {
+            margin-bottom: 4rem;
+            align-items: center;
+
+            @include mq-mediumLarge {
+                display: grid;
+                grid-template-columns: 3fr 1fr;
+                border: 1px solid #DDDDDD;
+                border-radius: 45px;
+                box-shadow: 0px 0px 32px #0000000D;
+            }
+
+            .postcards {
+                background: #E5E5E5;
+                justify-items: center;
+                padding: 2rem;
+
+                @include mq-mediumLarge {
+                    display: flex;
+                    justify-content: space-evenly;
+                    height: 200px;
+                    border-top-left-radius: 45px;
+                    border-bottom-left-radius: 45px;
+                    padding: 0 2.5rem;
+                }
+
+                .postcard-img {
+                    width: 100px;
+                }
+            }
+
+            .postcard-one {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-gap: 1.5rem;
+
+                @include mq-small {
+                    grid-template-columns: repeat(4, 1fr);
+                    align-items: center;
+                }
+
+                .postcard-img {
+                    width: 100px;
+                }
+            }
+
+            .postcard-two {
+                display: grid;
+                grid-template-columns: 1fr;
+                grid-gap: 1.5rem;
+
+                @include mq-medium {
+                    grid-template-columns: repeat(3, 1fr);
+                    align-items: center;
+                    grid-gap: 0.5rem;
+                    padding: 0 1rem;
+                }
+
+                @include mq-large {
+                    padding: 0 2.5rem;
+                }
+
+                .postcard-details {
+                    display: flex;
+                    align-items: center;
+
+                    @include mq-medium {
+                        margin-right: 0.5rem;
+                        margin-bottom: 0;
+
+                        &:last-of-type {
+                            margin-right: 0;
+                        }
+                    }
+
+                    .postcard-info {
+                        margin-left: 1.5rem;
+                        font-size: 10px;
+                        line-height: 13px;
+                        letter-spacing: 0.2px;
+
+                        @include mq-medium {
+                            margin-left: 1rem;
+                        }
+
+                        h5 {
+                            font-weight: normal;
+                            text-transform: uppercase;
+                            font-size: 9.5px;
+                        }
+                    }
+
+                    .postcard-img {
+                        width: 100px;
+                    }
+                }
+            }
+
+            .postcard-download {
+                max-width: 200px;
+                margin: 0 auto;
+                text-align: center;
+                margin-top: 2rem;
+
+                @include mq-mediumLarge {
+                    text-align: left;
+                }
+
+                span {
+                    display: block;
+                    line-height: 25px;
+                }
+
+                .download-now-btn {
+                    display: inline-block;
+                    margin-top: 2rem;
+                    background-color: $savy-green-100;
+                    border-radius: 6px;
+                    color: $savy-white;
+                    padding: 1rem 2rem;
+                }
+            }
+        }
+    }
+
+    // FAQ Section
+    .faq-section {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        color: $savy-gray-100;
+
+        h2 {
+            font-size: 20px;
+            line-height: 27px;
+        }
+
+        h3 {
+            font-weight: normal;
+            line-height: 24px;
+            letter-spacing: 0.5px;
+        }
+
+        .hr-separator {
+            border-bottom: 0.5px solid #707070;
+            width: 90%;
+            margin: 0 auto;
+            margin-bottom: 2rem;
+        }
+    }
+}
