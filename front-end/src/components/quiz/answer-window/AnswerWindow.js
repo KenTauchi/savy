@@ -32,8 +32,14 @@ export default function AnswerWindow() {
   ) : (
     <div className="answer-window">
       <h2>{quizData.correctness ? "Correct" : "Incorect"} Answer!!</h2>
-      <div>
-        <img src="#" />
+      <div className="true-false-logo">
+        <img
+          src={
+            quizData.correctness
+              ? "./images/icons/right_answer.svg"
+              : "./images/icons/wrong_answer.svg"
+          }
+        />
       </div>
       <p>{quizData.data[quizData.currentIndex - 1].question.description}</p>
 
