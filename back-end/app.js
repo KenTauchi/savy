@@ -7,20 +7,19 @@
 //      3)  npm i mysql
 //      4)  npm i express-validator
 //      5)  npm i node-fetch
-// 
+//
 // *******************************************************
 // ******** Required Modules *****************************
 // *******************************************************
 
 const express = require("express");
-const fetch = require('node-fetch');
+const fetch = require("node-fetch");
 const app = express();
 const { savyDb } = require("./connection.js");
 
 const server = app.listen(process.env.PORT || 3000, () => {
   console.log("listening port 3000");
 });
-
 
 // middleware parse the request body
 app.use(express.urlencoded({ extended: true }));
@@ -33,27 +32,22 @@ app.use(express.json());
 //     next();
 //   });
 
-
-
 // Returns all provinces in database
 app.get("/api/v1/provinces", (req, res) => {
-
   let qry = `SELECT * FROM provinces`;
 
   savyDb.query(qry, (error, results) => {
     if (error) throw error;
     if (results.length == 0) {
-      res.status(404).send('No Record Found');
+      res.status(404).send("No Record Found");
     } else {
       res.status(200).send(results);
     }
   });
 });
 
-
 // Returns statics data from provinces for the map
 app.get("/api/v1/mapdata", (req, res) => {
-
   let qry = `SELECT md.provinceCode, md.provinceName,
                       md.prov_Population, md.prov_RecyclingContribPerc, md.prov_Industries, md.prov_Employees,
                       md.prov_TotalRecycling, md.prov_TotalWaste, md.prov_WasteRecyclingPerc, md.prov_populationPercOverCountry,
@@ -129,49 +123,57 @@ app.get("/api/v1/mapdata", (req, res) => {
   savyDb.query(qry, (error, results) => {
     if (error) throw error;
     if (results.length == 0) {
-      res.status(404).send('No Record Found');
+      res.status(404).send("No Record Found");
     } else {
-
       let myResult = [];
       let pieObj = [];
       let mapData = {};
-      let sProvince = '';
+      let sProvince = "";
       let iRank = 0;
 
       for (let i = 0; i < results.length; i++) {
         if (sProvince != results[i].provinceCode) {
-
           if (pieObj.length > 0) {
-            myResult.push({ mapData, 'pieData': pieObj });
+            myResult.push({ mapData, pieData: pieObj });
             pieObj = [];
           }
 
           iRank++;
           mapData = {
-            'provinceCode': results[i].provinceCode,
-            'provinceName': results[i].provinceName,
-            'prov_Population': results[i].prov_Population,
-            'prov_RecyclingContribPerc': results[i].prov_RecyclingContribPerc,
-            'prov_populationPercOverCountry': results[i].prov_populationPercOverCountry,
-            'prov_TotalRecycling': results[i].prov_TotalRecycling,
-            'prov_TotalWaste': results[i].prov_TotalWaste,
-            'prov_Industries': results[i].prov_Industries,
-            'prov_Employees': results[i].prov_Employees,
-            'prov_WasteRecyclingPerc': results[i].prov_WasteRecyclingPerc,
-            'prov_Rank': iRank,
-            'prov_Population_Rank': 0
+            provinceCode: results[i].provinceCode,
+            provinceName: results[i].provinceName,
+            prov_Population: results[i].prov_Population,
+            prov_RecyclingContribPerc: results[i].prov_RecyclingContribPerc,
+            prov_populationPercOverCountry:
+              results[i].prov_populationPercOverCountry,
+            prov_TotalRecycling: results[i].prov_TotalRecycling,
+            prov_TotalWaste: results[i].prov_TotalWaste,
+            prov_Industries: results[i].prov_Industries,
+            prov_Employees: results[i].prov_Employees,
+            prov_WasteRecyclingPerc: results[i].prov_WasteRecyclingPerc,
+            prov_Rank: iRank,
+            prov_Population_Rank: 0,
           };
         }
-        pieObj.push({ 'familyName': results[i].familyName, 'familyTotalRecycling': results[i].familyTotalRecycling, 'familyPercent': results[i].familyPercent });
+        pieObj.push({
+          familyName: results[i].familyName,
+          familyTotalRecycling: results[i].familyTotalRecycling,
+          familyPercent: results[i].familyPercent,
+        });
         sProvince = results[i].provinceCode;
       }
 
       if (mapData != {}) {
-        myResult.push({ mapData, 'pieData': pieObj });
+        myResult.push({ mapData, pieData: pieObj });
       }
 
       // Sort object to get population rank
-      myResult.sort((a, b) => (a.mapData.prov_populationPercOverCountry < b.mapData.prov_populationPercOverCountry) ? 1 : -1)
+      myResult.sort((a, b) =>
+        a.mapData.prov_populationPercOverCountry <
+        b.mapData.prov_populationPercOverCountry
+          ? 1
+          : -1
+      );
       for (let i = 0; i < myResult.length; i++) {
         myResult[i].mapData.prov_Population_Rank = i + 1;
       }
@@ -181,10 +183,8 @@ app.get("/api/v1/mapdata", (req, res) => {
   });
 });
 
-
 // Returns a list of all team members
 app.get("/api/v1/team", (req, res) => {
-
   let qry = `SELECT t.name, r.name AS role, t.imageURL, t.linkedinURL, t.githubURL, t.behanceURL
                     FROM teammember t
                         INNER JOIN teamrole r ON (t.teamRoleId = r.teamRoleId)
@@ -193,17 +193,15 @@ app.get("/api/v1/team", (req, res) => {
   savyDb.query(qry, (error, results) => {
     if (error) throw error;
     if (results.length == 0) {
-      res.status(404).send('No Record Found');
+      res.status(404).send("No Record Found");
     } else {
       res.status(200).send(results);
     }
   });
 });
 
-
 // Returns a list of all quiz questions and answers
 app.get("/api/v1/quiz", (req, res) => {
-
   let qry = `SELECT q.questionId, q.question, q.description, a.answer, 
                       CASE WHEN a.correct = 1 THEN 'yes' ELSE 'no' END AS correct
                  FROM quizquestion q
@@ -213,9 +211,8 @@ app.get("/api/v1/quiz", (req, res) => {
   savyDb.query(qry, (error, results) => {
     if (error) throw error;
     if (results.length == 0) {
-      res.status(404).send('No Record Found');
+      res.status(404).send("No Record Found");
     } else {
-
       let myResult = [];
       let myAnswer = [];
       let question = {};
@@ -223,19 +220,25 @@ app.get("/api/v1/quiz", (req, res) => {
 
       for (let i = 0; i < results.length; i++) {
         if (iQuestion != results[i].questionId) {
-
           if (myAnswer.length > 0) {
-            myResult.push({ question, 'answers': myAnswer });
+            myResult.push({ question, answers: myAnswer });
             myAnswer = [];
           }
-          question = { 'questionId': results[i].questionId, 'question': results[i].question, 'description': results[i].description };
+          question = {
+            questionId: results[i].questionId,
+            question: results[i].question,
+            description: results[i].description,
+          };
         }
-        myAnswer.push({ 'answer': results[i].answer, 'correct': results[i].correct });
+        myAnswer.push({
+          answer: results[i].answer,
+          correct: results[i].correct,
+        });
         iQuestion = results[i].questionId;
       }
 
       if (question != {}) {
-        myResult.push({ question, 'answers': myAnswer });
+        myResult.push({ question, answers: myAnswer });
       }
 
       res.status(200).send(myResult);
@@ -243,10 +246,8 @@ app.get("/api/v1/quiz", (req, res) => {
   });
 });
 
-
 // Returns a list of all FAQ questions
 app.get("/api/v1/faq", (req, res) => {
-
   let qry = `SELECT f.faqId, f.postedOn, f.question, f.answer
                  FROM faq f
                 ORDER BY f.question  `;
@@ -254,17 +255,15 @@ app.get("/api/v1/faq", (req, res) => {
   savyDb.query(qry, (error, results) => {
     if (error) throw error;
     if (results.length == 0) {
-      res.status(404).send('No Record Found');
+      res.status(404).send("No Record Found");
     } else {
       res.status(200).send(results);
     }
   });
 });
 
-
 // Returns a list of all TESTEMONIALS report
 app.get("/api/v1/testemonials", (req, res) => {
-
   let qry = `SELECT t.testemonialId, t.postedOn, t.postedBy, t.imageURL, t.description
                  FROM testemonial t
                  ORDER BY t.postedOn   `;
@@ -272,17 +271,15 @@ app.get("/api/v1/testemonials", (req, res) => {
   savyDb.query(qry, (error, results) => {
     if (error) throw error;
     if (results.length == 0) {
-      res.status(404).send('No Record Found');
+      res.status(404).send("No Record Found");
     } else {
       res.status(200).send(results);
     }
   });
 });
 
-
 // Returns a list of all TESTEMONIALS report
 app.get("/api/v1/materials", (req, res) => {
-
   let qry = `SELECT "material" AS type, m.materialId AS id, m.name AS materialName
                  FROM material m 
                 UNION  
@@ -294,58 +291,61 @@ app.get("/api/v1/materials", (req, res) => {
   savyDb.query(qry, (error, results) => {
     if (error) throw error;
     if (results.length == 0) {
-      res.status(404).send('No Record Found');
+      res.status(404).send("No Record Found");
     } else {
       res.status(200).send(results);
     }
   });
 });
 
-
-
-
-
 // Search a location for a material
 app.get("/api/v1/search", (req, res) => {
-
   let mySearch = async (req) => {
-
     //let sApiFilter = "";
-    let zipCodeCordinate = { 'latitude': req.query.latitude, 'longitude': req.query.longitude }
-    if ((req.query.filterRange != undefined) && (req.query.filterRange == 'true')) {
-
+    let zipCodeCordinate = {
+      latitude: req.query.latitude,
+      longitude: req.query.longitude,
+    };
+    if (req.query.filterRange != undefined && req.query.filterRange == "true") {
       // Get cordinates from user location
-      if ((req.query.latitude != undefined) && (req.query.latitude != '') &&
-        (req.query.longitude != undefined) && (req.query.longitude != '')) {
-        zipCodeCordinate = { 'latitude': req.query.latitude, 'longitude': req.query.longitude }
+      if (
+        req.query.latitude != undefined &&
+        req.query.latitude != "" &&
+        req.query.longitude != undefined &&
+        req.query.longitude != ""
+      ) {
+        zipCodeCordinate = {
+          latitude: req.query.latitude,
+          longitude: req.query.longitude,
+        };
       } else {
-        // Get cordinates from ZipCode   
-        if ((req.query.zipCode != undefined) && (req.query.zipCode != '')) {
-
+        // Get cordinates from ZipCode
+        if (req.query.zipCode != undefined && req.query.zipCode != "") {
           let getMyCordinateAPI = new Promise((resolve, reject) => {
-
             let zipCodeApiKey = `5CTJKU60V33QGEGWCSFW`;
-            let zipCode = `${req.query.zipCode}`;  // `V6B1B4`;
+            let zipCode = `${req.query.zipCode}`; // `V6B1B4`;
             let zipCodeApi = `https://api.zip-codes.com/ZipCodesAPI.svc/1.0/QuickGetZipCodeDetails/${zipCode}?key=${zipCodeApiKey}`;
 
-            fetch(zipCodeApi)
-              .then((res) => {
-                res.json().then((data) => {
-                  if (data.err) {
-                    console.log(err);
-                    reject({});
-                  } else {
-                    resolve({ 'latitude': data.Latitude, 'longitude': data.Longitude });
-                  }
-                })
-              })
+            fetch(zipCodeApi).then((res) => {
+              res.json().then((data) => {
+                if (data.err) {
+                  console.log(err);
+                  reject({});
+                } else {
+                  resolve({
+                    latitude: data.Latitude,
+                    longitude: data.Longitude,
+                  });
+                }
+              });
+            });
           });
 
           zipCodeCordinate = await getMyCordinateAPI; // wait until the promise resolves (*)
         }
       }
 
-      //console.log(zipCodeCordinate);            
+      //console.log(zipCodeCordinate);
 
       // if (zipCodeCordinate.latitude != undefined && zipCodeCordinate.longitude != undefined) {
 
@@ -358,8 +358,8 @@ app.get("/api/v1/search", (req, res) => {
       //         let zipCodeLongitudeField = `l.longitude`;
       //         let zipCodeRange          = `20`;  // default kilometers for range search
       //         if ((req.query.range != undefined) && (req.query.range > 0)) {
-      //             zipCodeRange          = `${req.query.range}`;                    
-      //         }    
+      //             zipCodeRange          = `${req.query.range}`;
+      //         }
 
       //         let zipCodeApi = `https://www.zipcodeapi.com/rest/${zipCodeApiKey}/radius-sql.json/${zipCodeLatitude}/${zipCodeLongitude}/degrees/${zipCodeRange}/km/${zipCodeLatitudeField}/${zipCodeLongitudeField}/2`
 
@@ -371,7 +371,7 @@ app.get("/api/v1/search", (req, res) => {
       //                     reject (``);
       //                 } else {
       //                     resolve (` AND ${data.where_clause} `);
-      //                 }   
+      //                 }
       //             })
       //         })
       //     });
@@ -389,31 +389,34 @@ app.get("/api/v1/search", (req, res) => {
     // Initialize default values
     let sOrigin = "";
     let sRangeFilter = "";
-    let zipCodeRange = `20`;                  // default kilometers for range search 
-    let sDistance = ` null AS distance `;  // default doesn't have origin cordinates     
-    let sWhere = " WHERE 1=1";          // + sApiFilter;
+    let zipCodeRange = `20`; // default kilometers for range search
+    let sDistance = ` null AS distance `; // default doesn't have origin cordinates
+    let sWhere = " WHERE 1=1"; // + sApiFilter;
 
     // Material and Family Parameters
-    if ((req.query.materialId != undefined) && (req.query.materialId != "")) {
+    if (req.query.materialId != undefined && req.query.materialId != "") {
       sWhere = sWhere + ` AND m.materialId = ${req.query.materialId} `;
       sOrigin = ` "material" AS origin, m.name AS material, m.description, m.imageUrl AS materialImageUrl, m.imageName AS materialImageName, m.deliveryNotes, `;
     } else {
-      if ((req.query.familyId != undefined) && (req.query.familyId != "")) {
+      if (req.query.familyId != undefined && req.query.familyId != "") {
         sWhere = sWhere + ` AND f.familyId = ${req.query.familyId} `;
         sOrigin = ` "family" AS origin, f.name AS material, f.description, f.imageUrl AS materialImageUrl, f.imageName AS materialImageName, f.deliveryNotes, `;
       }
     }
-    
+
     // Range Filter Parameters
-    if ((req.query.filterRange != undefined) && (req.query.filterRange == 'true')) {
-      if ((req.query.range != undefined) && (req.query.range > 0)) {
+    if (req.query.filterRange != undefined && req.query.filterRange == "true") {
+      if (req.query.range != undefined && req.query.range > 0) {
         zipCodeRange = req.query.range;
       }
       sRangeFilter = ` HAVING distance <= ${zipCodeRange} `;
     }
 
     // Distance function Parameters
-    if (zipCodeCordinate.latitude != undefined && zipCodeCordinate.longitude != undefined) {
+    if (
+      zipCodeCordinate.latitude != undefined &&
+      zipCodeCordinate.longitude != undefined
+    ) {
       sDistance = ` round(ST_Distance_Sphere( point(l.longitude, l.latitude), point(${zipCodeCordinate.longitude}, ${zipCodeCordinate.latitude}) ) * .000621371192, 1) AS distance `;
     }
 
@@ -450,7 +453,7 @@ app.get("/api/v1/search", (req, res) => {
     savyDb.query(qry, (error, results) => {
       if (error) throw error;
       if (results.length == 0) {
-        res.status(404).send('No Record Found');
+        res.status(404).send("No Record Found");
       } else {
         let myResult = [];
         let myLocation = [];
@@ -460,13 +463,14 @@ app.get("/api/v1/search", (req, res) => {
         let iLocationId = -1;
 
         material = {
-          'origin': results[0].origin, 'materialName': results[0].material,
-          'familyName': results[0].familyName,
-          'description': results[0].description,
-          'imageUrl': results[0].materialImageUrl,
-          'imageName': results[0].materialImageName,          
-          'deliveryNotes': results[0].deliveryNotes,
-          'recyclingFact': results[0].recyclingFact
+          origin: results[0].origin,
+          materialName: results[0].material,
+          familyName: results[0].familyName,
+          description: results[0].description,
+          imageUrl: results[0].materialImageUrl,
+          imageName: results[0].materialImageName,
+          deliveryNotes: results[0].deliveryNotes,
+          recyclingFact: results[0].recyclingFact,
         };
 
         let i = 0;
@@ -475,37 +479,37 @@ app.get("/api/v1/search", (req, res) => {
           iLocationId = results[i].locationId;
 
           location = {
-            'locationName': results[i].location,
-            'city': results[i].city,
-            'provinceCode': results[i].provinceCode,
-            'postalCode': results[i].postalCode,
-            'address': results[i].address,
-            'phone': results[i].phone,
-            'latitude': results[i].latitude,
-            'longitude': results[i].longitude,
-            'distance': results[i].distance,
-            'openningHour': results[i].openningHour,
-            'website': results[i].website,
-            'openningHour': results[i].openningHour,
-            'imageUrl': results[i].imageUrl,
-            'locationNotes': results[i].locationNotes
+            locationName: results[i].location,
+            city: results[i].city,
+            provinceCode: results[i].provinceCode,
+            postalCode: results[i].postalCode,
+            address: results[i].address,
+            phone: results[i].phone,
+            latitude: results[i].latitude,
+            longitude: results[i].longitude,
+            distance: results[i].distance,
+            openningHour: results[i].openningHour,
+            website: results[i].website,
+            openningHour: results[i].openningHour,
+            imageUrl: results[i].imageUrl,
+            locationNotes: results[i].locationNotes,
+          };
+          while (i < results.length && iLocationId == results[i].locationId) {
+            otherMaterials.push({ materialName: results[i].otherMaterial });
+            i++;
           }
-          while ((i < results.length) && (iLocationId == results[i].locationId)) {
-            otherMaterials.push({ 'materialName': results[i].otherMaterial });
-            i++
-          }
-          myLocation.push({ 'locationInfo': location, 'otherMaterials': otherMaterials });
+          myLocation.push({
+            locationInfo: location,
+            otherMaterials: otherMaterials,
+          });
         }
 
-        myResult.push({ material, 'locations': myLocation });
+        myResult.push({ material, locations: myLocation });
 
         res.status(200).send(myResult);
       }
     });
-
   };
 
   mySearch(req);
-
 });
-
