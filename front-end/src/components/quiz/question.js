@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { quizImportAction, incAction } from "../../reducks/quiz/action";
 import { getQuizData } from "../../reducks/quiz/selectors";
 import Answer from "./answer";
-// import Slider from "react-slick";
+import ProgressBar from "./progress-bar/Progressbar";
 
 export default function Question() {
   const selector = useSelector((state) => state);
@@ -27,19 +27,11 @@ export default function Question() {
     <div>
       <div>
         {quizData.currentIndex > quizData.quizLength ? (
-          <div>
-            <h3>Thank You!</h3>
-            <h3>Thank You!</h3>
-            <h3>Thank You!</h3>
-            <h3>Thank You!</h3>
-            <h3>Thank You!</h3>
-            <h3>Thank You!</h3>
-            <h3>Thank You!</h3>
-            <h3>Thank You!</h3>
-            <h3>Thank You!</h3>
-          </div>
+          <div className="quiz-loading">Thank you!</div>
         ) : (
           <div>
+            <ProgressBar />
+
             <h2>
               Question {quizData.currentIndex} / {quizData.quizLength}
             </h2>
