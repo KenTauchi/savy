@@ -1,10 +1,12 @@
 // import { dataImportAction } from "./action";
+import { API_URL } from '../../components/global_variables';
 
 export const dataFetch = () => {
   // return (dispatch, getState) => {
     const provs = fetch(
-      "https://cors-anywhere.herokuapp.com/" +
-        "https://api.covid19tracker.ca/provinces"
+      // "https://cors-anywhere.herokuapp.com/" +
+      //   "https://api.covid19tracker.ca/provinces"
+      `${API_URL}/provinces`
     )
       .then((response) => response.json())
       .catch(() => null);

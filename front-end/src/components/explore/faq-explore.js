@@ -9,6 +9,8 @@ import AccordionSummary from '@material-ui/core/AccordionSummary';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import { API_URL } from '../global_variables';
+
 const FAQExplore = () => {
     const [expanded, setExpanded] = useState(false);
 
@@ -21,7 +23,7 @@ const FAQExplore = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/v1/faq')
+        fetch(`${API_URL}/faq`)
             .then(response => response.json())
             .then((result) => {
                 dispatch(faqImportAction(result));

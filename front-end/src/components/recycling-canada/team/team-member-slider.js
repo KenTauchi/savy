@@ -8,13 +8,15 @@ import TeamMember from './team-member';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import { API_URL } from '../../global_variables';
+
 export default function CenterMode() {
     const selector = useSelector((state) => state);
     const teamMembers = getTeamMembers(selector);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/v1/team')
+        fetch(`${API_URL}/team`)
             .then(response => response.json())
             .then((result) => {
                 dispatch(teamImportAction(result));

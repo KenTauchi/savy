@@ -1,4 +1,5 @@
 import { locationsImportAction, searchedMaterialFactImportAction, loadingConditionHandlerAction, notFoundHandlerAction } from './actions.js';
+import { API_URL } from '../../components/global_variables';
 
 export const searchLocationsByMaterial = (
   latitude,
@@ -42,7 +43,9 @@ export const searchLocationsByMaterial = (
       sfamiliyId,
     ];
 
-    let apiUrl = "http://34.212.131.115/api/v1/search/?";
+
+    let apiUrl = `${API_URL}/search?`;
+
 
     queries.forEach((query, index) => {
       if (index === 0) {
@@ -99,7 +102,7 @@ export const searchLocationsByMaterial = (
     };
 };
 
-    // const locations = await fetch(`http://localhost:3000/api/v1/search?materialId=${materialId}`)
+    // const locations = await fetch(`${API_URL}/search?materialId=${materialId}`)
     //     .then((response) => response.json())
     //     .then((result) => {
     //         // dispatch(locationsImportAction(result));

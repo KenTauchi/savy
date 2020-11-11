@@ -14,6 +14,8 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import am4geodata_region_canada from "@amcharts/amcharts4-geodata/canadaLow";
 
+import { API_URL } from '../../global_variables';
+
 am4core.useTheme(am4themes_animated);
 am4core.options.autoDispose = true;
 
@@ -428,7 +430,7 @@ export default function Map() {
     // fetch("https://cors-anywhere.herokuapp.com/" +
     //       "https://api.covid19tracker.ca/provinces")
 
-    fetch("http://localhost:3000/api/v1/mapdata")
+    fetch(`${API_URL}/mapdata`)
       .then((response) => response.json())
       .then((result) => {
         // dispatch(dataImportAction(result));

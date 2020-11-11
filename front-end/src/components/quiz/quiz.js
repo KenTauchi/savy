@@ -6,8 +6,6 @@ import { getQuizData } from "../../reducks/quiz/selectors";
 import Question from "../quiz/question";
 import AnswerWindow from "./answer-window/AnswerWindow";
 
-import "./quiz.scss";
-
 const Quiz = () => {
 	const selector = useSelector((state) => state);
 	const quizData = getQuizData(selector);

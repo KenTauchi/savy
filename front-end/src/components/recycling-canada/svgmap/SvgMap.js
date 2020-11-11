@@ -8,6 +8,8 @@ import {
 
 import PieChart from "./piechart/piechart";
 
+import { API_URL } from '../../global_variables';
+
 const SvgMap = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
@@ -25,7 +27,7 @@ const SvgMap = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:3000/api/v1/mapdata")
+    fetch(`${API_URL}/mapdata`)
       .then((response) => response.json())
       .then((result) => {
         dispatch(dataImportAction(result));
