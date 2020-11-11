@@ -42,7 +42,7 @@ export const searchLocationsByMaterial = (
       sfamiliyId,
     ];
 
-    let apiUrl = "http://localhost:3000/api/v1/search?";
+    let apiUrl = "http://34.212.131.115/api/v1/search/?";
 
     queries.forEach((query, index) => {
       if (index === 0) {

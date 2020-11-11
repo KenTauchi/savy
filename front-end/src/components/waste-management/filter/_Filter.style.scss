@@ -65,6 +65,7 @@
         top: 52%;
         transform: translatey(-50%);
         right: 4px;
+        width: 56px;
         // border-radius: 30px;
 
         img {
@@ -159,6 +160,13 @@
             display: block;
             border-radius: 50%;
         }
-
     }
+
+    @-moz-document url-prefix() {
+
+     .searchButtonLaptop {
+        // display: block !important;
+        // width: 56px;
+    }
+}
 }
