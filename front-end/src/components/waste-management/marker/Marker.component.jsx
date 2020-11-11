@@ -9,11 +9,12 @@ const Marker = (props) => {
         location,
         mapMarkerLocationDetailDisplayHandler,
         getSelectedLocation,
+        selected
     } = props;
 
     return (
         <div 
-            className="markerDiv"
+            className={ selected ? "markerDiv selectedMarker" : "markerDiv" }
             onClick={()=>{
                 mapMarkerLocationDetailDisplayHandler();
                 getSelectedLocation(location);

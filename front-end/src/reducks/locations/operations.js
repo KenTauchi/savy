@@ -43,7 +43,9 @@ export const searchLocationsByMaterial = (
       sfamiliyId,
     ];
 
+
     let apiUrl = `${API_URL}/search?`;
+
 
     queries.forEach((query, index) => {
       if (index === 0) {

@@ -14,7 +14,7 @@ const GoogleMap = (props) => {
     displayStyle,
     mapMarkerLocationDetailDisplayHandler,
     getSelectedLocation,
-
+    selectedLocation
   } = props;
 
   const [apikey, setApikey] = useState({
@@ -24,18 +24,32 @@ const GoogleMap = (props) => {
     },
   });
   
-  const Markers = locations.map((location, index) => (
-    <Marker
-      key={location.address + location.location + index}
-      lat={location.latitude}
-      lng={location.longitude}
-      // any user props
-      text={location.locationName}
-      location={location}
-      mapMarkerLocationDetailDisplayHandler={mapMarkerLocationDetailDisplayHandler}
-      getSelectedLocation={getSelectedLocation}
-    />
-  ));
+  const Markers = locations.map((location, index) => {
+    let selected = false;
+
+    if (
+      location.latitude === selectedLocation.latitude &&
+      location.longitude === selectedLocation.longitude
+    ) {
+      selected = true;
+    }
+
+      return (
+        <Marker
+          key={location.address + location.location + index}
+          lat={location.latitude}
+          lng={location.longitude}
+          // any user props
+          text={location.locationName}
+          location={location}
+          mapMarkerLocationDetailDisplayHandler={
+            mapMarkerLocationDetailDisplayHandler
+          }
+          getSelectedLocation={getSelectedLocation}
+          selected={selected}
+        />
+      );
+    });
 
   return (
     // Important! Always set the container height explicitly

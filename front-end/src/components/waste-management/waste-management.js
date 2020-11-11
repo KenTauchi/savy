@@ -294,9 +294,17 @@ const WasteManagement = () => {
         lat: parseFloat(location.latitude),
         lng: parseFloat(location.longitude),
       },
-      zoom: 13,
+      zoom: 14,
     });
   };
+
+  const resetSelectedLocation = () => {
+    setSelectedLocation({
+      ...selectedLocation,
+      latitude: "",
+      longitude: "",
+    })
+  }
 
   const setCurrentPosition = (position) => {
     setCurrentLocationProps({
@@ -621,6 +629,8 @@ const WasteManagement = () => {
         detailHide={detailHide}
         currentLocation={defaultProps}
         getlocationByPostalCode={getlocationByPostalCode}
+        getLocation={getLocation}
+        resetSelectedLocation={resetSelectedLocation}
       />
       <div className="wm-main-contents" style={notFoundDisplay.contents}>
         {wmComponentDisplay.tab ? (
@@ -653,6 +663,7 @@ const WasteManagement = () => {
               mapMarkerLocationDetailDisplayHandler
             }
             getSelectedLocation={getSelectedLocation}
+            selectedLocation={selectedLocation}
           />
         ) : null}
 
@@ -669,6 +680,7 @@ const WasteManagement = () => {
           <LocationDetail
             location={selectedLocation}
             locationDetailDisplayHandler={locationDetailDisplayHandler}
+            resetSelectedLocation={resetSelectedLocation}
           />
         ) : null}
 
