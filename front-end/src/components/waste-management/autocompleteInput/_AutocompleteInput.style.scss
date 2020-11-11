@@ -1,5 +1,7 @@
 .autocompleteInput {
     position: relative;
+    border-bottom: $savy-gray-50 1px solid;
+
     ul {
         margin-top: .5rem;
          -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
@@ -21,7 +23,7 @@
         width: 100%;
         // border: solid 1px #aaaaaa;
         border: none;
-        border-bottom: $savy-gray-50 1px solid;
+        // border-bottom: $savy-gray-50 1px solid;
         -moz-box-sizing: border-box;
         -webkit-box-sizing: border-box;
         box-sizing: border-box;
@@ -66,9 +68,7 @@
 
 @media screen and (min-width: 768px) {
     .autocompleteInput {
-        input {
-            border-bottom: none;
-        }
+        border-bottom: none;
 
         // .makeStyles-input-2 {
         //     padding-bottom: 0;

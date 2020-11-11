@@ -5,7 +5,12 @@ import x_mark from './closewindow-60px.svg';
 // import "./LocationDetail.style.scss";
 
 const LocationDetail = (props) => {
-  const { location, displayStyle, locationDetailDisplayHandler } = props;
+  const {
+    location,
+    displayStyle,
+    locationDetailDisplayHandler,
+    resetSelectedLocation,
+  } = props;
 
   const displayUrl = location.website.slice(0, 30) + "...";
   // console.log(location);
@@ -27,7 +32,12 @@ const LocationDetail = (props) => {
           className="x_markImage"
           src={x_mark}
           alt="x_mark"
-          onClick={locationDetailDisplayHandler}
+          onClick={
+            () => {
+              resetSelectedLocation();
+              locationDetailDisplayHandler();           
+            }
+          }
         />
       </div>
 
