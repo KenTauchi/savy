@@ -8,6 +8,8 @@ import SwiperCore, { Pagination } from "swiper";
 import "../../../../node_modules/swiper/swiper-bundle.css";
 import "../../../../node_modules/swiper/swiper.scss";
 
+import { API_URL } from '../../global_variables';
+
 SwiperCore.use([Pagination]);
 
 const Testimonial = () => {
@@ -23,7 +25,7 @@ const Testimonial = () => {
 	useEffect(() => {
 		console.log("Testimonial API data fetch rendered");
 
-		fetch("http://localhost:3000/api/v1/testemonials")
+		fetch(`${API_URL}/testemonials`)
 			.then((response) => response.json())
 			.then((result) => {
 				dispatch(testimonialImportAction(result));

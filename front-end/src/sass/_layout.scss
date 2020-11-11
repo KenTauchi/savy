@@ -12,5 +12,13 @@ a {
 }
 
 .main-content {
-    min-height: 80vh;
+    min-height: 75vh;
+}
+
+.savy-green-button {
+    background-color: $savy-green-100;
+    border-radius: 6px;
+    color: $savy-white;
+    padding: 0.5rem 2rem;
+    display: inline-block;
 }

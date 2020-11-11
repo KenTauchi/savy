@@ -6,6 +6,8 @@ import { getQuizData } from "../../reducks/quiz/selectors";
 import Answer from "./answer";
 import ProgressBar from "./progress-bar/Progressbar";
 
+import { API_URL } from '../global_variables';
+
 export default function Question() {
   const selector = useSelector((state) => state);
   const quizData = getQuizData(selector);
@@ -14,7 +16,7 @@ export default function Question() {
   useEffect(() => {
     console.log("quiz API data fetch rendered");
 
-    fetch("http://localhost:3000/api/v1/quiz?limit=10")
+    fetch(`${API_URL}/quiz?limit=10`)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);

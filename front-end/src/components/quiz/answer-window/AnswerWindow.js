@@ -1,6 +1,5 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./AnswerWindow.scss";
 
 import { incAction, disWindow, resetQuiz } from "../../../reducks/quiz/action";
 import { getQuizData } from "../../../reducks/quiz/selectors";
