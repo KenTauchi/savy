@@ -37,7 +37,7 @@ const FAQExplore = () => {
             <h2>Frequently Asked Questions on Recycling</h2>
             <h3>Below are answers to some of the most common questions about recycling!</h3>
             <div className="hr-separator"></div>
-            <div>
+            <div className="faq-list">
                 {faqs.data.map((faq, index) => {
                     return (
                         <Accordion key={index} expanded={expanded === `panel${faq.faqId}`} onChange={handleChange(`panel${faq.faqId}`)}>
