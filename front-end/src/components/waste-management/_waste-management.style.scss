@@ -17,6 +17,8 @@
 .waste-management-content {
     position: relative;
     color: $savy-black;
+    max-width: $max-width;
+    margin: 0 auto;
 }
 
 .mapAndMaterialTab {
@@ -41,10 +43,9 @@
 }
 
 @media screen and (min-width: 768px) {
-    // .waste-management-content {
-    //     display: grid;
-    //     grid-template-columns: 325px 1fr;
-    // }
+    .waste-management-content {
+        padding: 0 1.5rem;
+    }
 
     // .filter-section {
     //     order: 1;
@@ -59,7 +60,7 @@
 
     .wm-main-contents {
         display: grid;
-        grid-template-columns: 325px 1fr;
+        grid-template-columns: 1fr 1.25fr;
         margin-top: 2rem;
         grid-column-gap: 48px;
     }
@@ -95,14 +96,14 @@
     }
 }
 
-@media screen and (min-width: 992px) {
-    .wm-main-contents {
-        grid-template-columns: 420px 1fr;
-    }
-}
+// @media screen and (min-width: 992px) {
+//     .wm-main-contents {
+//         grid-template-columns: 420px 1fr;
+//     }
+// }
 
-@media screen and (min-width: 1200px) {
-    .wm-main-contents {
-        grid-template-columns: 520px 1fr;
-    }
-}
+// @media screen and (min-width: 1200px) {
+//     .wm-main-contents {
+//         grid-template-columns: 520px 1fr;
+//     }
+// }

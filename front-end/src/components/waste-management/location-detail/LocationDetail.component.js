@@ -12,7 +12,9 @@ const LocationDetail = (props) => {
     resetSelectedLocation,
   } = props;
 
-  const displayUrl = location.website.slice(0, 30) + "...";
+  const displayUrl = location.website;
+  // const displayUrl = location.website.slice(0, 30) + "...";
+
   // console.log(location);
 
   // console.log(location.materials);
@@ -26,7 +28,7 @@ const LocationDetail = (props) => {
   return (
     <div style={displayStyle} className="locationDetailDiv">
       <div className="detailTop">
-        <p className="listItemFacilityName">{location.locationName}</p>
+        <p className="locationDetailFacilityName">{location.locationName}</p>
 
         <img
           className="x_markImage"

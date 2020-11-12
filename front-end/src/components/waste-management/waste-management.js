@@ -170,10 +170,9 @@ const WasteManagement = () => {
       searchLocationsByMaterial(
         49.188678,
         -122.951498,
-        20,
+        15,
         "",
-        49, // cat
-        // 26, //dog
+        "29", // 49 cat, 26 dog, 29 mixed paper
         "",
       )
     );

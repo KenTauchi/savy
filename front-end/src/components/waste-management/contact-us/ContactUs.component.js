@@ -11,7 +11,8 @@ const ContactUs = () => {
   const history = useHistory();
 
   const moveToContact = () => {
-    history.push("/contact")
+    history.push("/contact");
+    window.scrollTo(0, 0);
   }
 
   return (

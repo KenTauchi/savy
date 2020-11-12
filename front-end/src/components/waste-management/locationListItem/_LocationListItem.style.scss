@@ -5,17 +5,18 @@
     text-align: left;
     padding: 1rem;
     display: grid;
-    grid-template-columns: 1fr 32px;
+    // grid-template-columns: 1fr 32px; // without miles
+    grid-template-columns: 1fr 64px; // with miles
     line-height: 1.5;
 
     p {
         margin: 0;
         line-height: 1.25;
-        font-size: .8rem;
+        font-size: 14px;
     }
 
     a {
-        font-size: .8rem;
+        font-size: 14px;
         text-decoration: none;
         color: $savy-gray-50;
     }
@@ -43,6 +44,7 @@
     .directionDistance {
         justify-self: right;
         align-self: flex-end;
+        // display: none;
     }
 
     .rightArrowDiv {

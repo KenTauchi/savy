@@ -10,6 +10,7 @@ const Explore = () => {
 
   const moveToExplore = () => {
       history.push("/explore");
+      window.scrollTo(0, 0);
   }
 
   return (
