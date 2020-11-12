@@ -1,31 +1,23 @@
-const mySql = require('mysql');
+require("dotenv").config();
 
-// ConnectionString to connect to database
-// const ConnectionString = {
-//     connectionLimit:10,
-//     host: 'localhost',
-//     database: 'savy',
-//     user: 'root',
-//     password: 'root',
-//     multipleStatements: true,
-//     socketPath: '/Applications/MAMP/tmp/mysql/mysql.sock'
-// }
+const mySql         = require('mysql');
+const promise_mysql = require('promise-mysql');
+
 
 const ConnectionString = {
     connectionLimit:10,
-    host: '34.212.131.115',
-    database: 'savy',
-    user: 'savy-user',
-    password: '9LpsjjT6Pn<0',
+    host     : process.env.DB_HOST,
+    user     : process.env.DB_USER,
+    password : process.env.DB_PASS,
+    database : process.env.DB_NAME,
     multipleStatements: true
 }
-
-
 
 
 // *******************************************************
 // ******** Database Connection Setup ********************
 // *******************************************************
 const savyDb = mySql.createConnection(ConnectionString);
+const savyPoolDb = promise_mysql.createPool(ConnectionString);
 
-module.exports = {savyDb};
+module.exports = {savyDb, savyPoolDb};
