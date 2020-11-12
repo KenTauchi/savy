@@ -123,7 +123,8 @@ exports.search = (req, res) => {
       // Set query statement
       let qry = `SELECT DISTINCT 
                             ${sOrigin} 
-                            f.name AS familyName, f.recyclingFact, l.locationId, l.distance,                   
+                            f.name AS familyName, f.recyclingFact, l.locationId, l.distance,   
+                            b.color AS binColor, b.name As binName, b.description AS binDescription,                
                             l.name AS location, c.name AS city, c.provinceCode, l.postalCode, l.address, l.phone, l.latitude, l.longitude, 
                             l.openningHour, l.website, l.imageUrl, l.locationNotes, om.family_name as otherMaterial 
                        FROM family f  
@@ -143,6 +144,7 @@ exports.search = (req, res) => {
                                                 INNER JOIN materialperlocation ml ON (m.materialId = ml.materialId)
                                                 INNER JOIN location l ON (ml.locationId = l.locationId ) 
                                         ) om ON ( om.locationId = l.locationId AND om.familyId <> f.familyId )
+                            LEFT JOIN bin b ON (m.binId = b.binId)                                         
                       ${sWhere}      
                       ORDER BY distance, location, locationId, otherMaterial                         
                      `;
@@ -173,6 +175,9 @@ exports.search = (req, res) => {
                     imageName: results[0].materialImageName,
                     deliveryNotes: results[0].deliveryNotes,
                     recyclingFact: results[0].recyclingFact,
+                    binName: results[0].binName,
+                    binColor: results[0].binColor,
+                    binDescription: results[0].binDescription
                   };
           
                   let i = 0;
@@ -197,7 +202,10 @@ exports.search = (req, res) => {
                       locationNotes: results[i].locationNotes,
                     };
                     while (i < results.length && iLocationId == results[i].locationId) {
-                      otherMaterials.push({ materialName: results[i].otherMaterial });
+                      var isMaterial = otherMaterials.find(o => o.materialName === results[i].otherMaterial);
+                      if (isMaterial == undefined) {
+                        otherMaterials.push({ materialName: results[i].otherMaterial });
+                      }
                       i++;
                     }
                     myLocation.push({
