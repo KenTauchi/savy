@@ -1,6 +1,7 @@
 .explore-content {
     max-width: 1300px;
     margin: 0 auto;
+    margin-bottom: 5rem;
 
     @include mq-mediumLarge {
         padding: 0 1.5rem;
@@ -162,6 +163,56 @@
             width: 90%;
             margin: 0 auto;
             margin-bottom: 2rem;
+
+            @include mq-medium {
+                border-bottom: none;
+            }
+        }
+
+        .faq-list {
+            .MuiAccordion-root {
+                position: unset;
+                color: $savy-gray-100;
+
+                &.Mui-expanded {
+                    margin: 0;
+                }
+
+                &.MuiPaper-elevation1 {
+                    box-shadow: none;
+                    border-bottom: 1px solid $savy-gray-50;
+                    padding: 1rem 0;
+                }
+
+                .MuiSvgIcon-root {
+                    width: 2em;
+                    height: 2em;
+                    fill: #A0A0A0;
+                }
+
+                .MuiAccordionSummary-root {
+                    padding: 0;
+
+                    .MuiTypography-body1 {
+                        font-size: 18px;
+                        line-height: 30px;
+                        font-weight: bold;
+                        font-family: $font-sans-serif;
+                    }
+                }
+
+                .MuiAccordionDetails-root {
+                    padding: 0;
+
+                    .MuiTypography-body1 {
+                        font-size: 16px;
+                        line-height: 30px;
+                        font-family: $font-sans-serif;
+                    }
+                }
+            }
+
+
         }
     }
 }

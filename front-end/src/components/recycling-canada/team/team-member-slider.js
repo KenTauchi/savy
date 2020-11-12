@@ -51,19 +51,7 @@ export default function CenterMode() {
                 }
             },
             {
-                breakpoint: 769,
-                settings: {
-                    slidesToShow: 2
-                }
-            },
-            {
-                breakpoint: 600,
-                settings: {
-                    slidesToShow: 2
-                }
-            },
-            {
-                breakpoint: 480,
+                breakpoint: 660,
                 settings: {
                     slidesToShow: 1
                 }

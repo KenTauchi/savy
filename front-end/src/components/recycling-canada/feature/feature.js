@@ -33,7 +33,7 @@ const Feature = () => {
                             knowledge and expertise in recycling and learn
                             new things with simple question and answer.
                         </span>
-                        <button className="feature-redirect-btn">Go to Challenges</button>
+                        <button onClick={() => history.push("/challenges/rule")} className="feature-redirect-btn">Go to Challenges</button>
                     </div>
 
                     <div className="feature">
@@ -44,7 +44,7 @@ const Feature = () => {
                             and any related articles that can help you
                             expand your knowledge.
                         </span>
-                        <button className="feature-redirect-btn">Go to Explore </button>
+                        <button onClick={() => history.push("/explore")} className="feature-redirect-btn">Go to Explore </button>
                     </div>
                 </div>
             </div>
