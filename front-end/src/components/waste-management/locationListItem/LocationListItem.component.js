@@ -39,6 +39,7 @@ const LocationListItem = (props) => {
 
       <div className="locationListItemDirection">
         <img className="directionArrow" src={arrow} alt="arrow image" />
+        {location.distance ? <p className="directionDistance">{location.distance} miles</p> : null}
       </div>
     </li>
   );

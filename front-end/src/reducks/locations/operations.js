@@ -4,7 +4,7 @@ import { API_URL } from '../../components/global_variables';
 export const searchLocationsByMaterial = (
   latitude,
   longitude,
-  filterRange,
+  range,
   zipCode,
   materialId,
   familiyId,
@@ -19,10 +19,14 @@ export const searchLocationsByMaterial = (
       longitude === "" || longitude === undefined
         ? ""
         : "longitude=" + longitude;
-    let sfilterRange =
-      filterRange === "" || filterRange === undefined
+    let srange =
+      range === "" || range === undefined
         ? ""
-        : "filterRange=" + filterRange;
+        : "range=" + range;
+    let sfilterRange =
+      range === "" || range === undefined
+        ? "filterRange=" + false
+        : "filterRange=" + true;
     let szipCode =
       zipCode === "" || zipCode === undefined ? "" : "zipCode=" + zipCode;
     let smaterialId =
@@ -37,6 +41,7 @@ export const searchLocationsByMaterial = (
     let queries = [
       slatitude,
       slongitude,
+      srange,
       sfilterRange,
       szipCode,
       smaterialId,
@@ -55,7 +60,7 @@ export const searchLocationsByMaterial = (
       }
     });
 
-    // console.log(apiUrl);
+    console.log(apiUrl);
 
     const searchResult = await fetch(apiUrl)
       .then((response) => response.json())
@@ -93,7 +98,7 @@ export const searchLocationsByMaterial = (
     })
 
     dispatch(loadingConditionHandlerAction(false)); 
-    // console.log("search results: ", searchResult);
+    console.log("search results: ", searchResult);
     // console.log("search results L: ", locations);
     // console.log("search results M: ", material);
     dispatch(locationsImportAction(locations));

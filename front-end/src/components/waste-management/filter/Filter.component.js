@@ -102,7 +102,7 @@ const Filter = (props) => {
     }
 
     let lat = currentLocation.center.lat;
-    let lng = currentLocation.center.lat;
+    let lng = currentLocation.center.lng;
     let range = distanceSearchField;
     let zip = postalCodeSearchField;
 

@@ -9,6 +9,27 @@
     -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
 
+    p,a,ul {
+        color: $savy-gray-100;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+
+    .locationDetailFacilityName {
+        color: $primary-color;
+        font-size: 22px;
+        margin-top: 0;
+        font-weight: bold;
+    }
+
+    .hoursOfOperation,
+    .materialAccepted,
+    .notes,
+    .locationNotes {
+        color: $savy-black;
+    }
 
     overflow-y: scroll;
 
@@ -20,9 +41,6 @@
         grid-column-gap: 1rem;
     }
 
-    li {
-        // display: inline-block; 
-    }
 }
 
 .locationDetailDiv::-webkit-scrollbar{
@@ -43,6 +61,7 @@
 .detailTop {
     display: grid;
     grid-template-columns: 1fr 24px;
+    align-items: flex-start;
 }
 
 .x_markImage {

@@ -2,6 +2,8 @@ import React from "react";
 
 import marker from "./map-pin-60px.svg";
 
+import selectedMarker from "./map-pin.png";
+
 // import './Marker.styles.scss';
 
 const Marker = (props) => {
@@ -13,19 +15,23 @@ const Marker = (props) => {
     } = props;
 
     return (
-        <div 
-            className={ selected ? "markerDiv selectedMarker" : "markerDiv" }
-            onClick={()=>{
-                mapMarkerLocationDetailDisplayHandler();
-                getSelectedLocation(location);
-            }}
-            >
-            <div className="popupComment">
-                <p>{props.text}</p>
-            </div>
-            <img className="markerImage" src={marker} />
+      <div
+        className={selected ? "markerDiv selectedMarker" : "markerDiv"}
+        onClick={() => {
+          mapMarkerLocationDetailDisplayHandler();
+          getSelectedLocation(location);
+        }}
+      >
+        <div className="popupComment">
+          <p>{props.text}</p>
         </div>
-    )
+        { !selected ? (
+          <img className="markerImage" src={marker} />
+        ) : (
+          <img className="markerImage" src={selectedMarker} />
+        )}
+      </div>
+    );
 }
 
 export default Marker;

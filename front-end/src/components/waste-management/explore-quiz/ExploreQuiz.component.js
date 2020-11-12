@@ -10,7 +10,8 @@ const ExploreQuiz = () => {
 
   const history = useHistory();
   const moveToQuiz = () => {
-    history.push("/challenges")
+    history.push("/challenges");
+    window.scrollTo(0, 0);
   }
 
   return (
