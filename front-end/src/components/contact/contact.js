@@ -16,18 +16,22 @@ const Contact = () => {
     const [serverState, setServerState] = useState({
         submitting: false,
         status: null,
+       // displayForm:false
     });
 
 
     const handleServerResponse = (ok, msg, form) => {
         setServerState({
             submitting: false,
-            status: { ok, msg }
+            status: { ok, msg },
+           // displayForm:false
         });
 
         if (ok) {
             form.reset();
-
+            // setServerState({
+            //     displayForm:true
+            // });
         }
     }
 
@@ -55,6 +59,7 @@ const Contact = () => {
 
     // Form hidden 
     // className={serverState.submitting ? {display: 'none'} : ""} 
+    console.log("Check status",serverState.displayForm);
     return (
         <div className="main-content">
             <div className="contact-main">
@@ -93,10 +98,12 @@ const Contact = () => {
                                 label="Message"
                                 required
                             />
-                            <button id="contact-button" type="submit" disabled={serverState.submitting} >
-                                Submit
-                            </button>
 
+                            <div className="contact-button">
+                                <button type="submit" disabled={serverState.submitting} >
+                                    Submit
+                                </button>
+                            </div>
                        
                         </form>
                             
