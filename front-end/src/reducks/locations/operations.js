@@ -60,7 +60,7 @@ export const searchLocationsByMaterial = (
       }
     });
 
-    console.log(apiUrl);
+    // console.log(apiUrl);
 
     const searchResult = await fetch(apiUrl)
       .then((response) => response.json())
@@ -98,7 +98,7 @@ export const searchLocationsByMaterial = (
     })
 
     dispatch(loadingConditionHandlerAction(false)); 
-    console.log("search results: ", searchResult);
+    // console.log("search results: ", searchResult);
     // console.log("search results L: ", locations);
     // console.log("search results M: ", material);
     dispatch(locationsImportAction(locations));
