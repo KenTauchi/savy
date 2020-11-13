@@ -1,27 +1,21 @@
 .contact-main{
-    
+    margin: 10%;
     h2 {
         text-align: center;
         font-weight: 900;
-        font-size: 1.4rem;
-    }
-    .contact-section {
-        display: grid;
-        grid-template-columns: 2fr 1fr;
-        justify-content: center;
-        text-align: left;
-        grid-gap: 4rem;
-        margin: 5rem;
+        font-size: 1.2rem;
     }
 
-    #submit-message {
-        text-align: center;
+    .contact-img {
+        padding: 5%;
+        margin: auto;
     }
+
     .contact-content {
         h3 {
             text-align: center;
             font-weight: 900;
-            font-size: 1.3rem;
+            font-size: 1rem;
         }
 
         .floating-input {
@@ -29,19 +23,74 @@
             margin-top: 2rem;
             padding: 5px 1px;
         }
+
+        .contact-button {
+            text-align: center;
+        }
+
         button {
             border-radius: 5px;
             background-color:$primary-color;
             border: none;
             color: #ffffff;
             height: 3rem;
-            width: 6rem;
             margin-top: 4rem;
+            width: 30%;
         }
         #submit-message {
-            margin-top: 2rem;
+            margin-top: 4rem;
+            text-align: center;
         }
     }
     
 }
 
+
+@media screen and (min-width: $medium) {
+    .contact-main{ 
+        margin: 5%;
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        
+        .contact-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            justify-content: center;
+            text-align: left;
+            grid-gap: 4rem;
+            margin: 5rem 0;
+        }
+
+        .contact-img {
+            padding: 0;
+            margin: 0;
+            max-width: 85%;
+        }
+
+        .contact-content {
+
+            h3 {
+                font-size: 1.2rem;
+            }
+
+            .contact-button {
+                text-align: left;
+            }
+
+            button {
+                width: 70%;
+            }
+        }
+    }
+
+}
+
+@media screen and (min-width: $large) {
+    .contact-img {
+        max-width: 60%;
+    }
+
+}

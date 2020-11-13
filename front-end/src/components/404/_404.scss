@@ -1,0 +1,108 @@
+.errorMain-Section {
+
+    align-content: center;
+
+    .error-Section {    
+        margin: 5% 10%;
+    }
+
+    h1 {
+        font-weight: 900;
+    }
+
+    .main-primary {
+        text-align: center;
+    }
+
+    .notFound-section{
+        margin-top: 10%;
+        grid-gap: 2rem;
+    }
+
+    .error-logo {
+        margin: 10% auto;
+        max-width: 40%;
+    }
+    
+    .notFound-content {
+        margin-right: 10%;
+    }
+
+    .contact-button {
+        text-align: center;
+    }
+
+    button {
+        border-radius: 5px;
+        background-color:$primary-color;
+        border: none;
+        color: #ffffff;
+        height: 3rem;
+        margin: 10%;
+    }
+    
+
+}
+
+
+@media screen and (min-width: $medium) {
+    .errorMain-Section {
+        .error-Section {    
+            margin: 5% 20%;
+        }
+
+
+        .notFound-section{
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            margin-top: 10%;
+            grid-gap: 2rem;
+        }
+
+        .error-logo {
+            text-align: end;
+            margin: auto;
+            max-width: 100%;
+        }  
+        
+        .errorMain-Section button {
+            border-radius: 5px;
+            background-color: #05C4A3;
+            border: none;
+            color: #ffffff;
+            height: 3rem;
+            margin-bottom: 10%;
+        }
+
+        button {
+            margin-top: 5%;
+        }
+}
+}
+
+@media screen and (min-width: $large) {
+    .errorMain-Section {
+        .error-Section {    
+            margin: 5% 25%;
+        }
+
+        .error-logo {
+            text-align: end;
+            margin: auto;
+        } 
+
+        .errorMain-Section button {
+            margin-top: 0;
+            margin-bottom: 5%;
+        }
+
+        .errorMain-Section .error-logo {
+            margin: 0;
+            width: 50%; 
+        }
+        
+        button {
+            margin-top: 5%;
+        }
+}
+}
