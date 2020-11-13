@@ -10,10 +10,15 @@ const Feature = () => {
         window.scrollTo(0,0);
     }
 
-    // const moveToChallenges = () => {
-    //     history.push("/challenges/rule");
-    //     window.scrollTo(0,0);
-    // }
+    const moveToChallenges = () => {
+        history.push("/challenges-rule");
+        window.scrollTo(0,0);
+    }
+
+    const moveToWasteManagement = () => {
+        history.push("/challenges-rule");
+        window.scrollTo(0,0);
+    }
 
     return (
         <div className="feature-section">
@@ -33,7 +38,7 @@ const Feature = () => {
                             how to get in touch with them.
                         </span>
                         {/* <Button className="feature-redirect-btn" component={Link} to="/waste-management">Manage</Button> */}
-                        <button onClick={() => history.push("/waste-management")} className="feature-redirect-btn">Manage</button>
+                        <button onClick={moveToWasteManagement} className="feature-redirect-btn">Manage</button>
                     </div>
 
                     <div className="feature">
@@ -44,7 +49,7 @@ const Feature = () => {
                             knowledge and expertise in recycling and learn
                             new things with simple question and answer.
                         </span>
-                        <button onClick={() => history.push("/challenges/rule")} className="feature-redirect-btn">Go to Challenges</button>
+                        <button onClick={moveToChallenges} className="feature-redirect-btn">Go to Challenges</button>
                     </div>
 
                     <div className="feature">
