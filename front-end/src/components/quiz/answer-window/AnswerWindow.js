@@ -12,9 +12,13 @@ export default function AnswerWindow() {
   return quizData.currentIndex > quizData.quizLength ? (
     <div className="answer-window">
       <h2>
-        {(quizData.correctAnswer / quizData.quizLength).toFixed(2) * 100 > 50
-          ? "Congratulations! "
-          : "Sorry... "}{" "}
+        {(quizData.correctAnswer / quizData.quizLength).toFixed(2) * 100 <= 40
+          ? "Sorry... "
+          : (quizData.correctAnswer / quizData.quizLength).toFixed(2) * 100 <=
+              70 &&
+            (quizData.correctAnswer / quizData.quizLength).toFixed(2) * 100 > 40
+          ? "Great! "
+          : "Congratulations! "}
         Your Score is &nbsp;{" "}
         {(quizData.correctAnswer / quizData.quizLength).toFixed(2) * 100}%
       </h2>
