@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getDataSet } from "../../../../reducks/mapChartData/selectors";
@@ -16,6 +16,9 @@ const PieChart = () => {
   const selector = useSelector((state) => state);
   const dataSet = getDataSet(selector);
   const pieData = dataSet.pieChartData;
+
+  const [width, setWidth] = useState(0);
+  const updateSize = () => setWidth(window.innerWidth);
 
   useEffect(() => {
     console.log("pieChart UseEffect");
@@ -56,23 +59,26 @@ const PieChart = () => {
     // ==========To make the pie chart Resonsive ===========
     // =====================================================
 
-    let screen = window.innerWidth;
-    let padVar = screen > 550 ? 9 : 4;
-    let padSide = screen > 550 ? 4.5 : 2;
+    window.addEventListener("resize", updateSize);
+    updateSize();
+    let padVar = width > 550 ? 9 : 4;
+    let padSide = width > 550 ? 4.5 : 2;
 
     // For the desktip view
-    // change the percentage to 50, font size t0 12, and css as below;
-    chart.radius = am4core.percent(screen > 700 ? 95 : screen / 9.5);
-    labelTemplate.fontSize = screen > 550 ? 16 : 14;
+    chart.radius = am4core.percent(width > 700 ? 95 : width / 9.5);
+    labelTemplate.fontSize = width > 550 ? 16 : 14;
     labelTemplate.padding(padSide, padVar, padSide, padVar);
 
     // ====================================================
     // ====================================================
-  }, []);
+    console.log(width);
+    return () => window.removeEventListener("resize", updateSize);
+  }, [width]);
 
   return (
     <div className="piechart">
       <div id="chartdiv"></div>
+      <div>{width}</div>
     </div>
   );
 };

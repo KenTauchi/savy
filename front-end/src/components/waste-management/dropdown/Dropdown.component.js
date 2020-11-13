@@ -49,11 +49,11 @@ export const Dropdown = (props) => {
                     inputProps={{ 'aria-label': 'Without label' }}
                     IconComponent={ArrowIcon}
                 >
-                    <MenuItem value={5}>5 miles</MenuItem>
-                    <MenuItem value={10}>10 miles</MenuItem>
-                    <MenuItem value={15}>15 miles</MenuItem>
-                    <MenuItem value={20}>20 miles</MenuItem>
-                    <MenuItem value={25}>25 miles</MenuItem>
+                    <MenuItem value={5}>5 kilometers</MenuItem>
+                    <MenuItem value={10}>10 kilometers</MenuItem>
+                    <MenuItem value={15}>15 kilometers</MenuItem>
+                    <MenuItem value={20}>20 kilometers</MenuItem>
+                    <MenuItem value={25}>25 kilometers</MenuItem>
                 </Select>
             </FormControl>
         </div>

@@ -50,9 +50,9 @@ const WasteManagement = () => {
     contents: { display: "none" },
     notFound: { display: "none" },
   });
+  const breakPoint = 768;
 
   const notFoundCondition = getNotFoundCondition(state)
-
   const [loadingCondition, setLoadingCondition] = useState(false);
   const loadingState = getLoadingCondition(state);
 
@@ -74,7 +74,7 @@ const WasteManagement = () => {
         notFound: { display: "none" },
       });
     } else {
-      if (windowWidth >= 768) {
+      if (windowWidth >= breakPoint) {
         setWmComponentDisplay({
           tab: true,
           list: true,
@@ -170,10 +170,9 @@ const WasteManagement = () => {
       searchLocationsByMaterial(
         49.188678,
         -122.951498,
-        20,
+        15,
         "",
-        49, // cat
-        // 26, //dog
+        "", // 49 cat, 26 dog, 29 mixed paper
         "",
       )
     );
@@ -205,7 +204,7 @@ const WasteManagement = () => {
   //           notFound: { display: "block" },
   //         });
   //       } else {
-  //         if (windowWidth >= 768) {
+  //         if (windowWidth >= breakPoint) {
   //           setNotFoundDisplay({
   //             ...notFoundDisplay,
   //             contents: { display: "grid" },
@@ -364,7 +363,7 @@ const WasteManagement = () => {
         notFound: { display: "block" },
       });
     } else {
-      if (windowWidth >= 768) {
+      if (windowWidth >= breakPoint) {
         setNotFoundDisplay({
           ...notFoundDisplay,
           contents: { display: "grid" },
@@ -381,7 +380,7 @@ const WasteManagement = () => {
   };
 
   const detailHide = () => {
-    if (windowWidth < 768 && wmComponentDisplay.detail) {
+    if (windowWidth < breakPoint && wmComponentDisplay.detail) {
       setWmComponentDisplay({
         ...wmComponentDisplay,
         list: true,
@@ -451,7 +450,7 @@ const WasteManagement = () => {
 			notFound: { display: "block" }
 		  })
 		} else {
-		  if (windowWidth >= 768) {
+		  if (windowWidth >= breakPoint) {
 			setNotFoundDisplay({
 			  contents: { display: "grid" },
 			  notFound: { display: "none" }
@@ -469,13 +468,13 @@ const WasteManagement = () => {
   // }, [postalCodeSearchField])
 
   useEffect(() => {
-    if (windowWidth >= 768 && wmComponentDisplay.detail) {
+    if (windowWidth >= breakPoint && wmComponentDisplay.detail) {
       setWmComponentDisplay({
         ...wmComponentDisplay,
         list: false,
         detail: true,
       });
-    } else if (windowWidth < 768 && wmComponentDisplay.detail) {
+    } else if (windowWidth < breakPoint && wmComponentDisplay.detail) {
       if (mapAndMaterialDisplay.map) {
         setWmComponentDisplay({
           ...wmComponentDisplay,
@@ -491,12 +490,12 @@ const WasteManagement = () => {
           detail: false,
         });
       }
-    } else if (windowWidth >= 768 && !wmComponentDisplay.detail) {
+    } else if (windowWidth >= breakPoint && !wmComponentDisplay.detail) {
       setWmComponentDisplay({
         ...wmComponentDisplay,
         list: true,
       });
-    } else if (windowWidth < 768 && !wmComponentDisplay.detail) {
+    } else if (windowWidth < breakPoint && !wmComponentDisplay.detail) {
       if (mapAndMaterialDisplay.map) {
         setWmComponentDisplay({
           ...wmComponentDisplay,
@@ -516,7 +515,7 @@ const WasteManagement = () => {
   }, [wmComponentDisplay.detail]);
 
   useEffect(() => {
-    if (windowWidth >= 768) {
+    if (windowWidth >= breakPoint) {
       setMapAndMaterialDisplay({
         map: true,
         material: true,
@@ -571,7 +570,7 @@ const WasteManagement = () => {
           });
         }
       }
-    } else if (windowWidth <= 767) {
+    } else if (windowWidth < breakPoint) {
       if (mapAndMaterialDisplay.map && mapAndMaterialDisplay.material) {
         setMapAndMaterialDisplay({
           map: true,

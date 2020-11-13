@@ -6,9 +6,11 @@
 //      2)  npm i express
 //      3)  npm i mysql
 //      4)  npm i promise-sql
-//      4)  npm i express-validator
-//      5)  npm i node-fetch
-//      6)  npm i dotenv
+//      5)  npm i express-validator
+//      6)  npm i nodemon --save-dev  
+//      7)  npm i node-fetch
+//      8)  npm i dotenv
+//      9)  npm i cors
 //
 // *******************************************************
 // ******** Required Modules *****************************
@@ -16,6 +18,9 @@
 
 const express = require("express");
 const app     = express();
+
+const cors = require('cors');
+app.use(cors())
 
 const { savyDb } = require("./connection.js");
 

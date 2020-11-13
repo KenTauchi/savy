@@ -17,32 +17,35 @@ const RecyclingFacts = () => {
     <div className="fact-section">
       <div className="factHeadDiv">
         <h2>{fact.materialName ? fact.materialName : fact.familyName}</h2>
-        <p>{fact.description}</p>
+        {fact.binColor && fact.familyName ? (
+          <p className="binInfo">
+            This is a type of <span>{fact.familyName}</span> and it goes to{" "}
+            <span>{fact.binColor}</span> Bin.
+          </p>
+        ) : null}
+        <p className="factDescription">{fact.description}</p>
       </div>
       <div className="factImageDiv">
-        {fact.imageName?
+        {fact.imageName ? (
           <img className="factWasteImage" src={imagePath} alt="Material" />
-          :
+        ) : (
           <p className="noImageText">No Image</p>
-        }
-        
+        )}
       </div>
 
-      {fact.deliveryNotes?
+      {fact.deliveryNotes ? (
         <div className="notesDiv">
           <p className="factRecyclingNotes">Recycling Notes: </p>
           <p className="factRecyclingNotesText">{fact.deliveryNotes}</p>
         </div>
-        : null
-      }
+      ) : null}
 
-      {fact.recyclingFact?
-      <div className="factMainDiv">
-        <h2>Recycling Facts</h2>
-        <p>{fact.recyclingFact}</p>
-      </div>
-      : null
-    }
+      {fact.recyclingFact ? (
+        <div className="factMainDiv">
+          <h2>Recycling Facts</h2>
+          <p>{fact.recyclingFact}</p>
+        </div>
+      ) : null}
     </div>
   );
 }
