@@ -10,12 +10,7 @@ export default function Answer(props) {
 	const dispatch = useDispatch();
 	return (
 		<div className="answer">
-			{/* <input
-        
-      /> */}
 			<div id={props.answerID}
-				// type="radio"
-				// name="quizAnswer"
 				onClick={() => {
 					dispatch(disWindow(true));
 					if (props.correct === "yes") {
@@ -24,7 +19,7 @@ export default function Answer(props) {
 					} else {
 						dispatch(checkCorrect(false));
 					}
-				}}>{props.charCode} <label >{props.answer}</label></div>
+				}}><span className="answer-option">{props.charCode}</span> <label >{props.answer}</label></div>
 
 		</div>
 	);
