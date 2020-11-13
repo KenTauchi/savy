@@ -16,7 +16,7 @@ export const initialState = {
   },
   materials: {
     idNameType: [],
-    searchedMaterial: "Mixed Paper",
+    searchedMaterial: "",
   },
   locations: {
     searchedLocations: [],
