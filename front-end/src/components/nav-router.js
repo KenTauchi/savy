@@ -11,7 +11,7 @@ const NavRouter = () => (
   <Switch>
     <Route exact path="/" component={RecyclingCanada} />
     <Route path="/waste-management" component={WasteManagement} />
-    <Route path="/challenges/rule" component={QuizStarter} />
+    <Route path="/challenges-rule" component={QuizStarter} />
     <Route exact path="/challenges" component={Quiz} />
     <Route path="/explore" component={Explore} />
     <Route path="/contact" component={Contact} />

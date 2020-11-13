@@ -4,6 +4,17 @@ import Button from '@material-ui/core/Button';
 
 const Feature = () => {
     const history = useHistory();
+
+    const moveToExplore = () => {
+        history.push("/explore");
+        window.scrollTo(0,0);
+    }
+
+    // const moveToChallenges = () => {
+    //     history.push("/challenges/rule");
+    //     window.scrollTo(0,0);
+    // }
+
     return (
         <div className="feature-section">
             <div className="feature-section-info">
@@ -44,7 +55,7 @@ const Feature = () => {
                             and any related articles that can help you
                             expand your knowledge.
                         </span>
-                        <button onClick={() => history.push("/explore")} className="feature-redirect-btn">Go to Explore </button>
+                        <button onClick={moveToExplore} className="feature-redirect-btn">Go to Explore </button>
                     </div>
                 </div>
             </div>

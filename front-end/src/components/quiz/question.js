@@ -9,56 +9,61 @@ import ProgressBar from "./progress-bar/Progressbar";
 import { API_URL } from '../global_variables';
 
 export default function Question() {
-  const selector = useSelector((state) => state);
-  const quizData = getQuizData(selector);
-  const dispatch = useDispatch();
+	let charCode = 65;
+	const selector = useSelector((state) => state);
+	const quizData = getQuizData(selector);
+	const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log("quiz API data fetch rendered");
+	useEffect(() => {
+		console.log("quiz API data fetch rendered");
 
-    fetch(`${API_URL}/quiz?limit=10`)
-      .then((response) => response.json())
-      .then((result) => {
-        console.log(result);
-        dispatch(quizImportAction(result));
-      })
-      .catch(() => null);
-  }, []);
+		fetch(`${API_URL}/quiz?limit=10`)
+			.then((response) => response.json())
+			.then((result) => {
+				console.log(result);
+				dispatch(quizImportAction(result));
+			})
+			.catch(() => null);
+	}, []);
 
-  return (
-    <div>
-      <div>
-        {quizData.currentIndex > quizData.quizLength ? (
-          <div className="quiz-loading">Thank you!</div>
-        ) : (
-          <div>
-            <ProgressBar />
+	return (
+		<div className="question-answer-section">
+			{quizData.currentIndex > quizData.quizLength ? (
+				<div className="quiz-loading">Thank you!</div>
+			) : (
+					<div>
 
-            <h2>
-              Question {quizData.currentIndex} / {quizData.quizLength}
-            </h2>
-            <h3>
-              {typeof quizData.data[0] === "undefined"
-                ? "Loading..."
-                : quizData.data[quizData.currentIndex - 1].question.question}
-            </h3>
-            <div>
-              {typeof quizData.data[0] === "undefined"
-                ? "Loading..."
-                : quizData.data[
-                    quizData.currentIndex - 1
-                  ].answers.map((answer, index) => (
-                    <Answer
-                      key={index}
-                      answerID={`answer_${index}`}
-                      answer={answer.answer}
-                      correct={answer.correct}
-                    />
-                  ))}
-            </div>
-          </div>
-        )}
-      </div>
-    </div>
-  );
+						<h3 className="question-number">
+							Question {quizData.currentIndex} / {quizData.quizLength}
+						</h3>
+						
+						<ProgressBar />
+						
+						<div className="question-answer-block">
+							<h4 className="question-text">
+								{typeof quizData.data[0] === "undefined"
+									? "Loading..."
+									: quizData.data[quizData.currentIndex - 1].question.question}
+							</h4>
+							<div className="answer-list">
+								{typeof quizData.data[0] === "undefined"
+									? "Loading..."
+									:
+									quizData.data[
+										quizData.currentIndex - 1
+									].answers.map((answer, index) => (
+										<Answer
+											key={index}
+											answerID={`answer_${index}`}
+											answer={answer.answer}
+											correct={answer.correct}
+											charCode={String.fromCharCode(charCode++)}
+										/>
+									))}
+							</div>
+						</div>
+					</div>
+				)}
+		</div>
+	);
 }

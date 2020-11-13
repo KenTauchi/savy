@@ -6,7 +6,7 @@ export default function QuizStarter() {
 		<div className="quiz-starter-page main-content">
 			<div className="quiz-rules-section">
 				<div className="quiz-starter-image">
-					<img src="../images/contact.svg" alt="quiz-starter-img" />
+					<img src="./images/contact.svg" alt="quiz-starter-img" />
 				</div>
 				<div className="quiz-starter-desc">
 					<h2>Keep Calm and Challenge On</h2>

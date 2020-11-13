@@ -13,7 +13,7 @@ export const ToggleMenu = [
   },
   {
     title: "Challenges",
-    path: "/challenges/rule",
+    path: "/challenges-rule",
     cName: "nav-item",
   },
   {
