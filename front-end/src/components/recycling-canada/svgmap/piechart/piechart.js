@@ -21,7 +21,7 @@ const PieChart = () => {
   const updateSize = () => setWidth(window.innerWidth);
 
   useEffect(() => {
-    console.log("pieChart UseEffect");
+    // console.log("pieChart UseEffect");
     am4core.useTheme(am4themes_animated);
     let chart = am4core.create("chartdiv", am4charts.PieChart);
     chart.responsive.enabled = true;
@@ -71,14 +71,13 @@ const PieChart = () => {
 
     // ====================================================
     // ====================================================
-    console.log(width);
+    // console.log(width);
     return () => window.removeEventListener("resize", updateSize);
   }, [width]);
 
   return (
     <div className="piechart">
       <div id="chartdiv"></div>
-      <div>{width}</div>
     </div>
   );
 };

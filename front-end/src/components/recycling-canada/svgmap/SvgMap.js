@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDataSet } from "../../../reducks/mapChartData/selectors";
 import {
-  clickGet,
-  dataImportAction,
+	clickGet,
+	dataImportAction,
 } from "../../../reducks/mapChartData/action";
 
 import PieChart from "./piechart/piechart";
@@ -11,54 +11,54 @@ import PieChart from "./piechart/piechart";
 import { API_URL } from '../../global_variables';
 
 const SvgMap = () => {
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
+	const dispatch = useDispatch();
+	const selector = useSelector((state) => state);
 
-  const [charDis, setCartDis] = useState(false);
+	const [charDis, setCartDis] = useState(false);
 
-  const clickFunc = (e) => {
-    setCartDis(!charDis);
-    let province = e.target.id;
-    console.log("province", e.target.id);
+	const clickFunc = (e) => {
+		setCartDis(!charDis);
+		let province = e.target.id;
+		console.log("province", e.target.id);
 
-    return province !== "" && charDis === false
-      ? dispatch(clickGet(e.target.id))
-      : null;
-  };
+		return province !== "" && charDis === false
+			? dispatch(clickGet(e.target.id))
+			: null;
+	};
 
-  useEffect(() => {
-    fetch(`${API_URL}/mapdata`)
-      .then((response) => response.json())
-      .then((result) => {
-        dispatch(dataImportAction(result));
-      })
-      .catch(() => null);
-  }, []);
+	useEffect(() => {
+		fetch(`${API_URL}/mapdata`)
+			.then((response) => response.json())
+			.then((result) => {
+				dispatch(dataImportAction(result));
+			})
+			.catch(() => null);
+	}, []);
 
-  return (
-    <div className="canada-map-container">
-      <div className="canada-map">
-        <span className="info-label">
-          <label>Click on provinces to see details</label>
-        </span>
-        <svg
-          version="1.1"
-          id="Layer_1"
-          xmlns="http://www.w3.org/2000/svg"
-          x="0px"
-          y="0px"
-          viewBox="0 0 1032.51 831.57"
-        >
-          <path
-            onClick={clickFunc}
-            id="NS"
-            className="st0"
-            fill="#F4F4F4"
-            stroke="#E29A25"
-            strokeWidth="0.7898"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M971.5,571.33c-2.33-1.12-3.36,1.49-5.22,2.23c-0.86,0.35-1.9-0.15-2.8,0.19
+	return (
+		<div className="canada-map-container">
+			<div className="canada-map">
+				<span className="info-label">
+					<label>Click on provinces to see details</label>
+				</span>
+				<svg
+					version="1.1"
+					id="Layer_1"
+					xmlns="http://www.w3.org/2000/svg"
+					x="0px"
+					y="0px"
+					viewBox="0 0 1032.51 831.57"
+				>
+					<path
+						onClick={clickFunc}
+						id="NS"
+						className="st0"
+						fill="#F4F4F4"
+						stroke="#E29A25"
+						strokeWidth="0.7898"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M971.5,571.33c-2.33-1.12-3.36,1.49-5.22,2.23c-0.86,0.35-1.9-0.15-2.8,0.19
 
 
     
@@ -75,17 +75,17 @@ const SvgMap = () => {
 	c3.47-1.46,0.89-3.94,1.84-6.78c0.7-2.08,3.2-3.57,4.66-5.08c2.38-2.49,3.88-6.07,5.73-8.98c2.24-3.47,2.73-7.34,4.62-10.78
 
 	c0.87-1.58,2.52-2.79,3.43-4.48c1.08-2.03,1.17-3.13,3.15-4.66C968.7,597.55,967.34,599.16,965.7,599.58z"
-          />
-          <path
-            onClick={clickFunc}
-            id="NL"
-            className="st0"
-            fill="#F4F4F4"
-            stroke="#E29A25"
-            strokeWidth="0.7898"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M1026.23,475.42c-4.65,0.2-2.72,6.38-6.54,8.13c2.94-1.73-5.22-10.47-7.98-10.7
+					/>
+					<path
+						onClick={clickFunc}
+						id="NL"
+						className="st0"
+						fill="#F4F4F4"
+						stroke="#E29A25"
+						strokeWidth="0.7898"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M1026.23,475.42c-4.65,0.2-2.72,6.38-6.54,8.13c2.94-1.73-5.22-10.47-7.98-10.7
 
 	c-2.16-0.19,2.4,14.48,2.47,14.8c-0.31-1.24-4.66,0.66-3.84,3.75c0.44,1.66,5.04,4.83,6.07,6.81c1.01,1.98,1.61,8.52,5.3,5.29
 	c0.16-0.15,3.13-14.4,5.6-3.44C1038.92,502.34,1027.68,479.7,1026.23,475.42z M1004.84,481.25c-0.78-4.52,4.59-12.37,1.04-15.49
@@ -110,17 +110,17 @@ const SvgMap = () => {
 	c1.19-1.1,4-2.66,5.37-3.05c7.64,10.24,31.75-12.57,37.01-16.95c5.97-4.98,34.47-38.21,43.37-27.55c3.59-6.52,5.94-12.03,4.31-21.01
 
 	C919.7,434.62,907.65,424.79,899.6,423.99z"
-          />
-          <path
-            onClick={clickFunc}
-            id="PE"
-            className="st0"
-            fill="#F4F4F4"
-            stroke="#E29A25"
-            strokeWidth="0.7898"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M933.72,595.24c1.97-1.7,4.3-7.16,7.58-6.48c-0.1,1.91-1.39,3.35-1.64,5.37
+					/>
+					<path
+						onClick={clickFunc}
+						id="PE"
+						className="st0"
+						fill="#F4F4F4"
+						stroke="#E29A25"
+						strokeWidth="0.7898"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M933.72,595.24c1.97-1.7,4.3-7.16,7.58-6.48c-0.1,1.91-1.39,3.35-1.64,5.37
 
 	c-0.32,2.76,0.03,3.35,1.27,5.18c1.07,1.55,2.87,2.11-0.12,3.98c-1.36,0.85-4.67,1.25-6.24,1.07c-0.04-1.53-1.13-2.19-2.53-1.59
 	c-1.51,0.69-0.44,1.99-1.43,2.86c-1.07,0.98-4.8,1.6-6.2,1.93c-2.54,0.62-3.17-0.44-4.91-0.36c-0.6,0.02-1.22,1.31-2.41,1.29
@@ -128,17 +128,17 @@ const SvgMap = () => {
 	c1.43,0.95,3.08,0.22,4.7,1.58c0.92-0.48,1.34-1.58,2.1-1.91c0.68-0.3,2.15-0.31,3.05-0.69c1.95-0.8,3.5-2.39,5.14-3.55
 
 	C930.37,596.95,932.44,596.34,933.72,595.24z"
-          />
-          <path
-            onClick={clickFunc}
-            id="NB"
-            className="st0"
-            fill="#F4F4F4"
-            stroke="#E29A25"
-            strokeWidth="0.7898"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M918.77,613.37c2.87-1.95,9.71-6.05,6.73,0.79c-0.14,0.32-0.09,0.49,0.08,0.59
+					/>
+					<path
+						onClick={clickFunc}
+						id="NB"
+						className="st0"
+						fill="#F4F4F4"
+						stroke="#E29A25"
+						strokeWidth="0.7898"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M918.77,613.37c2.87-1.95,9.71-6.05,6.73,0.79c-0.14,0.32-0.09,0.49,0.08,0.59
 
 	c-1.42,1.09-2.89,2.06-3.69,3.63c-0.65,1.25-1.05,2.75-1.24,4.35c-1.39,0.44-1.14,3.58-1.37,4.7c-0.46,2.12-1.33,4.2-2.5,6.1
 	c-2.53,4.14-3.09,10.98-6.64,14.23c-1.77,1.63-2.56,1.29-3.43,3.81c-1,2.81-0.77,2.4-2.99,4.09c-2.61,1.99-11.41,7.62-14.33,5.42
@@ -149,17 +149,17 @@ const SvgMap = () => {
 	c0.45-0.16,0.88-0.36,1.32-0.6c3.26,0.57,4.2,5.06,7.73,3.31c-0.05-5.78,6.18-13.47,8.9-4.38c1.28,4.25-1.62,11.82,6.23,7.99
 
 	c1.04,4.31,7.55,8.17,11.41,9.37C914.64,614.84,916.35,615.04,918.77,613.37z"
-          />
-          <path
-            onClick={clickFunc}
-            id="QC"
-            className="st0"
-            fill="#F4F4F4"
-            stroke="#E29A25"
-            strokeWidth="0.7898"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M877.98,488.45c-5.26,4.39-29.37,27.19-37.01,16.95c-1.37,0.39-4.18,1.96-5.37,3.05
+					/>
+					<path
+						onClick={clickFunc}
+						id="QC"
+						className="st0"
+						fill="#F4F4F4"
+						stroke="#E29A25"
+						strokeWidth="0.7898"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M877.98,488.45c-5.26,4.39-29.37,27.19-37.01,16.95c-1.37,0.39-4.18,1.96-5.37,3.05
 
 	c2.58,5.3,5.94,10.04,9.34,13.87c-9.82,8.05-20.25-0.55-28.29,4.75c-3.9-3.11-8.29-5.97-9.26-10.97c-1.8,3-4.77,7.24-8.83,8.49
 	c-4.09-3.99-1.01-7.92,3.24-11.09c-4.23-8.28-13.44-3.6-20.62-6.9c-0.16-2.1-1.28-4.35-1.18-6.53c-1.93-0.2-2.17-0.79-4.03-1.84
@@ -187,17 +187,17 @@ const SvgMap = () => {
 	C912.45,450.24,883.95,483.47,877.98,488.45z M893.47,542.15c-9.06,0.9-18.15,3.46-24.51,10.42c0.19,0.16,0.55,0.78,0.56,1.01
 
 	c8.8-0.18,17.52,0.06,26.04-2.32c2.79-0.77,8.69-1.86,10.72-3.84C913.71,540.11,896.21,541.89,893.47,542.15z"
-          />
-          <path
-            onClick={clickFunc}
-            id="ON"
-            className="st0"
-            fill="#F4F4F4"
-            stroke="#E29A25"
-            strokeWidth="0.7898"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M794.29,708.85c2.42,3.17,4.35,6.45,6.12,9.76c-5.8,3.83-9.55,7.88-12.76,15.76
+					/>
+					<path
+						onClick={clickFunc}
+						id="ON"
+						className="st0"
+						fill="#F4F4F4"
+						stroke="#E29A25"
+						strokeWidth="0.7898"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M794.29,708.85c2.42,3.17,4.35,6.45,6.12,9.76c-5.8,3.83-9.55,7.88-12.76,15.76
 
 	c-2.19,5.44-3.75,10.92-4.73,16.71c-3.19-2.56-8.1-2.42-9.39,1.81c-1.6,5.37,1.23,6.21-5.54,8.08c-8.31,2.28-16,6.31-20.91,13.7
 	c-2.53,3.85-4.18,7.87-4.26,12.51c3.18,0.46,15.73-5.52,15.08,1.81c-0.47,5.53-12.53,8.43-16.3,11.03
@@ -217,17 +217,17 @@ const SvgMap = () => {
 	c2.87,1.24,6.29,1.8,8.94,3.45c2.67,1.66,4.2,5.43,6.94,6.65c10.8,4.81,8.73-6.66,9.72-12.22c0.08,0.09,0.17,0.16,0.27,0.24
 
 	c11.87,34.1,24.41,93.07,59.17,98.15c12.1,1.76,24.86,0.37,37.06,0.99C780.01,715.84,784.54,706.52,794.29,708.85z"
-          />
-          <path
-            onClick={clickFunc}
-            id="MB"
-            className="st0"
-            fill="#F4F4F4"
-            stroke="#E29A25"
-            strokeWidth="0.7898"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M528.66,555.96c0.77,0,1.51,0.04,2.23,0.13c-11.8,25.74-26.55,52.21-41.08,76.55
+					/>
+					<path
+						onClick={clickFunc}
+						id="MB"
+						className="st0"
+						fill="#F4F4F4"
+						stroke="#E29A25"
+						strokeWidth="0.7898"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M528.66,555.96c0.77,0,1.51,0.04,2.23,0.13c-11.8,25.74-26.55,52.21-41.08,76.55
 
 	c-3.64,6.1-13.56,19.01-13.56,19.01s3.2,17.94,4.36,25.04c2.84,17.19,4.89,34.47,7.25,51.72c0,0.02,0,0.02,0,0.02
 	c-0.19,2.03-0.03,4.13,0.46,6.09c0.51,2.08-22.25,3.88-23.82,4.1c-21.27,2.95-42.16,4.99-62.46,6.28
@@ -236,26 +236,26 @@ const SvgMap = () => {
 	c0.57,2.7,10.29-2.92,11.24-3.35c4.25-1.91,11.06-3.01,15.6-1.75c1.9,0.52,2.39,2.5,4.74,2.89
 
 	C523.76,557.82,526.4,556,528.66,555.96z"
-          />
-          <path
-            onClick={clickFunc}
-            id="SK"
-            className="st0"
-            fill="#F4F4F4"
-            stroke="#E29A25"
-            strokeWidth="0.7898"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M378.97,511.15c2.3,41.37,7.87,83.17,11.82,124.04c3.54,36.61,7.02,73.18,11.26,109.72
+					/>
+					<path
+						onClick={clickFunc}
+						id="SK"
+						className="st0"
+						fill="#F4F4F4"
+						stroke="#E29A25"
+						strokeWidth="0.7898"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M378.97,511.15c2.3,41.37,7.87,83.17,11.82,124.04c3.54,36.61,7.02,73.18,11.26,109.72
 	c-43.3,2.74-84.02,2.06-120.63-0.49l17.13-233.77C324.09,512.21,350.93,512.46,378.97,511.15z"
-          />
-          <g onClick={clickFunc} id="NU">
-            <g>
-              <path
-                id="NU"
-                className="st1"
-                fill="#F4F4F4"
-                d="M661.89,344.06c3.16-12.95,22.35-0.86,30.32-1.52c16.53-1.41,8.75-15.31,0.42-12.15
+					/>
+					<g onClick={clickFunc} id="NU">
+						<g>
+							<path
+								id="NU"
+								className="st1"
+								fill="#F4F4F4"
+								d="M661.89,344.06c3.16-12.95,22.35-0.86,30.32-1.52c16.53-1.41,8.75-15.31,0.42-12.15
 
 			c1.47-0.55,2.14-1.81,4.37-2.03c-4.55-1.69-4.61-5.47-7.96-8.15c-3.26-2.59-6.8-1.61-9.48-5.58c-6.14,2.82-3.3-4.14-7.38-5.22
 			c-3.44-0.89-6.83,3.91-10.56,3.04c-5.3-1.23-9.67-13.24-14.34-1.72c-0.84-5.46-4.97-5.02-8.36-8.16
@@ -372,18 +372,18 @@ const SvgMap = () => {
 			C348.7,230.19,341.45,228.01,339.18,232.53z M321.91,345.98c2.8,1.23,5.89-3.72,8.08-4.7c2.38-1.08,5.03-1.18,7.65-1.21
 
 			c0.41-4.38,6.06-3.68,6.9-7.84c-2.12-1.86-4.88-1.82-7.12-0.37l3.04-0.5C339.29,331.71,310.62,341,321.91,345.98z"
-              />
-            </g>
-            <g>
-              <path
-                className="st2"
-                id="NU"
-                fill="none"
-                stroke="#E29A25"
-                strokeWidth="0.7898"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M661.89,344.06c3.16-12.95,22.35-0.86,30.32-1.52c16.53-1.41,8.75-15.31,0.42-12.15
+							/>
+						</g>
+						<g>
+							<path
+								className="st2"
+								id="NU"
+								fill="none"
+								stroke="#E29A25"
+								strokeWidth="0.7898"
+								strokeLinecap="round"
+								strokeLinejoin="round"
+								d="M661.89,344.06c3.16-12.95,22.35-0.86,30.32-1.52c16.53-1.41,8.75-15.31,0.42-12.15
 
 			c1.47-0.55,2.14-1.81,4.37-2.03c-4.55-1.69-4.61-5.47-7.96-8.15c-3.26-2.59-6.8-1.61-9.48-5.58c-6.14,2.82-3.3-4.14-7.38-5.22
 			c-3.44-0.89-6.83,3.91-10.56,3.04c-5.3-1.23-9.67-13.24-14.34-1.72c-0.84-5.46-4.97-5.02-8.36-8.16
@@ -500,19 +500,19 @@ const SvgMap = () => {
 			C348.7,230.19,341.45,228.01,339.18,232.53z M321.91,345.98c2.8,1.23,5.89-3.72,8.08-4.7c2.38-1.08,5.03-1.18,7.65-1.21
 
 			c0.41-4.38,6.06-3.68,6.9-7.84c-2.12-1.86-4.88-1.82-7.12-0.37l3.04-0.5C339.29,331.71,310.62,341,321.91,345.98z"
-              />
-            </g>
-          </g>
-          <path
-            onClick={clickFunc}
-            id="NT"
-            className="st0"
-            fill="#F4F4F4"
-            stroke="#E29A25"
-            strokeWidth="0.7898"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M311.98,128.57c2.35,4.9,11.15,3.1,14.28-0.41c-0.02-0.02-0.02-0.02,0-0.02
+							/>
+						</g>
+					</g>
+					<path
+						onClick={clickFunc}
+						id="NT"
+						className="st0"
+						fill="#F4F4F4"
+						stroke="#E29A25"
+						strokeWidth="0.7898"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M311.98,128.57c2.35,4.9,11.15,3.1,14.28-0.41c-0.02-0.02-0.02-0.02,0-0.02
 
 	c0.1-1.54,0.23-3.06,0.35-4.58C323.59,119.9,314.11,126.24,311.98,128.57z M307.53,414.23c-1.8-4.35-2.43-11.37-6.79-14.07
 	c-4.71-2.91-11.06,0.74-16.18-2.69c-7.02-4.68-13.14-14.56-19.95-20.15c-8.09-6.67-6.71-16.26-15.18-23.35
@@ -547,30 +547,30 @@ const SvgMap = () => {
 	c-3.54-0.11-6.94-3.07-10.39-1.25c-4.45,2.33-1.64,8.25-2.23,12.13c-1.2,8.03-8.55,13.84-12.94,20.24
 
 	c-3.33,4.86-9.19,7.67-6.19,13.8C220.32,250.16,223.68,251.36,224.87,254.52z"
-          />
-          <path
-            onClick={clickFunc}
-            id="AB"
-            className="st0"
-            fill="#F4F4F4"
-            stroke="#E29A25"
-            strokeWidth="0.7898"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M298.3,510.7l-17.13,233.77c-21.74-1.51-42.04-3.67-60.54-6.15c-4.03-10.23-4.82-21.37,0.56-31.05
+					/>
+					<path
+						onClick={clickFunc}
+						id="AB"
+						className="st0"
+						fill="#F4F4F4"
+						stroke="#E29A25"
+						strokeWidth="0.7898"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M298.3,510.7l-17.13,233.77c-21.74-1.51-42.04-3.67-60.54-6.15c-4.03-10.23-4.82-21.37,0.56-31.05
 	c-3.07,0.07-4.97-1.62-8.22-1.13c-2.09-13.71-12.41-35.34-25.26-39.68c1.34-5.26,0.28-11.83-5.68-9.33
 	c2.98-18-23.69-25.57-17.32-42.66c8.1-21.67,21.72-82.78,30.25-117.92C226.49,503.42,261.01,508.45,298.3,510.7z"
-          />
-          <path
-            onClick={clickFunc}
-            id="YT"
-            className="st0"
-            fill="#F4F4F4"
-            stroke="#E29A25"
-            strokeWidth="0.7898"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M155.11,470.02c0.76,2.48-0.24,5.77-0.1,8.37c0.14,2.75,0.5,5.48,0.95,8.19
+					/>
+					<path
+						onClick={clickFunc}
+						id="YT"
+						className="st0"
+						fill="#F4F4F4"
+						stroke="#E29A25"
+						strokeWidth="0.7898"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M155.11,470.02c0.76,2.48-0.24,5.77-0.1,8.37c0.14,2.75,0.5,5.48,0.95,8.19
 
 	c-64.3-18.5-113.32-44.33-144.46-67.6c-0.01-0.08-0.04-0.14-0.06-0.22c-0.19-0.78-0.6-4.57-1.7-4.78c-1.94-0.41-4-0.78-6.01-1.07
 	c-1.3-1.04-2.53-2.06-3.74-3.09c15.16-20,89.62-142.75,103.85-163.2c5.14,11.15,12.11,23.41,19.12,30.93
@@ -580,17 +580,17 @@ const SvgMap = () => {
 	c-0.89,3.44,2.35,7.34,2.64,10.73c0.66,7.7-4.16,11.07-5.74,17.56c3.19,0.41,6.27-3.03,9.08-4.53c6.18,7.07,2.2,16.71,4.82,24.78
 
 	c3.04,9.48,10.7,9.84,18.92,12.63C154.08,467.44,153.59,465.07,155.11,470.02z"
-          />
-          <path
-            onClick={clickFunc}
-            id="BC"
-            className="st0"
-            fill="#F4F4F4"
-            stroke="#E29A25"
-            strokeWidth="0.7898"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M213.22,706.09c-2.09-13.71-12.41-35.34-25.26-39.68c1.34-5.26,0.28-11.83-5.68-9.33
+					/>
+					<path
+						onClick={clickFunc}
+						id="BC"
+						className="st0"
+						fill="#F4F4F4"
+						stroke="#E29A25"
+						strokeWidth="0.7898"
+						strokeLinecap="round"
+						strokeLinejoin="round"
+						d="M213.22,706.09c-2.09-13.71-12.41-35.34-25.26-39.68c1.34-5.26,0.28-11.83-5.68-9.33
 
 	c2.98-18-23.69-25.57-17.32-42.66c8.1-21.67,21.72-82.78,30.25-117.92c-13.65-2.98-26.73-6.31-39.26-9.92
 	c-64.3-18.5-113.32-44.33-144.46-67.6c1.65,6.76,2.56,13.78,3.56,20.67c0.46,3.17,1.03,6.39,1.59,9.55
@@ -609,17 +609,17 @@ const SvgMap = () => {
 	c-3.8-4.73-9.75-6.6-14-10.57c-3.61-3.36-5.61-10.6-11.32-11.34c-8.09-1.09-2.19,7.17,0.33,9.98c-7.01,3.21,1.96,9.67,4.84,12.08
 	c1.9,1.58,4.62,3.05,5.52,5.59c1.18,3.41-1.31,4.3-0.93,7.15c0.74,5.75,6.29,6.96,9.84,10.19c4.56,4.19,3.11,9.82,7.08,14.45
 	c3.2,3.76,10.4,9.58,15.06,11.33c4,1.51,0.75-12.02,0.5-13.2C88.86,703.26,83.79,699.91,79.78,692.76z"
-          />
-        </svg>
+					/>
+				</svg>
 
-        {charDis ? (
-          <div className="chart fade_in" onClick={clickFunc}>
-            <PieChart />
-          </div>
-        ) : null}
-      </div>
-    </div>
-  );
+				{charDis ? (
+					<div className="chart fade_in" onClick={clickFunc}>
+						<PieChart />
+					</div>
+				) : null}
+			</div>
+		</div>
+	);
 };
 
 export default SvgMap;
