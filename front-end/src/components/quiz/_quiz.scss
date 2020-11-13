@@ -7,7 +7,7 @@
 		background-repeat: no-repeat;
 		background-position: bottom;
 	}
-	
+
 	.quiz-content {
 		max-width: 1000px;
 		margin: 0 auto;
@@ -50,15 +50,42 @@
 
 				.answer-list {
 					.answer {
+						cursor: pointer;
+						min-width: 200px;
 						border: 1px solid #707070;
 						border-radius: 5px;
 						margin-bottom: 0.5rem;
-						padding: 0.5rem 1rem;
 						display: flex;
 						align-items: center;
 
+						&> div {
+							width: 100%;
+							padding: 0.5rem 1rem;
+						}
+
+						.answer-option {
+							display: inline-block;
+							font-weight: bold;
+							width: 30px;
+							line-height: 30px;
+							border: 1px solid #707070;
+							border-radius: 50%;
+							text-align: center;
+							background: $savy-white;
+							color: $savy-black;
+						}
+
+						&:hover {
+							.answer-option {
+								border: 1px solid $savy-green-100;
+								background: $savy-green-100;
+								color: $savy-white;
+							}
+						}
+
 						label {
 							margin-left: 0.5rem;
+							cursor: pointer;
 						}
 					}
 				}

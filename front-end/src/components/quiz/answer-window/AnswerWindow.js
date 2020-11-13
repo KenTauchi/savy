@@ -13,11 +13,11 @@ export default function AnswerWindow() {
 	return quizData.currentIndex > quizData.quizLength ? (
 		<div className="answer-window">
 			<h2>
-				Congratulation! Your Score is &nbsp;
-        {(quizData.correctAnswer / quizData.quizLength).toFixed(2) * 100}%
-      </h2>
+				Congratulation! Your Score is &nbsp; {(quizData.correctAnswer / quizData.quizLength).toFixed(2) * 100}%
+      		</h2>
+			
 			<div>
-				<img src="#" />
+				<img src={((quizData.correctAnswer / quizData.quizLength) * 100) > 40 ? "./images/icons/quiz-success.svg" : "./images/icons/quiz-fail.svg" } />
 			</div>
 			<span
 				className="next-question savy-green-button"
