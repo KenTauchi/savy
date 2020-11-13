@@ -112,12 +112,12 @@ exports.search = (req, res) => {
         sRangeFilter = ` HAVING distance <= ${zipCodeRange} `;
       }
   
-      // Distance function Parameters
+      // Distance function Parameters - result in kilometers
       if (
         zipCodeCordinate.latitude != undefined &&
         zipCodeCordinate.longitude != undefined
       ) {
-        sDistance = ` round(ST_Distance_Sphere( point(l.longitude, l.latitude), point(${zipCodeCordinate.longitude}, ${zipCodeCordinate.latitude}) ) * .000621371192, 1) AS distance `;
+        sDistance = ` round(ST_Distance_Sphere( point(l.longitude, l.latitude), point(${zipCodeCordinate.longitude}, ${zipCodeCordinate.latitude}) ) * .000621371192 * 1.60934, 1) AS distance `;
       }
   
       // Set query statement
