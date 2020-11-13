@@ -15,7 +15,7 @@ const Quiz = () => {
 
 			<div className="quiz-content">
 				{quizData.windowDis ? <div className="quiz-overlay"></div> : null}
-				<h1>Quiz</h1>
+				<h2>Quiz</h2>
 				<Question />
 				{quizData.windowDis ? <AnswerWindow /> : null}
 			</div>

@@ -10,7 +10,7 @@ export default function Progressbar() {
 
   const Block = styled.div`
     margin: 0;
-    height: 10px;
+    height: 8px;
     border-right: 1px solid white;
     background-color: gray;
     :last-child {

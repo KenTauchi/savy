@@ -5,64 +5,65 @@ import { incAction, disWindow, resetQuiz } from "../../../reducks/quiz/action";
 import { getQuizData } from "../../../reducks/quiz/selectors";
 
 export default function AnswerWindow() {
-  const dispatch = useDispatch();
-  const selector = useSelector((state) => state);
-  const quizData = getQuizData(selector);
-  console.log(quizData);
+	const dispatch = useDispatch();
+	const selector = useSelector((state) => state);
+	const quizData = getQuizData(selector);
+	console.log(quizData);
 
-  return quizData.currentIndex > quizData.quizLength ? (
-    <div className="answer-window">
-      <h2>
-        Congratulation! Your Score is
+	return quizData.currentIndex > quizData.quizLength ? (
+		<div className="answer-window">
+			<h2>
+				Congratulation! Your Score is &nbsp;
         {(quizData.correctAnswer / quizData.quizLength).toFixed(2) * 100}%
       </h2>
-      <div>
-        <img src="#" />
-      </div>
-      <span
-        className="next-question"
-        onClick={() => {
-          dispatch(resetQuiz(true));
-        }}
-      >
-        Back
+			<div>
+				<img src="#" />
+			</div>
+			<span
+				className="next-question savy-green-button"
+				onClick={() => {
+					dispatch(resetQuiz(true));
+				}}
+			>
+				Back
       </span>
-    </div>
-  ) : (
-    <div className="answer-window">
-      <h2>{quizData.correctness ? "Correct" : "Incorect"} Answer!!</h2>
-      <div className="true-false-logo">
-        <img
-          src={
-            quizData.correctness
-              ? "./images/icons/right_answer.svg"
-              : "./images/icons/wrong_answer.svg"
-          }
-        />
-      </div>
-      <p>{quizData.data[quizData.currentIndex - 1].question.description}</p>
+		</div>
+	) : (
+			<div className="answer-window">
+				<span className="answer-boolean">{quizData.correctness ? "Correct" : "Incorect"} Answer!!</span>
+				<div className="true-false-logo">
+					<img
+						src={
+							quizData.correctness
+								? "./images/icons/right_answer.svg"
+								: "./images/icons/wrong_answer.svg"
+						}
+					/>
+				</div>
+				{quizData.correctness ? "" : <b>Let's Learn More</b>}
+				<p>{quizData.data[quizData.currentIndex - 1].question.description}</p>
 
-      {quizData.currentIndex === quizData.quizLength ? (
-        <span
-          className="next-question"
-          onClick={() => {
-            dispatch(incAction(1));
-            dispatch(disWindow(true));
-          }}
-        >
-          See Score
-        </span>
-      ) : (
-        <span
-          className="next-question"
-          onClick={() => {
-            dispatch(incAction(1));
-            dispatch(disWindow(false));
-          }}
-        >
-          Next Question
-        </span>
-      )}
-    </div>
-  );
+				{quizData.currentIndex === quizData.quizLength ? (
+					<span
+						className="next-question savy-green-button"
+						onClick={() => {
+							dispatch(incAction(1));
+							dispatch(disWindow(true));
+						}}
+					>
+						See Score
+					</span>
+				) : (
+						<span
+							className="next-question savy-green-button"
+							onClick={() => {
+								dispatch(incAction(1));
+								dispatch(disWindow(false));
+							}}
+						>
+							Next Question
+						</span>
+					)}
+			</div>
+		);
 }
