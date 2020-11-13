@@ -16,7 +16,7 @@ const Feature = () => {
     }
 
     const moveToWasteManagement = () => {
-        history.push("/challenges-rule");
+        history.push("/waste-management");
         window.scrollTo(0,0);
     }
 
