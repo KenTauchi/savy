@@ -21,5 +21,13 @@
   "devDependencies": {
     "nodemon": "^2.0.6"
   },
-  "description": ""
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KenTauchi/savy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KenTauchi/savy/issues"
+  },
+  "homepage": "https://github.com/KenTauchi/savy#readme"
 }
