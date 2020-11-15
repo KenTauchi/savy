@@ -145,6 +145,14 @@ const WasteManagement = () => {
     zoom: 11,
   });
 
+  const [usersLocationProps, setUsersLocationProps] = useState({
+    center: {
+      lat: 49.2246,
+      lng: -123.1087,
+    },
+    zoom: 11,
+  });
+
   const [selectedLocation, setSelectedLocation] = useState({
     locationId: "",
     locationTypeId: "",
@@ -314,6 +322,20 @@ const WasteManagement = () => {
       zoom: 12,
     });
   };
+  
+  const setUserPosition = (position) => {
+    setUsersLocationProps({
+      center: {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude,
+      },
+      zoom: 12,
+    });
+  };
+
+  const setUserLocationAsCenter = () => {
+    setCurrentLocationProps(usersLocationProps);
+  }
 
   const getlocationByPostalCode = (postalCode) => {
     fetch(
@@ -337,6 +359,7 @@ const WasteManagement = () => {
     if (navigator.geolocation) {
       // console.log("Get current location!!!");
       navigator.geolocation.getCurrentPosition(setCurrentPosition);
+      navigator.geolocation.getCurrentPosition(setUserPosition);
     } else {
       // console.log("Geolocation is not supported by this browser.");
       setCurrentLocationProps({
@@ -628,8 +651,10 @@ const WasteManagement = () => {
         detailHide={detailHide}
         currentLocation={defaultProps}
         getlocationByPostalCode={getlocationByPostalCode}
-        getLocation={getLocation}
+        // getLocation={getLocation}
         resetSelectedLocation={resetSelectedLocation}
+        mapDisplayHandler={mapDisplayHandler}
+        // setUserLocationAsCenter={setUserLocationAsCenter}
       />
       <div className="wm-main-contents" style={notFoundDisplay.contents}>
         {wmComponentDisplay.tab ? (

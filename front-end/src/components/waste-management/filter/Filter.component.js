@@ -24,8 +24,10 @@ const Filter = (props) => {
     currentLocation,
     detailHide,
     getlocationByPostalCode,
-    getLocation,
+    // getLocation,
     resetSelectedLocation,
+    mapDisplayHandler,
+    // setUserLocationAsCenter
   } = props;
 
   const [materialsSearchField, setMaterialsSearchField] = useState(
@@ -94,11 +96,13 @@ const Filter = (props) => {
     // console.log(materials);
     detailHide();
     resetSelectedLocation();
+    mapDisplayHandler();
 
     if (postalCodeSearchField != "") {
       getlocationByPostalCode(postalCodeSearchField);
     } else {
-      getLocation();
+      // getLocation();
+      // setUserLocationAsCenter();
     }
 
     let lat = currentLocation.center.lat;
