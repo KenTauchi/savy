@@ -28,12 +28,10 @@ const MapData = () => {
   const ulStyle = () =>
     width < 700
       ? minMinStyle
-      : width > 700 && width < 1024 && table.prov_Rank <= 0
-      ? minMidAltStyle
-      : width > 700 && width < 1024 && table.prov_Rank > 0
+      : width > 700 && width < 1024
       ? minMidStyle
       : width > 1024 && table.prov_Rank <= 0
-      ? minMidAltStyle
+      ? minMidStyle
       : minMaxStyle;
 
   useEffect(() => {
@@ -63,25 +61,28 @@ const MapData = () => {
         </li>
 
         {/* Contribution (%) */}
-        <li className="table-data">
-          <span>
-            <img
-              className="map-data-img"
-              src="./images/icons/contribution.svg"
-              alt=""
-            />
-          </span>
-          <span className="map-data-value">
-            {table.prov_RecyclingContribPerc
-              ? table.prov_RecyclingContribPerc
-              : "0"}
-          </span>
-          <span className="data-table-title">Contribution (%)</span>
-        </li>
+
+        {table.provinceName === "Canada" ? null : (
+          <li className="table-data">
+            <span>
+              <img
+                className="map-data-img"
+                src="./images/icons/contribution.svg"
+                alt=""
+              />
+            </span>
+            <span className="map-data-value">
+              {table.prov_RecyclingContribPerc
+                ? table.prov_RecyclingContribPerc
+                : "0"}
+            </span>
+            <span className="data-table-title">Contribution (%)</span>
+          </li>
+        )}
 
         {/* Province Rank */}
 
-        {table.prov_Rank <= 0 ? null : (
+        {table.provinceName === "Canada" ? null : (
           <li className="table-data">
             <span>
               <img
@@ -97,7 +98,7 @@ const MapData = () => {
 
         {/* Population Contirbution Rank */}
 
-        {table.prov_Population_Rank <= 0 ? null : (
+        {table.provinceName === "Canada" ? null : (
           <li className="table-data">
             <span>
               <img
