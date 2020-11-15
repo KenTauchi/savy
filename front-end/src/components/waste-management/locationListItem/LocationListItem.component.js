@@ -32,14 +32,20 @@ const LocationListItem = (props) => {
           {" "}
           {location.city}, {location.provinceCode}, {location.postalCode}
         </p>
-        <a className="listItemFacilityLink" href={location.website}>
+        <a
+          className="listItemFacilityLink"
+          href={location.website}
+          target="_blank"
+        >
           {displayUrl}
         </a>
       </div>
 
       <div className="locationListItemDirection">
         <img className="directionArrow" src={arrow} alt="arrow image" />
-        {location.distance ? <p className="directionDistance">{location.distance} km</p> : null}
+        {location.distance ? (
+          <p className="directionDistance">{location.distance} km</p>
+        ) : null}
       </div>
     </li>
   );

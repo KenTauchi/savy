@@ -34,12 +34,10 @@ const LocationDetail = (props) => {
           className="x_markImage"
           src={x_mark}
           alt="x_mark"
-          onClick={
-            () => {
-              resetSelectedLocation();
-              locationDetailDisplayHandler();           
-            }
-          }
+          onClick={() => {
+            resetSelectedLocation();
+            locationDetailDisplayHandler();
+          }}
         />
       </div>
 
@@ -49,7 +47,11 @@ const LocationDetail = (props) => {
         {" "}
         {location.city}, {location.provinceCode}, {location.postalCode}
       </p>
-      <a className="listItemFacilityLink" href={location.website}>
+      <a
+        className="listItemFacilityLink"
+        href={location.website}
+        target="_blank"
+      >
         {displayUrl}
       </a>
 
