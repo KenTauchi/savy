@@ -16,13 +16,14 @@ const PieChart = () => {
   const selector = useSelector((state) => state);
   const dataSet = getDataSet(selector);
   const pieData = dataSet.pieChartData;
+  console.log(pieData);
 
   const [width, setWidth] = useState(0);
   const updateSize = () => setWidth(window.innerWidth);
 
   useEffect(() => {
-    // console.log("pieChart UseEffect");
     am4core.useTheme(am4themes_animated);
+    am4core.options.autoDispose = true;
     let chart = am4core.create("chartdiv", am4charts.PieChart);
     chart.responsive.enabled = true;
     chart.data = pieData;
@@ -31,7 +32,7 @@ const PieChart = () => {
     let pieSeries = chart.series.push(new am4charts.PieSeries());
     pieSeries.dataFields.value = "familyPercent";
     pieSeries.dataFields.category = "familyName";
-    pieSeries.slices.template.stroke = am4core.color("#fff"); //color of piechart inner strole
+    pieSeries.slices.template.stroke = am4core.color("#fff"); //color of piechart inner stroke
     pieSeries.slices.template.strokeWidth = 1;
     pieSeries.slices.template.strokeOpacity = 0.5;
 
@@ -53,7 +54,18 @@ const PieChart = () => {
     labelTemplate.fill = am4core.color("#FFFFFF");
     labelTemplate.background = new am4core.RoundedRectangle();
     labelTemplate.background.fillOpacity = 0.9;
-    labelTemplate.background.fill = am4core.color("#0d9445");
+
+    let found = pieData.forEach(
+      (p) =>
+        (labelTemplate.background.fill =
+          p.familyName === "Organic"
+            ? am4core.color("#0d9445")
+            : p.familyName === "Plastic"
+            ? am4core.color("#F15a22")
+            : p.familyName === "Paper"
+            ? am4core.color("#05C4A3")
+            : am4core.color("#FFFFFF"))
+    );
 
     // =====================================================
     // ==========To make the pie chart Resonsive ===========
