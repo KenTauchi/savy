@@ -54,17 +54,27 @@ exports.search = (req, res) => {
           if (req.query.zipCode != undefined && req.query.zipCode != "") {
 
             let getMyCordinateAPI = new Promise((resolve, reject) => {
-                let zipCodeApiKey = process.env.ZIPCODE_API_PASS;    
-                let zipCode = `${req.query.zipCode}`; // `V6B1B4`;
-                let zipCodeApi = `https://api.zip-codes.com/ZipCodesAPI.svc/1.0/QuickGetZipCodeDetails/${zipCode}?key=${zipCodeApiKey}`;
+                // OLD api.zip-codes.com 
+                //let zipCodeApiKey = process.env.ZIPCODE_API_PASS;    
+                //let zipCode = `${req.query.zipCode}`; // `V6B1B4`;
+                //let zipCodeApi = `https://api.zip-codes.com/ZipCodesAPI.svc/1.0/QuickGetZipCodeDetails/${zipCode}?key=${zipCodeApiKey}`;
   
+                // Canada Gov new API
+                let zipCode = `${req.query.zipCode}`; // `V6B1B4`;                
+                let zipCodeApi = `http://geogratis.gc.ca/services/geolocation/en/locate?q=${zipCode}`;
+  
+
                 fetch(zipCodeApi).then((res) => {
                   res.json().then((data) => {
                     if (data.err) {
                       console.log(data.err);
                       reject({});
                     } else {
-                      resolve({ latitude: data.Latitude, longitude: data.Longitude });
+                      // NEW Canada api  
+                      resolve({ longitude: data[0].geometry.coordinates[0], latitude: data[0].geometry.coordinates[1] });
+
+                      // OLD api.zip-codes.com                       
+                      //resolve({ latitude: data.Latitude, longitude: data.Longitude });
                     }
                   })
                   .catch(error => {
