@@ -9,6 +9,7 @@ const LocationListItem = (props) => {
     location,
     locationDetailDisplayHandler,
     getSelectedLocation,
+    directionsDisplayOn
   } = props;
 
   const displayUrl = location.website.slice(0, 30) + "..."
@@ -42,7 +43,12 @@ const LocationListItem = (props) => {
       </div>
 
       <div className="locationListItemDirection">
-        <img className="directionArrow" src={arrow} alt="arrow image" />
+        <img
+          className="directionArrow"
+          src={arrow}
+          alt="arrow image"
+          onClick={directionsDisplayOn}
+        />
         {location.distance ? (
           <p className="directionDistance">{location.distance} km</p>
         ) : null}

@@ -153,7 +153,8 @@ const WasteManagement = () => {
     zoom: 11,
   });
 
-  const [selectedLocation, setSelectedLocation] = useState({
+  const [selectedLocation, setSelectedLocation] = 
+  useState({
     locationId: "",
     locationTypeId: "",
     cityId: "",
@@ -168,6 +169,8 @@ const WasteManagement = () => {
     imageUrl: "",
     locationNotes: "",
   });
+
+  const [directionsDisplay, setDirectionsDisplay] = useState(false);
 
   // const [filteredLocations, setFilteredLocations] = useState(locations.selectedLocations);
 
@@ -412,6 +415,11 @@ const WasteManagement = () => {
       });
     }
   };
+
+  const directionsDisplayOn = () => {
+    setDirectionsDisplay(true);
+    console.log(directionsDisplay);
+  }
 
   // Lifecycle *********************************************************************************************************************************************************************************************
 
@@ -688,6 +696,7 @@ const WasteManagement = () => {
             }
             getSelectedLocation={getSelectedLocation}
             selectedLocation={selectedLocation}
+            directionsDisplay={directionsDisplay}
           />
         ) : null}
 
@@ -697,6 +706,7 @@ const WasteManagement = () => {
             windowWidth={windowWidth}
             locationDetailDisplayHandler={locationDetailDisplayHandler}
             getSelectedLocation={getSelectedLocation}
+            directionsDisplayOn={directionsDisplayOn}
           />
         ) : null}
 
