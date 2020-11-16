@@ -12,6 +12,7 @@ const LocationList = (props) => {
       displayStyle,
       locationDetailDisplayHandler,
       getSelectedLocation,
+      directionsDisplayOn
     } = props;
 
     // console.log(locations);
@@ -26,6 +27,7 @@ const LocationList = (props) => {
               windowWidth={windowWidth}
               locationDetailDisplayHandler={locationDetailDisplayHandler}
               getSelectedLocation={getSelectedLocation}
+              directionsDisplayOn={directionsDisplayOn}
             />
           ))}
         </ul>
