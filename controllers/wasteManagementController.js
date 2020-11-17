@@ -3,7 +3,7 @@ const fetch      = require("node-fetch");
 const { savyDb, savyPoolDb } = require("../connection.js");
 
 
-// Returns a list of all TESTEMONIALS report
+// Returns a list of all Materials
 exports.getMaterial = (req, res) => {
     let qry = `SELECT "material" AS type, m.materialId AS id, m.name AS materialName
                  FROM material m 
@@ -40,60 +40,58 @@ exports.getMaterial = (req, res) => {
   // Search a location for a material
 exports.search = (req, res) => {
     let mySearch = async (req) => {
-      //let sApiFilter = "";
-      let zipCodeCordinate = { latitude: req.query.latitude, longitude: req.query.longitude };
 
-      if (req.query.filterRange != undefined && req.query.filterRange == "true") {
-        // Get cordinates from user location
-        if ( req.query.latitude != undefined  && req.query.latitude  != "" &&
-             req.query.longitude != undefined && req.query.longitude != ""
-        ) {
-          zipCodeCordinate = { latitude: req.query.latitude, longitude: req.query.longitude };
-        } else {
-          // Get cordinates from ZipCode
-          if (req.query.zipCode != undefined && req.query.zipCode != "") {
+      // Escape input parameters
+      let zipCodeCordinate = { latitude:  savyDb.escape(req.query.latitude).replace(/['']+/g, ''),    
+                               longitude: savyDb.escape(req.query.longitude).replace(/['']+/g, '') }; 
+      let sFilterRange   = savyDb.escape(req.query.filterRange).replace(/['']+/g, '');
+      let sDistanceRange = savyDb.escape(req.query.range).replace(/['']+/g, '');         
+      let sZipCode       = savyDb.escape(req.query.zipCode).replace(/['']+/g, '');                                
+      let sMaterialId    = savyDb.escape(req.query.materialId).replace(/['']+/g, '');        
+      let sFamilyId      = savyDb.escape(req.query.familyId).replace(/['']+/g, '');              
 
-            let getMyCordinateAPI = new Promise((resolve, reject) => {
-                // OLD api.zip-codes.com 
-                //let zipCodeApiKey = process.env.ZIPCODE_API_PASS;    
-                //let zipCode = `${req.query.zipCode}`; // `V6B1B4`;
-                //let zipCodeApi = `https://api.zip-codes.com/ZipCodesAPI.svc/1.0/QuickGetZipCodeDetails/${zipCode}?key=${zipCodeApiKey}`;
-  
-                // Canada Gov new API
-                let zipCode = `${req.query.zipCode}`; // `V6B1B4`;                
-                let zipCodeApi = `http://geogratis.gc.ca/services/geolocation/en/locate?q=${zipCode}`;
-  
+      // Get cordinates from ZipCode
+      if (sFilterRange.toLowerCase() == "true" && sZipCode != "") {
 
-                fetch(zipCodeApi).then((res) => {
-                  res.json().then((data) => {
-                    if (data.err) {
-                      console.log(data.err);
-                      reject({});
-                    } else {
-                      // NEW Canada api  
-                      resolve({ longitude: data[0].geometry.coordinates[0], latitude: data[0].geometry.coordinates[1] });
+        // PROMISE to get ZipCode cordinates Before executing mySql query
+        let getMyCordinateAPI = new Promise((resolve, reject) => {
 
-                      // OLD api.zip-codes.com                       
-                      //resolve({ latitude: data.Latitude, longitude: data.Longitude });
-                    }
-                  })
-                  .catch(error => {
-                    console.log(error);
-                    reject({});                    
-                  }); 
-                }) 
-                .catch(error => {
-                  console.log(error);
-                }); 
-            });
-  
-            zipCodeCordinate = await getMyCordinateAPI; // wait until the promise resolves (*)
-          }
-        }
-  
-        //console.log(zipCodeCordinate);
+            // OLD api.zip-codes.com 
+            //let zipCodeApiKey = process.env.ZIPCODE_API_PASS;    
+            //let zipCode = `${req.query.zipCode}`; // `V6B1B4`;
+            //let zipCodeApi = `https://api.zip-codes.com/ZipCodesAPI.svc/1.0/QuickGetZipCodeDetails/${zipCode}?key=${zipCodeApiKey}`;
+
+            // Canada Gov new API
+            let zipCodeApi = `http://geogratis.gc.ca/services/geolocation/en/locate?q=${sZipCode}`;
+          
+            //console.log(zipCodeApi);
+
+            fetch(zipCodeApi).then((res) => {
+              res.json().then((data) => {
+                if (data.err) {
+                  console.log(data.err);
+                  reject({});
+                } else {
+                  // NEW Canada api  
+                  resolve({ longitude: data[0].geometry.coordinates[0], latitude: data[0].geometry.coordinates[1] });
+
+                  // OLD api.zip-codes.com                       
+                  //resolve({ latitude: data.Latitude, longitude: data.Longitude });
+                }
+              })
+              .catch(error => {
+                console.log(error);
+                reject({});                    
+              }); 
+            }) 
+            .catch(error => {
+              console.log(error);
+            }); 
+        });
+
+        zipCodeCordinate = await getMyCordinateAPI; // wait until the promise resolves (*)
       }
-  
+
       //console.log(`Finish Promise Zip`);
   
       // Initialize default values
@@ -104,20 +102,20 @@ exports.search = (req, res) => {
       let sWhere       = " WHERE 1=1";             // + sApiFilter;
   
       // Material and Family Parameters
-      if (req.query.materialId != undefined && req.query.materialId != "") {
-        sWhere = sWhere + ` AND m.materialId = ${req.query.materialId} `;
+      if (sMaterialId != "") {
+        sWhere = sWhere + ` AND m.materialId = ${sMaterialId} `;
         sOrigin = ` "material" AS origin, m.name AS material, m.description, m.imageUrl AS materialImageUrl, m.imageName AS materialImageName, m.deliveryNotes, `;
       } else {
-        if (req.query.familyId != undefined && req.query.familyId != "") {
-          sWhere = sWhere + ` AND f.familyId = ${req.query.familyId} `;
+        if (sFamilyId != "") {
+          sWhere = sWhere + ` AND f.familyId = ${sFamilyId} `;
           sOrigin = ` "family" AS origin, f.name AS material, f.description, f.imageUrl AS materialImageUrl, f.imageName AS materialImageName, f.deliveryNotes, `;
         }
       }
   
       // Range Filter Parameters
-      if (req.query.filterRange != undefined && req.query.filterRange == "true") {
-        if (req.query.range != undefined && req.query.range > 0) {
-          zipCodeRange = req.query.range;
+      if (sFilterRange != undefined && sFilterRange == "true") {
+        if (sDistanceRange != undefined && sDistanceRange > 0) {
+          zipCodeRange = sDistanceRange;
         }
         sRangeFilter = ` HAVING distance <= ${zipCodeRange} `;
       }
