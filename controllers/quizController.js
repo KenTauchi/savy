@@ -5,7 +5,8 @@ exports.getQuiz = (req, res) => {
 
     let slimit = ``;
     if ((req.query.limit != undefined) && (req.query.limit > 0)) {
-      slimit = ` LIMIT ${req.query.limit} `;
+       sLimit = savyDb.escape(req.query.limit).replace(/['']+/g, '')
+       slimit = ` LIMIT ${sLimit} `;
     }
 
     let qry = `SELECT q.questionId, q.question, q.description, a.answer, 
