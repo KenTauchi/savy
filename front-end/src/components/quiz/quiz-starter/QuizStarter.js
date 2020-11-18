@@ -6,17 +6,18 @@ export default function QuizStarter() {
 		<div className="quiz-starter-page main-content">
 			<div className="quiz-rules-section">
 				<div className="quiz-starter-image">
-					<img src="./images/contact.svg" alt="quiz-starter-img" />
+					<img src="./images/icons/quiz_starter.svg" alt="quiz-starter-img" />
 				</div>
 				<div className="quiz-starter-desc">
-					<h2>Keep Calm and Challenge On</h2>
+					<h2>Recycling Challenge</h2>
 					<p>
-						Dive in and dare yourself to test the knowledge about recycling. How
-						it works?
+						Test your knowledge and learn more about recycling now!
 	        		</p>
-					<p>1. Click take quiz to began the challenge.</p>
-					<p>2. Select the correct answer to earn the score.</p>
-					<p>3. Submit the quiz to get the final score.</p>
+					<p>Steps to take the quiz</p>
+					<p>1. Click the button below to begin the challenge.</p>
+					<p>2. Select the correct answer to increase your score.</p>
+					<p>3. Get a final score on submission!</p>
+					<p>Let’s get started!</p>
 					<Link to="/challenges" className="button savy-green-button take-quiz-btn">
 						Take the Quiz
 	      			</Link>

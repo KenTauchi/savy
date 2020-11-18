@@ -12,7 +12,7 @@ export default function Progressbar() {
     margin: 0;
     height: 8px;
     border-right: 1px solid white;
-    background-color: gray;
+    background-color: #DADADA;
     :last-child {
       border: none;
     }

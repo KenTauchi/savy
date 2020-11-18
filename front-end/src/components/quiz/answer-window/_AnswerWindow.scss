@@ -10,7 +10,7 @@
 	transform: translateY(-50%) translateX(-50%);
 	background-color: white;
 
-	padding: 3rem 0.7rem;
+	padding: 3rem 1.2rem;
 	box-shadow: 5px 5px 6px #00000029;
 	border-radius: 10px;
 
@@ -31,5 +31,7 @@
 
 	p {
 		font-size: 0.9rem;
+		letter-spacing: $letter_spacing;
+		line-height: 20px;
 	}
 }

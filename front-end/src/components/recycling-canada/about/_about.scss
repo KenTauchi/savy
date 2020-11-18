@@ -5,7 +5,7 @@
     .about-section-info {
         max-width: 700px;
         margin: 0 auto;
-        padding: 5rem 0;
+        padding: 3rem 0;
 
         h2 {
             font-size: $h2-fz;
@@ -13,8 +13,8 @@
         }
 
         p {
-            line-height: 1.7;
-            letter-spacing: 1px;
+            line-height: $para_line-height;
+            letter-spacing: $letter_spacing;
             color: $savy-black;
 
             &:first-of-type {
