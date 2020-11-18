@@ -51,7 +51,7 @@ exports.search = (req, res) => {
       let sFamilyId      = savyDb.escape(req.query.familyId).replace(/['']+/g, '');              
 
       // Get cordinates from ZipCode
-      if (sFilterRange.toLowerCase() == "true" && sZipCode != "") {
+      if (sFilterRange.toLowerCase() == "true" && sZipCode != "" && sZipCode.toLowerCase() != "null") {
 
         // PROMISE to get ZipCode cordinates Before executing mySql query
         let getMyCordinateAPI = new Promise((resolve, reject) => {
@@ -102,11 +102,11 @@ exports.search = (req, res) => {
       let sWhere       = " WHERE 1=1";             // + sApiFilter;
   
       // Material and Family Parameters
-      if (sMaterialId != "") {
+      if (sMaterialId != "" && sMaterialId.toLowerCase() != "null") {
         sWhere = sWhere + ` AND m.materialId = ${sMaterialId} `;
         sOrigin = ` "material" AS origin, m.name AS material, m.description, m.imageUrl AS materialImageUrl, m.imageName AS materialImageName, m.deliveryNotes, `;
       } else {
-        if (sFamilyId != "") {
+        if (sFamilyId != "" && sFamilyId.toLowerCase() != "null") {
           sWhere = sWhere + ` AND f.familyId = ${sFamilyId} `;
           sOrigin = ` "family" AS origin, f.name AS material, f.description, f.imageUrl AS materialImageUrl, f.imageName AS materialImageName, f.deliveryNotes, `;
         }
