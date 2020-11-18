@@ -1,22 +1,27 @@
 .team-section {
 	max-width: $max-width;
 	margin: 0 auto;
+	margin-bottom: 3rem;
 
 	.team-section-info {
-		text-align: center;
-		max-width: 700px;
+		max-width: 666px;
 		margin: 0 auto;
 		padding: 0 1.5rem;
+
+		@include mq-medium {
+			text-align: center;
+			padding: 0 2.5rem;
+		}
 
 		h2 {
 			font-size: $h2-fz;
 			font-weight: normal;
-			line-height: 41px;
+			line-height: $heading_line-height;
 		}
 
 		.heading-info {
-			line-height: 25px;
-			letter-spacing: 1px;
+			line-height: $para_line-height;
+			letter-spacing: $letter_spacing;
 			color: $savy-gray-100;
 		}
 	}
@@ -43,9 +48,12 @@
 		.slick-prev {
 			left: 0;
 			z-index: 1;
+			background-color: $savy-white;
 
 			&:before {
-				color: #000;
+				color: $savy-gray-50;
+				background-color: $savy-white;
+				opacity: 1;
 			}
 		}
 
@@ -54,7 +62,8 @@
 			z-index: 1;
 
 			&:before {
-				color: #000;
+				color: $savy-gray-50;
+				opacity: 1;
 			}
 		}
 

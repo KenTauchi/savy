@@ -4,7 +4,7 @@ const { savyDb, savyPoolDb } = require("../connection.js");
 exports.getFaq = (req, res) => {
     let qry = `SELECT f.faqId, f.postedOn, f.question, f.answer
                    FROM faq f
-                  ORDER BY f.question  `;
+                  ORDER BY f.faqId `;
   
     savyPoolDb.then(pool =>{
       pool.query(qry)

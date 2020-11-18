@@ -49,6 +49,15 @@ const PieChart = () => {
     // dropShadowFilter.blur = 4;
     // pieSeries.filters.push(dropShadowFilter);
 
+    pieSeries.colors.list = [
+      am4core.color("#ECDBAC"),
+      am4core.color("#E3CA86"),
+      am4core.color("#D7B148"),
+      am4core.color("#F4D6B4"),
+      am4core.color("#EAB678"),
+      am4core.color("#E09030"),
+    ];
+
     let labelTemplate = pieSeries.labels.template;
     labelTemplate.nonScaling = true;
     labelTemplate.fill = am4core.color("#FFFFFF");

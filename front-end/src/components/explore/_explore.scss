@@ -9,10 +9,13 @@
 
     // Post Card Download Section
     .download-section {
+        max-width: 1100px;
+        margin: 0 auto;
         margin-bottom: 6rem;
 
         @include mq-mediumLarge {
             margin-bottom: 9rem;
+            padding: 0 1.5rem;
         }
 
         .postcard-section {
@@ -147,22 +150,26 @@
         padding: 0 1.5rem;
         color: $savy-gray-100;
 
+        letter-spacing: $letter_spacing;
+
         h2 {
-            font-size: 20px;
-            line-height: 27px;
+            font-size: 30px;
+            line-height: $heading_line-height;
+            font-weight: normal;
         }
 
         h3 {
             font-weight: normal;
-            line-height: 24px;
-            letter-spacing: 0.5px;
+            line-height: $para_line-height;
+            font-size: 22px;
+            margin: 0;
         }
 
         .hr-separator {
-            border-bottom: 0.5px solid #707070;
-            width: 90%;
+            border-bottom: 0.5px solid $savy-gray-50;
             margin: 0 auto;
-            margin-bottom: 2rem;
+            margin-top: 1.5rem;
+            margin-bottom: 3rem;
 
             @include mq-medium {
                 border-bottom: none;
@@ -180,14 +187,24 @@
 
                 &.MuiPaper-elevation1 {
                     box-shadow: none;
-                    border-bottom: 1px solid $savy-gray-50;
+                    border-bottom: 0.5px solid $savy-gray-50;
                     padding: 1rem 0;
                 }
 
                 .MuiSvgIcon-root {
-                    width: 2em;
-                    height: 2em;
-                    fill: #A0A0A0;
+                    width: 1.5em;
+                    height: 1.5em;
+                    fill: $savy-gray-100;
+
+                    // @include mq-mediumLarge {
+                    //     width: 1.5em;
+                    //     height: 1.5em;
+                    // }
+                }
+
+                .MuiIconButton-root {
+                    padding: 24px;
+
                 }
 
                 .MuiAccordionSummary-root {
@@ -195,9 +212,10 @@
 
                     .MuiTypography-body1 {
                         font-size: 18px;
-                        line-height: 30px;
+                        line-height: $para_line-height;
                         font-weight: bold;
                         font-family: $font-sans-serif;
+                        letter-spacing: $letter_spacing;
                     }
                 }
 
@@ -206,8 +224,9 @@
 
                     .MuiTypography-body1 {
                         font-size: 16px;
-                        line-height: 30px;
+                        line-height: $para_line-height;
                         font-family: $font-sans-serif;
+                        letter-spacing: $letter_spacing;
                     }
                 }
             }

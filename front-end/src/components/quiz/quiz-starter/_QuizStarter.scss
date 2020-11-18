@@ -9,19 +9,16 @@
 
     .quiz-rules-section {
         max-width: 500px;
-        margin: 0 auto;
+        margin: 5rem auto;
         margin-top: 5rem;
         padding: 0 1.5rem;
         display: grid;
         grid-template-columns: 1fr;
         grid-gap: 2rem;
-
-        @include mq-small {
-            margin-bottom: 5rem;
-        }
+        align-items: center;
 
         @include mq-mediumLarge {
-            max-width: 1024px;
+            max-width: 1224px;
             grid-template-columns: repeat(2, 1fr);
         }
 
@@ -33,7 +30,16 @@
             }
 
             img {
-                max-width: 465px;
+                // max-width: 500px;
+
+                @include mq-mediumLarge {
+                    width: 700px;
+                }
+
+                // @include mq-large {
+                //     min-width: 700px;
+                //     max-width: 700px;
+                // }
             }
         }
 
@@ -47,17 +53,27 @@
                 margin-bottom: 1.5rem;
                 padding-bottom: 1.5rem;
                 border-bottom: 3px solid $savy-green-100;
+                line-height: $heading_line-height;
+                display: inline-block;
 
                 @include mq-medium {
                     font-size: 28px;
-                    display: inline-block;
                 }
             }
 
             p {
                 margin: 0;
                 padding: 0;
-                line-height: 30px;
+                line-height: $para_line-height;
+                letter-spacing: $letter_spacing;
+
+                &:first-of-type {
+                    margin-bottom: 1rem;
+                }
+
+                &:last-of-type {
+                    margin-top: 1rem;
+                }
             }
 
             .take-quiz-btn {

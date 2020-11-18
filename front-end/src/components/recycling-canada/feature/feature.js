@@ -38,7 +38,7 @@ const Feature = () => {
                             how to get in touch with them.
                         </span>
                         {/* <Button className="feature-redirect-btn" component={Link} to="/waste-management">Manage</Button> */}
-                        <button onClick={moveToWasteManagement} className="feature-redirect-btn">Manage</button>
+                        <button onClick={moveToWasteManagement} className="feature-redirect-btn">Learn More</button>
                     </div>
 
                     <div className="feature">
@@ -49,7 +49,7 @@ const Feature = () => {
                             knowledge and expertise in recycling and learn
                             new things with simple question and answer.
                         </span>
-                        <button onClick={moveToChallenges} className="feature-redirect-btn">Go to Challenges</button>
+                        <button onClick={moveToChallenges} className="feature-redirect-btn">Learn More</button>
                     </div>
 
                     <div className="feature">
@@ -60,7 +60,7 @@ const Feature = () => {
                             and any related articles that can help you
                             expand your knowledge.
                         </span>
-                        <button onClick={moveToExplore} className="feature-redirect-btn">Go to Explore </button>
+                        <button onClick={moveToExplore} className="feature-redirect-btn">Learn More</button>
                     </div>
                 </div>
             </div>

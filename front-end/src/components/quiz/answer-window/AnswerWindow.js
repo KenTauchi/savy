@@ -44,7 +44,7 @@ export default function AnswerWindow() {
   ) : (
     <div className="answer-window">
       <span className="answer-boolean">
-        {quizData.correctness ? "Correct" : "Incorect"} Answer!!
+        {quizData.correctness ? "Correct" : "Incorect"} Answer
       </span>
       <div className="true-false-logo">
         <img
