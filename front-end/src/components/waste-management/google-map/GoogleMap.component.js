@@ -6,6 +6,7 @@ import Marker from "../marker/Marker.component";
 // import './GoogleMap.style.scss';
 
 const api_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+// const api_key = "";
 
 const GoogleMap = (props) => {
   const {
@@ -17,6 +18,8 @@ const GoogleMap = (props) => {
     getSelectedLocation,
     selectedLocation,
     directionsDisplay,
+    usersLocationProps,
+    directionLatlng
   } = props;
 
   const [apikey, setApikey] = useState({
@@ -58,16 +61,19 @@ const GoogleMap = (props) => {
     let directionsRenderer = new maps.DirectionsRenderer();
     directionsRenderer.setMap(map);
 
+    // console.log(usersLocationProps);
+    // console.log(selectedLocation);
+
     directionsService.route(
       {
         travelMode: maps.TravelMode.DRIVING,
         origin: new maps.LatLng(
-          currentLocationProps.center.lat,
-          currentLocationProps.center.lng
+          usersLocationProps.center.lat,
+          usersLocationProps.center.lng
         ),
         destination: new maps.LatLng(
-          selectedLocation.latitude,
-          selectedLocation.longitude
+          directionLatlng.lat,
+          directionLatlng.lng
         ),
         // origin: new maps.LatLng(49.2246, -123.1087),
         // destination: new maps.LatLng(49.2206, -123.1107),
@@ -102,10 +108,8 @@ const GoogleMap = (props) => {
         >
           {Markers}
         </GoogleMapReact>
-      ) : (
-        null
-      )}
-      { !directionsDisplay ? (
+      ) : null}
+      {!directionsDisplay ? (
         <GoogleMapReact
           bootstrapURLKeys={{ key: apikey.apiKey.development }}
           defaultCenter={defaultProps.center}
@@ -115,9 +119,7 @@ const GoogleMap = (props) => {
         >
           {Markers}
         </GoogleMapReact>
-      ) : (
-        null
-      )}
+      ) : null}
     </div>
   );
 }

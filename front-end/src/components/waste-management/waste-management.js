@@ -27,7 +27,6 @@ import Loader from './loader/Loader.component';
 // import "./waste-management.style.scss";
 
 const WasteManagement = () => {
-
   const dispatch = useDispatch();
   const state = useSelector((state) => state);
 
@@ -52,13 +51,13 @@ const WasteManagement = () => {
   });
   const breakPoint = 768;
 
-  const notFoundCondition = getNotFoundCondition(state)
+  const notFoundCondition = getNotFoundCondition(state);
   const [loadingCondition, setLoadingCondition] = useState(false);
   const loadingState = getLoadingCondition(state);
 
   useEffect(() => {
-	  setLoadingCondition(loadingState);
-  //   console.log(loadingState);
+    setLoadingCondition(loadingState);
+    //   console.log(loadingState);
     if (loadingState) {
       setWmComponentDisplay({
         tab: false,
@@ -137,6 +136,7 @@ const WasteManagement = () => {
     zoom: 11,
   });
 
+  // This is used to zoom in facility
   const [currentLocationProps, setCurrentLocationProps] = useState({
     center: {
       lat: 49.2246,
@@ -145,6 +145,7 @@ const WasteManagement = () => {
     zoom: 11,
   });
 
+  // This is used to define user's location
   const [usersLocationProps, setUsersLocationProps] = useState({
     center: {
       lat: 49.2246,
@@ -153,8 +154,8 @@ const WasteManagement = () => {
     zoom: 11,
   });
 
-  const [selectedLocation, setSelectedLocation] = 
-  useState({
+  // This is used to display facility detail
+  const [selectedLocation, setSelectedLocation] = useState({
     locationId: "",
     locationTypeId: "",
     cityId: "",
@@ -172,6 +173,11 @@ const WasteManagement = () => {
 
   const [directionsDisplay, setDirectionsDisplay] = useState(false);
 
+  const [directionLatlng, setDirectionLatlng] = useState({
+    lat: undefined,
+    lng: undefined,
+  });
+
   // const [filteredLocations, setFilteredLocations] = useState(locations.selectedLocations);
 
   let stateLocations = getLocationsSearchedLocations(state);
@@ -179,17 +185,19 @@ const WasteManagement = () => {
   useEffect(() => {
     dispatch(
       searchLocationsByMaterial(
-        49.188678,
-        -122.951498,
+        // 49.188678,
+        // -122.951498,
+        usersLocationProps.center.lat,
+        usersLocationProps.center.lng,
         15,
         "",
         "", // 49 cat, 26 dog, 29 mixed paper
-        "",
+        ""
       )
     );
     return () => {
       dispatch(notFoundHandlerAction(false));
-    }
+    };
   }, []);
 
   useEffect(() => {
@@ -204,9 +212,9 @@ const WasteManagement = () => {
 
   useEffect(() => {
     // console.log(loadingCondition);
-      notFoundhandler(filteredLocations);
+    notFoundhandler(filteredLocations);
   }, [filteredLocations]);
-  
+
   // useEffect(() => {
   //       if (notFoundCondition) {
   //         setNotFoundDisplay({
@@ -313,8 +321,8 @@ const WasteManagement = () => {
       ...selectedLocation,
       latitude: "",
       longitude: "",
-    })
-  }
+    });
+  };
 
   const setCurrentPosition = (position) => {
     setCurrentLocationProps({
@@ -325,7 +333,7 @@ const WasteManagement = () => {
       zoom: 12,
     });
   };
-  
+
   const setUserPosition = (position) => {
     setUsersLocationProps({
       center: {
@@ -338,7 +346,7 @@ const WasteManagement = () => {
 
   const setUserLocationAsCenter = () => {
     setCurrentLocationProps(usersLocationProps);
-  }
+  };
 
   const getlocationByPostalCode = (postalCode) => {
     fetch(
@@ -376,11 +384,11 @@ const WasteManagement = () => {
   };
 
   const notFoundhandler = (searchResult) => {
-	// console.log(searchResult);
-	
-	// if (notFoundDisplay.loader.display === "block") {
-	// 	return;
-	// }
+    // console.log(searchResult);
+
+    // if (notFoundDisplay.loader.display === "block") {
+    // 	return;
+    // }
 
     if (notFoundCondition) {
       setNotFoundDisplay({
@@ -416,10 +424,34 @@ const WasteManagement = () => {
     }
   };
 
-  const directionsDisplayOn = () => {
-    setDirectionsDisplay(true);
-    console.log(directionsDisplay);
-  }
+  const directionsDisplayOn = (lat, lng) => {
+    // console.log(directionLatlng.lat);
+    // console.log(directionLatlng.lng);
+    // console.log(lat)
+    // console.log(lng)
+    if (directionLatlng.lat == lat && directionLatlng.lng == lng) {
+      setDirectionsDisplay(false);
+      // console.log(false)
+    } else {
+      setDirectionLatlng({
+        lat: lat,
+        lng: lng,
+      });
+      setDirectionsDisplay(false);
+      // console.log(true);
+    }
+  };
+
+  useEffect(() => {
+      setDirectionsDisplay(true);
+  }, [directionLatlng]);
+
+  // const getDirectionLatlng = (lat, lng) => {
+  //   setDirectionLatlng({
+  //     lat: lat,
+  //     lng: lng
+  //   })
+  // }
 
   // Lifecycle *********************************************************************************************************************************************************************************************
 
@@ -657,12 +689,14 @@ const WasteManagement = () => {
     <div className="waste-management-content main-content">
       <Filter
         detailHide={detailHide}
-        currentLocation={defaultProps}
+        // currentLocation={defaultProps}
+        usersLocationProps={usersLocationProps}
         getlocationByPostalCode={getlocationByPostalCode}
         // getLocation={getLocation}
         resetSelectedLocation={resetSelectedLocation}
         mapDisplayHandler={mapDisplayHandler}
         // setUserLocationAsCenter={setUserLocationAsCenter}
+        setDirectionsDisplay={setDirectionsDisplay}
       />
       <div className="wm-main-contents" style={notFoundDisplay.contents}>
         {wmComponentDisplay.tab ? (
@@ -697,6 +731,8 @@ const WasteManagement = () => {
             getSelectedLocation={getSelectedLocation}
             selectedLocation={selectedLocation}
             directionsDisplay={directionsDisplay}
+            usersLocationProps={usersLocationProps}
+            directionLatlng={directionLatlng}
           />
         ) : null}
 
@@ -707,6 +743,7 @@ const WasteManagement = () => {
             locationDetailDisplayHandler={locationDetailDisplayHandler}
             getSelectedLocation={getSelectedLocation}
             directionsDisplayOn={directionsDisplayOn}
+            // getDirectionLatlng={getDirectionLatlng}
           />
         ) : null}
 

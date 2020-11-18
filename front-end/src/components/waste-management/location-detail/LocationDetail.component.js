@@ -12,8 +12,8 @@ const LocationDetail = (props) => {
     resetSelectedLocation,
   } = props;
 
-  const displayUrl = location.website;
-  // const displayUrl = location.website.slice(0, 30) + "...";
+  // const displayUrl = location.website;
+  const displayUrl = location.website.slice(0, 30) + "...";
 
   // console.log(location);
 

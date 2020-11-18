@@ -21,13 +21,14 @@ import { searchLocationsByMaterial } from "../../../reducks/locations/operations
 const Filter = (props) => {
   const dispatch = useDispatch();
   const {
-    currentLocation,
+    usersLocationProps,
     detailHide,
     getlocationByPostalCode,
     // getLocation,
     resetSelectedLocation,
     mapDisplayHandler,
-    // setUserLocationAsCenter
+    // setUserLocationAsCenter,
+    setDirectionsDisplay
   } = props;
 
   const [materialsSearchField, setMaterialsSearchField] = useState(
@@ -97,6 +98,7 @@ const Filter = (props) => {
     detailHide();
     resetSelectedLocation();
     mapDisplayHandler();
+    setDirectionsDisplay(false)
 
     if (postalCodeSearchField != "") {
       getlocationByPostalCode(postalCodeSearchField);
@@ -105,8 +107,8 @@ const Filter = (props) => {
       // setUserLocationAsCenter();
     }
 
-    let lat = currentLocation.center.lat;
-    let lng = currentLocation.center.lng;
+    let lat = usersLocationProps.center.lat;
+    let lng = usersLocationProps.center.lng;
     let range = distanceSearchField;
     let zip = postalCodeSearchField;
 
