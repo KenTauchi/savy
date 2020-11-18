@@ -9,11 +9,16 @@ exports.getQuiz = (req, res) => {
        slimit = ` LIMIT ${sLimit} `;
     }
 
+    // let qry = `SELECT q.questionId, q.question, q.description, a.answer, 
+    //                     CASE WHEN a.correct = 1 THEN 'yes' ELSE 'no' END AS correct
+    //                FROM (SELECT * FROM quizquestion ${slimit} ) q
+    //                     INNER JOIN quizanswer a ON (q.questionId = a.questionId)
+    //               ORDER BY q.questionId, a.answerId  `;
+
     let qry = `SELECT q.questionId, q.question, q.description, a.answer, 
                         CASE WHEN a.correct = 1 THEN 'yes' ELSE 'no' END AS correct
-                   FROM (SELECT * FROM quizquestion ${slimit} ) q
-                        INNER JOIN quizanswer a ON (q.questionId = a.questionId)
-                  ORDER BY q.questionId, a.answerId  `;
+                   FROM (SELECT * FROM quizquestion ORDER BY RAND() ${slimit} ) q
+                        INNER JOIN quizanswer a ON (q.questionId = a.questionId)`;
   
     savyPoolDb.then(pool =>{
       pool.query(qry)

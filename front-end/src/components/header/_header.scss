@@ -1,21 +1,31 @@
 header {
-    @media screen and (max-width: 874px) {
+    .site-logo a {
+        img {
+            max-width: 100px;
+        }
+    }
+
+    // Mobile Menu CSS
+    &.mobile-menu {
         .navbar {
-            background-color: #060b26;
-            height: 80px;
+            background-color: $savy-white;
             display: flex;
-            justify-content: start;
+            justify-content: space-between;
             align-items: center;
+            padding: 1rem 1.5rem;
         }
 
         .hamburger-menu {
             font-size: 2rem;
-            margin-left: 2rem;
             background: none;
+
+            svg {
+                color: $savy-gray-100 !important;
+            }
         }
 
         .nav-menu {
-            background-color: #060b26;
+            background-color: $savy-green-100;
             width: 250px;
             height: 100vh;
             display: flex;
@@ -29,19 +39,26 @@ header {
             &.active {
                 left: 0;
                 transition: 350ms;
+                box-shadow: 5px 0 5px -1px $savy-gray-50;
             }
 
             .nav-menu-items {
 
                 width: 100%;
+                margin: 0;
+                padding-left: 1.5rem;
 
                 .navbar-toggle {
-                    background-color: #060b26;
+                    background-color: $savy-green-100;
                     width: 100%;
-                    height: 80px;
+                    padding-top: 1rem;
                     display: flex;
                     justify-content: start;
                     align-items: center;
+
+                    .close-menu {
+                        font-size: 2rem;
+                    }
                 }
 
                 .nav-item {
@@ -71,19 +88,25 @@ header {
         }
     }
 
-    @media screen and (min-width: 875px) {
-        max-width: $max-width;
-        margin: 0 auto;
-        margin-bottom: 4rem;
-        padding: 0 1.5rem;
 
-        .site-logo a {
-            img {
-                max-width: 100px;
-            }
+    // Desktop Menu CSS
+    &.desktop-menu {
+        padding: 0.5rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 9999;
+        background: $savy-white;
+
+        &.active {
+            box-shadow: 0 0 10px $savy-gray-50;
         }
 
         .nav-menu {
+            max-width: $max-width;
+            margin: 0 auto;
+            // margin-bottom: 4rem;
+            padding: 0 1.5rem;
+
             @include mq-medium {
                 display: grid;
                 grid-template-columns: 100px auto;
