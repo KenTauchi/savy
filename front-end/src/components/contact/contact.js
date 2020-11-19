@@ -61,7 +61,7 @@ const Contact = () => {
     // className={serverState.submitting ? {display: 'none'} : ""} 
     console.log("Check status", serverState.displayForm);
     return (
-        <div className="main-content">
+        <div className="contact-page main-content">
             <div className="contact-main">
 
 
