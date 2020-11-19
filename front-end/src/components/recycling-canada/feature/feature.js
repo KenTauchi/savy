@@ -1,24 +1,8 @@
 import React from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import Button from '@material-ui/core/Button';
 
 const Feature = () => {
     const history = useHistory();
-
-    const moveToExplore = () => {
-        history.push("/explore");
-        window.scrollTo(0,0);
-    }
-
-    const moveToChallenges = () => {
-        history.push("/challenges-rule");
-        window.scrollTo(0,0);
-    }
-
-    const moveToWasteManagement = () => {
-        history.push("/waste-management");
-        window.scrollTo(0,0);
-    }
 
     return (
         <div className="feature-section">
@@ -37,8 +21,7 @@ const Feature = () => {
                             materials along with the items they receive and
                             how to get in touch with them.
                         </span>
-                        {/* <Button className="feature-redirect-btn" component={Link} to="/waste-management">Manage</Button> */}
-                        <button onClick={moveToWasteManagement} className="feature-redirect-btn">Learn More</button>
+                        <button onClick={() => history.push("/waste-management")} className="feature-redirect-btn">Learn More</button>
                     </div>
 
                     <div className="feature">
@@ -49,7 +32,7 @@ const Feature = () => {
                             knowledge and expertise in recycling and learn
                             new things with simple question and answer.
                         </span>
-                        <button onClick={moveToChallenges} className="feature-redirect-btn">Learn More</button>
+                        <button onClick={() => history.push("/challenges-rule")} className="feature-redirect-btn">Learn More</button>
                     </div>
 
                     <div className="feature">
@@ -60,7 +43,7 @@ const Feature = () => {
                             and any related articles that can help you
                             expand your knowledge.
                         </span>
-                        <button onClick={moveToExplore} className="feature-redirect-btn">Learn More</button>
+                        <button onClick={() => history.push("/explore")} className="feature-redirect-btn">Learn More</button>
                     </div>
                 </div>
             </div>
