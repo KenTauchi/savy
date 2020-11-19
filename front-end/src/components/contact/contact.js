@@ -16,7 +16,7 @@ const Contact = () => {
     const [serverState, setServerState] = useState({
         submitting: false,
         status: null,
-       // displayForm:false
+        // displayForm:false
     });
 
 
@@ -24,7 +24,7 @@ const Contact = () => {
         setServerState({
             submitting: false,
             status: { ok, msg },
-           // displayForm:false
+            // displayForm:false
         });
 
         if (ok) {
@@ -59,13 +59,14 @@ const Contact = () => {
 
     // Form hidden 
     // className={serverState.submitting ? {display: 'none'} : ""} 
-    console.log("Check status",serverState.displayForm);
+    console.log("Check status", serverState.displayForm);
     return (
         <div className="main-content">
             <div className="contact-main">
-                <h2>If there is any question or feedback, feel free to reach out to us.</h2>
+
 
                 <div className="contact-section">
+                    <h2>If there is any question or feedback, feel free to reach out to us.</h2>
                     <div className="contact-img">
                         <img src="./images/contact.svg" />
                     </div>
@@ -73,9 +74,9 @@ const Contact = () => {
                     <div className="contact-content">
                         <h3>Contact Us</h3>
 
-                        
+
                         <form onSubmit={handleOnSubmit}>
-                            
+
                             <FloatingLabelInput
                                 className="floating-input"
                                 type="text"
@@ -100,17 +101,17 @@ const Contact = () => {
                             />
 
                             <div className="contact-button">
-                                <button type="submit" disabled={serverState.submitting} >
+                                <button type="submit" disabled={serverState.submitting} className="savy-green-button contact-form-submit-btn">
                                     Submit
                                 </button>
                             </div>
-                       
+
                         </form>
-                            
+
                         {serverState.status && (
-                                <p id="submit-message" className={!serverState.status.ok ? "errorMsg" : ""}>
-                                    {serverState.status.msg}
-                                </p>
+                            <p id="submit-message" className={!serverState.status.ok ? "errorMsg" : ""}>
+                                {serverState.status.msg}
+                            </p>
                         )}
 
                     </div>

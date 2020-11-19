@@ -71,7 +71,8 @@ const Header = () => {
 								{ToggleMenu.map((menuItem, index) => {
 									return (
 										<li key={index} className={menuItem.cName}>
-											<Link to={menuItem.path}>{menuItem.title}</Link>
+											{/* <Link to={menuItem.path}>{menuItem.title}</Link> */}
+											<NavLink exact to={menuItem.path}>{menuItem.title}</NavLink>
 										</li>
 									)
 								})}

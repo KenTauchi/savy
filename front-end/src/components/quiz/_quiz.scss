@@ -60,10 +60,12 @@
 						display: flex;
 						align-items: center;
 
-						&> div {
+						&>div {
 							width: 100%;
 							padding: 0.5rem 1rem;
-							display: flex;
+							// display: flex;
+							display: grid;
+							grid-template-columns: 40px auto;
 							align-items: center;
 						}
 
@@ -106,6 +108,12 @@
 		left: 0;
 		right: 0;
 		bottom: 0;
+		z-index: 99;
 		background-color: rgba(211, 211, 211, 0.5);
+		margin-bottom: -2.5rem;
+
+		@include mq-mediumLarge {
+			margin-bottom: -1.4rem;
+		}
 	}
 }

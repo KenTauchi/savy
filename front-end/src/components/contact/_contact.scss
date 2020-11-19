@@ -1,21 +1,39 @@
-.contact-main{
-    margin: 10%;
+.main-content {
+    margin: 0 1.5rem;
+}
+
+.contact-main {
+    max-width: 570px;
+    margin: 0 auto;
+    letter-spacing: $letter_spacing;
+
+    .contact-section {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        text-align: left;
+        grid-gap: 2rem;
+        padding: 5rem 0;
+    }
+
     h2 {
         text-align: center;
-        font-weight: 900;
-        font-size: 1.2rem;
+        font-size: 22px;
+        line-height: $heading_line-height;
+        margin-bottom: 0;
     }
 
     .contact-img {
-        padding: 5%;
-        margin: auto;
+        order: -1;
     }
 
     .contact-content {
         h3 {
+            display: none;
             text-align: center;
-            font-weight: 900;
-            font-size: 1rem;
+            font-size: 22px;
+            line-height: $heading_line-height;
+            margin: 0;
         }
 
         .floating-input {
@@ -28,69 +46,53 @@
             text-align: center;
         }
 
-        button {
-            border-radius: 5px;
-            background-color:$primary-color;
+        .contact-form-submit-btn {
             border: none;
-            color: #ffffff;
-            height: 3rem;
             margin-top: 4rem;
-            width: 30%;
         }
+
         #submit-message {
             margin-top: 4rem;
             text-align: center;
         }
     }
-    
+
 }
 
+@media screen and (min-width: $mediumLarge) {
+    .contact-main {
+        max-width: 1224px;
 
-@media screen and (min-width: $medium) {
-    .contact-main{ 
-        margin: 5%;
-
-        h2 {
-            font-size: 1.5rem;
+        .contact-section {
+            grid-template-columns: 1.5fr 1fr;
         }
 
-        
-        .contact-section {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            justify-content: center;
-            text-align: left;
-            grid-gap: 4rem;
-            margin: 5rem 0;
+        h2 {
+            font-size: 28px;
+            grid-column: span 2;
+            margin-bottom: 3rem;
         }
 
         .contact-img {
-            padding: 0;
-            margin: 0;
-            max-width: 85%;
-        }
+            order: 0;
+
+            img {
+                width: 520px;
+                max-width: 520px;
+            }
+        } 
 
         .contact-content {
 
             h3 {
-                font-size: 1.2rem;
+                display: block;
+                font-size: 28px;
             }
 
             .contact-button {
                 text-align: left;
             }
-
-            button {
-                width: 70%;
-            }
         }
-    }
-
-}
-
-@media screen and (min-width: $large) {
-    .contact-img {
-        max-width: 60%;
     }
 
 }

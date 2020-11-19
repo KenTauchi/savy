@@ -16,10 +16,11 @@ button {
 }
 
 .main-content {
-    min-height: 79vh;
+    min-height: 84vh;
 }
 
 .savy-green-button {
+    cursor: pointer;
     background-color: $savy-green-100;
     border-radius: 6px;
     color: $savy-white;
