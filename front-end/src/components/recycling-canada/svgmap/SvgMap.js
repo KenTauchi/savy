@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getDataSet } from "../../../reducks/mapChartData/selectors";
 import {
   clickGet,
   dataImportAction,
 } from "../../../reducks/mapChartData/action";
+import OutSideClick from "../outside-click/OutSideClick";
 
 import PieChart from "./piechart/piechart";
 
@@ -14,12 +15,19 @@ const SvgMap = () => {
   const dispatch = useDispatch();
   const selector = useSelector((state) => state);
 
+  const ref = useRef();
+
   const [charDis, setCartDis] = useState(false);
+
+  OutSideClick(ref, () => {
+    dispatch(clickGet("CA"));
+    setCartDis(false);
+  });
 
   const clickFunc = (e) => {
     setCartDis(!charDis);
     let province = e.target.id;
-    // console.log("province", e.target.id);
+    // console.log("click event", node.current.contains(e.target));
 
     return province !== "" && charDis === false
       ? dispatch(clickGet(e.target.id))
@@ -37,7 +45,7 @@ const SvgMap = () => {
   }, []);
 
   return (
-    <div className="canada-map-container">
+    <div className="canada-map-container" ref={ref}>
       <div className="canada-map">
         <span className="info-label">
           <label>Click on provinces to see details</label>
