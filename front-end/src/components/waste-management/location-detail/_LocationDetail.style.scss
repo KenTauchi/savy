@@ -41,6 +41,30 @@
         grid-column-gap: 1rem;
     }
 
+    .locationDetailAndDirections {
+        display: grid;
+        grid-template-columns: 1fr 64px;
+    }
+
+    .locationDetailDirection {
+        display: grid;
+    }
+
+    .directionArrow {
+        width: 32px;
+        height: auto;
+        justify-self: right;
+        align-self: flex-start;
+        cursor: pointer;
+    }
+
+    .directionDistance {
+        justify-self: right;
+        align-self: flex-end;
+        margin: 0;
+        // display: none;
+    }
+
 }
 
 .locationDetailDiv::-webkit-scrollbar{

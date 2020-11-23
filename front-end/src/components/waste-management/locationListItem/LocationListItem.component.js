@@ -49,6 +49,8 @@ const LocationListItem = (props) => {
           src={arrow}
           alt="arrow image"
           onClick={()=>{
+            locationDetailDisplayHandler();
+            getSelectedLocation(location);
             directionsDisplayOn(
               parseFloat(location.latitude),
               parseFloat(location.longitude)

@@ -1,6 +1,7 @@
 import React from "react";
 
 import x_mark from './closewindow-60px.svg';
+import arrow from './directions-60px.svg';
 
 // import "./LocationDetail.style.scss";
 
@@ -10,12 +11,14 @@ const LocationDetail = (props) => {
     displayStyle,
     locationDetailDisplayHandler,
     resetSelectedLocation,
+    directionsDisplayOn,
   } = props;
 
   // const displayUrl = location.website;
   const displayUrl = location.website.slice(0, 30) + "...";
 
-  // console.log(location);
+  // console.log(location.latitude);
+  // console.log(location.longitude);
 
   // console.log(location.materials);
 
@@ -41,19 +44,39 @@ const LocationDetail = (props) => {
         />
       </div>
 
-      <p className="listItemFacilityPhone">{location.phone}</p>
-      <p className="listItemFacilityAddress1">{location.address}</p>
-      <p className="listItemFacilityAddress2">
-        {" "}
-        {location.city}, {location.provinceCode}, {location.postalCode}
-      </p>
-      <a
-        className="listItemFacilityLink"
-        href={location.website}
-        target="_blank"
-      >
-        {displayUrl}
-      </a>
+      <div className="locationDetailAndDirections">
+        <div>
+          <p className="listItemFacilityPhone">{location.phone}</p>
+          <p className="listItemFacilityAddress1">{location.address}</p>
+          <p className="listItemFacilityAddress2">
+            {" "}
+            {location.city}, {location.provinceCode}, {location.postalCode}
+          </p>
+          <a
+            className="listItemFacilityLink"
+            href={location.website}
+            target="_blank"
+          >
+            {displayUrl}
+          </a>
+        </div>
+        <div className="locationDetailDirection">
+          <img
+            className="directionArrow"
+            src={arrow}
+            alt="arrow image"
+            onClick={()=>{
+              directionsDisplayOn(
+                parseFloat(location.latitude),
+                parseFloat(location.longitude)
+              );
+            }}
+          />
+          {location.distance ? (
+            <p className="directionDistance">{location.distance} km</p>
+          ) : null}
+        </div>
+      </div>
 
       <p className="hoursOfOperation">Hours of Operation</p>
       <p className="openingHour">{location.openningHour}</p>

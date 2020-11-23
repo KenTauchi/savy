@@ -206,6 +206,10 @@ const WasteManagement = () => {
     } else {
       setFilteredLocations([]);
     }
+    setDirectionLatlng({
+      lat: undefined,
+      lng: undefined,
+    });
     // console.log(stateLocations)
     // notFoundhandler(stateLocations);
   }, [stateLocations]);
@@ -290,6 +294,14 @@ const WasteManagement = () => {
       ...wmComponentDisplay,
       detail: !wmComponentDisplay.detail,
     });
+    // console.log(wmComponentDisplay.detail)
+    if(wmComponentDisplay.detail) {
+      setDirectionsDisplay(false);
+      setDirectionLatlng({
+        lat: undefined,
+        lng: undefined,
+      });
+    }
   };
 
   const mapMarkerLocationDetailDisplayHandler = () => {
@@ -344,9 +356,9 @@ const WasteManagement = () => {
     });
   };
 
-  const setUserLocationAsCenter = () => {
-    setCurrentLocationProps(usersLocationProps);
-  };
+  // const setUserLocationAsCenter = () => {
+  //   setCurrentLocationProps(usersLocationProps);
+  // };
 
   const getlocationByPostalCode = (postalCode) => {
     fetch(
@@ -431,6 +443,10 @@ const WasteManagement = () => {
     // console.log(lng)
     if (directionLatlng.lat == lat && directionLatlng.lng == lng) {
       setDirectionsDisplay(false);
+      setDirectionLatlng({
+        lat: undefined,
+        lng: undefined,
+      });
       // console.log(false)
     } else {
       setDirectionLatlng({
@@ -752,6 +768,7 @@ const WasteManagement = () => {
             location={selectedLocation}
             locationDetailDisplayHandler={locationDetailDisplayHandler}
             resetSelectedLocation={resetSelectedLocation}
+            directionsDisplayOn={directionsDisplayOn}
           />
         ) : null}
 
