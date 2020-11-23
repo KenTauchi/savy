@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import GoogleMapReact from "google-map-react";
 
 import Marker from "../marker/Marker.component";
+import UserMarker from "../user-marker/UserMarker.component";
 
 // import './GoogleMap.style.scss';
 
@@ -56,6 +57,14 @@ const GoogleMap = (props) => {
     );
   });
 
+  const UsersLocationMarker = (
+    <UserMarker
+      key={usersLocationProps.center.lat + usersLocationProps.center.lng + "usersLocationPin"}
+      lat={usersLocationProps.center.lat}
+      lng={usersLocationProps.center.lng}
+/>
+  )
+
   const handleDirectionsApiLoaded = (map, maps) => {
     let directionsService = new maps.DirectionsService();
     let directionsRenderer = new maps.DirectionsRenderer();
@@ -107,6 +116,7 @@ const GoogleMap = (props) => {
           }}
         >
           {Markers}
+          {UsersLocationMarker}
         </GoogleMapReact>
       ) : null}
       {!directionsDisplay ? (
@@ -117,8 +127,9 @@ const GoogleMap = (props) => {
           center={currentLocationProps.center}
           zoom={currentLocationProps.zoom}
         >
-          {Markers}
-        </GoogleMapReact>
+        {Markers}
+        {UsersLocationMarker}
+      </GoogleMapReact>
       ) : null}
     </div>
   );

@@ -3,6 +3,11 @@
     max-width: 100%;
 }
 
+// Directons CSS
+.gm-style>div>div>div>div>img {
+    display: none;
+}
+
 @media screen and (min-width: 768px) {
     .google-map-section {
         height: 447.45px;
