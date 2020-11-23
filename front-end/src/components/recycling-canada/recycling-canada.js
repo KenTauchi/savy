@@ -7,7 +7,7 @@ import MapData from "./map-data/map-data";
 import Team from "./team/team";
 import Testimonial from "./testimonial/testimonial";
 import ContactSection from "./contact-section/contact-section";
-import Overlay from "../../components/recycling-canada/overlay/Overlay";
+// import Overlay from "../../components/recycling-canada/overlay/Overlay";
 
 const RecyclingCanada = () => {
   return (
