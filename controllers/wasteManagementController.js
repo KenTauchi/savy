@@ -159,7 +159,6 @@ exports.search = (req, res) => {
   
       //console.log(`SQL QUERY -----------------------`);
       //console.log(qry);
-  
 
       savyPoolDb.then(pool =>{
         pool.query(qry)
