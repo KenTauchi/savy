@@ -106,9 +106,9 @@ exports.search = (req, res) => {
         sWhere = sWhere + ` AND m.materialId = ${sMaterialId} `;
         sOrigin = ` "material" AS origin, m.name AS material, m.description, m.imageUrl AS materialImageUrl, m.imageName AS materialImageName, m.deliveryNotes, `;
       } else {
+        sOrigin = ` "family" AS origin, f.name AS material, f.description, f.imageUrl AS materialImageUrl, f.imageName AS materialImageName, f.deliveryNotes, `;          
         if (sFamilyId != "" && sFamilyId.toLowerCase() != "null") {
           sWhere = sWhere + ` AND f.familyId = ${sFamilyId} `;
-          sOrigin = ` "family" AS origin, f.name AS material, f.description, f.imageUrl AS materialImageUrl, f.imageName AS materialImageName, f.deliveryNotes, `;
         }
       }
   
