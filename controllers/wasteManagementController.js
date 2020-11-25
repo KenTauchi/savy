@@ -122,8 +122,8 @@ exports.search = (req, res) => {
   
       // Distance function Parameters - result in kilometers
       if (
-        zipCodeCordinate.latitude != undefined &&
-        zipCodeCordinate.longitude != undefined
+        zipCodeCordinate.latitude != undefined && zipCodeCordinate.latitude != '' &&
+        zipCodeCordinate.longitude != undefined && zipCodeCordinate.longitude != ''
       ) {
         sDistance = ` round(ST_Distance_Sphere( point(l.longitude, l.latitude), point(${zipCodeCordinate.longitude}, ${zipCodeCordinate.latitude}) ) * .000621371192 * 1.60934, 1) AS distance `;
       }
@@ -144,7 +144,7 @@ exports.search = (req, res) => {
                                        ) l ON (ml.locationId = l.locationId)
                             INNER JOIN city c ON (l.cityId = c.cityId)
                             INNER JOIN provinces p ON (c.provinceCode = p.provinceCode AND c.countryCode = p.countryCode) 
-                            INNER JOIN (
+                            LEFT JOIN (
                                          SELECT f.familyId, m.materialId, l.locationId, 
                                                 f.name AS family_name, m.name as material_name
                                            FROM family f  
