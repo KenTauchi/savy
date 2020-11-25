@@ -17,7 +17,7 @@ const ExploreQuiz = () => {
   return (
     <div className="explore-quiz-section">
       <p>
-        EXPLORE OUR PLATFORM AND TEST YOUR RECYCLING KNOWLEDGE: TAKE OUR QUIZ!
+        Explore our platform and test your recycling knowledge: Take the quiz now!
       </p>
       <DefaultButton
         click={moveToQuiz}
