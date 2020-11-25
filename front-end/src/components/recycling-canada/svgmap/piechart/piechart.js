@@ -16,7 +16,7 @@ const PieChart = () => {
   const selector = useSelector((state) => state);
   const dataSet = getDataSet(selector);
   const pieData = dataSet.pieChartData;
-  console.log(pieData);
+  // console.log(pieData);
 
   const [width, setWidth] = useState(0);
   const updateSize = () => setWidth(window.innerWidth);

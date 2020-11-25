@@ -14,9 +14,12 @@ export default function QuizStarter() {
 						Test your knowledge and learn more about recycling now!
 	        		</p>
 					<p>Steps to take the quiz</p>
-					<p>1. Click the button below to begin the challenge.</p>
-					<p>2. Select the correct answer to increase your score.</p>
-					<p>3. Get a final score on submission!</p>
+					<ol className="quiz-rules">
+						<li>Click the button below to begin the challenge.</li>
+						<li>Select the correct answer to increase your score.</li>
+						<li>Get a final score on submission!</li>
+					</ol>
+
 					<p>Let’s get started!</p>
 					<Link to="/challenges" className="button savy-green-button take-quiz-btn">
 						Take the Quiz

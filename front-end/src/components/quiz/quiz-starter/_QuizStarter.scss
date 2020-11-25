@@ -2,7 +2,7 @@
     max-width: $max-width;
     margin: 0 auto;
 
-    @include mq-mediumLarge {
+    @include mq-large {
         display: flex;
         align-items: center;
     }
@@ -17,7 +17,7 @@
         grid-gap: 2rem;
         align-items: center;
 
-        @include mq-mediumLarge {
+        @include mq-large {
             max-width: 1224px;
             grid-template-columns: repeat(2, 1fr);
         }
@@ -25,26 +25,20 @@
         .quiz-starter-image {
             text-align: center;
 
-            @include mq-mediumLarge {
+            @include mq-large {
                 order: 2;
             }
 
             img {
-                // max-width: 500px;
 
-                @include mq-mediumLarge {
-                    width: 700px;
+                @include mq-large {
+                    width: 740px;
                 }
-
-                // @include mq-large {
-                //     min-width: 700px;
-                //     max-width: 700px;
-                // }
             }
         }
 
         .quiz-starter-desc {
-            @include mq-mediumLarge {
+            @include mq-large {
                 order: 1;
             }
 
@@ -73,6 +67,17 @@
 
                 &:last-of-type {
                     margin-top: 1rem;
+                }
+            }
+
+            .quiz-rules {
+                padding: 0;
+                padding-left: 1.2rem;
+
+                li {
+                    margin-bottom: 0.5rem;
+                    line-height: $para_line-height;
+                    letter-spacing: $letter_spacing;
                 }
             }
 
