@@ -94,7 +94,7 @@ const Filter = (props) => {
     // console.log(materialsSearchField);
     // console.log(postalCodeSearchField);
     // console.log(distanceSearchField);
-    console.log(materials);
+    // console.log(materials);
     detailHide();
     resetSelectedLocation();
     mapDisplayHandler();

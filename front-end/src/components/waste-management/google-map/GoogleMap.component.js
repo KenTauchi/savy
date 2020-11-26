@@ -66,6 +66,11 @@ const GoogleMap = (props) => {
   )
 
   const handleDirectionsApiLoaded = (map, maps) => {
+
+    if(directionLatlng.lat === undefined || usersLocationProps.center.lng === undefined) {
+      return;
+    };
+
     let directionsService = new maps.DirectionsService();
     let directionsRenderer = new maps.DirectionsRenderer();
     directionsRenderer.setMap(map);
@@ -105,7 +110,7 @@ const GoogleMap = (props) => {
     <div className="google-map-section" style={displayStyle}>
       {directionsDisplay ? (
         <GoogleMapReact
-          bootstrapURLKeys={{ key: apikey.apiKey.development }}
+          bootstrapURLKeys={{ key: apikey.apiKey.product }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
           center={currentLocationProps.center}
@@ -121,7 +126,7 @@ const GoogleMap = (props) => {
       ) : null}
       {!directionsDisplay ? (
         <GoogleMapReact
-          bootstrapURLKeys={{ key: apikey.apiKey.development }}
+          bootstrapURLKeys={{ key: apikey.apiKey.product }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
           center={currentLocationProps.center}
