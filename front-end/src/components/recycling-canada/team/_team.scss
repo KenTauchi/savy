@@ -42,7 +42,7 @@
 			margin: 0;
 			max-width: 160px;
 			border-radius: 50%;
-			filter: grayscale(100%);
+			// filter: grayscale(100%);
 		}
 
 		.slick-prev {
@@ -71,7 +71,23 @@
 			padding-bottom: 1rem;
 			padding-top: 5rem;
 
+			p {
+				margin: 0;
+				padding: 0;
+			}
+			
+			.member-name {
+				margin: 0.5rem 0;
+			}
+
+			.member-role {
+				display: inline-block;
+				border-top: 2px solid $savy-orange-100;
+				padding: 0.5rem 0;
+			}
+
 			.member-profile {
+				margin-top: 0.5rem;
 				a {
 					font-size: 1.7rem;
 					margin: 5px;
