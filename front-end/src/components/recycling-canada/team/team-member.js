@@ -29,7 +29,7 @@ const TeamMember = (props) => {
     return (
         <div className="team-member-info">
             <img src={"./images/" + props.imageSRC} />
-            <div className="member-info">
+            <div className="member-info" style={{ borderColor: borderColor }}>
                 <p className="member-name">{props.memberName}</p>
                 <p className="member-role" style={{ borderColor: borderColor }}>{props.memberRole}</p>
                 <p className="member-profile">

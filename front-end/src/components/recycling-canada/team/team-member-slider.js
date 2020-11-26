@@ -39,23 +39,68 @@ export default function CenterMode() {
         cssEase: "linear",
         responsive: [
             {
-                breakpoint: 1367,
+                breakpoint: 1400,
                 settings: {
                     slidesToShow: 5
                 }
             },
             {
-                breakpoint: 1025,
+                breakpoint: 1100,
                 settings: {
+                    centerPadding: "50px",
                     slidesToShow: 3
                 }
             },
             {
-                breakpoint: 660,
+                breakpoint: 900,
                 settings: {
+                    centerPadding: "0px",
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 667,
+                settings: {
+                    centerPadding: "160px",
                     slidesToShow: 1
                 }
-            }
+            },
+            {
+                breakpoint: 600,
+                settings: {
+                    centerPadding: "40px",
+                    slidesToShow: 1
+                }
+            },
+            {
+                breakpoint: 570,
+                settings: {
+                    centerPadding: "85px",
+                    slidesToShow: 1
+                }
+            },
+            {
+                breakpoint: 450,
+                settings: {
+                    centerPadding: "45px",
+                    slidesToShow: 1
+                }
+            },
+            {
+                breakpoint: 380,
+                settings: {
+                    centerPadding: "35px",
+                    slidesToShow: 1
+                }
+            },
+            {
+                breakpoint: 350,
+                settings: {
+                    centerPadding: "25px",
+                    slidesToShow: 1
+                }
+            },
+            
         ]
     };
     return (
