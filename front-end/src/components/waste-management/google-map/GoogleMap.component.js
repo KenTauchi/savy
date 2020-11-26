@@ -110,7 +110,7 @@ const GoogleMap = (props) => {
     <div className="google-map-section" style={displayStyle}>
       {directionsDisplay ? (
         <GoogleMapReact
-          bootstrapURLKeys={{ key: apikey.apiKey.product }}
+          bootstrapURLKeys={{ key: apikey.apiKey.development }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
           center={currentLocationProps.center}
@@ -126,7 +126,7 @@ const GoogleMap = (props) => {
       ) : null}
       {!directionsDisplay ? (
         <GoogleMapReact
-          bootstrapURLKeys={{ key: apikey.apiKey.product }}
+          bootstrapURLKeys={{ key: apikey.apiKey.development }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
           center={currentLocationProps.center}
