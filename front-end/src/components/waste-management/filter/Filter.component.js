@@ -94,7 +94,7 @@ const Filter = (props) => {
     // console.log(materialsSearchField);
     // console.log(postalCodeSearchField);
     // console.log(distanceSearchField);
-    // console.log(materials);
+    console.log(materials);
     detailHide();
     resetSelectedLocation();
     mapDisplayHandler();
@@ -117,23 +117,24 @@ const Filter = (props) => {
     let selectedMaterial;
     if (materialsSearchField !== "") {
       selectedMaterial = materials.idNameType.find((material) => {
-        const searchresult = material.materialName
-          .toLowerCase()
-          .indexOf(materialsSearchField.toLowerCase());
-        if (searchresult > -1) {
+
+        const searchresult = material.materialName.toLowerCase() === materialsSearchField.toLowerCase();
+        if (searchresult === true) {
           return true;
         }
+
       });
-    }
 
-    // console.log(selectedMaterial);
+      // console.log(selectedMaterial);
 
-    if (selectedMaterial) {
-      selectedMaterial.type === "family"
-        ? (familiyId = selectedMaterial.id)
-        : (materialId = selectedMaterial.id);
-    } else {
-      materialId = 99999;
+      if (selectedMaterial) {
+        selectedMaterial.type === "family"
+          ? (familiyId = selectedMaterial.id)
+          : (materialId = selectedMaterial.id);
+      } else {
+        materialId = 99999;
+      }
+
     }
 
     // console.log(familiyId, materialId);
