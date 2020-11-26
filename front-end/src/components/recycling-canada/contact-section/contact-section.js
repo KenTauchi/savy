@@ -6,7 +6,7 @@ const ContactSection = () => {
     return (
         <div className="home-contact-section">
             <h3>Drop us a line and we'll get back as fast as we can!</h3>
-            <button onClick={() => history.push("/contact")} className="contact-us-btn">Contact Us</button>
+            <button onClick={() => history.push("/contact")} className="button savy-green-button contact-us-btn">Contact Us</button>
         </div>
     );
 }

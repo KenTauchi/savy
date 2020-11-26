@@ -3,7 +3,7 @@
 	padding: 0 1.5rem;
 
 	@include mq-medium {
-		background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), url("../../images/quiz_bg.svg");
+		background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url("../../images/quiz_bg.svg");
 		background-repeat: no-repeat;
 		background-position: bottom;
 	}

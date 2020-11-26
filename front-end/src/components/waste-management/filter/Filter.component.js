@@ -209,7 +209,8 @@ const Filter = (props) => {
         </div>
 
         <div className="searchButtonMobile">
-          <DefaultButton text="Search" click={searchButtonClickHandler} />
+          <button onClick={searchButtonClickHandler} className="button savy-green-button filter-search-btn">Search</button>
+          {/* <DefaultButton text="Search" click={searchButtonClickHandler} /> */}
         </div>
 
         <div className="searchButtonLaptop">

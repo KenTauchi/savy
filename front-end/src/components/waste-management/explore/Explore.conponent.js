@@ -1,17 +1,9 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 
-import DefaultButton from '../button/Button.component';
-
-// import './RecyclingFacts.style.scss';
-
 const Explore = () => {
   const history = useHistory();
 
-  const moveToExplore = () => {
-      history.push("/explore");
-      window.scrollTo(0, 0);
-  }
 
   return (
     <div className="explore-section">
@@ -20,10 +12,8 @@ const Explore = () => {
         management, check our explore page !
       </p>
 
-      <DefaultButton 
-        click={moveToExplore}
-        text="Explore"
-        />
+      <button onClick={() => history.push("/explore")} className="button savy-green-button contact-us-btn">Explore</button>
+
     </div>
   );
 };

@@ -1,7 +1,8 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 export default function QuizStarter() {
+	const history = useHistory();
 	return (
 		<div className="quiz-starter-page main-content">
 			<div className="quiz-rules-section">
@@ -21,9 +22,9 @@ export default function QuizStarter() {
 					</ol>
 
 					<p>Let’s get started!</p>
-					<Link to="/challenges" className="button savy-green-button take-quiz-btn">
+					<button onClick={() => history.push("/challenges")} className="button savy-green-button take-quiz-btn">
 						Take the Quiz
-	      			</Link>
+	      			</button>
 				</div>
 			</div>
 		</div>

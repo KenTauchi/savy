@@ -1,6 +1,7 @@
 .google-map-section {
     height: 50vh;
     max-width: 100%;
+    letter-spacing: 0.3px;
 }
 
 // Directons CSS
@@ -17,9 +18,9 @@
     .google-map-section {
         height: 447.45px;
         max-width: 100%;
-        -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-        -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+        -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 
         // google map zoom button configuration
         // *************************************
