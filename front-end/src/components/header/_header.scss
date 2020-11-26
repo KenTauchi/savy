@@ -37,20 +37,21 @@ header {
             position: fixed;
             top: 0;
             left: -100%;
-            z-index: 1;
+            z-index: 9;
             transition: 850ms;
 
             &.active {
                 left: 0;
                 transition: 350ms;
-                box-shadow: 5px 0 5px -1px $savy-gray-50;
+                box-shadow: 5px 0 5px -3px $savy-gray-50;
             }
 
             .nav-menu-items {
                 width: 100%;
                 margin: 0;
-                padding-left: 1.5rem;
-                margin-right: 1.5rem;
+                padding: 0;
+                // padding-left: 1.5rem;
+                // margin-right: 1.5rem;
 
                 .navbar-toggle {
                     background-color: $savy-green-100;
@@ -63,6 +64,7 @@ header {
                     .close-menu {
                         font-size: 2rem;
                         padding-bottom: 2rem;
+                        padding-left: 1.5rem;
                     }
                 }
 
@@ -70,7 +72,6 @@ header {
                     display: flex;
                     justify-content: start;
                     align-items: center;
-                    // padding: 8px 0px 8px 16px;
                     list-style: none;
                     height: 60px;
                     padding: 0;
@@ -82,13 +83,13 @@ header {
                         width: 95%;
                         display: flex;
                         align-items: center;
-                        padding: 0 1rem;
-                        border-radius: 4px;
+                        padding: 0 1.5rem;
+                        // border-radius: 4px;
                         height: 100%;
 
                         &:hover,
                         &.active {
-                            background-color: $savy-white;
+                            background-color: rgba(255, 255, 255, 0.8);
                             color: $savy-green-100;
                             font-weight: 600;
                         }
@@ -105,17 +106,15 @@ header {
         top: 0;
         z-index: 2;
         background: $savy-white;
-        // transition: all 0.5s linear;
 
         &.active {
-            box-shadow: 0 0 10px $savy-gray-50;
+            box-shadow: 0 0 5px $savy-gray-50;
             transition: all 0.5s linear;
         }
 
         .nav-menu {
             max-width: $max-width;
             margin: 0 auto;
-            // margin-bottom: 4rem;
             padding: 0 1.5rem;
 
             @include mq-medium {

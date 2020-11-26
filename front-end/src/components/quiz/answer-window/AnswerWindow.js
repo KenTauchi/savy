@@ -57,42 +57,44 @@ export default function AnswerWindow() {
 		</div>
 	) : (
 			<div className="answer-window">
-				<span className="answer-boolean">
-					{quizData.correctness ? "Correct" : "Incorect"} Answer
-      </span>
-				<div className="true-false-logo">
-					<img
-						src={
-							quizData.correctness
-								? "./images/icons/right_answer.svg"
-								: "./images/icons/wrong_answer.svg"
-						}
-					/>
-				</div>
-				<b>Let's Learn More</b>
-				<p className="learn_more">{quizData.data[quizData.currentIndex - 1].question.description}</p>
-
-				{quizData.currentIndex === quizData.quizLength ? (
-					<span
-						className="next-question savy-green-button"
-						onClick={() => {
-							dispatch(incAction(1));
-							dispatch(disWindow(true));
-						}}
-					>
-						See Score
-					</span>
-				) : (
+				<div className="answer-content">
+					<span className="answer-boolean">
+						{quizData.correctness ? "Correct" : "Incorrect"} Answer
+	      			</span>
+					<div className="true-false-logo">
+						<img
+							src={
+								quizData.correctness
+									? "./images/icons/right_answer.svg"
+									: "./images/icons/wrong_answer.svg"
+							}
+						/>
+					</div>
+					<b>Let's Learn More</b>
+					<p className="learn_more">{quizData.data[quizData.currentIndex - 1].question.description}</p>
+	
+					{quizData.currentIndex === quizData.quizLength ? (
 						<span
 							className="next-question savy-green-button"
 							onClick={() => {
 								dispatch(incAction(1));
-								dispatch(disWindow(false));
+								dispatch(disWindow(true));
 							}}
 						>
-							Next Question
+							See Score
 						</span>
-					)}
+					) : (
+							<span
+								className="next-question savy-green-button"
+								onClick={() => {
+									dispatch(incAction(1));
+									dispatch(disWindow(false));
+								}}
+							>
+								Next Question
+							</span>
+						)}
+				</div>
 			</div>
 		);
 }

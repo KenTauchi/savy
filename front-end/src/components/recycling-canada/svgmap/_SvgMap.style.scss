@@ -33,10 +33,12 @@
     display: block;
     height: auto;
     padding: 0 1.5rem;
+    margin-top: 2rem;
 
     @include mq-medium {
       max-width: 700px;
       margin: 0 auto;
+      margin-top: 2rem;
     }
 
     svg {
@@ -58,6 +60,7 @@
     #SK:hover,
     #YT:hover {
       // fill: #F6EBBE;
+      cursor: pointer;
       fill: $savy-green-50;
     }
 

@@ -9,15 +9,14 @@ const Downlaods = () => {
             {/* PostCard Download - 1 */}
             <div className="postcard-section">
                 <div className="postcards postcard-one">
-                    <img className="postcard-img" src="./images/icons/waste-recycled.svg" alt="" />
-                    <img className="postcard-img" src="./images/icons/waste-recycled.svg" alt="" />
-                    <img className="postcard-img" src="./images/icons/waste-recycled.svg" alt="" />
-                    <img className="postcard-img" src="./images/icons/waste-recycled.svg" alt="" />
+                    <img className="postcard-img" src="./images/explore/Explore_Selected-05.svg" alt="Please Recycle" />
+                    <img className="postcard-img" src="./images/explore/Explore_Selected-06.svg" alt="Clean Vibes" />
+                    <img className="postcard-img" src="./images/explore/Explore_Selected-07.svg" alt="Goodbye Waste" />
+                    <img className="postcard-img" src="./images/explore/Explore_Selected-08.svg" alt="Keep the earth clean" />
                 </div>
                 <div className="postcard-download">
-                    <span>Postcards,</span>
-                    <span>Printable PDF / Size A5</span>
-                    <a href="./postcards/Printable_PDF.pdf" className="download-now-btn" download>
+                    <span>Stickers</span>
+                    <a href="./postcards/ExploreStickers.zip" className="download-now-btn" download>
                         Download Now
                     </a>
                 </div>
