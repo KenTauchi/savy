@@ -15,7 +15,7 @@ const LocationDetail = (props) => {
   } = props;
 
   // const displayUrl = location.website;
-  const displayUrl = location.website.slice(0, 30) + "...";
+  const displayUrl = location.website.slice(0, 25) + "...";
 
   // console.log(location.latitude);
   // console.log(location.longitude);

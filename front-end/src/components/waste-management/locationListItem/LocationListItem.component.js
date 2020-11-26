@@ -10,6 +10,7 @@ const LocationListItem = (props) => {
     locationDetailDisplayHandler,
     getSelectedLocation,
     directionsDisplayOn,
+    windowWidth,
     // getDirectionLatlng,
   } = props;
 
@@ -49,8 +50,10 @@ const LocationListItem = (props) => {
           src={arrow}
           alt="arrow image"
           onClick={()=>{
-            locationDetailDisplayHandler();
-            getSelectedLocation(location);
+            if(windowWidth >= 768){
+              locationDetailDisplayHandler();
+              getSelectedLocation(location);
+              }
             directionsDisplayOn(
               parseFloat(location.latitude),
               parseFloat(location.longitude)

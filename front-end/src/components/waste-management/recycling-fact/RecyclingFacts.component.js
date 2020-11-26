@@ -20,7 +20,7 @@ const RecyclingFacts = () => {
         {fact.binColor && fact.familyName ? (
           <p className="binInfo">
             This is a type of <span>{fact.familyName}</span> and it goes to{" "}
-            <span>{fact.binColor}</span> Bin.
+            <span>{fact.binColor} Bin</span>.
           </p>
         ) : null}
         <p className="factDescription">{fact.description}</p>
