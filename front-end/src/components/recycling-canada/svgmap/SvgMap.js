@@ -47,9 +47,9 @@ const SvgMap = () => {
   return (
     <div className="canada-map-container" ref={ref}>
       <div className="canada-map">
-        <span className="info-label">
+        {/* <span className="info-label">
           <label>Click on provinces to see details</label>
-        </span>
+        </span> */}
         <svg
           version="1.1"
           id="Layer_1"

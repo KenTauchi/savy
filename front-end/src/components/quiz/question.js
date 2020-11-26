@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { initialState } from "../../reducks/store/initialState";
 import { quizImportAction, incAction } from "../../reducks/quiz/action";
@@ -14,6 +14,8 @@ export default function Question() {
 	const quizData = getQuizData(selector);
 	const dispatch = useDispatch();
 
+	
+
 	useEffect(() => {
 		console.log("quiz API data fetch rendered");
 
@@ -25,11 +27,13 @@ export default function Question() {
 			})
 			.catch(() => null);
 	}, []);
-
+	const [display, setDisplay] = useState("block");
+	;
 	return (
-		<div className="question-answer-section">
+		<div className="question-answer-section" style={{display:(quizData.currentIndex > quizData.quizLength) ? "none" : "block"}}>
 			{quizData.currentIndex > quizData.quizLength ? (
-				<div className="quiz-loading">Thank you!</div>
+				<div></div>
+				// <div className="quiz-loading">Thank you!</div>
 			) : (
 					<div>
 
