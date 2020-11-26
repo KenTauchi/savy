@@ -106,9 +106,9 @@ exports.search = (req, res) => {
         sWhere = sWhere + ` AND m.materialId = ${sMaterialId} `;
         sOrigin = ` "material" AS origin, m.name AS material, m.description, m.imageUrl AS materialImageUrl, m.imageName AS materialImageName, m.deliveryNotes, `;
       } else {
+        sOrigin = ` "family" AS origin, f.name AS material, f.description, f.imageUrl AS materialImageUrl, f.imageName AS materialImageName, f.deliveryNotes, `;          
         if (sFamilyId != "" && sFamilyId.toLowerCase() != "null") {
           sWhere = sWhere + ` AND f.familyId = ${sFamilyId} `;
-          sOrigin = ` "family" AS origin, f.name AS material, f.description, f.imageUrl AS materialImageUrl, f.imageName AS materialImageName, f.deliveryNotes, `;
         }
       }
   
@@ -122,8 +122,8 @@ exports.search = (req, res) => {
   
       // Distance function Parameters - result in kilometers
       if (
-        zipCodeCordinate.latitude != undefined &&
-        zipCodeCordinate.longitude != undefined
+        zipCodeCordinate.latitude != undefined && zipCodeCordinate.latitude != '' &&
+        zipCodeCordinate.longitude != undefined && zipCodeCordinate.longitude != ''
       ) {
         sDistance = ` round(ST_Distance_Sphere( point(l.longitude, l.latitude), point(${zipCodeCordinate.longitude}, ${zipCodeCordinate.latitude}) ) * .000621371192 * 1.60934, 1) AS distance `;
       }
@@ -144,7 +144,7 @@ exports.search = (req, res) => {
                                        ) l ON (ml.locationId = l.locationId)
                             INNER JOIN city c ON (l.cityId = c.cityId)
                             INNER JOIN provinces p ON (c.provinceCode = p.provinceCode AND c.countryCode = p.countryCode) 
-                            INNER JOIN (
+                            LEFT JOIN (
                                          SELECT f.familyId, m.materialId, l.locationId, 
                                                 f.name AS family_name, m.name as material_name
                                            FROM family f  
@@ -159,7 +159,6 @@ exports.search = (req, res) => {
   
       //console.log(`SQL QUERY -----------------------`);
       //console.log(qry);
-  
 
       savyPoolDb.then(pool =>{
         pool.query(qry)

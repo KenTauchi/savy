@@ -57,6 +57,7 @@ export default function AnswerWindow() {
 		</div>
 	) : (
 			<div className="answer-window">
+
 				<div className="answer-content">
 					<span className="answer-boolean">
 						{quizData.correctness ? "Correct" : "Incorrect"} Answer
@@ -74,6 +75,7 @@ export default function AnswerWindow() {
 					<p className="learn_more">{quizData.data[quizData.currentIndex - 1].question.description}</p>
 	
 					{quizData.currentIndex === quizData.quizLength ? (
+
 						<span
 							className="next-question savy-green-button"
 							onClick={() => {

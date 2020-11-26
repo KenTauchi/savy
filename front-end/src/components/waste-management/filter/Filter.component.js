@@ -192,8 +192,7 @@ const Filter = (props) => {
         <div className="searchInput">
           <AutocompleteInput
             options={[]}
-            autocomplete="on"
-            placeholder="Postal Code"
+            placeholder="Postal code"
             change={postalCodeChangeHandler}
             click={postalCodeClickHandler}
             value={postalCodeSearchField}
