@@ -1,14 +1,9 @@
 .explore-section {
     padding: 1.5rem;
-    line-height: 1.5;
+    line-height: $para_line-height;
     text-align: center;
     font-size: 18px;
     font-weight: bold;
-
-    button {
-        font-size: 18px;
-        padding: .75rem;
-    }
 }
 
 @media screen and (min-width: 768px) {
@@ -17,10 +12,5 @@
         max-width: 716px;
         margin-right: auto;
         margin-left: auto;
-
-        button {
-            padding: 8px 40px !important;
-            max-width: 220px;
-        }
     }
 }

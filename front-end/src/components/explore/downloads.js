@@ -2,6 +2,14 @@ import React from 'react';
 
 const Downlaods = () => {
 
+    const downloadFile = (fileName) => {
+        var anchor = document.createElement('a');
+        anchor.href = './postcards/' + fileName;
+        anchor.target = '_blank';
+        anchor.download = fileName;
+        anchor.click();
+    }
+
     return (
         // Download Section
         <div className="download-section">
@@ -16,9 +24,9 @@ const Downlaods = () => {
                 </div>
                 <div className="postcard-download">
                     <span>Stickers</span>
-                    <a href="./postcards/ExploreStickers.zip" className="download-now-btn" download>
-                        Download Now
-                    </a>
+                    <button onClick={() => downloadFile('ExploreStickers.zip')} className="button savy-green-button download-now-btn">
+                        Download
+                    </button>
                 </div>
             </div>
 
@@ -56,9 +64,9 @@ const Downlaods = () => {
                 <div className="postcard-download">
                     <span>Postcards,</span>
                     <span>Printable PDF / Size A5</span>
-                    <a href="./postcards/Printable_PDF.pdf" className="download-now-btn" download>
-                        Download Now
-                    </a>
+                    <button onClick={() => downloadFile('Printable_PDF.pdf')} className="button savy-green-button download-now-btn">
+                        Download
+                    </button>
                 </div>
             </div>
         </div>

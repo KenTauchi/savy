@@ -10,9 +10,7 @@
 
     .searchInstructionText {
         text-align: center;
-        // display: none;
         margin: 24px 1rem;
-
     }
 
     .WMpageInputsDiv {
@@ -21,15 +19,19 @@
         grid-template-columns: 1fr 1fr;
         grid-column-gap: 16px;
         grid-row-gap: 8px;
-        padding: .5rem 1rem 1rem;
+        // padding: .5rem 1rem 1rem;
+        padding: 1.5rem;
+        padding-top: 0.5rem;
         position: relative;
         max-width: 774px;
 
-        -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-        border-radius: 8px;
-        
+        -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+
 
         div:first-child {
             grid-column: span 2;
@@ -47,12 +49,15 @@
     }
 
     .searchInput {
-        // margin: .5rem auto;
         width: 100%;
     }
 
     .searchButtonMobile {
-        margin-top: 8px;
+        margin-top: 1rem;
+
+        .filter-search-btn {
+            width: 100%;
+        }
     }
 
     .MuiButton-label {
@@ -62,53 +67,23 @@
     .searchButtonLaptop {
         display: none;
         position: absolute;
-        top: 52%;
+        top: 52.5%;
         transform: translatey(-50%);
-        right: 4px;
-        width: 56px;
+        right: -3px;
+        width: 63px;
         cursor: pointer;
-        // border-radius: 30px;
 
         img {
-            max-width: 56px;
+            max-width: 63px;
             height: auto;
             border-radius: 50%;
 
             &:hover {
-                // -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                // -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                // box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
                 opacity: .8;
             }
 
         }
     }
-
-    // input {
-    //     padding: .5rem;
-    //     border-radius: 18px;
-    //     font-size: 16px;
-    //     width: 100%;
-
-    // }
-
-    // input:focus {
-    //     outline: none;
-    // }
-
-    // #use-autocomplete-demo-popup {
-    //     height: 300px;
-    //     z-index: 10;
-    //     // color: red !important;
-    //      -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    //     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    //     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    //     border-radius: 20px;
-
-    //     li {
-    //         font-size: 1rem;
-    //     }
-    // }
 }
 
 @media screen and (min-width: 768px) {
@@ -123,14 +98,12 @@
 
 
         .searchInstructionText {
-            // display: block;
             margin: 2rem auto;
-            letter-spacing: 1px;
+            margin-bottom: 5rem;
         }
 
         .WMpageInputsDiv {
             display: flex;
-            // padding-top: 1rem;
             padding: .5rem;
             border-radius: 48px;
             margin: 0 auto;
@@ -138,9 +111,11 @@
             & div:nth-of-type(1) {
                 margin-right: .5rem;
             }
+
             & div:nth-of-type(2) {
                 margin-left: .5rem;
             }
+
             & div:nth-of-type(3) {
                 border-right: none;
                 align-items: center;
@@ -164,10 +139,9 @@
     }
 
     @-moz-document url-prefix() {
-
-     .searchButtonLaptop {
-        // display: block !important;
-        // width: 56px;
+        .searchButtonLaptop {
+            // display: block !important;
+            // width: 56px;
+        }
     }
-}
 }

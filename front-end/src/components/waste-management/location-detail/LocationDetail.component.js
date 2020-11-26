@@ -84,7 +84,8 @@ const LocationDetail = (props) => {
       <p className="materialAccepted">Material accepted</p>
       <ul className="acceptedMaterialsList">
         {location.materials.map((material, index) => (
-          <li key={material + index}>{material}</li>
+          material != undefined ? <li key={material + index}>{material}</li> : ""
+          // <li key={material + index}>{material}</li>
         ))}
       </ul>
 

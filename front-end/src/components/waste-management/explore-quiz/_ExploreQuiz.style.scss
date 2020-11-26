@@ -1,21 +1,16 @@
 .explore-quiz-section {
     background-color: #F6F8FB;
     color: $savy-gray-100;
-    padding: 1rem;
+    padding: 1.5rem;
     margin: 48px 0;
     text-align: center;
 
     p {
-        font-size: 20px;
+        font-size: 18px;
         line-height: 1.5;
         margin-bottom: 2.5rem;
     }
 
-    button {
-        font-size: 18px;
-        padding: .75rem;
-        // width: 100%;
-    }
 }
 
 @media screen and (min-width: 768px) {
@@ -24,20 +19,10 @@
         justify-content: center;
         align-items: center;
         margin: 80px 0 48px;
-        // display: grid;
-        // align-items: center;
-        // grid-template-columns: 1fr 200px;
 
         p {
             margin-right: 40px;
             margin-bottom: 20px;
-            // display: inline-block;
-        }
-
-        button {
-            max-width: 220px;
-            padding: .5rem 2.5rem;
-            height: 48px;
         }
     }
 }

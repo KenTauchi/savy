@@ -55,13 +55,21 @@
                 grid-template-columns: repeat(2, 1fr);
                 grid-gap: 1.5rem;
 
-                @include mq-small {
+                @include mq-medium {
                     grid-template-columns: repeat(4, 1fr);
                     align-items: center;
                 }
 
                 .postcard-img {
-                    width: 165px;
+                    width: 150px;
+
+                    @include mq-mediumLarge {
+                        width: 130px;
+                    }
+
+                    @include mq-large {
+                        width: 165px;
+                    }
                 }
             }
 
@@ -133,12 +141,7 @@
                 }
 
                 .download-now-btn {
-                    display: inline-block;
                     margin-top: 2rem;
-                    background-color: $savy-green-100;
-                    border-radius: 6px;
-                    color: $savy-white;
-                    padding: 1rem 2rem;
                 }
             }
         }

@@ -2,11 +2,16 @@
     list-style-type: none;
     padding-left: 0;
     margin: 0;
-    border: solid 1px $savy-gray-25;
+    border: 0.5px solid $savy-gray-25;
     border-right: none;
     max-height: 400px;
-
     overflow-y:scroll;
+    margin-top: 1.5rem;
+    border: none;
+
+    @include mq-medium {
+      margin-top: 0;
+    }
 }
 
 .locationsList::-webkit-scrollbar{
@@ -19,7 +24,7 @@
 }
 .locationsList::-webkit-scrollbar-thumb{
   background: $savy-green-50;
-  border: solid 1px $savy-green-50;
+  border: 1px solid $savy-green-50;
   border-radius: 10px;
   box-shadow: none;
 }
@@ -29,9 +34,9 @@
         margin: 0;
         max-height: 447.45px;
         height: 100%;
-        border: solid 1px $savy-gray-25;
-        -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-        -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+        border: 0.5px solid #DBDBDB;
+        -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
     }
 }

@@ -27,12 +27,19 @@
 
 @media screen and (min-width: 768px) {
 
+    .wm-notfound-wrapper {
+        max-width: 768px;
+        margin: 0 auto;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    }
+
     .wmPageNotFound {
         display: grid;
         justify-content: center;
-        grid-template-columns: 200px 360px;
+        grid-template-columns: 200px 420px;
         grid-column-gap: 3rem;
         margin-top: 80px;
+        padding: 2rem;
     }
 
     .notFoundLogo {
