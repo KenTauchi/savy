@@ -557,6 +557,7 @@ const WasteManagement = () => {
       if (mapAndMaterialDisplay.map) {
         setWmComponentDisplay({
           ...wmComponentDisplay,
+          tab: false,
           list: false,
           map: false,
           detail: true,

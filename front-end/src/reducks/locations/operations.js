@@ -74,7 +74,7 @@ export const searchLocationsByMaterial = (
         console.log(error);
       });
     
-    // console.log(searchResult);
+    // console.log(searchResult[0]);
 
     if (!searchResult) {
         dispatch(locationsImportAction([]));
@@ -92,10 +92,16 @@ export const searchLocationsByMaterial = (
       ));
     });
 
+    // locations = locations.map(location => {
+    //     location.locationInfo.materials.unshift(material.materialName);
+    //     return location.locationInfo;
+    // })
+
     locations = locations.map(location => {
-        location.locationInfo.materials.unshift(material.materialName);
         return location.locationInfo;
     })
+
+    // console.log(locations);
 
     dispatch(loadingConditionHandlerAction(false)); 
     // console.log("search results: ", searchResult);
