@@ -122,7 +122,7 @@ const MapData = () => {
 					</li>
 				)}
 
-				{/* Population Contirbution Rank */}
+				{/* Population Contribution Rank */}
 
 				{table.provinceName === "Canada" ? null : (
 					<li className="table-data">
@@ -135,7 +135,7 @@ const MapData = () => {
 						</span>
 						<span className="map-data-value">{table.prov_Population_Rank}</span>
 						<span className="data-table-title">
-							Population Contirbution Rank
+							Population Contribution Rank
             </span>
 					</li>
 				)}
