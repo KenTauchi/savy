@@ -2,21 +2,15 @@ import React, { useEffect, useState } from "react";
 
 import { useDispatch, useSelector } from "react-redux";
 import { getDataSet } from "../../../../reducks/mapChartData/selectors";
-// import {
-//   clickGet,
-//   dataImportAction,
-// } from "../../../reducks/mapChartData/action";
 
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 
 const PieChart = () => {
-  // const dispatch = useDispatch();
   const selector = useSelector((state) => state);
   const dataSet = getDataSet(selector);
   const pieData = dataSet.pieChartData;
-  // console.log(pieData);
 
   const [width, setWidth] = useState(0);
   const updateSize = () => setWidth(window.innerWidth);
@@ -45,10 +39,7 @@ const PieChart = () => {
     pieSeries.hiddenState.properties.endAngle = -90;
     pieSeries.hiddenState.properties.startAngle = -90;
 
-    // let dropShadowFilter = new am4core.DropShadowFilter();
-    // dropShadowFilter.blur = 4;
-    // pieSeries.filters.push(dropShadowFilter);
-
+    // This sets the color of pie slice
     pieSeries.colors.list = [
       am4core.color("#ECDBAC"),
       am4core.color("#E3CA86"),
@@ -64,18 +55,6 @@ const PieChart = () => {
     labelTemplate.background = new am4core.RoundedRectangle();
     labelTemplate.background.fillOpacity = 0.9;
     labelTemplate.background.fill = am4core.color("#05C4A3");
-
-    // let found = pieData.forEach(
-    //   (p) =>
-    //     (labelTemplate.background.fill =
-    //       p.familyName === "Organic"
-    //         ? am4core.color("#0d9445")
-    //         : p.familyName === "Plastic"
-    //         ? am4core.color("#F15a22")
-    //         : p.familyName === "Paper"
-    //         ? am4core.color("#05C4A3")
-    //         : am4core.color("#FFFFFF"))
-    // );
 
     // =====================================================
     // ==========To make the pie chart Resonsive ===========
@@ -93,8 +72,9 @@ const PieChart = () => {
 
     // ====================================================
     // ====================================================
-    // console.log(width);
     return () => window.removeEventListener("resize", updateSize);
+
+    // whenever width changes, the pic is re-rendered to show the realtime responsiveness
   }, [width]);
 
   return (

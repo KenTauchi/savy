@@ -12,7 +12,7 @@ export default function Progressbar() {
     margin: 0;
     height: 8px;
     border-right: 1px solid white;
-    background-color: #DADADA;
+    background-color: #dadada;
     :last-child {
       border: none;
     }
@@ -21,6 +21,7 @@ export default function Progressbar() {
     }
   `;
 
+  // crating an array that contains a small block (times quiz length)
   const fields = [];
   for (let i = 1; i <= quizData.quizLength; i++) {
     fields.push(<Block key={i} />);

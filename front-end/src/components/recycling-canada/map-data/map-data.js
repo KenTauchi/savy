@@ -4,174 +4,164 @@ import { useSelector } from "react-redux";
 import { getDataSet } from "../../../reducks/mapChartData/selectors";
 
 const MapData = () => {
-	const selector = useSelector((state) => state);
-	const mapTableData = getDataSet(selector);
-	const table = mapTableData.mapDataTable;
-	//   console.log("province", table);
+  const selector = useSelector((state) => state);
+  const mapTableData = getDataSet(selector);
+  const table = mapTableData.mapDataTable;
 
-	let minMinStyle = {
-		gridTemplateColumns: "repeat(2, 1fr)",
-		gridGap: "3rem",
-	};
-	let minMidStyle = {
-		gridTemplateColumns: "repeat(3, 1fr)",
-		gridGap: "4rem",
-		maxWidth: "1024px",
-	};
-	let minMidAltStyle = {
-		gridTemplateColumns: "repeat(4, 1fr)",
-		maxWidth: "1024px",
-	};
-	let minMaxStyle = {
-		gridTemplateColumns: "repeat(6, 1fr)",
-		maxWidth: "1224px",
-	};
+  let minMinStyle = {
+    gridTemplateColumns: "repeat(2, 1fr)",
+    gridGap: "3rem",
+  };
+  let minMidStyle = {
+    gridTemplateColumns: "repeat(3, 1fr)",
+    gridGap: "4rem",
+    maxWidth: "1024px",
+  };
+  let minMidAltStyle = {
+    gridTemplateColumns: "repeat(4, 1fr)",
+    maxWidth: "1024px",
+  };
+  let minMaxStyle = {
+    gridTemplateColumns: "repeat(6, 1fr)",
+    maxWidth: "1224px",
+  };
 
-	if (table.provinceName == "Canada") {
-		minMinStyle = {
-			gridTemplateColumns: "repeat(3, 1fr)",
-			gridGap: "2rem",
-		};
-		minMidStyle = {
-			gridTemplateColumns: "repeat(3, 1fr)",
-			gridGap: "4rem",
-			maxWidth: "650px",
-		};
-		minMidAltStyle = {
-			gridTemplateColumns: "repeat(3, 1fr)",
-			maxWidth: "650px",
-		};
-		minMaxStyle = {
-			gridTemplateColumns: "repeat(3, 1fr)",
-		};
-	}
+  if (table.provinceName == "Canada") {
+    minMinStyle = {
+      gridTemplateColumns: "repeat(3, 1fr)",
+      gridGap: "2rem",
+    };
+    minMidStyle = {
+      gridTemplateColumns: "repeat(3, 1fr)",
+      gridGap: "4rem",
+      maxWidth: "650px",
+    };
+    minMidAltStyle = {
+      gridTemplateColumns: "repeat(3, 1fr)",
+      maxWidth: "650px",
+    };
+    minMaxStyle = {
+      gridTemplateColumns: "repeat(3, 1fr)",
+    };
+  }
 
+  const [width, setWidth] = useState(0);
+  const updateSize = () => setWidth(window.innerWidth);
 
+  const ulStyle = () =>
+    width < 700
+      ? minMinStyle
+      : width > 700 && width < 1024
+      ? minMidStyle
+      : width >= 1024 && table.prov_Rank <= 0
+      ? minMidStyle
+      : minMaxStyle;
 
-	const [width, setWidth] = useState(0);
-	const updateSize = () => setWidth(window.innerWidth);
+  useEffect(() => {
+    window.addEventListener("resize", updateSize);
+    updateSize();
 
-	const ulStyle = () =>
-		width < 700
-			? minMinStyle
-			: width > 700 && width < 1024
-				? minMidStyle
-				: width >= 1024 && table.prov_Rank <= 0
-					? minMidStyle
-					: minMaxStyle;
+    // whenever width changes, the updateSize function is called.
+  }, [width]);
 
-	useEffect(() => {
-		window.addEventListener("resize", updateSize);
-		updateSize();
-	}, [width]);
+  return (
+    <div className="map-data-section">
+      <h2>{table.provinceName}</h2>
+      <ul style={ulStyle()}>
+        <li className="table-data">
+          <span>
+            <img
+              className="map-data-img"
+              src="./images/icons/waste-recycled.svg"
+              alt=""
+            />
+          </span>
+          <span className="map-data-value">
+            {table.prov_WasteRecyclingPerc
+              ? table.prov_WasteRecyclingPerc
+              : "0"}
+          </span>
+          <span className="data-table-title">Waste Recycled (%)</span>
+        </li>
 
-	return (
-		<div className="map-data-section">
-			<h2>{table.provinceName}</h2>
-			<ul style={ulStyle()}>
-				{/* Waste Recycled */}
-				<li className="table-data">
-					<span>
-						<img
-							className="map-data-img"
-							src="./images/icons/waste-recycled.svg"
-							alt=""
-						/>
-					</span>
-					<span className="map-data-value">
-						{table.prov_WasteRecyclingPerc
-							? table.prov_WasteRecyclingPerc
-							: "0"}
-					</span>
-					<span className="data-table-title">Waste Recycled (%)</span>
-				</li>
-
-				{/* Contribution (%) */}
-
-				{table.provinceName === "Canada" ? null : (
-					<li className="table-data">
-						<span>
-							<img
-								className="map-data-img"
-								src="./images/icons/contribution.svg"
-								alt=""
-							/>
-						</span>
-						<span className="map-data-value">
-							{table.prov_RecyclingContribPerc
-								? table.prov_RecyclingContribPerc
-								: "0"}
-						</span>
-						<span className="data-table-title">Contribution (%)</span>
-					</li>
-				)}
-
-				{/* Province Rank */}
-
-				{table.provinceName === "Canada" ? null : (
-					<li className="table-data">
-						<span>
-							<img
-								className="map-data-img"
-								src="./images/icons/province-rank.svg"
-								alt=""
-							/>
-						</span>
-						<span className="map-data-value">{table.prov_Rank}</span>
-						<span className="data-table-title">Province Rank</span>
-					</li>
-				)}
-
-				{/* Population Contirbution Rank */}
-
-				{table.provinceName === "Canada" ? null : (
-					<li className="table-data">
-						<span>
-							<img
-								className="map-data-img"
-								src="./images/icons/population-contribution-rank.svg"
-								alt=""
-							/>
-						</span>
-						<span className="map-data-value">{table.prov_Population_Rank}</span>
-						<span className="data-table-title">
-							Population Contirbution Rank
+        {table.provinceName === "Canada" ? null : (
+          <li className="table-data">
+            <span>
+              <img
+                className="map-data-img"
+                src="./images/icons/contribution.svg"
+                alt=""
+              />
             </span>
-					</li>
-				)}
+            <span className="map-data-value">
+              {table.prov_RecyclingContribPerc
+                ? table.prov_RecyclingContribPerc
+                : "0"}
+            </span>
+            <span className="data-table-title">Contribution (%)</span>
+          </li>
+        )}
 
-				{/* Industries */}
-				<li className="table-data">
-					<span>
-						<img
-							className="map-data-img"
-							src="./images/icons/industries.svg"
-							alt=""
-						/>
-					</span>
-					<span className="map-data-value">
-						{table.prov_Industries ? table.prov_Industries : "0"}
-					</span>
-					<span className="data-table-title">Industries</span>
-				</li>
+        {table.provinceName === "Canada" ? null : (
+          <li className="table-data">
+            <span>
+              <img
+                className="map-data-img"
+                src="./images/icons/province-rank.svg"
+                alt=""
+              />
+            </span>
+            <span className="map-data-value">{table.prov_Rank}</span>
+            <span className="data-table-title">Province Rank</span>
+          </li>
+        )}
 
-				{/* Employees */}
-				<li className="table-data">
-					<span>
-						<img
-							className="map-data-img"
-							src="./images/icons/employees.svg"
-							alt=""
-						/>
-					</span>
-					<span className="map-data-value">
-						{table.prov_Employees ? table.prov_Employees.toLocaleString() : "0"}
-					</span>
-					<span className="data-table-title">Employees</span>
-				</li>
-			</ul>
-		</div>
-	);
+        {table.provinceName === "Canada" ? null : (
+          <li className="table-data">
+            <span>
+              <img
+                className="map-data-img"
+                src="./images/icons/population-contribution-rank.svg"
+                alt=""
+              />
+            </span>
+            <span className="map-data-value">{table.prov_Population_Rank}</span>
+            <span className="data-table-title">
+              Population Contirbution Rank
+            </span>
+          </li>
+        )}
+
+        <li className="table-data">
+          <span>
+            <img
+              className="map-data-img"
+              src="./images/icons/industries.svg"
+              alt=""
+            />
+          </span>
+          <span className="map-data-value">
+            {table.prov_Industries ? table.prov_Industries : "0"}
+          </span>
+          <span className="data-table-title">Industries</span>
+        </li>
+
+        <li className="table-data">
+          <span>
+            <img
+              className="map-data-img"
+              src="./images/icons/employees.svg"
+              alt=""
+            />
+          </span>
+          <span className="map-data-value">
+            {table.prov_Employees ? table.prov_Employees.toLocaleString() : "0"}
+          </span>
+          <span className="data-table-title">Employees</span>
+        </li>
+      </ul>
+    </div>
+  );
 };
 
 export default MapData;
