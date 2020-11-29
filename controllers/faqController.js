@@ -1,6 +1,8 @@
 const { savyDb, savyPoolDb } = require("../connection.js");
 
+// ----------------------------------------------------------
 // Returns a list of all FAQ questions
+// ----------------------------------------------------------
 exports.getFaq = (req, res) => {
     let qry = `SELECT f.faqId, f.postedOn, f.question, f.answer
                    FROM faq f

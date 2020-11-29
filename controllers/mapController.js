@@ -1,7 +1,9 @@
 const { savyDb, savyPoolDb } = require("../connection.js");
 
 
+// ----------------------------------------------------------
 // Returns all provinces in database
+// ----------------------------------------------------------
 exports.getProvinces = (req, res) => {
     let qry = `SELECT * FROM provinces`;
   
@@ -26,18 +28,28 @@ exports.getProvinces = (req, res) => {
 };
   
 
-
-
-
-
-  // Returns statics data from provinces for the map
+// ----------------------------------------------------------
+// Returns statics data from provinces for the map
+// ----------------------------------------------------------
+// Year: 2016 - just considering last year of data
+// Province "TR" - includes all territories, should be ignored as data is also segregated into YT, NT, NB
+// Pie Chart - consider families:
+// 2	Glass
+// 3	Paper
+// 4	Plastic
+// 5	Foam
+// 6	Eletronic
+// 7	Construction
+// 8	Small Appliance
+// 9	Organic
+// ----------------------------------------------------------
 exports.getMapData = (req, res) => {
     let qry = `SELECT md.provinceCode, md.provinceName,
                       md.prov_Population, md.prov_RecyclingContribPerc, md.prov_Industries, md.prov_Employees,
                       md.prov_TotalRecycling, md.prov_TotalWaste, md.prov_WasteRecyclingPerc, md.prov_populationPercOverCountry,
                       pd.familyName, pd.familyTotalRecycling, pd.familyPercent
                  FROM
-                      -- Map data 
+                      -- Subquery for Map data 
                       (
                         SELECT p.countryCode, p.provinceCode, p.provinceName, 
                                -- MIN(ctr.ctr_population) AS ctr_Population, MIN(ctr.ctr_recycling) AS ctr_Recycling, 
@@ -72,7 +84,7 @@ exports.getMapData = (req, res) => {
                          GROUP BY p.countryCode, p.provinceCode, p.provinceName  
                       ) md,
 
-                      -- Pie Chart data per province
+                      -- Subquery for Pie Chart data per province
                       (
                         SELECT p.countryCode,
                                p.provinceCode,
@@ -105,7 +117,7 @@ exports.getMapData = (req, res) => {
 
                UNION    
 
-               -- Canada Data                    
+               -- Query for total Canada Data                    
                SELECT md.countryCode AS provinceCode, md.countryName AS provinceName,
                       md.prov_Population, md.prov_RecyclingContribPerc, md.prov_Industries, md.prov_Employees,
                       md.prov_TotalRecycling, md.prov_TotalWaste, md.prov_WasteRecyclingPerc, md.prov_populationPercOverCountry,
@@ -140,14 +152,14 @@ exports.getMapData = (req, res) => {
                                               AND p2.provinceCode <> 'TR'
                                             GROUP BY c.countryCode
                                             ) ctr ON (p.countryCode = ctr.countryCode)
-                            WHERE ( (it.informationTypeID IN(1)  AND dc.year = 2016) OR -- 1. All Materials Diverted 
+                            WHERE ( (it.informationTypeID IN(1)  AND dc.year = 2016) OR -- 01.All Materials Diverted 
                                     (it.informationTypeID IN(19) AND dc.year = 2016) OR -- 19.Number of Business   
                                     (it.informationTypeID IN(23) AND dc.year = 2016) OR -- 23.Number of Employees                                    
                                     (it.informationTypeID IN(14) AND dc.year = 2018) )  -- 14.Total Waste  
                               AND p.provinceCode <> 'TR'      
                             GROUP BY c.countryCode, c.countryName  
                       ) md,
-                      -- Pie Chart data per province
+                      -- Pie Chart data 
                       (
                         SELECT c.countryCode,
                                 c.countryName,
@@ -199,6 +211,8 @@ exports.getMapData = (req, res) => {
                       pieObj = [];
                     }
           
+                    // Sort object to get province rank
+                    // "CA" has the consolidate data from Canada, and should not be considered on Rank                    
                     if (results[i].provinceCode != 'CA') {
                       iRank++;
                       iRankProv = iRank;
@@ -235,6 +249,7 @@ exports.getMapData = (req, res) => {
                 }
           
                 // Sort object to get population rank
+                // "CA" has the consolidate data from Canada, and should not be considered on Rank
                 iRank = 0;
                 iRankProv = 0;                 
                 myResult.sort((a, b) => a.mapData.prov_populationPercOverCountry < b.mapData.prov_populationPercOverCountry ? 1 : -1 );

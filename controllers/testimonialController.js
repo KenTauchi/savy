@@ -1,9 +1,10 @@
 const { savyDb, savyPoolDb } = require("../connection.js");
 
-
-// Returns a list of all TESTEMONIALS report
-exports.getTestemonial =  (req, res) => {
-    let qry = `SELECT t.testemonialId, t.postedOn, t.postedBy, t.imageURL, t.description
+// ----------------------------------------------------------
+// Returns a list of all TESTIMONIALS report
+// ----------------------------------------------------------
+exports.getTestimonial =  (req, res) => {
+    let qry = `SELECT t.testemonialId as testimonialId, t.postedOn, t.postedBy, t.imageURL, t.description
                  FROM testemonial t
                 ORDER BY t.postedOn   `;
   

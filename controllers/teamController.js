@@ -1,13 +1,14 @@
 const { savyDb, savyPoolDb } = require("../connection.js");
 
+// ----------------------------------------------------------
 // Returns a list of all team members
+// ----------------------------------------------------------
 exports.getTeam = (req, res) => {
     let qry = `SELECT t.name, r.name AS role, t.imageURL, t.linkedinURL, t.githubURL, t.behanceURL
                       FROM teammember t
                           INNER JOIN teamrole r ON (t.teamRoleId = r.teamRoleId)
                   ORDER BY t.teamMemberId`;
   
-
     savyPoolDb.then(pool =>{
       pool.query(qry)
           .then(results => {

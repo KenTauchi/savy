@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { getDataSet } from "../../../reducks/mapChartData/selectors";
 
 const MapData = () => {
+
   const selector = useSelector((state) => state);
   const mapTableData = getDataSet(selector);
   const table = mapTableData.mapDataTable;
@@ -92,6 +93,7 @@ const MapData = () => {
                 src="./images/icons/contribution.svg"
                 alt=""
               />
+
             </span>
             <span className="map-data-value">
               {table.prov_RecyclingContribPerc
