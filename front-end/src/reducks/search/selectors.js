@@ -1,28 +1,28 @@
 import { createSelector } from "reselect";
 
-const locationsSelector = (state) => state.locations;
+const searchSelector = (state) => state.search;
 
-export const getLocations = createSelector(
-    [locationsSelector],
+export const getSearch = createSelector(
+    [searchSelector],
     (state) => state
 );
 
 export const getLocationsSearchedLocations = createSelector(
-    [locationsSelector],
+    [searchSelector],
     (state) => state.searchedLocations
 );
 
 export const getSearchedMaterialFact = createSelector(
-  [locationsSelector],
+  [searchSelector],
   (state) => state.searchedMaterialFact
 );
 
 export const getLoadingCondition = createSelector(
-  [locationsSelector],
+  [searchSelector],
   (state) => state.loading
 );
 
 export const getNotFoundCondition = createSelector(
-  [locationsSelector],
+  [searchSelector],
   (state) => state.notFound
 );

@@ -3,7 +3,7 @@ import React from "react";
 import marker from "./home-pin-60px.svg";
 
 
-const UserMarker = (props) => {
+const UserMarker = () => {
     // const {
     //     location,
     //     mapMarkerLocationDetailDisplayHandler,
@@ -22,7 +22,7 @@ const UserMarker = (props) => {
         <div className="popupComment">
           <p>Your Location</p>
         </div>
-          <img className="markerImage" src={marker} />
+          <img className="markerImage" src={marker} alt="userMarker" />
       </div>
     );
 }

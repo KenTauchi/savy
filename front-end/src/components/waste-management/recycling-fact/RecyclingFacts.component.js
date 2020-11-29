@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from "react-redux";
-import { getSearchedMaterialFact } from '../../../reducks/locations/selectors';
+import { getSearchedMaterialFact } from '../../../reducks/search/selectors';
 
 
 // import './RecyclingFacts.style.scss';

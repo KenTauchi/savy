@@ -18,7 +18,7 @@ export const initialState = {
     idNameType: [],
     searchedMaterial: "",
   },
-  locations: {
+  search: {
     searchedLocations: [],
     searchedMaterialFact: {},
     loading: false,

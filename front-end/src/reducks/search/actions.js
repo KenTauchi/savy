@@ -1,4 +1,4 @@
-export const locationsAcationsTypes = {
+export const searchAcationsTypes = {
   LOCATIONS_IMPORT: "LOCATIONS_IMPORT",
   SEARCHED_MATERIAL_FACT_IMPORT: "SEARCHED_MATERIAL_FACT_IMPORT",
   LOADING_CONDITION_HANDLER: "LOADING_CONDITION_HANDLER",
@@ -7,28 +7,28 @@ export const locationsAcationsTypes = {
 
 export const locationsImportAction = (locations) => {
     return {
-        type: locationsAcationsTypes.LOCATIONS_IMPORT,
+        type: searchAcationsTypes.LOCATIONS_IMPORT,
         payload: locations,
     };
 };
 
 export const searchedMaterialFactImportAction = (materialFact) => {
     return {
-        type: locationsAcationsTypes.SEARCHED_MATERIAL_FACT_IMPORT,
+        type: searchAcationsTypes.SEARCHED_MATERIAL_FACT_IMPORT,
         payload: materialFact,
     };
 };
 
 export const loadingConditionHandlerAction = (status) => {
     return {
-        type: locationsAcationsTypes.LOADING_CONDITION_HANDLER,
+        type: searchAcationsTypes.LOADING_CONDITION_HANDLER,
         payload: status,
     };
 };
 
 export const notFoundHandlerAction = (status) => {
     return {
-        type: locationsAcationsTypes.NOTFOUND_HANDLER,
+        type: searchAcationsTypes.NOTFOUND_HANDLER,
         payload: status,
     };
 };
