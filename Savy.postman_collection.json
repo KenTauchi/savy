@@ -117,12 +117,12 @@
 			"response": []
 		},
 		{
-			"name": "testemonials",
+			"name": "testimonials",
 			"request": {
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/api/v1/testemonials",
+					"raw": "http://localhost:3000/api/v1/testimonials",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -131,7 +131,7 @@
 					"path": [
 						"api",
 						"v1",
-						"testemonials"
+						"testimonials"
 					]
 				}
 			},
