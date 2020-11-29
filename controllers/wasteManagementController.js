@@ -118,14 +118,6 @@ exports.search = (req, res) => {
         }
       }
   
-      // Range Filter Parameters
-      if (sFilterRange != undefined && sFilterRange == "true") {
-        if (sDistanceRange != undefined && sDistanceRange > 0) {
-          zipCodeRange = sDistanceRange;
-        }
-        sRangeFilter = ` HAVING distance <= ${zipCodeRange} `;
-      }
-  
       // Distance function Parameters - result in kilometers
       if (
         zipCodeCordinate.latitude != undefined && zipCodeCordinate.latitude != '' &&
@@ -133,7 +125,15 @@ exports.search = (req, res) => {
       ) {
         sDistance = ` round(ST_Distance_Sphere( point(l.longitude, l.latitude), point(${zipCodeCordinate.longitude}, ${zipCodeCordinate.latitude}) ) * .000621371192 * 1.60934, 1) AS distance `;
       }
-  
+
+      // Range Filter Parameters
+      if (sFilterRange != undefined && sFilterRange == "true") {
+        if (sDistanceRange != undefined && sDistanceRange > 0) {
+          zipCodeRange = sDistanceRange;
+        }
+        sRangeFilter = ` HAVING distance <= ${zipCodeRange} `;
+      }      
+
       // Set query statement
       let qry = `SELECT DISTINCT 
                             ${sOrigin} 
