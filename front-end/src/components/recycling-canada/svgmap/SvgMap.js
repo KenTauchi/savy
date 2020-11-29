@@ -17,19 +17,20 @@ const SvgMap = () => {
 
   const ref = useRef();
 
-  const [charDis, setCartDis] = useState(false);
+  const [chartDis, setChartDis] = useState(false);
 
   OutSideClick(ref, () => {
     dispatch(clickGet("CA"));
-    setCartDis(false);
+    setChartDis(false);
   });
 
+  //   detects the province id clicked on the map, and send the id of Canada when no id found or closing a province data
   const clickFunc = (e) => {
-    setCartDis(!charDis);
+    setChartDis(!chartDis);
     let province = e.target.id;
-    // console.log("click event", node.current.contains(e.target));
 
-    return province !== "" && charDis === false
+    // sending clickGet to Action
+    return province !== "" && chartDis === false
       ? dispatch(clickGet(e.target.id))
       : dispatch(clickGet("CA"));
   };
@@ -47,9 +48,6 @@ const SvgMap = () => {
   return (
     <div className="canada-map-container" ref={ref}>
       <div className="canada-map">
-        {/* <span className="info-label">
-          <label>Click on provinces to see details</label>
-        </span> */}
         <svg
           version="1.1"
           id="Layer_1"
@@ -621,7 +619,7 @@ const SvgMap = () => {
           />
         </svg>
 
-        {charDis ? (
+        {chartDis ? (
           <div className="chart fade_in" onClick={clickFunc}>
             <PieChart />
           </div>
