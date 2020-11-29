@@ -1,6 +1,10 @@
 const { savyDb, savyPoolDb } = require("../connection.js");
 
+// ----------------------------------------------------------
 // Returns a list of all quiz questions and answers
+// Parameters:
+//       limit - number of quiz questions to return
+// ----------------------------------------------------------
 exports.getQuiz = (req, res) => {
 
     let slimit = ``;
