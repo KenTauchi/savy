@@ -5,10 +5,10 @@ import { useSelector } from "react-redux";
 import { getQuizData } from "../../../reducks/quiz/selectors";
 
 export default function Progressbar() {
-  const selector = useSelector((state) => state);
-  const quizData = getQuizData(selector);
+	const selector = useSelector((state) => state);
+	const quizData = getQuizData(selector);
 
-  const Block = styled.div`
+	const Block = styled.div`
     margin: 0;
     height: 8px;
     border-right: 1px solid white;
@@ -21,10 +21,10 @@ export default function Progressbar() {
     }
   `;
 
-  const fields = [];
-  for (let i = 1; i <= quizData.quizLength; i++) {
-    fields.push(<Block key={i} />);
-  }
+	const fields = [];
+	for (let i = 1; i <= quizData.quizLength; i++) {
+		fields.push(<Block key={i} />);
+	}
 
-  return <div className="progress-bar">{fields.map((field) => field)}</div>;
+	return <div className="progress-bar">{fields.map((field) => field)}</div>;
 }

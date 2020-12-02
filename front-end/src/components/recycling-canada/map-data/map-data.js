@@ -1,4 +1,4 @@
-import { repeat } from "@amcharts/amcharts4/.internal/core/utils/String";
+// import { repeat } from "@amcharts/amcharts4/.internal/core/utils/String";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { getDataSet } from "../../../reducks/mapChartData/selectors";
@@ -18,16 +18,13 @@ const MapData = () => {
 		gridGap: "4rem",
 		maxWidth: "1024px",
 	};
-	let minMidAltStyle = {
-		gridTemplateColumns: "repeat(4, 1fr)",
-		maxWidth: "1024px",
-	};
+
 	let minMaxStyle = {
 		gridTemplateColumns: "repeat(6, 1fr)",
 		maxWidth: "1224px",
 	};
 
-	if (table.provinceName == "Canada") {
+	if (table.provinceName === "Canada") {
 		minMinStyle = {
 			gridTemplateColumns: "repeat(3, 1fr)",
 			gridGap: "2rem",
@@ -37,16 +34,11 @@ const MapData = () => {
 			gridGap: "4rem",
 			maxWidth: "650px",
 		};
-		minMidAltStyle = {
-			gridTemplateColumns: "repeat(3, 1fr)",
-			maxWidth: "650px",
-		};
+
 		minMaxStyle = {
 			gridTemplateColumns: "repeat(3, 1fr)",
 		};
 	}
-
-
 
 	const [width, setWidth] = useState(0);
 	const updateSize = () => setWidth(window.innerWidth);
@@ -54,7 +46,7 @@ const MapData = () => {
 	const ulStyle = () =>
 		width < 700
 			? minMinStyle
-			: width > 700 && width < 1024
+			: width >= 700 && width < 1024
 				? minMidStyle
 				: width >= 1024 && table.prov_Rank <= 0
 					? minMidStyle

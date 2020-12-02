@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import { initialState } from "../../reducks/store/initialState";
+// import { initialState } from "../../reducks/store/initialState";
 import { faqImportAction } from "../../reducks/exploreFAQ/action";
 import { getFAQs } from "../../reducks/exploreFAQ/selectors";
 import Accordion from '@material-ui/core/Accordion';
