@@ -1,0 +1,195 @@
+.explore-content {
+    max-width: 1300px;
+    margin: 0 auto;
+    margin-bottom: 5rem;
+    margin-top: 2rem;
+
+    @include mq-mediumLarge {
+        padding: 0 1.5rem;
+    }
+
+    // Post Card Download Section
+    .download-section {
+        max-width: 1100px;
+        margin: 0 auto;
+        margin-bottom: 6rem;
+
+        @include mq-mediumLarge {
+            margin-bottom: 9rem;
+            padding: 0 1.5rem;
+        }
+
+        .postcard-section {
+            margin-bottom: 4rem;
+            align-items: center;
+
+            @include mq-mediumLarge {
+                display: grid;
+                grid-template-columns: 3fr 1fr;
+                border: 1px solid #DDDDDD;
+                border-radius: 45px;
+                box-shadow: 0px 0px 32px #0000000D;
+            }
+
+            .postcards {
+                background: #E5E5E5;
+                justify-items: center;
+                padding: 2rem;
+
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-gap: 1.5rem;
+
+                @include mq-medium {
+                    grid-template-columns: repeat(4, 1fr);
+                    align-items: center;
+                }
+
+                @include mq-mediumLarge {
+                    display: flex;
+                    justify-content: space-evenly;
+                    height: 200px;
+                    border-top-left-radius: 45px;
+                    border-bottom-left-radius: 45px;
+                    padding: 0 2.5rem;
+                }
+
+                .postcard-img {
+                    width: 165px;
+                }
+            }
+
+            .postcard-one {
+                .postcard-img {
+                    width: 150px;
+
+                    @include mq-mediumLarge {
+                        width: 130px;
+                    }
+
+                    @include mq-large {
+                        width: 165px;
+                    }
+                }
+            }
+
+            .postcard-two {
+                .postcard-img {
+                    width: 150px;
+
+                    @include mq-mediumLarge {
+                        width: 130px;
+                    }
+                }
+            }
+
+            .postcard-download {
+                max-width: 200px;
+                margin: 0 auto;
+                text-align: center;
+                margin-top: 2rem;
+
+                @include mq-mediumLarge {
+                    text-align: left;
+                    margin-top: 0;
+                }
+
+                span {
+                    display: block;
+                    line-height: 25px;
+                }
+
+                .download-now-btn {
+                    margin-top: 2rem;
+                }
+            }
+        }
+    }
+
+    // FAQ Section
+    .faq-section {
+        max-width: 1100px;
+        margin: 0 auto;
+        padding: 0 1.5rem;
+        color: $savy-gray-100;
+
+        letter-spacing: $letter_spacing;
+
+        h2 {
+            font-size: 30px;
+            line-height: $heading_line-height;
+            font-weight: normal;
+        }
+
+        h3 {
+            font-weight: normal;
+            line-height: $para_line-height;
+            font-size: 22px;
+            margin: 0;
+        }
+
+        .hr-separator {
+            border-bottom: 0.5px solid $savy-gray-50;
+            margin: 0 auto;
+            margin-top: 1.5rem;
+            margin-bottom: 3rem;
+
+            @include mq-medium {
+                border-bottom: none;
+            }
+        }
+
+        .faq-list {
+            .MuiAccordion-root {
+                position: unset;
+                color: $savy-gray-100;
+
+                &.Mui-expanded {
+                    margin: 0;
+                }
+
+                &.MuiPaper-elevation1 {
+                    box-shadow: none;
+                    border-bottom: 0.5px solid $savy-gray-50;
+                    padding: 1rem 0;
+                }
+
+                .MuiSvgIcon-root {
+                    width: 1.5em;
+                    height: 1.5em;
+                    fill: $savy-gray-100;
+                }
+
+                .MuiIconButton-root {
+                    padding: 24px;
+
+                }
+
+                .MuiAccordionSummary-root {
+                    padding: 0;
+
+                    .MuiTypography-body1 {
+                        font-size: 18px;
+                        line-height: $para_line-height;
+                        font-weight: bold;
+                        font-family: $font-sans-serif;
+                        letter-spacing: $letter_spacing;
+                    }
+                }
+
+                .MuiAccordionDetails-root {
+                    padding: 0;
+
+                    .MuiTypography-body1 {
+                        font-size: 16px;
+                        line-height: $para_line-height;
+                        font-family: $font-sans-serif;
+                        letter-spacing: $letter_spacing;
+                    }
+                }
+            }
+
+
+        }
+    }
+}

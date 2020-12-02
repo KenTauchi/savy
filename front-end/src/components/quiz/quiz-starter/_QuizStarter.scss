@@ -1,0 +1,89 @@
+.quiz-starter-page {
+    max-width: $max-width;
+    margin: 0 auto;
+
+    @include mq-large {
+        display: flex;
+        align-items: center;
+    }
+
+    .quiz-rules-section {
+        max-width: 500px;
+        margin: 5rem auto;
+        margin-top: 5rem;
+        padding: 0 1.5rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-gap: 2rem;
+        align-items: center;
+
+        @include mq-large {
+            max-width: 1224px;
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .quiz-starter-image {
+            text-align: center;
+
+            @include mq-large {
+                order: 2;
+            }
+
+            img {
+
+                @include mq-large {
+                    width: 740px;
+                }
+            }
+        }
+
+        .quiz-starter-desc {
+            @include mq-large {
+                order: 1;
+            }
+
+            h2 {
+                font-size: 22px;
+                margin-bottom: 1.5rem;
+                padding-bottom: 1.5rem;
+                border-bottom: 3px solid $savy-green-100;
+                line-height: $heading_line-height;
+                display: inline-block;
+
+                @include mq-medium {
+                    font-size: 28px;
+                }
+            }
+
+            p {
+                margin: 0;
+                padding: 0;
+                line-height: $para_line-height;
+                letter-spacing: $letter_spacing;
+
+                &:first-of-type {
+                    margin-bottom: 1rem;
+                }
+
+                &:last-of-type {
+                    margin-top: 1rem;
+                }
+            }
+
+            .quiz-rules {
+                padding: 0;
+                padding-left: 1.2rem;
+
+                li {
+                    margin-bottom: 0.5rem;
+                    line-height: $para_line-height;
+                    letter-spacing: $letter_spacing;
+                }
+            }
+
+            .take-quiz-btn {
+                margin-top: 1.5rem;
+            }
+        }
+    }
+}

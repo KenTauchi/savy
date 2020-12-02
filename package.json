@@ -1,0 +1,33 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-validator": "^6.6.1",
+    "mysql": "^2.18.1",
+    "node-fetch": "^2.6.1",
+    "promise-mysql": "^4.1.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  },
+  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KenTauchi/savy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KenTauchi/savy/issues"
+  },
+  "homepage": "https://github.com/KenTauchi/savy#readme"
+}

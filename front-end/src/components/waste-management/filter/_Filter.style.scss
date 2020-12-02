@@ -1,0 +1,147 @@
+.filter-section {
+    max-width: 100%;
+
+    .WMpageH2 {
+        text-align: center;
+        text-transform: capitalize;
+        margin: 0 1rem;
+        font-size: $h1-fz;
+    }
+
+    .searchInstructionText {
+        text-align: center;
+        margin: 24px 1rem;
+    }
+
+    .WMpageInputsDiv {
+        text-align: left;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: 16px;
+        grid-row-gap: 8px;
+        // padding: .5rem 1rem 1rem;
+        padding: 1.5rem;
+        padding-top: 0.5rem;
+        position: relative;
+        max-width: 774px;
+
+        -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+        -moz-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        margin-top: 3rem;
+        margin-bottom: 2rem;
+
+
+        div:first-child {
+            grid-column: span 2;
+        }
+
+        div:nth-of-type(3) {
+            display: grid;
+            align-items: flex-end;
+        }
+
+        div:nth-of-type(4) {
+            grid-column: span 2;
+        }
+
+    }
+
+    .searchInput {
+        width: 100%;
+    }
+
+    .searchButtonMobile {
+        margin-top: 1rem;
+
+        .filter-search-btn {
+            width: 100%;
+        }
+    }
+
+    .MuiButton-label {
+        font-size: 18px;
+    }
+
+    .searchButtonLaptop {
+        display: none;
+        position: absolute;
+        top: 52.5%;
+        transform: translatey(-50%);
+        right: -3px;
+        width: 63px;
+        cursor: pointer;
+
+        img {
+            max-width: 63px;
+            height: auto;
+            border-radius: 50%;
+
+            &:hover {
+                opacity: .8;
+            }
+
+        }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .filter-section {
+
+        margin-bottom: 96px;
+
+        .WMpageH2 {
+            font-size: 50px;
+            margin: 2rem auto;
+        }
+
+
+        .searchInstructionText {
+            margin: 2rem auto;
+            margin-bottom: 5rem;
+        }
+
+        .WMpageInputsDiv {
+            display: flex;
+            padding: .5rem;
+            border-radius: 48px;
+            margin: 0 auto;
+
+            & div:nth-of-type(1) {
+                margin-right: .5rem;
+            }
+
+            & div:nth-of-type(2) {
+                margin-left: .5rem;
+            }
+
+            & div:nth-of-type(3) {
+                border-right: none;
+                align-items: center;
+            }
+        }
+
+        .searchInput {
+            width: 30%;
+            border-right: solid 1px $savy-gray-50;
+            height: 43px;
+        }
+
+        .searchButtonMobile {
+            display: none;
+        }
+
+        .searchButtonLaptop {
+            display: block;
+            border-radius: 50%;
+        }
+    }
+
+    @-moz-document url-prefix() {
+        .searchButtonLaptop {
+            // display: block !important;
+            // width: 56px;
+        }
+    }
+}

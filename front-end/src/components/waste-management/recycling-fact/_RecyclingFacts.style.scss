@@ -1,0 +1,132 @@
+.fact-section {
+    text-align: left;
+    padding: 1.5rem;
+    line-height: $para_line-height;
+    position: relative;
+    border: 0.5px solid #DBDBDB;
+    border-radius: 16px;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+
+    h2 {
+        text-transform: uppercase;
+        margin-bottom: 0;
+    }
+
+    img {
+        vertical-align: top;
+    }
+
+}
+
+.binInfo {
+    margin-bottom: 0;
+
+    span {
+        font-weight: bold;
+    }
+}
+
+.factDescription {
+    margin-top: 0;
+}
+
+.noImageText {
+    font-size: 24px;
+    text-align: center;
+    margin: 0;
+    width: 100%;
+    height: 240px;
+    font-weight: bold;
+    background-color: $savy-gray-50;
+    color: $savy-gray-25;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.factRecyclingNotes {
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.factRecyclingNotesText {
+    margin-top: 0;
+}
+
+.factExploreButton {
+    font-size: 22px;
+    width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+    .fact-section {
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1.25fr 1fr;
+        grid-column-gap: 1rem;
+
+        border: 0.5px solid #DBDBDB;
+        margin: 5rem auto;
+    }
+
+    .factHeadDiv,
+    .factMainDiv {
+        padding: 1rem;
+
+        @include mq-mediumLarge {
+            padding: 1.5rem;
+        }
+    }
+
+    .factImageDiv {
+        order: -1;
+        grid-row: span 3;
+        overflow: hidden;
+
+        img {
+            height: 100%;
+            object-fit: cover;
+            border-bottom-left-radius: 16px;
+            border-top-left-radius: 16px;
+        }
+    }
+
+    .noImageText {
+        border-bottom-left-radius: 16px;
+        border-top-left-radius: 16px;
+        width: 100%;
+        height: 100%;
+    }
+
+    .factExploreButton {
+        width: auto;
+    }
+
+    .factMainDiv {
+        order: 3;
+    }
+
+    .notesDiv {
+        order: 4;
+        color: $primary-color;
+    }
+
+    .factRecyclingNotes,
+    .factRecyclingNotesText {
+        display: inline;
+    }
+}
+
+.notesDiv {
+    padding: 0;
+
+    @include mq-medium {
+        padding: 1rem;
+    }
+
+    @include mq-mediumLarge {
+        padding: 1.5rem;
+    }
+}

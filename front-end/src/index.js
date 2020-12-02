@@ -6,8 +6,9 @@ import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from "react-redux";
 import createStore from "./reducks/store/store";
+import ScrollToTop from "./components/scroll-to-top";
 
-import { ConnectedRouter } from "connected-react-router";
+// import { ConnectedRouter } from "connected-react-router";
 import * as History from "history";
 
 const history = History.createBrowserHistory();
@@ -15,9 +16,11 @@ export const store = createStore(history);
 
 ReactDOM.render(
 	<Provider store={store}>
-	<BrowserRouter>
-		<App />
-	</BrowserRouter>
+		<BrowserRouter>
+			<ScrollToTop>
+				<App />
+			</ScrollToTop>
+		</BrowserRouter>
 	</Provider>,
 	document.getElementById('root')
 );

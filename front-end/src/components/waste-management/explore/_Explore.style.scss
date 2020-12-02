@@ -1,0 +1,16 @@
+.explore-section {
+    padding: 1.5rem;
+    line-height: $para_line-height;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+@media screen and (min-width: 768px) {
+    .explore-section {
+        font-size: 20px;
+        max-width: 716px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}

@@ -1,50 +1,82 @@
 .feature-section {
-    max-width: $max-width;
-    margin: 5rem auto;
+    max-width: 940px;
+    margin: 4rem auto;
+    padding: 0 1.5rem;
+
+    @include mq-medium {
+        padding: 0 2.5rem;
+    }
+
+    @include mq-large {
+        padding: 0 7rem;
+        max-width: 1300px;
+    }
 
     .feature-section-info {
         h2 {
+            font-size: 27px;
             font-weight: normal;
-            line-height: 1.4;
-            
+            line-height: $heading_line-height;
+
             strong {
                 display: block;
+                font-size: 32px;
             }
         }
 
         .feature-list {
-
+            margin-top: 4rem;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-gap: 4rem;
+            grid-template-columns: 1fr;
+            grid-gap: 6rem;
+
+            @include mq-medium {
+                grid-template-columns: repeat(3, 1fr);
+                grid-gap: 2.5rem;
+            }
+
+            @include mq-large {
+                grid-gap: 5rem;
+            }
 
             .feature {
+                text-align: center;
+
+                @include mq-medium {
+                    text-align: left;
+                }
+
                 span {
                     display: block;
-                    letter-spacing: 0.8px;
-                    line-height: 1.5;
+                    letter-spacing: $letter_spacing;
+                    line-height: $para_line-height;
                 }
-                
+
                 .feature-image {
-                    width: 250px;
-                    height: 250px;;
+                    width: 120px;
+                    margin-bottom: 1.5rem;
                 }
 
                 .feature-name {
                     font-weight: bold;
+                    text-align: left;
+                    font-size: 1.2rem;
+                    margin-bottom: 0.5rem;
                 }
 
                 .feature-info {
-
+                    text-align: left;
                 }
 
                 .feature-redirect-btn {
                     margin-top: 1.5rem;
                     border: 2px solid $savy-green-100;
-                    border-radius: 5px;
+                    border-radius: 6px;
                     padding: 0.5rem 1.5rem;
                     color: $savy-green-100;
                     background-color: $savy-white;
+                    font-weight: 500;
+                    font-size: 14px;
                     cursor: pointer;
 
                     &:focus {

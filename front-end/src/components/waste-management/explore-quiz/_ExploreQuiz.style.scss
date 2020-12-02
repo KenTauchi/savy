@@ -1,0 +1,28 @@
+.explore-quiz-section {
+    background-color: #F6F8FB;
+    color: $savy-gray-100;
+    padding: 1.5rem;
+    margin: 48px 0;
+    text-align: center;
+
+    p {
+        font-size: 18px;
+        line-height: 1.5;
+        margin-bottom: 2.5rem;
+    }
+
+}
+
+@media screen and (min-width: 768px) {
+    .explore-quiz-section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 80px 0 48px;
+
+        p {
+            margin-right: 40px;
+            margin-bottom: 20px;
+        }
+    }
+}

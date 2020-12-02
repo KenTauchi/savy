@@ -1,0 +1,40 @@
+body {
+    font-family: $font-sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    cursor: pointer;
+}
+
+.main-content {
+    min-height: 84vh;
+}
+
+.savy-green-button {
+    cursor: pointer;
+    background-color: $savy-green-100;
+    border: none;
+    border-radius: 6px;
+    color: $savy-white;
+    padding: 0.75rem 2rem;
+    display: inline-block;
+    min-width: 170px;
+    font-size: 1rem;
+    // text-transform: uppercase;
+    letter-spacing: $letter_spacing;
+    outline: none;
+
+    &:hover {
+        transition: 0.3s;
+        box-shadow: 0px 5px 5px -5px rgba(0, 0, 0, 0.2), 0px 2px 7px 0px rgba(0, 0, 0, 0.2), 0px 0px 4px 0px rgba(0, 0, 0, 0.2)
+    }
+}

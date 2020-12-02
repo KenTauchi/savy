@@ -1,6 +1,5 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { initialState } from "../../../reducks/store/initialState";
 import { teamImportAction } from "../../../reducks/teamMembers/action";
 import { getTeamMembers } from "../../../reducks/teamMembers/selectors";
 import Slider from "react-slick";
@@ -8,13 +7,15 @@ import TeamMember from './team-member';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+import { API_URL } from '../../global_variables';
+
 export default function CenterMode() {
     const selector = useSelector((state) => state);
     const teamMembers = getTeamMembers(selector);
     const dispatch = useDispatch();
 
     useEffect(() => {
-        fetch('http://localhost:3000/api/v1/team')
+        fetch(`${API_URL}/team`)
             .then(response => response.json())
             .then((result) => {
                 dispatch(teamImportAction(result));
@@ -22,6 +23,9 @@ export default function CenterMode() {
             .catch(() => null);
     }, []);
 
+    console.log(teamMembers.data);
+
+    // Slick Slider Setting
     const settings = {
         className: "center",
         centerMode: true,
@@ -36,39 +40,73 @@ export default function CenterMode() {
         cssEase: "linear",
         responsive: [
             {
-                breakpoint: 1367,
+                breakpoint: 1400,
                 settings: {
                     slidesToShow: 5
                 }
             },
             {
-                breakpoint: 1025,
+                breakpoint: 1100,
                 settings: {
+                    centerPadding: "50px",
                     slidesToShow: 3
                 }
             },
             {
-                breakpoint: 769,
+                breakpoint: 900,
                 settings: {
-                    slidesToShow: 2
+                    centerPadding: "0px",
+                    slidesToShow: 3
                 }
             },
             {
-                breakpoint: 600,
+                breakpoint: 667,
                 settings: {
-                    slidesToShow: 2
-                }
-            },
-            {
-                breakpoint: 480,
-                settings: {
+                    centerPadding: "160px",
                     slidesToShow: 1
                 }
-            }
+            },
+            // {
+            //     breakpoint: 600,
+            //     settings: {
+            //         centerPadding: "140px",
+            //         slidesToShow: 1
+            //     }
+            // },
+            {
+                breakpoint: 570,
+                settings: {
+                    centerPadding: "85px",
+                    slidesToShow: 1
+                }
+            },
+            {
+                breakpoint: 450,
+                settings: {
+                    centerPadding: "45px",
+                    slidesToShow: 1
+                }
+            },
+            {
+                breakpoint: 380,
+                settings: {
+                    centerPadding: "35px",
+                    slidesToShow: 1
+                }
+            },
+            {
+                breakpoint: 350,
+                settings: {
+                    centerPadding: "25px",
+                    slidesToShow: 1
+                }
+            },
+            
         ]
     };
     return (
         <div>
+            {/* Loading Dynamic Data to the slides */}
             <Slider {...settings}>
                 {teamMembers.data.map((teamMember, index) => {
                     return (

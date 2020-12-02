@@ -14,7 +14,7 @@ import { DataTestimonialReducer } from "../testimonials/reducers";
 import { QuizDataReducer } from "../quiz/reducers";
 
 import { materialsReducer } from '../materials/reducers';
-import { locationsReducer } from '../locations/reducers';
+import { searchReducer } from '../search/reducers';
 
 
 
@@ -32,7 +32,7 @@ export default function createStore(history) {
 			faq: DataFaqReducer,
 			team: TeamDataReducer,
       materials: materialsReducer,
-      locations: locationsReducer
+      search: searchReducer
 		}),
 
 

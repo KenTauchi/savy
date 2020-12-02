@@ -1,0 +1,64 @@
+.locationListItem {
+
+    border: solid 1px $savy-gray-25;
+    border-right: none;
+    text-align: left;
+    padding: 1rem 1.5rem;
+    display: grid;
+    // grid-template-columns: 1fr 32px; // without miles
+    grid-template-columns: 1fr 64px; // with miles
+    line-height: 1.5;
+
+    p {
+        margin: 0;
+        line-height: 20px;
+        font-size: 14px;
+        color: $savy-gray-100;
+    }
+
+    a {
+        font-size: 14px;
+        text-decoration: none;
+        color: #939393;
+    }
+
+    .listItemFacilityName {
+        font-size: 20px;
+        margin-bottom: .5rem;
+        color: $primary-color;
+        // border-bottom: solid 1px black;
+        display: inline-block;
+        cursor: pointer;
+    }
+
+    .locationListItemDirection {
+        display: grid;
+    }
+
+    .directionArrow {
+        width: 32px;
+        height: auto;
+        justify-self: right;
+        align-self: flex-start;
+        cursor: pointer;
+    }
+
+    .directionDistance {
+        justify-self: right;
+        align-self: flex-end;
+        // display: none;
+    }
+
+    .rightArrowDiv {
+        display: grid;
+        justify-content: right;
+        align-items: flex-end;
+    }
+
+    .rightArrow {
+        max-width: 16px;
+        height: auto;
+        cursor: pointer;
+    }
+
+}

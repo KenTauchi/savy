@@ -16,10 +16,13 @@ export const initialState = {
   },
   materials: {
     idNameType: [],
-    searchedMaterial: ""
+    searchedMaterial: "",
   },
-  locations: {
+  search: {
     searchedLocations: [],
+    searchedMaterialFact: {},
+    loading: false,
+    notFound: false,
   },
   quizData: {
     data: [],

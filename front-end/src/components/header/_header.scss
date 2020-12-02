@@ -1,115 +1,160 @@
-// header {
-//     .navbar {
-//         background-color: #060b26;
-//         height: 80px;
-//         display: flex;
-//         justify-content: start;
-//         align-items: center;
-//     }
-
-//     .hamburger-menu {
-//         font-size: 2rem;
-//         margin-left: 2rem;
-//         background: none;
-//     }
-
-//     .nav-menu {
-//         background-color: #060b26;
-//         width: 250px;
-//         height: 100vh;
-//         display: flex;
-//         justify-content: center;
-//         position: fixed;
-//         top: 0;
-//         left: -100%;
-//         z-index: 1;
-//         transition: 850ms;
-
-//         &.active {
-//             left: 0;
-//             transition: 350ms;
-//         }
-
-//         .nav-menu-items {
-
-//             width: 100%;
-
-//             .navbar-toggle {
-//                 background-color:#060b26;
-//                 width: 100%;
-//                 height: 80px;
-//                 display: flex;
-//                 justify-content: start;
-//                 align-items: center;
-//             }
-
-//             .nav-item {
-//                 display: flex;
-//                 justify-content: start;
-//                 align-items: center;
-//                 padding: 8px 0px 8px 16px;
-//                 list-style: none;
-//                 height: 60px;
-
-//                 a {
-//                     text-decoration: none;
-//                     color: #f5f5f5;
-//                     width: 95%;
-//                     display: flex;
-//                     align-items: center;
-//                     padding: 0 1rem;
-//                     border-radius: 4px;
-//                     height: 100%;
-
-//                     &:hover {
-//                        background-color: #1a83ff;
-//                     }
-//                 }
-//             }
-//         }
-//     }
-
-// }
-
 header {
-    max-width: $max-width;
-    margin: 0 auto;
-    margin-bottom: 4rem;
-
     .site-logo a {
-        margin: 0 1rem;
+        img {
+            max-width: 100px;
+        }
     }
 
-    .nav-menu {
-        // background-color: #060b26;
-        display: grid;
-        grid-template-columns: 100px auto;
-        align-items: center;
+    @media screen and (max-width: 875px) {
+        border-bottom: 0.5px solid #E6E6E6;
+    }
 
-        .nav-menu-items {
+    // Mobile Menu CSS
+    &.mobile-menu {
+        .navbar {
+            background-color: $savy-white;
             display: flex;
-            justify-content: flex-end;
+            justify-content: space-between;
             align-items: center;
+            padding: 1rem 1.5rem;
+        }
 
-            .nav-item {
-                list-style: none;
+        .hamburger-menu {
+            font-size: 2rem;
+            background: none;
 
-                a {
-                    text-decoration: none;
-                    color: #3D3D3D;
-                    padding: 0 1rem;
+            svg {
+                color: $savy-gray-100 !important;
+            }
+        }
 
-                    &:hover,
-                    &.active {
-                        color: #05C4A3;
+        .nav-menu {
+            background-color: $savy-green-100;
+            width: 250px;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            position: fixed;
+            top: 0;
+            left: -100%;
+            z-index: 9;
+            transition: 850ms;
+
+            &.active {
+                left: 0;
+                transition: 350ms;
+                box-shadow: 5px 0 5px -3px $savy-gray-50;
+            }
+
+            .nav-menu-items {
+                width: 100%;
+                margin: 0;
+                padding: 0;
+
+                .navbar-toggle {
+                    background-color: $savy-green-100;
+                    width: 100%;
+                    padding-top: 1rem;
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+
+                    .close-menu {
+                        font-size: 2rem;
+                        padding-bottom: 2rem;
+                        padding-left: 1.5rem;
                     }
+                }
 
-                    &.active {
-                        font-weight: 600;
+                .nav-item {
+                    display: flex;
+                    justify-content: start;
+                    align-items: center;
+                    list-style: none;
+                    height: 60px;
+                    padding: 0;
+                    border-bottom: 1px solid $savy-green-50;
+
+                    a {
+                        text-decoration: none;
+                        color: $savy-white;
+                        width: 95%;
+                        display: flex;
+                        align-items: center;
+                        padding: 0 1.5rem;
+                        // border-radius: 4px;
+                        height: 100%;
+
+                        &:hover,
+                        &.active {
+                            background-color: rgba(255, 255, 255, 0.8);
+                            color: $savy-green-100;
+                            font-weight: 600;
+                        }
                     }
                 }
             }
         }
     }
 
+    // Desktop Menu CSS
+    &.desktop-menu {
+        padding: 0.5rem 0;
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        background: $savy-white;
+
+        &.active {
+            box-shadow: 0 0 5px $savy-gray-50;
+            transition: all 0.5s linear;
+        }
+
+        .nav-menu {
+            max-width: $max-width;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+
+            @include mq-medium {
+                display: grid;
+                grid-template-columns: 100px auto;
+                align-items: center;
+            }
+
+            .nav-menu-items {
+                padding: 0;
+
+                @include mq-medium {
+                    display: flex;
+                    justify-content: flex-end;
+                    align-items: center;
+                }
+
+                .nav-item {
+                    list-style: none;
+
+                    a {
+                        text-decoration: none;
+                        color: $savy-gray-100;
+                        padding: 0 1rem;
+
+                        &:hover,
+                        &.active {
+                            color: $savy-green-100;
+                        }
+
+                        &.active {
+                            font-weight: 600;
+                        }
+                    }
+
+                    &:last-of-type {
+                        a {
+                            padding-right: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

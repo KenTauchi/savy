@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-import arrow from './arrow-direction.png';
-import arrowRight from './arrow-right.png';
+import arrow from './directions-60px.svg';
 
-import "./LocationListItem.style.scss";
+// import "./LocationListItem.style.scss";
 
 const LocationListItem = (props) => {
   const {
     location,
-    windowWidth,
     locationDetailDisplayHandler,
     getSelectedLocation,
+    directionsDisplayOn,
+    windowWidth,
+    // getDirectionLatlng,
   } = props;
 
   const displayUrl = location.website.slice(0, 30) + "..."
@@ -26,7 +27,7 @@ const LocationListItem = (props) => {
             getSelectedLocation(location);
           }}
         >
-          {location.location}
+          {location.locationName}
         </p>
         <p className="listItemFacilityPhone">{location.phone}</p>
         <p className="listItemFacilityAddress1">{location.address}</p>
@@ -34,35 +35,62 @@ const LocationListItem = (props) => {
           {" "}
           {location.city}, {location.provinceCode}, {location.postalCode}
         </p>
-        <a className="listItemFacilityLink" href={location.website}>
+        <a
+          className="listItemFacilityLink"
+          href={location.website}
+          target="_blank"
+        >
           {displayUrl}
         </a>
       </div>
 
-      {windowWidth >= 768 ? (
-        <div className="locationListItemDirection">
-          <img className="directionArrow" src={arrow} alt="arrow image" />
-          <p className="directionDistance">{location.distance} miles</p>
-        </div>
-      ) : (
-        <div className="rightArrowDiv">
-          <img
-            className="rightArrow"
-            src={arrowRight}
-            alt="arrow image"
-            onClick={() => {
+      <div className="locationListItemDirection">
+        <img
+          className="directionArrow"
+          src={arrow}
+          alt="arrow image"
+          onClick={()=>{
+            if(windowWidth >= 768){
               locationDetailDisplayHandler();
               getSelectedLocation(location);
-            }}
-          />
-        </div>
-      )}
+              }
+            directionsDisplayOn(
+              parseFloat(location.latitude),
+              parseFloat(location.longitude)
+            );
+          }}
+        />
+        {location.distance ? (
+          <p className="directionDistance">{location.distance} km</p>
+        ) : null}
+      </div>
     </li>
   );
 };
 
 export default LocationListItem;
 
+// {
+//   windowWidth >= 768 ? (
+//     <div className="locationListItemDirection">
+//       <img className="directionArrow" src={arrow} alt="arrow image" />
+//       <p className="directionDistance">{location.distance} miles</p>
+//     </div>
+//   ) : (
+//     <div className="rightArrowDiv">
+//       <img
+//         className="rightArrow"
+//         src={arrowRight}
+//         alt="arrow image"
+//         onClick={() => {
+//           locationDetailDisplayHandler();
+//           getSelectedLocation(location);
+//         }}
+//       />
+//     </div>
+//   )
+// }
+// *****************************************************************************************************************
 // <li className="locationListItem">
 //   <div className="locationListItemDescription">
 //     <p

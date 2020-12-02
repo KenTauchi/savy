@@ -1,61 +1,117 @@
-import React from 'react';
+import React, { useState } from "react";
+import axios from "axios";
 
-class Contact extends React.Component {
+const Contact = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            name: '',
-            email: '',
-            message: ''
-        };
+    // Server State Handling
+    const [serverState, setServerState] = useState({
+        submitting: false,
+        status: null,
+    });
 
+
+    const handleServerResponse = (ok, msg, form) => {
+        setServerState({
+            submitting: false,
+            status: { ok, msg },
+        });
+
+        if (ok) {
+            form.reset();
+        }
     }
 
-    contactSubmit(event) {
-        const nameValue = event.target.name.value;
-        const emailValue = event.target.email.value;
-        const messageValue = event.target.message.value;
-
-        alert("Message Sent Successfully" + nameValue);
-
-        // Prevent for going on another page by default
+    const handleOnSubmit = event => {
         event.preventDefault();
+        const form = event.target;
+        setServerState({ submitting: true });
+
+        axios({
+            method: "POST",
+            url: "https://formspree.io/f/xyybjnnl",
+            data: new FormData(form)
+
+        })
+
+            .then(r => {
+                handleServerResponse(true, "Thanks You!  We will reply by email as soon as possible.", form);
+            })
+
+            .catch(r => {
+                handleServerResponse(false, r.response.data.error, form);
+            });
+
     }
 
-    render() {
-        return (
-            <div>
-                <h2>If there is any question or feedback, feel free to reach out to us.</h2>
+    console.log("Check status", serverState.displayForm);
+    return (
+        <div className="contact-page main-content">
+            <div className="contact-main">
+
 
                 <div className="contact-section">
-                    <div className="contact-img">
-                        <img src="./images/contact.jpeg"></img>
-                    </div>
+                    
+                    <img className="contact-img" src="./images/contact.svg" />
 
                     <div className="contact-content">
 
-                        <h3>Contact Us</h3>
+                        <h2>If there is any question or feedback, <span>feel free to reach out to us.</span></h2>
+                        <form className="contact-form" onSubmit={handleOnSubmit}>
 
-                        <form id="contact-form" method="POST" onSubmit={this.contactSubmit}>
+                            <div className="contact-input-field">
+                                <label for="name">Name</label>
+                                <input
+                                    className="contact-input"
+                                    type="text"
+                                    name="name"
+                                    id="name"
+                                    required
+                                />
+                            </div>
 
-                            <label htmlFor="name">Name</label>
-                            <input type="text" name="name" />
+                            <div className="contact-input-field">
+                                <label for="email">Email</label>
+                                <input
+                                    className="contact-input"
+                                    type="email"
+                                    name="email"
+                                    id="email"
+                                    required
+                                />
+                            </div>
 
-                            <label htmlFor="email">Email</label>
-                            <input type="email" name="email" />
+                            <div className="contact-input-field">
+                                <label for="message">Message</label>
+                                <textarea 
+                                    className="contact-input"
+                                    type="text"
+                                    name="message"
+                                    id="message"
+                                    required 
+                                    rows="6">
+                                </textarea>
+                            </div>
 
-                            <label htmlFor="message">Message</label>
-                            <textarea name="message" rows="3"></textarea>
+                            <div className="contact-button">
+                                <button type="submit" disabled={serverState.submitting} className="savy-green-button contact-form-submit-btn">
+                                    Submit
+                                </button>
+                            </div>
 
-                            <input type="submit" value="Submit" />
                         </form>
+
+                        {serverState.status && (
+                            <p id="submit-message" className={!serverState.status.ok ? "errorMsg" : ""}>
+                                {serverState.status.msg}
+                            </p>
+                        )}
 
                     </div>
                 </div>
             </div>
-        );
-    }
+        </div>
+    );
 }
+
 
 export default Contact;

@@ -8,9 +8,8 @@
 // Normalize
 @import './normalize';
 
-body {
-	font-family: $font-sans-serif;
-}
+// Layout
+@import './layout';
 
 // Header
 @import '../components/header/header';
@@ -25,8 +24,23 @@ body {
 @import '../components/recycling-canada/testimonial/testimonial';
 @import '../components/recycling-canada/contact-section/contact-section';
 
+// Waste Management
+@import '../components/waste-management/waste-management.style';
+
+// Explore
+@import '../components/explore/explore';
+
+// Challenges (Quiz)
+@import '../components/quiz/quiz-starter/QuizStarter';
+@import '../components/quiz/quiz';
+@import '../components/quiz/progress-bar/ProgressBar';
+@import '../components/quiz/answer-window/AnswerWindow';
+
 // Contact
 @import '../components/contact/contact';
 
 // Footer
 @import '../components/footer/footer';
+
+// 404 Error Page
+@import '../components/404/404';

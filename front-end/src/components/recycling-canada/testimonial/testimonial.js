@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { initialState } from "../../../reducks/store/initialState";
 import { testimonialImportAction } from "../../../reducks/testimonials/action";
 import { getTestimonials } from "../../../reducks/testimonials/selectors";
 import SwiperCore, { Pagination } from "swiper";
 import "../../../../node_modules/swiper/swiper-bundle.css";
 import "../../../../node_modules/swiper/swiper.scss";
+
+import { API_URL } from '../../global_variables';
 
 SwiperCore.use([Pagination]);
 
@@ -21,12 +22,9 @@ const Testimonial = () => {
 	};
 
 	useEffect(() => {
-		console.log("Testimonial API data fetch rendered");
+		// console.log("Testimonial API data fetch rendered");
 
-		// fetch("https://cors-anywhere.herokuapp.com/" +
-		//       "https://api.covid19tracker.ca/provinces")
-
-		fetch("http://localhost:3000/api/v1/testemonials")
+		fetch(`${API_URL}/testimonials`)
 			.then((response) => response.json())
 			.then((result) => {
 				dispatch(testimonialImportAction(result));
@@ -36,15 +34,7 @@ const Testimonial = () => {
 
 	return (
 		<div className="testimonial-section">
-			<div className="testimonial-img">
-				<img
-					src="https://images.unsplash.com/photo-1563477710521-5ae0aa5085ab?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1650&q=80"
-					alt="sample"
-				/>
-			</div>
-			<h2 className="char">"</h2>
-			<div>
-				{/* <h2>Our Testimonial</h2> */}
+			<div className="teastimonial-slider">
 
 				<Swiper
 					id="main"
@@ -56,9 +46,28 @@ const Testimonial = () => {
 					{testimonials.data.map((testimonial, index) => {
 						return (
 							<SwiperSlide tag="li" key={index}>
-								<p className="testimonial-description">{testimonial.description}</p>
-								<p className="testimonial-by">{testimonial.postedBy}</p>
-								<p className="testimonial-date">{formatDate(testimonial.postedOn)}</p>
+								<div className="testimonial-slide">
+									<img
+										className="testimonial-img"
+										src={
+											"./images/" +
+											testimonial.postedBy.split(" ")[0] +
+											".jpg"
+										}
+									/>
+									<div className="testimonial-block">
+										<h2 className="char">“</h2>
+										<div className="testimonial-info">
+											<p className="testimonial-description">
+												{testimonial.description}
+											</p>
+											<p className="testimonial-by">{testimonial.postedBy}</p>
+											<p className="testimonial-date">
+												{formatDate(testimonial.postedOn)}
+											</p>
+										</div>
+									</div>
+								</div>
 							</SwiperSlide>
 						);
 					})}

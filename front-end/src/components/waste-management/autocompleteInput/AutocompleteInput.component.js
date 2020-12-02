@@ -4,10 +4,11 @@ import React from "react";
 import useAutocomplete from "./useAutocomplete";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import x_mark from "./closewindow-60px.svg";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import './AutocompleteInput.style.scss';
+// import './AutocompleteInput.style.scss';
 
 const useStyles = makeStyles((theme) => ({
   label: {
@@ -49,7 +50,7 @@ const AutocompleteInput = (props) => {
     getOptionProps,
     groupedOptions,
   } = useAutocomplete({
-    id: "autocomplete-popup",
+    class: "autocomplete-popup",
     options: props.options,
     getOptionLabel: (option) => option,
   });
@@ -87,12 +88,13 @@ const AutocompleteInput = (props) => {
           value={props.value}
         />
         {props.value ? (
-          <FontAwesomeIcon 
-            icon={faTimesCircle} 
+          <img
+            className="textClearMark"
+            src={x_mark}
             onClick={props.clear}
-            />
+          />
         ) : (
-          <FontAwesomeIcon icon={faSearch} />
+          null
         )}
       </div>
       {groupedOptions.length > 0 ? (
@@ -115,3 +117,10 @@ const AutocompleteInput = (props) => {
 }
 
 export default AutocompleteInput;
+
+// <FontAwesomeIcon
+//   icon={faTimesCircle}
+//   onClick={props.clear}
+// />
+//         ) : (
+//   <FontAwesomeIcon icon={faSearch} />

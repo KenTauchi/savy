@@ -1,0 +1,119 @@
+.quiz-page {
+
+	padding: 0 1.5rem;
+
+	@include mq-medium {
+		background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url("../../images/quiz_bg.svg");
+		background-repeat: no-repeat;
+		background-position: bottom;
+	}
+
+	.quiz-content {
+		max-width: 1000px;
+		margin: 0 auto;
+		margin-bottom: 10rem;
+
+		h2 {
+			text-align: center;
+			text-transform: uppercase;
+			margin-bottom: 2rem;
+		}
+
+		.question-answer-section {
+			background: $savy-white;
+			box-shadow: 0px 3px 6px #00000029;
+			padding: 0 1rem;
+			padding-bottom: 2rem;
+			border-radius: 5px;
+
+			@include mq-medium {
+				padding-bottom: 4rem;
+			}
+
+			h3 {
+				text-align: center;
+				font-size: 20px;
+				line-height: $heading_line-height;
+				margin: 0;
+				padding: 2rem 0;
+			}
+
+			.question-answer-block {
+				display: flex;
+				align-items: center;
+				flex-direction: column;
+
+				h4 {
+					margin: 0;
+					padding: 2rem 0;
+					line-height: $para_line-height;
+					letter-spacing: $letter_spacing;
+				}
+
+				.answer-list {
+					.answer {
+						cursor: pointer;
+						min-width: 200px;
+						border: 1px solid #707070;
+						border-radius: 5px;
+						margin-bottom: 0.5rem;
+						display: flex;
+						align-items: center;
+
+						&>div {
+							width: 100%;
+							padding: 0.5rem 1rem;
+							// display: flex;
+							display: grid;
+							grid-template-columns: 40px auto;
+							align-items: center;
+						}
+
+						.answer-option {
+							display: inline-block;
+							font-weight: bold;
+							width: 30px;
+							height: 30px;
+							line-height: 30px;
+							border: 1px solid #707070;
+							border-radius: 50%;
+							text-align: center;
+							background: $savy-white;
+							color: $savy-black;
+						}
+
+						&:hover {
+							.answer-option {
+								border: 1px solid $savy-green-100;
+								background: $savy-green-100;
+								color: $savy-white;
+							}
+						}
+
+						label {
+							margin-left: 0.5rem;
+							cursor: pointer;
+							line-height: $para_line-height;
+							letter-spacing: $letter_spacing;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.quiz-overlay {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		z-index: 99;
+		background-color: rgba(211, 211, 211, 0.7);
+		margin-bottom: -2.5rem;
+
+		@include mq-mediumLarge {
+			margin-bottom: -1.4rem;
+		}
+	}
+}

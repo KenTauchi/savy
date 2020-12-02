@@ -1,11 +1,12 @@
 import { materialsImportAction } from './actions.js';
+import { API_URL } from '../../components/global_variables';
 
 export const materialsImport = () => {
     return async (dispatch, getState) => {
 
         // console.log("API data fetch rendered");
 
-        const materials = await fetch("http://localhost:3000/api/v1/materials")
+        const materials = await fetch(`${API_URL}/materials`)
             .then((response) => response.json())
             .then((result) => {
                 // dispatch(materialsImportAction(result));

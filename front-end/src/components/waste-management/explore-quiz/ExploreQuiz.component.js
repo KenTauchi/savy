@@ -1,8 +1,5 @@
 import React from 'react';
-
 import { useHistory } from 'react-router-dom';
-
-import './ExploreQuiz.style.scss';
 
 const ExploreQuiz = () => {
 
@@ -11,9 +8,9 @@ const ExploreQuiz = () => {
   return (
     <div className="explore-quiz-section">
       <p>
-        EXPLORE OUR PLATFORM AND TEST YOUR RECYCLING KNOWLEDGE: TAKE OUR QUIZ!
+        Explore our platform and test your recycling knowledge: Take the quiz now!
       </p>
-      <button onClick={() => history.push("/quiz")}>Start Quiz</button>
+      <button onClick={() => history.push("/challenges-rule")} className="button savy-green-button contact-us-btn">Start Quiz</button>
     </div>
   );
 }

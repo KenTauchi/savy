@@ -1,0 +1,74 @@
+
+  // initially any map object has left top corner at lat lng coordinates
+  // it's on you to set object origin to 0,0 coordinates
+
+.markerDiv {
+  cursor: pointer;
+}
+
+.markerDiv:hover .popupComment p{
+    display: block;
+    animation: fadeIn .5s ease;
+}
+
+.markerDiv:hover .markerImage {
+    transition: .25s ease;
+    width: 40px;
+    height: auto;
+    left: -20px;
+    // top: -79.3px;
+    top: -51.3px;
+    z-index: 10;
+}
+
+.popupComment p{
+    background-color: white;
+    padding: .5rem;
+    border-radius: 5px;
+    width: 100px;
+    height: auto;
+    position: absolute;
+    left: -20px;
+    // top: -140px;
+    top: -112px;
+    z-index: 15;
+    transition: .25s ease;
+    // transition: transform 0.25s cubic-bezier(0.485, 1.650, 0.545, 0.835);
+    // -webkit-transition: -webkit-transform 0.25s cubic-bezier(0.485, 1.650, 0.545, 0.835);
+    display: none;
+}
+
+.popupComment p:before {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 30%;
+  margin-left: -15px;
+  border: 10px solid transparent;
+  border-top: 10px solid white;
+}
+
+.markerImage {
+    width: 33px;
+    height: auto;
+    position: absolute;
+    left: -16px;
+    // top: -61px;
+    top: -33px;
+}
+
+.selectedMarker {
+  .markerImage {
+    width: 40px;
+    height: auto;
+    left: -20px;
+    // top: -79.3px;
+    top: -51.3px;
+    z-index: 10;
+  }
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0 }
+  100% { opacity: 1 }
+}

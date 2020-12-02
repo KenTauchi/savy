@@ -1,0 +1,40 @@
+.google-map-section {
+    height: 50vh;
+    max-width: 100%;
+    letter-spacing: 0.3px;
+}
+
+// Directons CSS
+.gm-style>div>div>div>div>img {
+    display: none;
+}
+
+.gm-style>div>div>div>div {
+    // border: 1px solid black;
+    // display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .google-map-section {
+        height: 447.45px;
+        max-width: 100%;
+        -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        -moz-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+
+        // google map zoom button configuration
+        // *************************************
+        // .gm-bundled-control-on-bottom div {
+        //     position: absolute;
+        //     transform: translateX(-1.5rem);
+        //     width: 5rem !important;
+
+        // }
+        // .gm-bundled-control-on-bottom div:nth-child(2) div div  {
+        //     position: absolute;
+        //     transform: translateX(.25rem);
+        //     width: 4rem !important;
+        // }
+        // *************************************
+    }
+}
