@@ -36,6 +36,15 @@
                 justify-items: center;
                 padding: 2rem;
 
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                grid-gap: 1.5rem;
+
+                @include mq-medium {
+                    grid-template-columns: repeat(4, 1fr);
+                    align-items: center;
+                }
+
                 @include mq-mediumLarge {
                     display: flex;
                     justify-content: space-evenly;
@@ -51,15 +60,6 @@
             }
 
             .postcard-one {
-                display: grid;
-                grid-template-columns: repeat(2, 1fr);
-                grid-gap: 1.5rem;
-
-                @include mq-medium {
-                    grid-template-columns: repeat(4, 1fr);
-                    align-items: center;
-                }
-
                 .postcard-img {
                     width: 150px;
 
@@ -74,53 +74,11 @@
             }
 
             .postcard-two {
-                display: grid;
-                grid-template-columns: 1fr;
-                grid-gap: 1.5rem;
+                .postcard-img {
+                    width: 150px;
 
-                @include mq-medium {
-                    grid-template-columns: repeat(3, 1fr);
-                    align-items: center;
-                    grid-gap: 0.5rem;
-                    padding: 0 1rem;
-                }
-
-                @include mq-large {
-                    padding: 0 2.5rem;
-                }
-
-                .postcard-details {
-                    display: flex;
-                    align-items: center;
-
-                    @include mq-medium {
-                        margin-right: 0.5rem;
-                        margin-bottom: 0;
-
-                        &:last-of-type {
-                            margin-right: 0;
-                        }
-                    }
-
-                    .postcard-info {
-                        margin-left: 1.5rem;
-                        font-size: 10px;
-                        line-height: 13px;
-                        letter-spacing: 0.2px;
-
-                        @include mq-medium {
-                            margin-left: 1rem;
-                        }
-
-                        h5 {
-                            font-weight: normal;
-                            text-transform: uppercase;
-                            font-size: 9.5px;
-                        }
-                    }
-
-                    .postcard-img {
-                        width: 100px;
+                    @include mq-mediumLarge {
+                        width: 130px;
                     }
                 }
             }
@@ -133,6 +91,7 @@
 
                 @include mq-mediumLarge {
                     text-align: left;
+                    margin-top: 0;
                 }
 
                 span {
@@ -199,11 +158,6 @@
                     width: 1.5em;
                     height: 1.5em;
                     fill: $savy-gray-100;
-
-                    // @include mq-mediumLarge {
-                    //     width: 1.5em;
-                    //     height: 1.5em;
-                    // }
                 }
 
                 .MuiIconButton-root {

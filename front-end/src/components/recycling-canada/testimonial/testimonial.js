@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { initialState } from "../../../reducks/store/initialState";
 import { testimonialImportAction } from "../../../reducks/testimonials/action";
 import { getTestimonials } from "../../../reducks/testimonials/selectors";
 import SwiperCore, { Pagination } from "swiper";
@@ -23,7 +22,7 @@ const Testimonial = () => {
 	};
 
 	useEffect(() => {
-		console.log("Testimonial API data fetch rendered");
+		// console.log("Testimonial API data fetch rendered");
 
 		fetch(`${API_URL}/testemonials`)
 			.then((response) => response.json())

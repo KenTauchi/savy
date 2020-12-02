@@ -41,10 +41,6 @@
     font-weight: bold;
     background-color: $savy-gray-50;
     color: $savy-gray-25;
-    // position: absolute;
-    // top: 50%;
-    // left: 50%;
-    // transform: translateY(-50%) translateX(-50%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -91,7 +87,6 @@
 
         img {
             height: 100%;
-            // width: auto;
             object-fit: cover;
             border-bottom-left-radius: 16px;
             border-top-left-radius: 16px;
@@ -116,12 +111,22 @@
     .notesDiv {
         order: 4;
         color: $primary-color;
-        padding-right: 1rem;
-        padding-bottom: 2rem;
     }
 
     .factRecyclingNotes,
     .factRecyclingNotesText {
         display: inline;
+    }
+}
+
+.notesDiv {
+    padding: 0;
+
+    @include mq-medium {
+        padding: 1rem;
+    }
+
+    @include mq-mediumLarge {
+        padding: 1.5rem;
     }
 }

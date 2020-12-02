@@ -20,6 +20,8 @@ export default function AnswerWindow() {
 								? "./images/icons/quiz-success.svg"
 								: "./images/icons/quiz-fail.svg"
 						}
+
+						alt="quiz result"
 					/>
 				</div>
 

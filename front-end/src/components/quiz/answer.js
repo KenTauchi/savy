@@ -4,7 +4,7 @@ import {
 	disWindow,
 	checkCorrect,
 } from "../../reducks/quiz/action";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 export default function Answer(props) {
 	const dispatch = useDispatch();

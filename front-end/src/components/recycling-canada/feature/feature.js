@@ -14,7 +14,7 @@ const Feature = () => {
 
                 <div className="feature-list">
                     <div className="feature">
-                        <img className="feature-image" src="./images/icons/waste-management.svg" />
+                        <img className="feature-image" src="./images/icons/waste-management.svg" alt="waste-management.svg" />
                         <span className="feature-name">Waste Management</span>
                         <span className="feature-info">
                             Find nearest locations for your recycling
@@ -25,7 +25,7 @@ const Feature = () => {
                     </div>
 
                     <div className="feature">
-                        <img className="feature-image" src="./images/icons/challenge.svg" />
+                        <img className="feature-image" src="./images/icons/challenge.svg" alt="challenge.svg" />
                         <span className="feature-name">Challenges</span>
                         <span className="feature-info">
                             You can easily test your
@@ -36,7 +36,7 @@ const Feature = () => {
                     </div>
 
                     <div className="feature">
-                        <img className="feature-image" src="./images/icons/explore.svg" />
+                        <img className="feature-image" src="./images/icons/explore.svg" alt="explore.svg" />
                         <span className="feature-name">Explore</span>
                         <span className="feature-info">
                             Find frequently asked questions and answers

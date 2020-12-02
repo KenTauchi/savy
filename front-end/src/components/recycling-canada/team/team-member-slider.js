@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-// import { initialState } from "../../../reducks/store/initialState";
 import { teamImportAction } from "../../../reducks/teamMembers/action";
 import { getTeamMembers } from "../../../reducks/teamMembers/selectors";
 import Slider from "react-slick";
@@ -23,6 +22,8 @@ export default function CenterMode() {
             })
             .catch(() => null);
     }, []);
+
+    console.log(teamMembers.data);
 
     // Slick Slider Setting
     const settings = {
@@ -65,13 +66,13 @@ export default function CenterMode() {
                     slidesToShow: 1
                 }
             },
-            {
-                breakpoint: 600,
-                settings: {
-                    centerPadding: "40px",
-                    slidesToShow: 1
-                }
-            },
+            // {
+            //     breakpoint: 600,
+            //     settings: {
+            //         centerPadding: "140px",
+            //         slidesToShow: 1
+            //     }
+            // },
             {
                 breakpoint: 570,
                 settings: {
