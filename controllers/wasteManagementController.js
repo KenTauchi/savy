@@ -3,7 +3,9 @@ const fetch      = require("node-fetch");
 const { savyDb, savyPoolDb } = require("../connection.js");
 
 
+// ----------------------------------------------------------
 // Returns a list of all Materials
+// ----------------------------------------------------------
 exports.getMaterial = (req, res) => {
     let qry = `SELECT "material" AS type, m.materialId AS id, m.name AS materialName
                  FROM material m 
@@ -34,10 +36,18 @@ exports.getMaterial = (req, res) => {
 };
               
             
-
-
-
-  // Search a location for a material
+// ----------------------------------------------------------
+// Search a location for a material
+// ----------------------------------------------------------
+// Parameters:
+//      materialId  - material to be searched, if not informed returns any material 
+//      familyId    - material family to be searched, if not informed returns any family
+//      latitude    - user location latitude coordinate
+//      longitude   - user location longitude coordinate
+//      zipCode     - user Postal Code. If informed, will ignore user location latitude and longitude
+//      range       - distance range to filter in kilometers
+//      filterRange - boolean. Will only filter range if true 
+// ----------------------------------------------------------
 exports.search = (req, res) => {
     let mySearch = async (req) => {
 
@@ -56,26 +66,24 @@ exports.search = (req, res) => {
         // PROMISE to get ZipCode cordinates Before executing mySql query
         let getMyCordinateAPI = new Promise((resolve, reject) => {
 
-            // OLD api.zip-codes.com 
+            // OLD resource, from: api.zip-codes.com 
             //let zipCodeApiKey = process.env.ZIPCODE_API_PASS;    
-            //let zipCode = `${req.query.zipCode}`; // `V6B1B4`;
+            //let zipCode = `${req.query.zipCode}`;     // example: `V6B1B4`;
             //let zipCodeApi = `https://api.zip-codes.com/ZipCodesAPI.svc/1.0/QuickGetZipCodeDetails/${zipCode}?key=${zipCodeApiKey}`;
 
-            // Canada Gov new API
+            // Canada Gov API
             let zipCodeApi = `http://geogratis.gc.ca/services/geolocation/en/locate?q=${sZipCode}`;
           
-            //console.log(zipCodeApi);
-
             fetch(zipCodeApi).then((res) => {
               res.json().then((data) => {
                 if (data.err) {
                   console.log(data.err);
                   reject({});
                 } else {
-                  // NEW Canada api  
+                  // Canada Gov API response  
                   resolve({ longitude: data[0].geometry.coordinates[0], latitude: data[0].geometry.coordinates[1] });
 
-                  // OLD api.zip-codes.com                       
+                  // OLD resource, from: api.zip-codes.com                       
                   //resolve({ latitude: data.Latitude, longitude: data.Longitude });
                 }
               })
@@ -91,8 +99,6 @@ exports.search = (req, res) => {
 
         zipCodeCordinate = await getMyCordinateAPI; // wait until the promise resolves (*)
       }
-
-      //console.log(`Finish Promise Zip`);
   
       // Initialize default values
       let sOrigin      = "";
@@ -112,14 +118,6 @@ exports.search = (req, res) => {
         }
       }
   
-      // Range Filter Parameters
-      if (sFilterRange != undefined && sFilterRange == "true") {
-        if (sDistanceRange != undefined && sDistanceRange > 0) {
-          zipCodeRange = sDistanceRange;
-        }
-        sRangeFilter = ` HAVING distance <= ${zipCodeRange} `;
-      }
-  
       // Distance function Parameters - result in kilometers
       if (
         zipCodeCordinate.latitude != undefined && zipCodeCordinate.latitude != '' &&
@@ -127,7 +125,15 @@ exports.search = (req, res) => {
       ) {
         sDistance = ` round(ST_Distance_Sphere( point(l.longitude, l.latitude), point(${zipCodeCordinate.longitude}, ${zipCodeCordinate.latitude}) ) * .000621371192 * 1.60934, 1) AS distance `;
       }
-  
+
+      // Range Filter Parameters
+      if (sFilterRange != undefined && sFilterRange == "true") {
+        if (sDistanceRange != undefined && sDistanceRange > 0) {
+          zipCodeRange = sDistanceRange;
+        }
+        sRangeFilter = ` HAVING distance <= ${zipCodeRange} `;
+      }      
+
       // Set query statement
       let qry = `SELECT DISTINCT 
                             ${sOrigin} 
@@ -175,17 +181,17 @@ exports.search = (req, res) => {
                   let iLocationId = -1;
           
                   material = {
-                    origin: results[0].origin,
-                    materialName: results[0].material,
-                    familyName: results[0].familyName,
-                    description: results[0].description,
-                    imageUrl: results[0].materialImageUrl,
-                    imageName: results[0].materialImageName,
-                    deliveryNotes: results[0].deliveryNotes,
-                    recyclingFact: results[0].recyclingFact,
-                    binName: results[0].binName,
-                    binColor: results[0].binColor,
-                    binDescription: results[0].binDescription
+                      origin: results[0].origin,
+                      materialName: results[0].material,
+                      familyName: results[0].familyName,
+                      description: results[0].description,
+                      imageUrl: results[0].materialImageUrl,
+                      imageName: results[0].materialImageName,
+                      deliveryNotes: results[0].deliveryNotes,
+                      recyclingFact: results[0].recyclingFact,
+                      binName: results[0].binName,
+                      binColor: results[0].binColor,
+                      binDescription: results[0].binDescription
                   };
           
                   let i = 0;
@@ -194,21 +200,22 @@ exports.search = (req, res) => {
                     iLocationId = results[i].locationId;
           
                     location = {
-                      locationName: results[i].location,
-                      city: results[i].city,
-                      provinceCode: results[i].provinceCode,
-                      postalCode: results[i].postalCode,
-                      address: results[i].address,
-                      phone: results[i].phone,
-                      latitude: results[i].latitude,
-                      longitude: results[i].longitude,
-                      distance: results[i].distance,
-                      openningHour: results[i].openningHour,
-                      website: results[i].website,
-                      openningHour: results[i].openningHour,
-                      imageUrl: results[i].imageUrl,
-                      locationNotes: results[i].locationNotes,
+                        locationName: results[i].location,
+                        city: results[i].city,
+                        provinceCode: results[i].provinceCode,
+                        postalCode: results[i].postalCode,
+                        address: results[i].address,
+                        phone: results[i].phone,
+                        latitude: results[i].latitude,
+                        longitude: results[i].longitude,
+                        distance: results[i].distance,
+                        openningHour: results[i].openningHour,
+                        website: results[i].website,
+                        openningHour: results[i].openningHour,
+                        imageUrl: results[i].imageUrl,
+                        locationNotes: results[i].locationNotes,
                     };
+                    // Creates array of other materials accepted on each location
                     while (i < results.length && iLocationId == results[i].locationId) {
                       var isMaterial = otherMaterials.find(o => o.materialName === results[i].otherMaterial);
                       if (isMaterial == undefined) {
@@ -217,8 +224,8 @@ exports.search = (req, res) => {
                       i++;
                     }
                     myLocation.push({
-                      locationInfo: location,
-                      otherMaterials: otherMaterials,
+                        locationInfo: location,
+                        otherMaterials: otherMaterials,
                     });
                   }
           
@@ -244,44 +251,3 @@ exports.search = (req, res) => {
 };
                 
           
-
-
-
-
-
-
-
-
-
-//--------------------------------------------------------------------------------
-// DISCONTINUED - Promise to get where clause for filtering lcation data
-// -------------------------------------------------------------------------------
-//     let getZipCodeAPI = new Promise((resolve, reject) => {
-
-//         let zipCodeApiKey         = `C3TxsgWGYzdRIPOlk1yaRoyLPTJrSojipPbYtQy51B55BSm3LxMxVUCNfab95sKE`;
-//         let zipCodeLatitude       =  `${zipCodeCordinate.latitude}`;  // `49.279750`;
-//         let zipCodeLongitude      =  `${zipCodeCordinate.longitude}`; // `-122.967925`;
-//         let zipCodeLatitudeField  = `l.latitude`;
-//         let zipCodeLongitudeField = `l.longitude`;
-//         let zipCodeRange          = `20`;  // default kilometers for range search
-//         if ((req.query.range != undefined) && (req.query.range > 0)) {
-//             zipCodeRange          = `${req.query.range}`;
-//         }
-
-//         let zipCodeApi = `https://www.zipcodeapi.com/rest/${zipCodeApiKey}/radius-sql.json/${zipCodeLatitude}/${zipCodeLongitude}/degrees/${zipCodeRange}/km/${zipCodeLatitudeField}/${zipCodeLongitudeField}/2`
-
-//         fetch(zipCodeApi)
-//         .then((res) => {
-//             res.json().then((data) => {
-//                 if (data.err) {
-//                     console.log(err);
-//                     reject (``);
-//                 } else {
-//                     resolve (` AND ${data.where_clause} `);
-//                 }
-//             })
-//         })
-//     });
-
-//     sApiFilter = await getZipCodeAPI; // wait until the promise resolves (*)
-

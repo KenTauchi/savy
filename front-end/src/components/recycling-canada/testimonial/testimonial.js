@@ -24,7 +24,7 @@ const Testimonial = () => {
 	useEffect(() => {
 		// console.log("Testimonial API data fetch rendered");
 
-		fetch(`${API_URL}/testemonials`)
+		fetch(`${API_URL}/testimonials`)
 			.then((response) => response.json())
 			.then((result) => {
 				dispatch(testimonialImportAction(result));

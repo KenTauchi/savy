@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import AutocompleteInput from '../autocompleteInput/AutocompleteInput.component';
-import DefaultButton from '../button/Button.component';
+// import DefaultButton from '../button/Button.component';
 import Dropdown from '../dropdown/Dropdown.component';
 
 import serchButtonIcon from './search-65px.svg';
@@ -14,7 +14,7 @@ import {
 } from "../../../reducks/materials/selectors.js";
 import { materialsSearchFieldUpdate } from "../../../reducks/materials/actions";
 
-import { searchLocationsByMaterial } from "../../../reducks/locations/operations.js";
+import { searchLocationsByMaterial } from "../../../reducks/search/operations.js";
 
 // import './Filter.style.scss';
 
@@ -94,13 +94,13 @@ const Filter = (props) => {
     // console.log(materialsSearchField);
     // console.log(postalCodeSearchField);
     // console.log(distanceSearchField);
-    console.log(materials);
+    // console.log(materials);
     detailHide();
     resetSelectedLocation();
     mapDisplayHandler();
     setDirectionsDisplay(false)
 
-    if (postalCodeSearchField != "") {
+    if (postalCodeSearchField !== "") {
       getlocationByPostalCode(postalCodeSearchField);
     } else {
       // getLocation();

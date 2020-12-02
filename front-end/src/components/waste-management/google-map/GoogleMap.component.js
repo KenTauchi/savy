@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import GoogleMapReact from "google-map-react";
 
 import Marker from "../marker/Marker.component";
@@ -66,6 +66,11 @@ const GoogleMap = (props) => {
   )
 
   const handleDirectionsApiLoaded = (map, maps) => {
+
+    if(directionLatlng.lat === undefined || usersLocationProps.center.lng === undefined) {
+      return;
+    };
+
     let directionsService = new maps.DirectionsService();
     let directionsRenderer = new maps.DirectionsRenderer();
     directionsRenderer.setMap(map);

@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { materialsImport } from '../../reducks/materials/operations.js';
 import { getMaterialsIdNameType } from '../../reducks/materials/selectors.js';
 
-import { searchLocationsByMaterial } from '../../reducks/locations/operations.js';
+import { searchLocationsByMaterial } from '../../reducks/search/operations.js';
 import {
   getLocationsSearchedLocations,
   getLoadingCondition,
   getNotFoundCondition
-} from "../../reducks/locations/selectors.js";
-import { notFoundHandlerAction } from "../../reducks/locations/actions";
+} from "../../reducks/search/selectors.js";
+import { notFoundHandlerAction } from "../../reducks/search/actions";
 
 import Filter from './filter/Filter.component';
 import LocationList from './locationList/LocationList.component';
@@ -557,6 +557,7 @@ const WasteManagement = () => {
       if (mapAndMaterialDisplay.map) {
         setWmComponentDisplay({
           ...wmComponentDisplay,
+          tab: false,
           list: false,
           map: false,
           detail: true,
