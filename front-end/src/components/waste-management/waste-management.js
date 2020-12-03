@@ -366,6 +366,14 @@ const WasteManagement = () => {
     )
       .then((response) => response.json())
       .then((result) => {
+        // console.log(result[0].geometry.coordinates[1],result[0].geometry.coordinates[0])
+        setUsersLocationProps({
+          center: {
+            lat: result[0].geometry.coordinates[1],
+            lng: result[0].geometry.coordinates[0],
+          },
+          zoom: 12,
+        });
         setCurrentLocationProps({
           center: {
             lat: result[0].geometry.coordinates[1],
