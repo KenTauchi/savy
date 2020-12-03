@@ -9,7 +9,6 @@ const Contact = () => {
         status: null,
     });
 
-
     const handleServerResponse = (ok, msg, form) => {
         setServerState({
             submitting: false,
@@ -32,15 +31,13 @@ const Contact = () => {
             data: new FormData(form)
 
         })
+        .then(r => {
+            handleServerResponse(true, "Thanks You!  We will reply by email as soon as possible.", form);
+        })
 
-            .then(r => {
-                handleServerResponse(true, "Thanks You!  We will reply by email as soon as possible.", form);
-            })
-
-            .catch(r => {
-                handleServerResponse(false, r.response.data.error, form);
-            });
-
+        .catch(r => {
+            handleServerResponse(false, r.response.data.error, form);
+        });
     }
 
     console.log("Check status", serverState.displayForm);
@@ -48,9 +45,8 @@ const Contact = () => {
         <div className="contact-page main-content">
             <div className="contact-main">
 
-
                 <div className="contact-section">
-                    
+
                     <img className="contact-img" src="./images/contact.svg" />
 
                     <div className="contact-content">
@@ -82,12 +78,12 @@ const Contact = () => {
 
                             <div className="contact-input-field">
                                 <label for="message">Message</label>
-                                <textarea 
+                                <textarea
                                     className="contact-input"
                                     type="text"
                                     name="message"
                                     id="message"
-                                    required 
+                                    required
                                     rows="6">
                                 </textarea>
                             </div>
@@ -112,6 +108,5 @@ const Contact = () => {
         </div>
     );
 }
-
 
 export default Contact;

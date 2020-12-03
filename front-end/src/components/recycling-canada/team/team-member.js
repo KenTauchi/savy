@@ -3,7 +3,6 @@ import * as FAIcons from "react-icons/fa";
 
 const TeamMember = (props) => {
     let borderColor = "";
-    console.log(props.gitHub);
     switch (props.memberName) {
 
         case 'Vinicius Meyer Lana':

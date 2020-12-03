@@ -2,16 +2,24 @@
 
 	padding: 0 1.5rem;
 
-	@include mq-medium {
-		background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url("../../images/quiz_bg.svg");
-		background-repeat: no-repeat;
-		background-position: bottom;
-	}
+	// .quiz-background {
+	// 	position: fixed;
+	// 	z-index: -1;
+	// 	top: 350px;
+	// 	bottom: 0;
+	// 	left: 0;
+	// 	right: 0;
+	// 	background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url("../../images/quiz_bg.svg");
+	// 	background-repeat: repeat-y;
+	// 	background-size: cover;
+	// 	// background-position: bottom center;
+	// 	// background-attachment: fixed;
+	// }
 
 	.quiz-content {
 		max-width: 1000px;
 		margin: 0 auto;
-		margin-bottom: 10rem;
+		padding: 3rem 0;
 
 		h2 {
 			text-align: center;
@@ -63,7 +71,6 @@
 						&>div {
 							width: 100%;
 							padding: 0.5rem 1rem;
-							// display: flex;
 							display: grid;
 							grid-template-columns: 40px auto;
 							align-items: center;

@@ -23,7 +23,7 @@ export default function CenterMode() {
             .catch(() => null);
     }, []);
 
-    console.log(teamMembers.data);
+    // console.log(teamMembers.data);
 
     // Slick Slider Setting
     const settings = {
@@ -66,13 +66,6 @@ export default function CenterMode() {
                     slidesToShow: 1
                 }
             },
-            // {
-            //     breakpoint: 600,
-            //     settings: {
-            //         centerPadding: "140px",
-            //         slidesToShow: 1
-            //     }
-            // },
             {
                 breakpoint: 570,
                 settings: {
