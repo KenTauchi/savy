@@ -25,7 +25,7 @@ const Testimonial = () => {
     useEffect(() => {	
 		// console.log("Testimonial API data fetch rendered");	
 		
-        fetch(`${API_URL}/testemonials`)	
+        fetch(`${API_URL}/testimonials`)	
             .then((response) => response.json())	
             .then((result) => {	
                 dispatch(testimonialImportAction(result));	
@@ -57,7 +57,7 @@ const Testimonial = () => {
                                         }	
                                     />	
                                     <div className="testimonial-block">	
-                                        <h2 className="char">"</h2>	
+                                        <h2 className="char">‟</h2>	
                                         <div className="testimonial-info">	
                                             <p className="testimonial-description">	
                                                 {testimonial.description}	

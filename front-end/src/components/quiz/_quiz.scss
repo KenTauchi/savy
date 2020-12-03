@@ -2,19 +2,17 @@
 
 	padding: 0 1.5rem;
 
-	// .quiz-background {
-	// 	position: fixed;
-	// 	z-index: -1;
-	// 	top: 350px;
-	// 	bottom: 0;
-	// 	left: 0;
-	// 	right: 0;
-	// 	background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url("../../images/quiz_bg.svg");
-	// 	background-repeat: repeat-y;
-	// 	background-size: cover;
-	// 	// background-position: bottom center;
-	// 	// background-attachment: fixed;
-	// }
+	.quiz-background {
+		position: fixed;
+		z-index: -1;
+		top: 350px;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), url("../../images/quiz_bg.svg");
+		background-repeat: repeat-y;
+		background-size: cover;
+	}
 
 	.quiz-content {
 		max-width: 1000px;
