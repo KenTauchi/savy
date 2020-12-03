@@ -15,12 +15,12 @@ export default function Question() {
 	const dispatch = useDispatch();
 
 	useEffect(() => {
-		console.log("quiz API data fetch rendered");
+		// console.log("quiz API data fetch rendered");
 
 		fetch(`${API_URL}/quiz?limit=10`)
 			.then((response) => response.json())
 			.then((result) => {
-				console.log(result);
+				// console.log(result);
 				dispatch(quizImportAction(result));
 			})
 			.catch(() => null);

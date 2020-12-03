@@ -121,6 +121,7 @@
 
 .notesDiv {
     padding: 0;
+    color: $primary-color;
 
     @include mq-medium {
         padding: 1rem;

@@ -24,8 +24,8 @@ const Downlaods = () => {
                 </div>
                 <div className="postcard-download">
                     <span>Stickers</span>
-                    <span>Printable PDF</span>
-                    <button onClick={() => downloadFile('ExploreStickers.zip')} className="button savy-green-button download-now-btn">
+                    <span>Printable</span>
+                    <button onClick={() => downloadFile('Savy_stickers.zip')} className="button savy-green-button download-now-btn">
                         Download
                     </button>
                 </div>
@@ -42,7 +42,7 @@ const Downlaods = () => {
                 <div className="postcard-download">
                     <span>Informative Sheet,</span>
                     <span>Printable PDF / Size A5</span>
-                    <button onClick={() => downloadFile('PostersA5.pdf')} className="button savy-green-button download-now-btn">
+                    <button onClick={() => downloadFile('Savy_Info_Sheet.pdf')} className="button savy-green-button download-now-btn">
                         Download
                     </button>
                 </div>
