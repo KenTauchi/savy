@@ -57,7 +57,7 @@ const Testimonial = () => {
                                         }	
                                     />	
                                     <div className="testimonial-block">	
-                                        <h2 className="char">"</h2>	
+                                        <h2 className="char">‟</h2>	
                                         <div className="testimonial-info">	
                                             <p className="testimonial-description">	
                                                 {testimonial.description}	
