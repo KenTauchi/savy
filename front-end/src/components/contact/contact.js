@@ -55,7 +55,7 @@ const Contact = () => {
                         <form className="contact-form" onSubmit={handleOnSubmit}>
 
                             <div className="contact-input-field">
-                                <label for="name">Name</label>
+                                <label htmlFor="name">Name</label>
                                 <input
                                     className="contact-input"
                                     type="text"
@@ -66,7 +66,7 @@ const Contact = () => {
                             </div>
 
                             <div className="contact-input-field">
-                                <label for="email">Email</label>
+                                <label htmlFor="email">Email</label>
                                 <input
                                     className="contact-input"
                                     type="email"
@@ -77,7 +77,7 @@ const Contact = () => {
                             </div>
 
                             <div className="contact-input-field">
-                                <label for="message">Message</label>
+                                <label htmlFor="message">Message</label>
                                 <textarea
                                     className="contact-input"
                                     type="text"
