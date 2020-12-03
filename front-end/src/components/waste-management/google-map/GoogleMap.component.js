@@ -105,12 +105,16 @@ const GoogleMap = (props) => {
     );
   };
 
+  // useEffect(()=>{
+  //   console.log(usersLocationProps.center);
+  // }, [usersLocationProps])
+
   return (
     // Important! Always set the container height explicitly
     <div className="google-map-section" style={displayStyle}>
       {directionsDisplay ? (
         <GoogleMapReact
-          bootstrapURLKeys={{ key: apikey.apiKey.development }}
+          bootstrapURLKeys={{ key: apikey.apiKey.product }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
           center={currentLocationProps.center}
@@ -126,7 +130,7 @@ const GoogleMap = (props) => {
       ) : null}
       {!directionsDisplay ? (
         <GoogleMapReact
-          bootstrapURLKeys={{ key: apikey.apiKey.development }}
+          bootstrapURLKeys={{ key: apikey.apiKey.product }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
           center={currentLocationProps.center}
