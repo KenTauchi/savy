@@ -22,9 +22,6 @@ import ExploreQuiz from './explore-quiz/ExploreQuiz.component.js';
 import NotFound from './not-found/NotFound.component.js';
 import Loader from './loader/Loader.component';
 
-// import { LOCATION_DATA } from './TEST_locations.data.js';
-
-// import "./waste-management.style.scss";
 
 const WasteManagement = () => {
   const dispatch = useDispatch();
@@ -55,47 +52,9 @@ const WasteManagement = () => {
   const [loadingCondition, setLoadingCondition] = useState(false);
   const loadingState = getLoadingCondition(state);
 
-  useEffect(() => {
-    setLoadingCondition(loadingState);
-    //   console.log(loadingState);
-    if (loadingState) {
-      setWmComponentDisplay({
-        tab: false,
-        list: false,
-        map: false,
-        detail: false,
-        material: false,
-        startQuiz: false,
-      });
-      setNotFoundDisplay({
-        ...notFoundDisplay,
-        contents: { display: "none" },
-        notFound: { display: "none" },
-      });
-    } else {
-      if (windowWidth >= breakPoint) {
-        setWmComponentDisplay({
-          tab: true,
-          list: true,
-          map: true,
-          detail: false,
-          material: true,
-          startQuiz: true,
-        });
-      } else {
-        setWmComponentDisplay({
-          tab: true,
-          list: true,
-          map: true,
-          detail: false,
-          material: false,
-          startQuiz: false,
-        });
-      }
-    }
-  }, [loadingState]);
+  const [directionsDisplay, setDirectionsDisplay] = useState(false);
 
-  // Get materials *********************************************************************************************************************************************************************************************
+  // Materials states *********************************************************************************************************************************************************************************************
 
   const [materials, setMaterilas] = useState({
     idNameType: [],
@@ -104,28 +63,8 @@ const WasteManagement = () => {
 
   let stateMaterials = getMaterialsIdNameType(state);
 
-  useEffect(() => {
-    dispatch(materialsImport());
-  }, []);
-
-  useEffect(() => {
-    setMaterilas({
-      ...materials,
-      idNameType: stateMaterials,
-    });
-    // console.log(stateMaterials)
-  }, [stateMaterials]);
-
-  // **********************************************************************************************************
-
-  // useEffect(()=>{
-  //   console.log(materials);
-  //   console.log(state);
-  // }, [materials]);
-
   // State for locations *********************************************************************************************************************************************************************************************
 
-  // const [locations, setLocations] = useState(LOCATION_DATA);
   const [locations, setLocations] = useState([]);
   const [filteredLocations, setFilteredLocations] = useState(locations);
   const [defaultProps, setDefaultProps] = useState({
@@ -171,85 +110,13 @@ const WasteManagement = () => {
     locationNotes: "",
   });
 
-  const [directionsDisplay, setDirectionsDisplay] = useState(false);
-
+  // This is used for directions search
   const [directionLatlng, setDirectionLatlng] = useState({
     lat: undefined,
     lng: undefined,
   });
 
-  // const [filteredLocations, setFilteredLocations] = useState(locations.selectedLocations);
-
   let stateLocations = getLocationsSearchedLocations(state);
-
-  useEffect(() => {
-    dispatch(
-      searchLocationsByMaterial(
-        // 49.188678,
-        // -122.951498,
-        usersLocationProps.center.lat,
-        usersLocationProps.center.lng,
-        15,
-        "",
-        "", // 49 cat, 26 dog, 29 mixed paper
-        ""
-      )
-    );
-    return () => {
-      dispatch(notFoundHandlerAction(false));
-    };
-  }, []);
-
-  useEffect(() => {
-    if (stateLocations) {
-      setFilteredLocations(stateLocations);
-    } else {
-      setFilteredLocations([]);
-    }
-    setDirectionLatlng({
-      lat: undefined,
-      lng: undefined,
-    });
-    // console.log(stateLocations)
-    // notFoundhandler(stateLocations);
-  }, [stateLocations]);
-
-  useEffect(() => {
-    // console.log(loadingCondition);
-    notFoundhandler(filteredLocations);
-  }, [filteredLocations]);
-
-  // useEffect(() => {
-  //       if (notFoundCondition) {
-  //         setNotFoundDisplay({
-  //           ...notFoundDisplay,
-  //           contents: { display: "none" },
-  //           notFound: { display: "block" },
-  //         });
-  //       } else {
-  //         if (windowWidth >= breakPoint) {
-  //           setNotFoundDisplay({
-  //             ...notFoundDisplay,
-  //             contents: { display: "grid" },
-  //             notFound: { display: "none" },
-  //           });
-  //         } else {
-  //           setNotFoundDisplay({
-  //             ...notFoundDisplay,
-  //             contents: { display: "block" },
-  //             notFound: { display: "none" },
-  //           });
-  //         }
-  //       }
-  // }, [notFoundCondition]);
-
-  // useEffect(()=>{
-  //   console.log(locations);
-  // }, [locations]);
-
-  // useEffect(()=>{
-  //   console.log(state);
-  // }, [state]);
 
   // Functions *********************************************************************************************************************************************************************************************
 
@@ -294,7 +161,6 @@ const WasteManagement = () => {
       ...wmComponentDisplay,
       detail: !wmComponentDisplay.detail,
     });
-    // console.log(wmComponentDisplay.detail)
     if(wmComponentDisplay.detail) {
       setDirectionsDisplay(false);
       setDirectionLatlng({
@@ -311,16 +177,10 @@ const WasteManagement = () => {
     });
   };
 
-  // useEffect(() => {
-  //   console.log(selectedLocation);
-  // }, [selectedLocation]);
-
   const getSelectedLocation = (location) => {
     setSelectedLocation(location);
     setCurrentLocationProps({
       center: {
-        // lat: location.latitude,
-        // lng: location.longitude,
         lat: parseFloat(location.latitude),
         lng: parseFloat(location.longitude),
       },
@@ -355,10 +215,6 @@ const WasteManagement = () => {
       zoom: 12,
     });
   };
-
-  // const setUserLocationAsCenter = () => {
-  //   setCurrentLocationProps(usersLocationProps);
-  // };
 
   const getlocationByPostalCode = (postalCode) => {
     fetch(
@@ -403,13 +259,7 @@ const WasteManagement = () => {
     }
   };
 
-  const notFoundhandler = (searchResult) => {
-    // console.log(searchResult);
-
-    // if (notFoundDisplay.loader.display === "block") {
-    // 	return;
-    // }
-
+  const notFoundhandler = () => {
     if (notFoundCondition) {
       setNotFoundDisplay({
         ...notFoundDisplay,
@@ -445,24 +295,18 @@ const WasteManagement = () => {
   };
 
   const directionsDisplayOn = (lat, lng) => {
-    // console.log(directionLatlng.lat);
-    // console.log(directionLatlng.lng);
-    // console.log(lat)
-    // console.log(lng)
     if (directionLatlng.lat == lat && directionLatlng.lng == lng) {
       setDirectionsDisplay(false);
       setDirectionLatlng({
         lat: undefined,
         lng: undefined,
       });
-      // console.log(false)
     } else {
       setDirectionLatlng({
         lat: lat,
         lng: lng,
       });
       setDirectionsDisplay(false);
-      // console.log(true);
     }
   };
 
@@ -470,90 +314,49 @@ const WasteManagement = () => {
       setDirectionsDisplay(true);
   }, [directionLatlng]);
 
-  // const getDirectionLatlng = (lat, lng) => {
-  //   setDirectionLatlng({
-  //     lat: lat,
-  //     lng: lng
-  //   })
-  // }
-
   // Lifecycle *********************************************************************************************************************************************************************************************
 
-  // useEffect(() => {
-  // 	// console.log(materialsSearchField);
-  // 	// console.log(materials);
-  // 	const selectedMaterial = materials.idNameType.find(material => {
-  // 		const searchresult = material.materialName.toLowerCase().indexOf(materialsSearchField.toLowerCase())
-  // 		if (searchresult > -1) {
-  // 			return true;
-  // 		}
-  // 	});
+  // Manage loading animation component ********************************************
+  useEffect(() => {
+    setLoadingCondition(loadingState);
+    if (loadingState) {
+      setWmComponentDisplay({
+        tab: false,
+        list: false,
+        map: false,
+        detail: false,
+        material: false,
+        startQuiz: false,
+      });
+      setNotFoundDisplay({
+        ...notFoundDisplay,
+        contents: { display: "none" },
+        notFound: { display: "none" },
+      });
+    } else {
+      if (windowWidth >= breakPoint) {
+        setWmComponentDisplay({
+          tab: true,
+          list: true,
+          map: true,
+          detail: false,
+          material: true,
+          startQuiz: true,
+        });
+      } else {
+        setWmComponentDisplay({
+          tab: true,
+          list: true,
+          map: true,
+          detail: false,
+          material: false,
+          startQuiz: false,
+        });
+      }
+    }
+  }, [loadingState]);
 
-  // 	// console.log("test: ", selectedMaterial)
-
-  // 	if (selectedMaterial !== undefined) {
-  // 		dispatch(searchLocationsByMaterial(selectedMaterial.id));
-  // 	}
-
-  // 	if (materialsSearchField !== "") {
-  // 		notFoundhandler(selectedMaterial);
-  // 	}
-  // }, [materialsSearchField])
-
-  // useEffect(() => {
-
-  // console.log("filter: ", postalCodeSearchField)
-  // const searchChars = postalCodeSearchField.split('');
-  // const filteredLocationsByPostalCode = locations.filter(location => {
-  //   if (searchChars.length === 0) {
-  //     return location.postalCode.toLowerCase().includes(postalCodeSearchField.toLocaleLowerCase())
-  //   } else {
-
-  //     let founds = [];
-  //     searchChars.forEach(char => {
-  //       if (location.postalCode.toLowerCase().includes(char.toLocaleLowerCase())) {
-  //         founds.push(true);
-  //       } else {
-  //         founds.push(false);
-  //       }
-  //     });
-  //     let searchResult = !founds.includes(false)
-  //     return searchResult;
-  //   }
-  // });
-  // console.log("filtered locations: ", filteredLocationsByPostalCode)
-
-  /*
-	
-		const filteredLocationsByPostalCode = locations.filter(location =>
-		  location.postalCode.toLowerCase().includes(postalCodeSearchField.toLocaleLowerCase())
-		)
-	
-		setFilteredLocations(filteredLocationsByPostalCode);
-	
-		if (filteredLocationsByPostalCode.length === 0) {
-		  setNotFoundDisplay({
-			contents: { display: "none" },
-			notFound: { display: "block" }
-		  })
-		} else {
-		  if (windowWidth >= breakPoint) {
-			setNotFoundDisplay({
-			  contents: { display: "grid" },
-			  notFound: { display: "none" }
-			})
-		  } else {
-			setNotFoundDisplay({
-			  contents: { display: "block" },
-			  notFound: { display: "none" }
-			})
-		  }
-		}
-	
-		*/
-
-  // }, [postalCodeSearchField])
-
+  // Manage detail component ********************************************
   useEffect(() => {
     if (windowWidth >= breakPoint && wmComponentDisplay.detail) {
       setWmComponentDisplay({
@@ -602,6 +405,7 @@ const WasteManagement = () => {
     }
   }, [wmComponentDisplay.detail]);
 
+  // Manage responsive behavior ********************************************
   useEffect(() => {
     if (windowWidth >= breakPoint) {
       setMapAndMaterialDisplay({
@@ -698,6 +502,7 @@ const WasteManagement = () => {
     }
   }, [windowWidth]);
 
+  // Listen window width ********************************************
   useEffect(() => {
     window.addEventListener("resize", displaySizeListener);
 
@@ -708,19 +513,70 @@ const WasteManagement = () => {
     };
   }, []);
 
-  // Render components *********************************************************************************************************************************************************************************************
+  // Retrieve material data from global state ********************************************
+  useEffect(() => {
+    dispatch(materialsImport());
+  }, []);
+
+  useEffect(() => {
+    setMaterilas({
+      ...materials,
+      idNameType: stateMaterials,
+    });
+  }, [stateMaterials]);
+
+  // Life cycle methods related to search functionaloty ********************************************
+
+  // Set up seached data **************************
+  useEffect(() => {
+    dispatch(
+      searchLocationsByMaterial(
+        usersLocationProps.center.lat,
+        usersLocationProps.center.lng,
+        15,
+        "",
+        "",
+        ""
+      )
+    );
+    return () => {
+      dispatch(notFoundHandlerAction(false));
+    };
+  }, []);
+
+  // Retrieve searched results **************************
+  useEffect(() => {
+    if (stateLocations) {
+      setFilteredLocations(stateLocations);
+    } else {
+      setFilteredLocations([]);
+    }
+    setDirectionLatlng({
+      lat: undefined,
+      lng: undefined,
+    });
+  }, [stateLocations]);
+
+  // Manage not found component according to the search results **************************
+  useEffect(() => {
+    notFoundhandler(filteredLocations);
+  }, [filteredLocations]);
+
+  // This code is used for a development purpose
+  // useEffect(()=>{
+  //   console.log(state);
+  // }, [state]);
+
+  // Render components *********************************************
 
   return (
     <div className="waste-management-content main-content">
       <Filter
         detailHide={detailHide}
-        // currentLocation={defaultProps}
         usersLocationProps={usersLocationProps}
         getlocationByPostalCode={getlocationByPostalCode}
-        // getLocation={getLocation}
         resetSelectedLocation={resetSelectedLocation}
         mapDisplayHandler={mapDisplayHandler}
-        // setUserLocationAsCenter={setUserLocationAsCenter}
         setDirectionsDisplay={setDirectionsDisplay}
       />
       <div className="wm-main-contents" style={notFoundDisplay.contents}>
@@ -768,7 +624,6 @@ const WasteManagement = () => {
             locationDetailDisplayHandler={locationDetailDisplayHandler}
             getSelectedLocation={getSelectedLocation}
             directionsDisplayOn={directionsDisplayOn}
-            // getDirectionLatlng={getDirectionLatlng}
           />
         ) : null}
 
@@ -798,7 +653,3 @@ const WasteManagement = () => {
 }
 
 export default WasteManagement;
-
-    //   {
-    //     loadingCondition ? <Loader /> : null;
-    //   }
