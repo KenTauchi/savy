@@ -3,7 +3,6 @@ import ContactUs from '../contact-us/ContactUs.component.js';
 
 import logo from './logo-error-page.svg';
 
-// import './NotFound.style.scss';
 
 const NotFound = (props) => {
 

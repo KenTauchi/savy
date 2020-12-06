@@ -3,7 +3,6 @@ import React from "react";
 import x_mark from './closewindow-60px.svg';
 import arrow from './directions-60px.svg';
 
-// import "./LocationDetail.style.scss";
 
 const LocationDetail = (props) => {
   const {
@@ -14,19 +13,7 @@ const LocationDetail = (props) => {
     directionsDisplayOn,
   } = props;
 
-  // const displayUrl = location.website;
   const displayUrl = location.website.slice(0, 25) + "...";
-
-  // console.log(location.latitude);
-  // console.log(location.longitude);
-
-  // console.log(location.materials);
-
-  // const displayMaterials = [...new Set(location.materials)];
-
-  // displayMaterials.shift();
-
-  // console.log(displayMaterials);
 
   return (
     <div style={displayStyle} className="locationDetailDiv">
@@ -96,16 +83,3 @@ const LocationDetail = (props) => {
 };
 
 export default LocationDetail;
-
-      // {
-      //   location.materials.length < 20 ? (
-      //     <React.Fragment>
-      //       <p className="materialAccepted">Material accepted</p>
-      //       <ul className="acceptedMaterialsList">
-      //         {location.materials.map((material, index) => (
-      //           <li key={material + index}>{material}</li>
-      //         ))}
-      //       </ul>
-      //     </React.Fragment>
-      //   ) : null;
-      // }

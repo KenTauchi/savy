@@ -2,13 +2,11 @@
 import React from "react";
 // import useAutocomplete from "@material-ui/lab/useAutocomplete";
 import useAutocomplete from "./useAutocomplete";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faSearch, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import x_mark from "./closewindow-60px.svg";
 
 import { makeStyles } from "@material-ui/core/styles";
-
-// import './AutocompleteInput.style.scss';
 
 const useStyles = makeStyles((theme) => ({
   label: {
@@ -57,19 +55,9 @@ const AutocompleteInput = (props) => {
 
   const { onChange } = getInputProps();
   const { onClick } = getOptionProps({ test: 1 });
-  // console.log(getRootProps);
   // console.log(getRootProps());
-  const { onKeyDown } = getRootProps();
   // console.log(getOptionProps({ test: 1 }));
   // console.log(getRootProps().onKeyDown);
-  // alert(getInputProps)
-
-  // console.log(onTouchStart);
-  // alert(onClick)
-
-  // getInputProps.onKeyDown = props.keyDown;
-
-
 
   return (
     <div className="autocompleteInput">
@@ -117,10 +105,3 @@ const AutocompleteInput = (props) => {
 }
 
 export default AutocompleteInput;
-
-// <FontAwesomeIcon
-//   icon={faTimesCircle}
-//   onClick={props.clear}
-// />
-//         ) : (
-//   <FontAwesomeIcon icon={faSearch} />

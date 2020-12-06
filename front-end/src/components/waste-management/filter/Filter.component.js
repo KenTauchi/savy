@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import AutocompleteInput from '../autocompleteInput/AutocompleteInput.component';
-// import DefaultButton from '../button/Button.component';
 import Dropdown from '../dropdown/Dropdown.component';
 
 import serchButtonIcon from './search-65px.svg';
@@ -16,7 +15,6 @@ import { materialsSearchFieldUpdate } from "../../../reducks/materials/actions";
 
 import { searchLocationsByMaterial } from "../../../reducks/search/operations.js";
 
-// import './Filter.style.scss';
 
 const Filter = (props) => {
   const dispatch = useDispatch();
@@ -24,11 +22,10 @@ const Filter = (props) => {
     usersLocationProps,
     detailHide,
     getlocationByPostalCode,
-    // getLocation,
     resetSelectedLocation,
     mapDisplayHandler,
-    // setUserLocationAsCenter,
-    setDirectionsDisplay
+    setDirectionsDisplay,
+    getLocation
   } = props;
 
   const [materialsSearchField, setMaterialsSearchField] = useState(
@@ -37,12 +34,19 @@ const Filter = (props) => {
   const [postalCodeSearchField, setPostalCodeSearchField] = useState("");
   const [distanceSearchField, setDistanceSearchField] = useState(15);
 
+  const [materials, setMaterilas] = useState({
+    idNameType: [],
+    searchedMaterial: "",
+  });
+
   const state = useSelector((state) => state);
   let stateMaterials = getMaterialsIdNameType(state);
   let stateSearchedMaterial = getSearchedMaterial(state);
 
   // console.log(stateMaterials);
 
+  // Functions ******************************************
+  // ****************************************************
   const materialsInputClear = () => {
     setMaterialsSearchField("");
     dispatch(materialsSearchFieldUpdate(""));
@@ -53,19 +57,6 @@ const Filter = (props) => {
   };
 
   const postalCodeChangeHandler = (event) => {
-    // if (windowWidth < 768 && wmComponentDisplay.detail) {
-    //   setWmComponentDisplay({
-    //     ...wmComponentDisplay,
-    //     list: true,
-    //     map: true,
-    //     detail: false,
-    //   });
-    // }
-
-    // materialsInputClear();
-
-    // console.log("event: ", event)
-    // console.log("handler: ", event.target.value);
     setPostalCodeSearchField(event.target.value);
   };
 
@@ -85,16 +76,10 @@ const Filter = (props) => {
     setDistanceSearchField(event.target.value);
   };
 
-  const [materials, setMaterilas] = useState({
-    idNameType: [],
-    searchedMaterial: "",
-  });
-
+  // Search button function ***************************
+  // **************************************************
 	const searchButtonClickHandler = () => {
-    // console.log(materialsSearchField);
-    // console.log(postalCodeSearchField);
-    // console.log(distanceSearchField);
-    // console.log(materials);
+    // Reset display and states
     detailHide();
     resetSelectedLocation();
     mapDisplayHandler();
@@ -103,7 +88,7 @@ const Filter = (props) => {
     if (postalCodeSearchField !== "") {
       getlocationByPostalCode(postalCodeSearchField);
     } else {
-      // getLocation();
+      getLocation();
       // setUserLocationAsCenter();
     }
 
@@ -117,12 +102,7 @@ const Filter = (props) => {
     let selectedMaterial;
     if (materialsSearchField !== "") {
       selectedMaterial = materials.idNameType.find((material) => {
-
-        const searchresult = material.materialName.toLowerCase() === materialsSearchField.toLowerCase();
-        if (searchresult === true) {
-          return true;
-        }
-
+        return material.materialName.toLowerCase() === materialsSearchField.toLowerCase();
       });
 
       // console.log(selectedMaterial);
@@ -132,7 +112,7 @@ const Filter = (props) => {
           ? (familiyId = selectedMaterial.id)
           : (materialId = selectedMaterial.id);
       } else {
-        materialId = 99999;
+        materialId = 99999; // Not found
       }
 
     }
@@ -150,7 +130,8 @@ const Filter = (props) => {
     }
   };
 
-
+  // Lifecycle methods ********************************
+  // **************************************************
   useEffect(() => {
     dispatch(materialsImport());
   }, []);
@@ -163,7 +144,7 @@ const Filter = (props) => {
     // console.log(stateMaterials)
   }, [stateMaterials]);
 
-  // This code is necessary to update search field when user chooses filter option by enter key. **********************************************************************************************************
+  // This code is necessary to update search field when user chooses filter option by enter key. **********************************************************************************************
   useEffect(() => {
     // console.log(materials);
     // console.log(stateSearchedMaterial);
@@ -226,71 +207,3 @@ const Filter = (props) => {
 }
 
 export default Filter;
-
-// <div className="searchInput">
-//   <AutocompleteInput
-//     options={locations.map((location) => location.postalCode)}
-//     placeholder="zip code"
-//     change={postalCodeChangeHandler}
-//     click={postalCodeClickHandler}
-//     value={postalCodeValue}
-//     clear={postalCodeInputClear}
-//   />
-// </div>
-
-
-          // <div className="searchInput">
-          //   <Autocomplete
-          //     id="materialInput"
-          //     options={materials.idNameType.map(
-          //       (material) => material.materialName
-          //     )}
-          //     renderInput={(params) => (
-          //       <div ref={params.InputProps.ref}>
-          //         <input
-          //           id="materialSearch"
-          //           type="text"
-          //           placeholder="Item / Material name"
-          //           {...params.inputProps}
-          //         />
-          //       </div>
-          //     )}
-          //   />
-          // </div>;
-
-
-          // <div className="searchInput">
-          //   <input
-          //     id="zipSearch"
-          //     type="text"
-          //     onChange={postalCodeChangeHandler}
-          //     value={postalCodeValue}
-          //     placeholder="Postal Code"
-          //   />
-          // </div>;
-
-        // <div className="searchInput">
-        //   <Autocomplete
-        //     id="postalCodeInput"
-        //     options={locations.map(
-        //       (location) => location.postalCode
-        //     )}
-        //     onInputChange={(event, value) => {
-        //       postalCodeChangeHandler(event, value);
-        //     }}
-        //     // style={{ width: 300 }}
-        //     renderInput={(params) => (
-        //       <div ref={params.InputProps.ref}>
-        //         <input
-        //           id="postalCodeSearch"
-        //           type="text"
-        //           onChange={postalCodeChangeHandler}
-        //           value={postalCodeValue}
-        //           placeholder="Postal Code"
-        //           {...params.inputProps}
-        //         />
-        //       </div>
-        //     )}
-        //   />
-        // </div>;
-

@@ -3,13 +3,9 @@ import { useSelector } from "react-redux";
 import { getSearchedMaterialFact } from '../../../reducks/search/selectors';
 
 
-// import './RecyclingFacts.style.scss';
-
 const RecyclingFacts = () => {
 	const state = useSelector(state => state);
 	const fact = getSearchedMaterialFact(state);
-
-	// console.log(fact);
 
 	const imagePath = "./images/materials/" + fact.imageName;
 
@@ -51,5 +47,3 @@ const RecyclingFacts = () => {
 }
 
 export default RecyclingFacts;
-
-// https://images.unsplash.com/photo-1598048145816-4d54a3af68fe?ixlib=rb-1.2.1&auto=format&fit=crop&w=2251&q=80
