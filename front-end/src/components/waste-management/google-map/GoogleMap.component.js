@@ -4,10 +4,9 @@ import GoogleMapReact from "google-map-react";
 import Marker from "../marker/Marker.component";
 import UserMarker from "../user-marker/UserMarker.component";
 
-// import './GoogleMap.style.scss';
 
+// Import Google Maps API key from .env.local file in front-end directory
 const api_key = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-// const api_key = "";
 
 const GoogleMap = (props) => {
   const {
@@ -30,6 +29,7 @@ const GoogleMap = (props) => {
     },
   });
   
+  // Make facilities markers components *************************
   const Markers = locations.map((location, index) => {
     let selected = false;
 
@@ -57,6 +57,7 @@ const GoogleMap = (props) => {
     );
   });
 
+  // Make user's marker components *************************
   const UsersLocationMarker = (
     <UserMarker
       key={usersLocationProps.center.lat + usersLocationProps.center.lng + "usersLocationPin"}
@@ -65,6 +66,7 @@ const GoogleMap = (props) => {
 />
   )
 
+  // Directions search function *************************
   const handleDirectionsApiLoaded = (map, maps) => {
 
     if(directionLatlng.lat === undefined || usersLocationProps.center.lng === undefined) {
@@ -89,14 +91,9 @@ const GoogleMap = (props) => {
           directionLatlng.lat,
           directionLatlng.lng
         ),
-        // origin: new maps.LatLng(49.2246, -123.1087),
-        // destination: new maps.LatLng(49.2206, -123.1107),
       },
       (response, status) => {
         if (status === "OK") {
-          // console.log("OK");
-          // console.log("response", response);
-          // console.log("status", status);
           directionsRenderer.setDirections(response);
         } else {
           console.log("Directions request failed due to " + status);
@@ -105,16 +102,12 @@ const GoogleMap = (props) => {
     );
   };
 
-  // useEffect(()=>{
-  //   console.log(usersLocationProps.center);
-  // }, [usersLocationProps])
-
   return (
     // Important! Always set the container height explicitly
     <div className="google-map-section" style={displayStyle}>
       {directionsDisplay ? (
         <GoogleMapReact
-          bootstrapURLKeys={{ key: apikey.apiKey.development }}
+          bootstrapURLKeys={{ key: apikey.apiKey.product }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
           center={currentLocationProps.center}
@@ -130,7 +123,7 @@ const GoogleMap = (props) => {
       ) : null}
       {!directionsDisplay ? (
         <GoogleMapReact
-          bootstrapURLKeys={{ key: apikey.apiKey.development }}
+          bootstrapURLKeys={{ key: apikey.apiKey.product }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
           center={currentLocationProps.center}
@@ -145,5 +138,3 @@ const GoogleMap = (props) => {
 }
 
 export default GoogleMap;
-
-        // <Marker lat={49.2246} lng={-123.1087} text="Langara College!!" />;

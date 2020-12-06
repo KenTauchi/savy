@@ -4,7 +4,6 @@ import marker from "./green-pin-60px.svg";
 
 import selectedMarker from "./dark-salmon-pin-60px.svg";
 
-// import './Marker.styles.scss';
 
 const Marker = (props) => {
     const {
