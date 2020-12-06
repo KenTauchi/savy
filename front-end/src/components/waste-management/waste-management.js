@@ -126,6 +126,7 @@ const WasteManagement = () => {
     setwindowWidth(newWindowWidth);
   };
 
+  // Display Google Maps in mobile layout
   const mapDisplayHandler = () => {
     setMapAndMaterialDisplay({
       map: true,
@@ -141,6 +142,7 @@ const WasteManagement = () => {
     });
   };
 
+  // Display material info in mobile layout
   const materialDisplayHandler = () => {
     setMapAndMaterialDisplay({
       map: false,
@@ -156,6 +158,7 @@ const WasteManagement = () => {
     });
   };
 
+  // Toggle detail component
   const locationDetailDisplayHandler = () => {
     setWmComponentDisplay({
       ...wmComponentDisplay,
@@ -170,6 +173,7 @@ const WasteManagement = () => {
     }
   };
 
+  // Display detail component when a pin is clicked
   const mapMarkerLocationDetailDisplayHandler = () => {
     setWmComponentDisplay({
       ...wmComponentDisplay,
@@ -177,6 +181,7 @@ const WasteManagement = () => {
     });
   };
 
+  // Get data of selected location
   const getSelectedLocation = (location) => {
     setSelectedLocation(location);
     setCurrentLocationProps({
@@ -196,6 +201,7 @@ const WasteManagement = () => {
     });
   };
 
+  // Set coordinate to set a new center point to Google Maps
   const setCurrentPosition = (position) => {
     setCurrentLocationProps({
       center: {
@@ -206,6 +212,7 @@ const WasteManagement = () => {
     });
   };
 
+  // Set users coordinate
   const setUserPosition = (position) => {
     setUsersLocationProps({
       center: {
@@ -216,6 +223,7 @@ const WasteManagement = () => {
     });
   };
 
+  // Set users coordinate by postal code inputted by user
   const getlocationByPostalCode = (postalCode) => {
     fetch(
       `http://geogratis.gc.ca/services/geolocation/en/locate?q=${postalCode}`
@@ -242,6 +250,7 @@ const WasteManagement = () => {
       .catch((error) => console.log(error));
   };
 
+  // Set users coordinate by browser
   const getLocation = () => {
     if (navigator.geolocation) {
       // console.log("Get current location!!!");
@@ -259,6 +268,7 @@ const WasteManagement = () => {
     }
   };
 
+  // Manage not-found component display condition
   const notFoundhandler = () => {
     if (notFoundCondition) {
       setNotFoundDisplay({
@@ -283,6 +293,7 @@ const WasteManagement = () => {
     }
   };
 
+  // Hide detail component
   const detailHide = () => {
     if (windowWidth < breakPoint && wmComponentDisplay.detail) {
       setWmComponentDisplay({
@@ -294,6 +305,7 @@ const WasteManagement = () => {
     }
   };
 
+  // Display directions to a selected facility
   const directionsDisplayOn = (lat, lng) => {
     if (directionLatlng.lat == lat && directionLatlng.lng == lng) {
       setDirectionsDisplay(false);

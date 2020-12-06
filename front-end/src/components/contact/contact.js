@@ -40,7 +40,7 @@ const Contact = () => {
         });
     }
 
-    console.log("Check status", serverState.displayForm);
+    // console.log("Check status", serverState.displayForm);
     return (
         <div className="contact-page main-content">
             <div className="contact-main">
