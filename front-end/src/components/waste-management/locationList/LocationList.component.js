@@ -2,7 +2,6 @@ import React from 'react';
 
 import LocationListItem from '../locationListItem/LocationListItem.component';
 
-// import './LocationList.style.scss';
 
 const LocationList = (props) => {
 
@@ -13,10 +12,7 @@ const LocationList = (props) => {
       locationDetailDisplayHandler,
       getSelectedLocation,
       directionsDisplayOn,
-      // getDirectionLatlng
     } = props;
-
-    // console.log(locations);
 
     return (
       <div className="location-section" style={displayStyle}>
@@ -29,7 +25,6 @@ const LocationList = (props) => {
               locationDetailDisplayHandler={locationDetailDisplayHandler}
               getSelectedLocation={getSelectedLocation}
               directionsDisplayOn={directionsDisplayOn}
-              // getDirectionLatlng={getDirectionLatlng}
             />
           ))}
         </ul>

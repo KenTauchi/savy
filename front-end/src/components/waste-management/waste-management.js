@@ -590,6 +590,7 @@ const WasteManagement = () => {
         resetSelectedLocation={resetSelectedLocation}
         mapDisplayHandler={mapDisplayHandler}
         setDirectionsDisplay={setDirectionsDisplay}
+        getLocation={getLocation}
       />
       <div className="wm-main-contents" style={notFoundDisplay.contents}>
         {wmComponentDisplay.tab ? (

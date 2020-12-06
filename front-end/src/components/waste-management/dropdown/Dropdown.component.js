@@ -1,12 +1,10 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuItem from '@material-ui/core/MenuItem';
-// import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 
 import dropdownArrow from './dropdown-60px.svg';
-// import SvgIcon from '@material-ui/core/SvgIcon';
 import Icon from '@material-ui/core/Icon';
 
 const useStyles = makeStyles((theme) => ({
@@ -19,12 +17,8 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
 function ArrowIcon(props) {
     return (
-        // <SvgIcon {...props}>
-        //     <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" />
-        // </SvgIcon>
         <Icon {...props}>
             <img src={dropdownArrow} />
         </Icon>
@@ -33,11 +27,6 @@ function ArrowIcon(props) {
 
 export const Dropdown = (props) => {
     const classes = useStyles();
-    // const [age, setAge] = React.useState(5);
-
-    // const handleChange = (event) => {
-    //     setAge(event.target.value);
-    // };
 
     return (
         <div className="customDropdown">
