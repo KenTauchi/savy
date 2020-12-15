@@ -22,10 +22,12 @@ const GoogleMap = (props) => {
     directionLatlng
   } = props;
 
+  // console.log(process.env.NODE_ENV);
+
   const [apikey, setApikey] = useState({
     apiKey: {
       development: "",
-      product: api_key,
+      production: api_key,
     },
   });
   
@@ -107,7 +109,7 @@ const GoogleMap = (props) => {
     <div className="google-map-section" style={displayStyle}>
       {directionsDisplay ? (
         <GoogleMapReact
-          bootstrapURLKeys={{ key: apikey.apiKey.product }}
+          bootstrapURLKeys={{ key: apikey.apiKey[process.env.NODE_ENV] }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
           center={currentLocationProps.center}
@@ -123,7 +125,7 @@ const GoogleMap = (props) => {
       ) : null}
       {!directionsDisplay ? (
         <GoogleMapReact
-          bootstrapURLKeys={{ key: apikey.apiKey.product }}
+          bootstrapURLKeys={{ key: apikey.apiKey[process.env.NODE_ENV] }}
           defaultCenter={defaultProps.center}
           defaultZoom={defaultProps.zoom}
           center={currentLocationProps.center}
