@@ -518,7 +518,8 @@ const WasteManagement = () => {
   useEffect(() => {
     window.addEventListener("resize", displaySizeListener);
 
-    getLocation();
+    // Make the below function dispable by Tomo
+    // getLocation();
 
     return () => {
       window.removeEventListener("resize", displaySizeListener);
